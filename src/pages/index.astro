@@ -2,9 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../modules/Hero.astro";
 import photo1 from "../images/old/chateau-pool-1.jpg";
-import properties, { fetchProperties } from "../stuff/properties";
-const res = await fetchProperties();
-console.log("🟢", res);
+import properties from "../content/properties";
+console.log("🟢", properties);
 ---
 
 <Layout>
@@ -13,7 +12,7 @@ console.log("🟢", res);
 	<section class="p-4 min-h-[50vh]">
 		<h2>Properties</h2>
 		<ul>
-			{properties.map((property) => (
+			{properties?.map((property) => (
 				<li>{property.name}</li>
 			))}
 		</ul>

@@ -1,4 +1,3 @@
-console.log("🉑", import.meta.env.LODGIFY_PUBLIC_KEY);
 import * as lodgify from "../lodgify-sdk/index";
 const config = new lodgify.Configuration({
   apiKey: import.meta.env.LODGIFY_PUBLIC_KEY,
@@ -10,33 +9,24 @@ export type { Property, Room };
 let properties: Property[] = [];
 
 const fetchProperties = async () => {
+  if (properties.length > 0) return properties;
   console.log("🟢 fetchProperties");
   const api = new lodgify.PropertiesApi(config);
-  console.log("🟢 api", api);
   try {
-    const fetched = await api.getAllPropertiesAsync({
+    const res = await api.getAllPropertiesAsync({
       includeCount: true,
-      includeInOut: true,
+      includeInOut: false,
       page: 1,
       size: 50,
     });
-    return fetched;
+    if (res?.items) {
+      properties = res.items as Property[];
+      return res.items;
+    }
   } catch (error) {
     console.error(error);
     return {};
   }
 };
 
-// console.log("🟢", fetched);
-
-// if (Array.isArray(fetched)) {
-//   if (fetched[0]?.rooms?.length) {
-//     properties = fetched;
-//   }
-// }
-
-export { fetchProperties };
-
-const res = await fetchProperties();
-
-export default res?.items || [];
+export default await fetchProperties();
