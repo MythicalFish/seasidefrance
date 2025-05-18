@@ -3,14 +3,16 @@ import type { GetAllPropertiesAsync200ResponseItemsInner } from '../lib/lodgify-
 
 export type Property = GetAllPropertiesAsync200ResponseItemsInner;
 
-const config = new lodgify.Configuration({
-  apiKey: import.meta.env.LODGIFY_PUBLIC_KEY,
-});
-
 let properties: Property[] = [];
 
-const fetchProperties = async () => {
+export const fetchProperties = async (apiKey: string): Promise<Property[]> => {
+  if (!apiKey) {
+    throw new Error('LODGIFY_PUBLIC_KEY is not set');
+  }
   if (properties.length > 0) return properties;
+  const config = new lodgify.Configuration({
+    apiKey,
+  });
   console.log('🟢 fetchProperties');
   const api = new lodgify.PropertiesApi(config);
   try {
@@ -26,8 +28,13 @@ const fetchProperties = async () => {
     }
   } catch (error) {
     console.error(error);
-    return {};
   }
+  return [];
 };
 
-export default (await fetchProperties()) as Property[];
+const apiKey = process.env.LODGIFY_PUBLIC_KEY;
+if (apiKey) {
+  await fetchProperties(apiKey);
+}
+
+export default properties;

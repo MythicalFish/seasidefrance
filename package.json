@@ -9,7 +9,7 @@
     "astro": "astro",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "optimize-properties": "node scripts/optimize-properties.js"
+    "optimize-properties": "tsx scripts/optimize-properties.ts"
   },
   "dependencies": {
     "@api/lodgify": "file:.api/apis/lodgify",
@@ -25,10 +25,12 @@
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "autoprefixer": "^10.4.21",
+    "dotenv": "^16.5.0",
     "postcss": "^8.4.35",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.19.4",
     "typescript": "^5.3.3"
   }
 }
