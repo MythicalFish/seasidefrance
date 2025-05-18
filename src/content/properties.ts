@@ -1,9 +1,11 @@
 import * as lodgify from '../lib/lodgify-sdk';
+import type { GetAllPropertiesAsync200ResponseItemsInner } from '../lib/lodgify-sdk';
+
+export type Property = GetAllPropertiesAsync200ResponseItemsInner;
+
 const config = new lodgify.Configuration({
   apiKey: import.meta.env.LODGIFY_PUBLIC_KEY,
 });
-
-import type { Property } from '../types/lodgify';
 
 let properties: Property[] = [];
 
