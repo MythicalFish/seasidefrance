@@ -1,0 +1,23 @@
+# Build output
+dist/
+.output/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# Cache
+.cache/
+.astro/
+
+# Package files
+package-lock.json
+
+# Generated files
+openapitools.json 

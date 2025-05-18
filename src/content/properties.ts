@@ -1,16 +1,15 @@
-import * as lodgify from "../lib/lodgify-sdk";
+import * as lodgify from '../lib/lodgify-sdk';
 const config = new lodgify.Configuration({
   apiKey: import.meta.env.LODGIFY_PUBLIC_KEY,
 });
 
-import type { Property, Room } from "../types/lodgify";
-export type { Property, Room };
+import type { Property } from '../types/lodgify';
 
 let properties: Property[] = [];
 
 const fetchProperties = async () => {
   if (properties.length > 0) return properties;
-  console.log("🟢 fetchProperties");
+  console.log('🟢 fetchProperties');
   const api = new lodgify.PropertiesApi(config);
   try {
     const res = await api.getAllPropertiesAsync({
@@ -29,4 +28,4 @@ const fetchProperties = async () => {
   }
 };
 
-export default await fetchProperties();
+export default (await fetchProperties()) as Property[];
