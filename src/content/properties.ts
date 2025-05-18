@@ -1,4 +1,4 @@
-import * as lodgify from "../lodgify-sdk/index";
+import * as lodgify from "../lib/lodgify-sdk";
 const config = new lodgify.Configuration({
   apiKey: import.meta.env.LODGIFY_PUBLIC_KEY,
 });
