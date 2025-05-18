@@ -13,7 +13,7 @@
  */
 
 
-export const BASE_PATH = "https://raw.githubusercontent.com/MythicalFish/seasidefrance/refs/heads/master/.api/apis/lodgify/api.lodgify.com".replace(/\/+$/, "");
+export const BASE_PATH = "https://api.lodgify.com".replace(/\/+$/, "");
 
 export interface ConfigurationParameters {
     basePath?: string; // override base path

@@ -1,3 +1,4 @@
+.openapi-generator-ignore
 apis/PropertiesApi.ts
 apis/RatesApi.ts
 apis/ReservationsApi.ts
