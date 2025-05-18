@@ -2,12 +2,20 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../modules/Hero.astro";
 import photo1 from "../images/old/chateau-pool-1.jpg";
+import properties, { fetchProperties } from "../stuff/properties";
+const res = await fetchProperties();
+console.log("🟢", res);
 ---
 
 <Layout>
 	<Hero title="Your holiday home in France" image={photo1}>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-		</p>
 	</Hero>
+	<section class="p-4 min-h-[50vh]">
+		<h2>Properties</h2>
+		<ul>
+			{properties.map((property) => (
+				<li>{property.name}</li>
+			))}
+		</ul>
+	</section>
 </Layout>
