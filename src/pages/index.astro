@@ -1,16 +1,13 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
+import Hero from "../modules/Hero.astro";
+import photo1 from "../images/old/chateau-pool-1.jpg";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+	<Hero title="Your holiday home in France" image={photo1}>
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+		</p>
+	</Hero>
+</Layout>
