@@ -1,12 +1,12 @@
 import type { LodgifyRate } from '../../content/rates/types';
 import type { LodgifyAvailability } from '../../content/availability/types';
 
-interface AvailablePeriod {
+export type AvailablePeriod = {
   startDate: Date;
   endDate: Date;
   totalPrice: number;
   nights: number;
-}
+};
 
 interface PricePerDay {
   [key: string]: number;

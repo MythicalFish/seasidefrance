@@ -70,7 +70,7 @@ const minStay =
 
         <div class="mt-8">
           <AvailablePeriods
-            client:load
+            propertyId={lodgify.id}
             rates={property.rates[0]?.data || []}
             availability={property.availability || []}
             minStay={minStay}
