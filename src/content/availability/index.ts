@@ -1,7 +1,66 @@
-import lodgifyFetchAvailability from './fetchData';
-export type { LodgifyAvailability, AvailabilityResponse } from './types';
+import * as lodgify from '../../lib/lodgify-sdk';
+import type { LodgifyAvailability } from './types';
+import { getCachedData, setCachedData } from '../../lib/cache';
 
-export const getAvailability = async (propertyId: number, startDate: string, endDate: string) => {
-  const apiKey = process.env.LODGIFY_PUBLIC_KEY;
-  return lodgifyFetchAvailability(apiKey, propertyId, startDate, endDate);
+const apiKey = import.meta.env.LODGIFY_PUBLIC_KEY;
+
+export const fetchAvailability = async (
+  propertyId = 0,
+  startDate: string,
+  endDate: string
+): Promise<LodgifyAvailability[]> => {
+  if (!apiKey) {
+    throw new Error('LODGIFY_PUBLIC_KEY is not set');
+  }
+
+  if (!propertyId) {
+    throw new Error('Property ID is not set');
+  }
+
+  // Try to get data from cache first
+  const cachedData = await getCachedData<LodgifyAvailability[]>({
+    type: 'availability',
+    propertyId,
+    startDate,
+    endDate,
+  });
+
+  if (cachedData) {
+    return cachedData;
+  }
+
+  const config = new lodgify.Configuration({
+    apiKey,
+  });
+  const api = new lodgify.ReservationsApi(config);
+
+  try {
+    // https://docs.lodgify.com/reference/getcalendarbyproperty
+    const res = await api.getCalendarByProperty({
+      propertyId,
+      start: new Date(startDate),
+      end: new Date(endDate),
+      includeDetails: true,
+    });
+
+    if (res) {
+      // Cache the results
+      await setCachedData(
+        {
+          type: 'availability',
+          propertyId,
+          startDate,
+          endDate,
+        },
+        res as LodgifyAvailability[]
+      );
+
+      return res as LodgifyAvailability[];
+    }
+  } catch (error: any) {
+    console.error(
+      `Error fetching availability for property ${propertyId} (${startDate} - ${endDate}): ${error?.response?.statusText}`
+    );
+  }
+  return [];
 };

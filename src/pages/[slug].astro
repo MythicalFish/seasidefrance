@@ -1,17 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import properties, { type Property } from '../content/properties';
+import properties from '../content/properties';
 
 export async function getStaticPaths() {
-  const propertyList = properties as Property[];
-  return propertyList.map((property: Property) => {
-    console.log(property);
-    return {
-      params: { slug: property.slug },
-      props: { property },
-    };
-  });
+  return properties
+    .filter(property => property.lodgify)
+    .map(property => {
+      console.log(property);
+      return {
+        params: { slug: property.slug },
+        props: { property },
+      };
+    });
 }
+
+console.log(Astro.props.property);
 
 const { lodgify, ...property } = Astro.props.property;
 ---

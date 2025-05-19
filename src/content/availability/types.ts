@@ -1,27 +1,3 @@
-export interface LodgifyAvailability {
-  propertyId: number;
-  start: string;
-  end: string;
-  available: number;
-  closedPeriod?: {
-    start: string;
-    end: string;
-    reason?: string;
-  };
-  bookings?: Array<{
-    id: number;
-    start: string;
-    end: string;
-    status: string;
-  }>;
-  channelCalendars?: Array<{
-    start: string;
-    end: string;
-    reason?: string;
-  }>;
-}
+import type { GetCalendarByUser200ResponseInner } from 'src/lib/lodgify-sdk';
 
-export interface AvailabilityResponse {
-  items: LodgifyAvailability[];
-  total: number;
-}
+export type LodgifyAvailability = GetCalendarByUser200ResponseInner;

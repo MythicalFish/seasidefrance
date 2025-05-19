@@ -1,17 +1,31 @@
 const apiKey = import.meta.env.LODGIFY_PUBLIC_KEY;
+import { fetchAvailability } from '../availability';
+import { fetchRates } from '../rates';
 import lodgifyFetch from './data/lodgifyFetch';
-const lodgifyProperties = await lodgifyFetch(apiKey || '');
-import optimizedProperties from './data/optimizedInfo.json';
 
-import type { Property } from './types';
+import type { Property, Rates } from './types';
 
-const properties = optimizedProperties.map(property => {
-  const lodgifyProperty = lodgifyProperties.find(p => p.id === property.id);
-  return {
-    ...property,
-    lodgify: lodgifyProperty,
-  };
-}) as Property[];
+import optimizedInfo from './data/optimizedInfo.json';
+const lodgifyInfo = await lodgifyFetch(apiKey || '');
+
+const properties = (await Promise.all(
+  optimizedInfo.map(async property => {
+    const lodgify = lodgifyInfo.find(p => p.id === property.id);
+    const availability = await fetchAvailability(property.id, '2025-05-01', '2026-01-01');
+    const rates: Rates = [];
+    for (const { roomTypeId } of availability || []) {
+      if (!roomTypeId) continue;
+      const rateData = await fetchRates(property.id, roomTypeId, '2025-05-01', '2026-01-01');
+      rates.push({ roomTypeId, data: rateData });
+    }
+    return {
+      ...property,
+      lodgify,
+      availability,
+      rates,
+    };
+  })
+)) as Property[];
 
 export type { Property };
 

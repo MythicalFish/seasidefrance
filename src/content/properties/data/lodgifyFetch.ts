@@ -1,13 +1,21 @@
 import * as lodgify from '../../../lib/lodgify-sdk';
 import type { LodgifyProperty } from '../types';
-
-let properties: LodgifyProperty[] = [];
+import { getCachedData, setCachedData } from '../../../lib/cache';
 
 const lodgifyFetch = async (apiKey: string): Promise<LodgifyProperty[]> => {
   if (!apiKey) {
     throw new Error('LODGIFY_PUBLIC_KEY is not set');
   }
-  if (properties.length > 0) return properties;
+
+  // Try to get data from cache first
+  const cachedData = await getCachedData<LodgifyProperty[]>({
+    type: 'properties',
+  });
+
+  if (cachedData) {
+    return cachedData;
+  }
+
   const config = new lodgify.Configuration({
     apiKey,
   });
@@ -20,8 +28,15 @@ const lodgifyFetch = async (apiKey: string): Promise<LodgifyProperty[]> => {
       size: 50,
     });
     if (res?.items) {
-      properties = res.items as LodgifyProperty[];
-      return res.items;
+      const properties = res.items as LodgifyProperty[];
+      // Cache the results
+      await setCachedData(
+        {
+          type: 'properties',
+        },
+        properties
+      );
+      return properties;
     }
   } catch (error) {
     console.error(error);

@@ -1,30 +1,11 @@
-export interface LodgifyRate {
-  propertyId: number;
-  roomTypeId: number;
-  date: string;
-  isDefault: boolean;
-  prices: Array<{
-    currency: string;
-    amount: number;
-    minStay?: number;
-    maxStay?: number;
-    pricePerDay?: Record<string, number>;
-    pricePerAdditionalGuest?: Record<string, number>;
-    additionalGuestsStartsFrom?: number;
-  }>;
-  rateSettings: {
-    bookability: 'InstantBooking' | 'BookingRequest' | 'EnquiryOnly';
-    checkInHour?: number;
-    checkOutHour?: number;
-    bookingWindowDays?: number;
-    advanceNoticeDays?: number;
-    currencyCode: string;
-    vat?: number;
-    isVatExclusive?: boolean;
-  };
-}
+import type {
+  RatesCalendarV2200ResponseCalendarItemsInner,
+  RatesCalendarV2200ResponseRateSettings,
+} from 'src/lib/lodgify-sdk';
+
+export type LodgifyRate = RatesCalendarV2200ResponseCalendarItemsInner;
 
 export interface RatesResponse {
-  items: LodgifyRate[];
-  total: number;
+  calendarItems: LodgifyRate[];
+  rateSettings: RatesCalendarV2200ResponseRateSettings;
 }
