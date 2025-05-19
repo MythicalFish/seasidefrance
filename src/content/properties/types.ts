@@ -10,5 +10,5 @@ export type Property = {
   intro: string;
   description: string;
   features: string[];
-  lodgify: LodgifyProperty;
+  lodgify?: LodgifyProperty;
 };

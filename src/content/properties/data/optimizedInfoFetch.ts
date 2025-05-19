@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
 import lodgifyFetch from './lodgifyFetch';
-import type { LodgifyProperty } from '../types';
+import type { LodgifyProperty, Property } from '../types';
 import aboutTheArea from './aboutTheArea';
 
 // Load environment variables from .env file
@@ -84,17 +84,30 @@ async function main(): Promise<void> {
       throw new Error('No properties found');
     }
 
-    const newData: string[] = [];
+    const newData: Property[] = [];
     for (const property of properties) {
       console.log(`🟢 Optimizing property: ${property.name}`);
       const optimized = await optimizeProperty(property);
-      newData.push(optimized);
+      try {
+        newData.push(JSON.parse(optimized));
+      } catch {
+        console.log(`🔴 Error parsing property: ${property.name}`);
+      }
     }
-    const fullJSONString = `[${newData.join(',')}]`;
-    const fullJSON = JSON.parse(fullJSONString);
 
     const outputPath = path.join(__dirname, './optimizedInfo.json');
-    fs.writeFileSync(outputPath, JSON.stringify(fullJSON, null, 2));
+
+    const existingData = fs.readFileSync(outputPath, 'utf-8');
+    const existingProperties = JSON.parse(existingData) as Property[];
+
+    // Match the IDs and update all data except for slug
+    const updatedProperties = existingProperties.map(property => {
+      const match = newData.find(p => p.id === property.id);
+      if (!match) return property;
+      return { ...match, slug: property.slug };
+    });
+
+    fs.writeFileSync(outputPath, JSON.stringify(updatedProperties, null, 2));
     console.log('Optimization complete!');
   } catch (error) {
     console.error('Error:', error);

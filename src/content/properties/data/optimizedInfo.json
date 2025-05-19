@@ -1,68 +1,70 @@
 [
   {
     "id": 280249,
-    "name": "La Chaumiere",
     "slug": "la-chaumiere",
+    "name": "La Chaumiere",
     "title": "1 bedroom gite",
-    "intro": "Discover a charming retreat with private garden and pool access at La Chaumiere, perfect for a relaxing getaway.",
-    "description": "La Chaumière at Domaine de Rochebonne offers a delightful escape in the heart of Charente-Maritime. This cozy one-bedroom gite features a spacious double bed and a convertible sofa bed, ideal for small families or couples. Step outside to your private garden and terrace, complete with a barbecue, or explore the expansive communal gardens with a heated swimming pool. Children will be entertained by the playground, complete with a wooden fort and sports facilities. The surrounding area boasts historical sites, colorful fishing ports, and stunning coastlines like La Cote Sauvage, all within easy reach. Enjoy local dining and shopping in the village of St Just-Luzac, just a short walk away, or venture to nearby islands and seaside towns for a true taste of Nouvelle Aquitaine.",
+    "intro": "Charming 1-bedroom gite with private garden and pool access, perfect for a peaceful getaway in Charente-Maritime.",
+    "description": "Nestled in the picturesque Domaine de Rochebonne, La Chaumière offers a tranquil retreat in the heart of Charente-Maritime. This charming 1-bedroom gite boasts a spacious living area, complete with a cozy sofa bed, and a well-equipped kitchen. Step outside to your private garden and terrace, ideal for al fresco dining or relaxing in the serene surroundings. The expansive communal gardens and heated swimming pool provide ample space for leisure and play, making it an ideal destination for families and couples alike. Located just a short drive from the stunning beaches and vibrant towns of the Charente-Maritime coastline, guests can explore the rich history and natural beauty of the region. With local shops and dining options within walking distance, La Chaumière combines convenience with the charm of rural France, promising an unforgettable holiday experience.",
     "features": [
       "1 large double bed",
       "Sofa bed",
-      "Private garden and terrace",
-      "Heated swimming pool",
-      "Children's playground",
-      "Wood-burning stove",
-      "Satellite TV",
-      "Fully equipped kitchen",
+      "Private garden",
+      "Terrace with barbecue",
+      "Communal gardens",
+      "Shared swimming pool",
+      "Children’s playground",
       "Free high-speed WiFi",
+      "Pets welcome",
       "Linen & towels included"
     ],
     "highlights": [
-      "10 minutes from the beaches",
-      "Pets welcome",
-      "Shops within walking distance",
-      "Easy access to historical sites",
-      "Stunning coastline and islands nearby"
+      "Private fenced garden",
+      "Heated pool",
+      "Walking distance to shops",
+      "10 minutes from beaches",
+      "Easy access to historical sites"
     ]
   },
   {
     "id": 280252,
-    "name": "La Charrue",
     "slug": "la-charrue",
-    "title": "4 bedroom house",
-    "intro": "Charming 4-bedroom cottage in a holiday resort, just 10 minutes from the beaches.",
-    "description": "**Welcome to La Charrue**, a delightful 4-bedroom house located in the picturesque Le Domaine de Rochebonne. Nestled in the heart of the Charente Maritime region, this charming cottage offers an idyllic escape just 10 minutes from the stunning beaches of Nouvelle Aquitaine. \n\nExplore the vibrant local culture with nearby historical sites and lively fishing ports. The area boasts a breathtaking coastline, including La Cote Sauvage, and is surrounded by dunes and pine forests. Discover the enchanting islands, or venture to the bustling seaside resorts and shopping centers. \n\nLa Charrue offers a private fenced garden and terrace, perfect for leisurely outdoor dining. The heated pool, open from April to October, and the large walled park with children's play areas ensure fun for all ages. \n\nWhether you're seeking relaxation or adventure, La Charrue provides the perfect starting point for exploring the rich heritage and natural beauty of this captivating region.",
+    "name": "La Charrue",
+    "title": "4 bedroom cottage",
+    "intro": "Charming 4-bedroom cottage with a private garden, 10 minutes from beaches.",
+    "description": "**La Charrue** offers a delightful retreat in the heart of the Charente Maritime region. Nestled within the serene Le Domaine de Rochebonne, this cottage is perfect for families and pet lovers alike. With its private fenced garden and terrace, it's ideal for outdoor relaxation. Enjoy swimming in the heated pool or exploring the vast walled park and children's play areas. Just a short drive away, the stunning coastlines of La Cote Sauvage and La Grande Côte await, promising picturesque views and sandy beaches. Explore nearby islands, historical sites, and lively seaside resorts. St Just-Luzac village is a stroll away, offering local dining and shopping, ensuring convenience during your stay. Discover a blend of tranquility and adventure, making every moment unforgettable.",
     "features": [
       "4 bedrooms",
       "Private fenced garden",
       "Terrace",
       "BBQ",
-      "Free WiFi",
-      "Heated pool",
-      "Children's play areas",
-      "Pets welcome"
+      "Free high-speed WiFi",
+      "Heated pool (April-Oct)",
+      "Large walled park",
+      "Children’s play areas",
+      "Pets welcome",
+      "Linen & towels included"
     ],
     "highlights": [
-      "10 minutes from the beaches",
-      "Easy access to historical sites",
-      "Proximity to lively seaside resorts",
-      "Walking distance to shops",
-      "Great low-season deals"
+      "10 minutes from beaches",
+      "Shops within walking distance",
+      "Great low-season deals",
+      "Historical sites nearby",
+      "Easy access to lively seaside resorts"
     ]
   },
   {
     "id": 280253,
-    "name": "Le Four a Pain",
     "slug": "le-four-a-pain",
-    "title": "2 bedroom gite",
-    "intro": "Charming 2-bedroom gite in a cozy holiday resort, just 10 minutes from the beaches of Charente-Maritime.",
-    "description": "Welcome to a delightful 2-bedroom gite nestled in the heart of Domaine de Rochebonne. This charming retreat features a cozy living room, fully equipped kitchen, and a private fenced garden with a terrace. Relax in the heated pool, open from April to October, or let the kids play in the large walled park. \n\nLocated in the picturesque village of St Just-Luzac, you'll find local shops and a friendly bar-restaurant within a 10-minute walk. Explore the stunning coastline, colorful fishing ports, and historical sites such as the fort of St Jean d’angle and the fortified village of Brouage. The nearby island of Oleron offers beautiful beaches and charming towns. \n\nVenture further to discover the vibrant seaside town of Royan, the historical monuments of Rochefort, or the bustling streets and ancient fortifications of La Rochelle. Whether seeking relaxation or adventure, this gite is your perfect base in Nouvelle Aquitaine.",
+    "name": "Le Four a Pain",
+    "title": "2 bedroom cottage",
+    "intro": "Charming 2-bedroom cottage with private garden in the Domaine de Rochebonne, just 10 minutes from the beach.",
+    "description": "Nestled in the idyllic Domaine de Rochebonne, this charming 2-bedroom cottage offers the perfect getaway for families or couples. Just a short 10-minute drive from the stunning beaches of Charente-Maritime, this property allows you to enjoy both relaxation and adventure. The cottage features a cozy living room with a wood-burning stove, a fully equipped kitchen, and a private fenced garden with a barbecue area. The shared heated pool and children's play areas within the large walled park add to the appeal for families.\n\nExplore the rich history and vibrant culture of the surrounding area, with historical sites like the fort of St Jean d’angle and the fortified village of Brouage nearby. The lively seaside resorts and the picturesque island of Oleron are easily accessible. Whether you're strolling through the local village square with its shops and dining options or venturing further to the bustling town of Royan, this location offers a blend of tranquility and excitement.",
     "features": [
       "2 bedrooms",
       "1 bathroom",
-      "Private garden",
-      "Shared swimming pool",
+      "Private garden with barbecue",
+      "Shared heated swimming pool",
       "Children's play areas",
       "Fully equipped kitchen",
       "Wood-burning stove",
@@ -72,232 +74,214 @@
     ],
     "highlights": [
       "10 minutes from the beach",
-      "Heated pool (April–Oct)",
       "Pets welcome",
-      "End-of-stay cleaning available",
-      "Shops and dining within walking distance",
-      "Smart meter for electricity tracking"
+      "Shops within walking distance",
+      "Low-season deals on stays of 3+ nights",
+      "Electricity included with real-time consumption tracking"
     ]
   },
   {
     "id": 280258,
-    "name": "Le Studio",
     "slug": "le-studio",
-    "title": "Cozy studio for 2",
-    "intro": "Discover a charming studio in Le Domaine de Rochebonne, perfect for a serene getaway for two.",
-    "description": "Nestled within the enchanting grounds of **Le Domaine de Rochebonne**, this cozy studio offers an ideal retreat for two. Located in the picturesque region of Charente-Maritime, the studio provides a tranquil escape with access to vast shared gardens and a large swimming pool. Explore the beautiful coastline, vibrant seaside resorts, and charming historical sites nearby. The Domaine is just minutes away from the island of Oleron and lively towns like Royan and La Rochelle, making it a perfect base for both relaxation and adventure. Enjoy the local dining, shopping, and cultural experiences, all within a short walk from your door. The studio is well-equipped with a comfortable living space, a balcony overlooking the grounds, and access to family-friendly amenities, ensuring a delightful stay in this scenic part of France.",
+    "name": "Le Studio",
+    "title": "Cozy Studio for 2",
+    "intro": "Charming studio perfect for two, nestled in the picturesque grounds of Le Domaine de Rochebonne.",
+    "description": "Le Studio offers a delightful retreat for two, located in the beautiful grounds of Le Domaine de Rochebonne. Enjoy stunning views from your private balcony, overlooking the serene gardens. The property is perfectly positioned to explore the enchanting Charente Maritime region, known for its historical sites and breathtaking coastline. Within a short drive, discover the island of Oleron, vibrant seaside resorts, and charming fishing ports. **St Just-Luzac** village, a short walk away, provides all your essentials and a taste of local life. Whether you seek relaxation by the shared heated pool or adventures in the surrounding area, Le Studio is your ideal base.",
     "features": [
-      "1 double bed",
-      "Shower room with WC",
+      "Double bed",
       "Fridge",
       "Microwave",
       "Electric hob",
-      "Balcony",
-      "Barbecue",
+      "Private balcony",
       "Shared swimming pool",
-      "Shared gardens",
-      "Play area",
-      "Free high-speed WiFi"
+      "Shared garden"
     ],
     "highlights": [
-      "Located in Le Domaine de Rochebonne",
-      "Close to beaches",
-      "Access to heated pool",
-      "Family-friendly environment",
-      "Explore historical sites and vibrant towns",
-      "Pets welcome",
-      "Shops and dining within walking distance"
+      "Stunning views of the grounds",
+      "Access to shared heated pool",
+      "Proximity to historical sites and coastline",
+      "Walking distance to village amenities"
     ]
   },
   {
     "id": 280263,
-    "name": "La Cave",
     "slug": "la-cave",
+    "name": "La Cave",
     "title": "3 bedroom cottage",
-    "intro": "Escape to a charming 3-bedroom cottage with a private garden in the scenic Domaine de Rochebonne.",
-    "description": "Discover the allure of a **charming 3-bedroom cottage** nestled in the tranquil Domaine de Rochebonne. This idyllic retreat offers a cozy living room, a fully-equipped kitchen, and a private garden perfect for al fresco dining. Situated just **10 minutes from the beaches**, this location offers a perfect blend of relaxation and adventure. Explore the vibrant Charente-Maritime region, famous for its historical sites, colorful fishing ports, and stunning coastlines like La Côte Sauvage. Within a short drive, immerse yourself in the culture of the island of Oléron, or visit the bustling seaside town of Royan. Whether you're exploring the local shops and restaurants or venturing to nearby attractions like Fort Louvois or the La Palmyre Zoo, there's something for everyone. Enjoy great low-season deals with up to 40% discounts for stays of 3 nights or more.",
+    "intro": "Charming cottage with private garden and shared pool, nestled in the picturesque Domaine de Rochebonne.",
+    "description": "Welcome to a charming 3-bedroom cottage in the idyllic Domaine de Rochebonne. This picturesque retreat offers a cozy living room, a fully equipped kitchen, and a private garden perfect for barbecues. Nestled in the heart of Charente-Maritime, you'll be just minutes away from stunning beaches and vibrant seaside resorts. Explore the cultural richness of the region with nearby historical sites like the island of Oleron and the fort of St Jean d’angle. Whether you seek relaxation or adventure, this cottage provides the perfect getaway surrounded by nature's beauty.",
     "features": [
       "3 bedrooms",
       "Living room",
-      "Fully-equipped kitchen",
+      "Fully equipped kitchen",
       "Private garden",
+      "Barbecue",
       "Shared swimming pool",
-      "Children's play areas",
-      "Wifi",
-      "Parking"
+      "Children's play areas"
     ],
     "highlights": [
-      "10 minutes from beaches",
-      "Heated pool (April-October)",
+      "10 minutes to beaches",
+      "Large shared pool",
+      "Great low season deals",
       "Pet-friendly",
-      "Shops and restaurants within walking distance",
-      "Discounts for extended stays",
-      "Historical sites nearby"
+      "Fast and free WiFi",
+      "Linens and towels included",
+      "Walking distance to shops and restaurants"
     ]
   },
   {
     "id": 280268,
-    "name": "La Mangeoire",
     "slug": "la-mangeoire",
-    "title": "2 bedroom cottage",
-    "intro": "Charming 2 bedroom cottage with private garden in Domaine de Rochebonne, 10 mins from beaches.",
-    "description": "Nestled in the tranquil Domaine de Rochebonne, this charming 2-bedroom cottage offers the perfect blend of comfort and convenience. Enjoy a private fenced garden and terrace, ideal for al fresco dining with its barbecue setup. The property features a cozy living room and a fully equipped kitchen, making it a home away from home. Just a short drive away, explore the stunning coastline of Charente-Maritime with its expansive beaches and picturesque fishing ports. Discover the rich history of nearby sites like the island of Oleron and Fort Louvois, or enjoy the bustling atmosphere of seaside resorts and shopping centers. With shops and dining options within walking distance, this location offers both relaxation and adventure. Pets are welcome, and great deals are available in the low season.",
+    "name": "La Mangeoire",
+    "title": "2 bedroom gite",
+    "intro": "Charming 2 bedroom gite with a private garden, located in the scenic Domaine de Rochebonne.",
+    "description": "Discover a delightful 2-bedroom gite nestled in the picturesque Domaine de Rochebonne. With a **private fenced garden** and direct access to a **heated pool**, enjoy a serene holiday retreat just 10 minutes from stunning beaches. Explore the charming village of St Just-Luzac with its vibrant local shops and dining options. Venture out to the **island of Oleron**, the **fortified village of Brouage**, and the **seaside town of Royan**. Perfect for families, the area offers historical sites, lively fishing ports, and expansive beaches. Whether you're exploring the pine forests or enjoying the local cuisine, this destination promises an unforgettable experience. Pets are welcome, making it an ideal getaway for the whole family.",
     "features": [
       "2 bedrooms",
-      "1 bathroom",
-      "Private garden",
-      "Barbecue",
-      "Living room",
-      "Kitchen",
-      "Heated pool",
-      "High-speed WiFi",
+      "Private fenced garden",
+      "Heated swimming pool",
+      "Free high-speed WiFi",
+      "Pets welcome",
       "Linen & towels included",
-      "End-of-stay cleaning"
+      "Fully equipped kitchen"
     ],
     "highlights": [
       "10 minutes from beaches",
       "Large shared swimming pool",
-      "Children’s play areas",
-      "Pets welcome",
-      "Shops within walking distance",
+      "Walking distance to shops",
       "Great low season deals",
       "Historical sites nearby"
     ]
   },
   {
     "id": 280274,
-    "name": "Le Chai",
     "slug": "le-chai",
-    "title": "2 bedroom cottage",
-    "intro": "Charming 2 bedroom cottage in Domaine de Rochebonne with private garden and pool access.",
-    "description": "Welcome to a **charming 2 bedroom cottage** nestled in the picturesque Domaine de Rochebonne. This delightful retreat offers a cozy living room and a fully equipped kitchen, complemented by a bedroom and a bathroom. Step outside to enjoy your **private fenced garden** with garden furniture and a barbecue, perfect for al fresco dining. The Domaine boasts expansive grounds with a shared **heated pool** and children's play areas, making it an ideal family destination. Just **10 minutes from stunning beaches**, this location provides easy access to vibrant fishing ports, historical sites, and the breathtaking coastline of Nouvelle Aquitaine. Discover the nearby island of Oleron or explore the bustling town of Royan. With shops and dining within walking distance, your stay promises convenience and relaxation. Whether you're seeking adventure or tranquility, Le Chai offers the perfect getaway in the heart of Charente-Maritime.",
+    "name": "Le Chai",
+    "title": "2 bedroom house",
+    "intro": "Charming 2 bedroom cottage with private garden and shared pool, just minutes from the beach.",
+    "description": "Welcome to Le Chai, a delightful 2-bedroom house nestled in the Domaine de Rochebonne. This charming cottage features a cozy living room, a fully equipped kitchen, and a private fenced garden with a barbecue. Enjoy the large shared swimming pool and children's play areas, perfect for families. Located just 10 minutes from beautiful beaches, Le Chai offers an ideal getaway in the heart of Charente-Maritime. Explore the nearby historic sites, vibrant seaside resorts, and picturesque fishing ports. With shops and dining within walking distance, your stay promises convenience and comfort. Pets are welcome, making it a perfect retreat for the entire family. Discover the allure of the Nouvelle Aquitaine region with its stunning coastline, enchanting islands, and rich history.",
     "features": [
       "2 bedrooms",
-      "1 bathroom",
       "Living room",
       "Fully equipped kitchen",
       "Private fenced garden",
       "Barbecue",
-      "Heated pool",
-      "Children’s play areas",
-      "Pets welcome",
-      "Free high-speed WiFi",
-      "Linen & towels included",
-      "End-of-stay cleaning available"
-    ],
-    "highlights": [
-      "10 minutes to the beach",
-      "Large shared swimming pool",
-      "Walking distance to shops and dining",
-      "Easy access to historical sites and coastline",
-      "Great low season deals"
-    ]
-  },
-  {
-    "id": 280277,
-    "name": "Le Pressoir",
-    "slug": "le-pressoir",
-    "title": "5-bedroom house",
-    "intro": "Charming 5-bedroom house just 10 minutes from the beach, featuring a private garden, shared pool, and great deals.",
-    "description": "Nestled in the picturesque Domaine de Rochebonne, this charming 5-bedroom house is a perfect getaway for families and friends. Located in the serene village of St Just-Luzac in Charente Maritime, Nouvelle Aquitaine, the property offers the comfort of a cozy living room, a full kitchen, and three bathrooms. The private fenced garden with a terrace is ideal for outdoor dining, while the shared heated pool promises relaxation from April to October. Explore nearby historical sites, colorful fishing ports, and stunning coastlines like La Cote Sauvage. With easy access to lively seaside resorts and shopping centers, this location is perfect for both relaxation and adventure. Whether strolling through the fortified village of Brouage or enjoying the vibrant town of Royan, you’ll find endless opportunities for exploration. Plus, with shops, restaurants, and bars within walking distance, convenience is at your doorstep.",
-    "features": [
-      "5 bedrooms",
-      "3 bathrooms",
-      "Private garden",
-      "Shared heated pool",
-      "Pets welcome",
-      "High-speed WiFi",
-      "Linen & towels included",
-      "End-of-stay cleaning"
-    ],
-    "highlights": [
-      "10 minutes from the beach",
-      "Great low-season deals",
-      "Walking distance to shops",
-      "Nearby historical sites",
-      "Stunning coastline"
-    ]
-  },
-  {
-    "id": 304946,
-    "name": "Le Logis",
-    "slug": "le-logis",
-    "title": "5 bedroom house",
-    "intro": "Charming 5-bedroom house just 10 minutes from the beach, with a private garden and shared pool.",
-    "description": "Discover the charm of a 5-bedroom retreat in the Domaine de Rochebonne, nestled in the picturesque village of St Just-Luzac. Just a short drive from the stunning coastline of Nouvelle Aquitaine, this spacious home offers a perfect blend of comfort and convenience. Relax in your private garden or take a dip in the shared heated pool, open from April to October. Explore the vibrant Charente Maritime region, with its historical sites, colorful fishing ports, and scenic islands. Within walking distance, enjoy local dining and shopping in the quaint village square. Whether you're here for a family vacation or a romantic getaway, Le Logis promises an unforgettable experience in southwest France.",
-    "features": [
-      "5 bedrooms",
-      "3 bathrooms",
-      "Private garden",
-      "Shared heated pool",
+      "Shared swimming pool",
       "Children's play areas",
       "Pets welcome",
       "Free high-speed WiFi",
       "Linen & towels included"
     ],
     "highlights": [
+      "10 minutes from the beaches",
+      "Large walled park",
+      "Heated pool (April–Oct)",
+      "Shops within walking distance",
+      "End-of-stay cleaning from €24",
+      "Electricity fully included outside Oct-May"
+    ]
+  },
+  {
+    "id": 280277,
+    "slug": "le-pressoir",
+    "name": "Le Pressoir",
+    "title": "5 bedroom house",
+    "intro": "Charming 5-bedroom house in the Domaine de Rochebonne, just 10 minutes from the beach.",
+    "description": "Welcome to **Le Pressoir**, a delightful 5-bedroom retreat nestled in the tranquil Domaine de Rochebonne. Just a short drive from the picturesque beaches of Charente-Maritime, this charming house offers everything for a perfect getaway. Relax in the cozy living room or enjoy the private garden with a barbecue. The shared heated pool is open from April to October, ensuring a refreshing dip is always possible. Explore the nearby historical sites, or wander through the colorful fishing ports and stunning coastlines. The village of St Just-Luzac offers local shops and dining options within walking distance, providing convenience and a taste of local culture. Whether you're here for a quiet retreat or an adventure-filled holiday, Le Pressoir is your gateway to the best of Nouvelle Aquitaine.",
+    "features": [
+      "5 bedrooms",
+      "3 bathrooms",
+      "Private fenced garden",
+      "Shared heated pool",
+      "Children's play areas",
+      "Free high-speed WiFi",
+      "Pets welcome"
+    ],
+    "highlights": [
       "10 minutes from the beach",
       "Large walled park",
-      "Cozy living room",
-      "Fully equipped kitchen",
-      "Wood-burning stove",
-      "Great low-season deals",
-      "Local shops within walking distance"
+      "Walking distance to shops",
+      "Low-season deals",
+      "Stunning local attractions"
+    ]
+  },
+  {
+    "id": 304946,
+    "slug": "le-logis",
+    "name": "Le Logis",
+    "title": "5 bedroom house",
+    "intro": "Charming 5-bedroom house in Domaine de Rochebonne, 10 mins from the beach.",
+    "description": "Discover a delightful retreat at Le Logis, a spacious 5-bedroom house nestled in the picturesque Domaine de Rochebonne. Perfect for families, this charming property offers a cozy living room, fully equipped kitchen, and a private garden ideal for relaxation. Just a short drive from the stunning beaches of Charente-Maritime, this location provides easy access to historical sites, colorful fishing ports, and lively seaside resorts. Enjoy exploring the island of Oleron, the fortified village of Brouage, and the bustling town of Royan. With a heated pool available from April to October and children's play areas, there's something for everyone. Experience the charm of Nouvelle Aquitaine with convenient access to local shops and dining options in the quaint village of St Just-Luzac.",
+    "features": [
+      "5 bedrooms",
+      "3 bathrooms",
+      "Private garden",
+      "Shared pool",
+      "Children's play areas",
+      "Free high-speed WiFi",
+      "Pet-friendly"
+    ],
+    "highlights": [
+      "10 minutes from the beach",
+      "Heated pool (April–Oct)",
+      "Large walled park",
+      "Local shops within walking distance",
+      "Great low-season deals"
     ]
   },
   {
     "id": 333855,
-    "name": "Charming Luzac Retreat",
     "slug": "charming-luzac-retreat",
+    "name": "Charming Vacation Home",
     "title": "4 bedroom house with private pool",
-    "intro": "Discover tranquility in this 4-bedroom house with a private pool, just minutes from Oléron Island and stunning beaches.",
-    "description": "Welcome to a delightful escape in the heart of Luzac, Southwestern France. This charming house offers four cozy bedrooms and a spacious open-plan living area, perfect for family gatherings. Nestled within a gated garden, enjoy complete privacy with a fenced, heated pool.\n\nExplore the vibrant local life with a short walk to Luzac's bakery, butcher, and pharmacy. A few more steps take you to St Just Luzac's quaint village square with a bar-tabac, restaurant, and grocery store. For more excitement, head to Marennes, just a 5-minute drive away, with its bustling markets, leisure port, and beach.\n\nThe area is rich in history and natural beauty, from the historic sites of Brouage and Fort Louvois to the stunning coastlines of La Cote Sauvage. Enjoy exploring the island of Oleron, or take a day trip to the vibrant cities of Royan and La Rochelle.",
+    "intro": "Discover a charming 4-bedroom retreat with a private pool in the heart of the Charente Maritime region.",
+    "description": "Nestled in the picturesque village of Luzac, this delightful 4-bedroom house offers a perfect blend of comfort and privacy. Just a short drive from the stunning island of Oléron, this home features a spacious open-plan living area with a cozy lounge, dining room, and fully-equipped kitchen. **Enjoy ultimate relaxation** in the secluded garden with a private heated pool, perfect for family gatherings and sun-soaked afternoons. Explore the vibrant local culture with nearby markets, restaurants, and historical sites. Venture further to experience the breathtaking coastline and lively seaside towns. Whether you're seeking tranquility or adventure, this charming getaway is your ideal base to explore the beauty of Nouvelle Aquitaine.",
     "features": [
       "4 bedrooms",
       "2 bathrooms",
-      "5m x 10m private heated pool",
       "Open-plan living area",
       "Fully-equipped kitchen",
+      "Private heated swimming pool",
+      "Enclosed garden",
       "Flat-screen LCD TV",
-      "Wood-burning stove",
       "Wifi",
-      "Central heating",
-      "Outdoor terrace",
-      "Barbecue"
+      "Wood-burning stove",
+      "Central heating"
     ],
     "highlights": [
-      "Private heated swimming pool",
-      "Proximity to Oléron Island",
-      "Walking distance to local amenities",
-      "Gated and enclosed garden",
-      "Historical sites nearby"
+      "Secluded private pool",
+      "Proximity to Oléron",
+      "Charming village setting",
+      "Easy access to beaches",
+      "Nearby restaurants and shops",
+      "Historical and cultural attractions"
     ]
   },
   {
     "id": 375769,
-    "name": "Château de Rochebonne",
     "slug": "chateau-de-rochebonne",
+    "name": "Château de Rochebonne",
     "title": "8 bedroom Chateau with private pool",
-    "intro": "Experience luxury and privacy at Château de Rochebonne, your own secluded oasis in Charente Maritime.",
-    "description": "Welcome to the **Château de Rochebonne**, a magnificent retreat offering complete privacy with its own swimming pool and expansive gardens. Enclosed by high walls and a gated entrance, this chateau ensures a secure environment for families. Parents can unwind while children explore the gardens, equipped with a sandpit, swings, and sports gear. For adults, a peaceful reading room and games room with table tennis provide relaxation.\n\nThis elegant chateau features eight bedrooms and four bathrooms, a grand kitchen, and spacious living areas, perfect for family gatherings. The property is equipped with modern amenities, including free Wi-Fi and satellite TV, ensuring a comfortable stay.\n\nLocated in the charming village of St Just-Luzac, the area is rich with history, vibrant fishing ports, and stunning coastlines. Explore nearby attractions like the island of Oleron and the historic fortifications of Brouage. A short drive reveals the lively seaside town of Royan and the cultural richness of La Rochelle and Saintes.",
+    "intro": "Experience luxury and privacy at the Château de Rochebonne, a secluded oasis with its own pool and gardens.",
+    "description": "Welcome to the **Château de Rochebonne**, a luxurious and private retreat nestled in the heart of Nouvelle Aquitaine. This elegant chateau offers an exclusive experience with its own secluded swimming pool and expansive gardens, surrounded by high walls for complete privacy. The charming village of St Just-Luzac is a short walk away, where you can explore local eateries and shops. The chateau features eight beautifully appointed bedrooms, four modern bathrooms, and spacious living areas perfect for families or groups. Enjoy leisurely days by the pool, family barbecues, or a game of tennis or badminton. For those seeking culture and adventure, the nearby Charente Maritime region boasts stunning coastlines, historical sites, and vibrant seaside towns. Explore the island of Oleron, the fortified town of Brouage, or the bustling streets of La Rochelle. The Château de Rochebonne is your gateway to a memorable French holiday.",
     "features": [
       "8 bedrooms",
       "4 bathrooms",
       "Private pool",
-      "Large garden",
-      "Games room",
-      "Table tennis",
-      "Wi-Fi",
+      "Spacious gardens",
       "Satellite TV",
+      "Free Wi-Fi",
       "Modern kitchen",
-      "Secluded grounds"
+      "Library",
+      "Games room"
     ],
     "highlights": [
-      "Private oasis",
-      "Gated property",
-      "Family-friendly",
-      "Near historical sites",
-      "Coastal charm"
+      "Private oasis with high walls",
+      "Close to historical sites",
+      "Secluded swimming pool",
+      "Family-friendly amenities",
+      "Easy access to local attractions",
+      "Late checkout available"
     ]
   }
 ]
