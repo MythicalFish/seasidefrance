@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
@@ -12,6 +12,10 @@ config();
 console.log('🟢🟢', process.env.OPENAI_API_KEY);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const aboutTheArea = fs.readFileSync(
+  path.join(__dirname, '../src/data/about-the-area.txt'),
+  'utf-8'
+);
 
 // Verify required environment variables
 const requiredEnvVars = ['OPENAI_API_KEY', 'LODGIFY_PUBLIC_KEY'];
@@ -34,15 +38,20 @@ Please provide:
 1. A concise title (without the property name), i.e. "5 bedroom cottage"
 2. The actual property name, i.e. "Le Logis"
 3. A short & appealing intro (max 200 characters)
-4. A longer description with markdown formatting (max 1200 characters). It should be engaging, highlighting unique features and the property's appeal to potential guests. 
-5. A list of features, i.e. "Wifi, Parking, Swimming Pool"
+4. A longer description with markdown formatting (max 1200 characters). It should be engaging, highlighting unique features about the property and the appeals of the general area. Should not include the ammenities, as these will be listed separately. 
+5. A list of features, i.e. "2 double beds", "Wifi, Parking, Swimming Pool"
 6. A list of highlights
 
-Your response must be a JSON object with the following keys: "name", "title", "intro", "description", "features", "highlights". The values for these should be strings, except for "features" and "highlights" which should be an array of strings. The "description" should be a markdown formatted string.
+Your response must be a JSON object with the following keys: "id", "name", "title", "intro", "description", "features", "highlights". The values for these should be strings, except for "features" and "highlights" which should be an array of strings, and "id" which should be a number. The "description" should be a markdown formatted string with line breaks.
 
-Do not respond with anything other than the raw JSON object (no backticks, comments or explanation).
+Here is a general description of the location & area where the property is located:
 
-Property Name: ${property.name}
+${aboutTheArea}
+
+Below is the actual property imformation, remember to not respond with anything other than the raw JSON object (no backticks, comments or explanation).
+
+Property ID: ${property.id}
+Property Title: ${property.name}
 Property Description (includes HTML):
 
 ${property.description}
@@ -91,7 +100,7 @@ async function main(): Promise<void> {
     const fullJSON = JSON.parse(fullJSONString);
 
     const outputPath = path.join(__dirname, '../src/data/property-info.json');
-    await fs.writeFile(outputPath, JSON.stringify(fullJSON, null, 2));
+    fs.writeFileSync(outputPath, JSON.stringify(fullJSON, null, 2));
     console.log('Optimization complete! Results saved to property-info.json');
   } catch (error) {
     console.error('Error:', error);
