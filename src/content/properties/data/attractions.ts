@@ -1,5 +1,4 @@
-
-Fort Louvois: This historic fortification, located on an island just off the coast of Bourcefranc-le-Chapus (11 km from Saint Just-Luzac), is accessible via a causeway at low tide. Explore the fort and enjoy the views of the surrounding ocean.
+export default `Fort Louvois: This historic fortification, located on an island just off the coast of Bourcefranc-le-Chapus (11 km from Saint Just-Luzac), is accessible via a causeway at low tide. Explore the fort and enjoy the views of the surrounding ocean.
 
 Mornac-sur-Seudre: This charming village, just 16 km from Saint Just-Luzac, is known for its picturesque harbor, narrow streets lined with artisan shops, and traditional wooden boats called "pinasses."
 
@@ -32,3 +31,4 @@ Les Remparts de Saintes: These ancient Roman ramparts, located in Saintes (just 
 Château de Panloy: This elegant 18th-century castle, located in Port-d'Envaux (just 15 km from Saint Just-Luzac), features beautiful gardens and a collection of antique furniture.
 
 These are just a few more of the many activities and sights to see within a 30 km radius of Saint Just-Luzac in South West France. With so much to explore in this beautiful region, you're sure to find something that interests you!
+`;

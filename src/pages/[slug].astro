@@ -4,10 +4,13 @@ import properties, { type Property } from '../content/properties';
 
 export async function getStaticPaths() {
   const propertyList = properties as Property[];
-  return propertyList.map((property: Property) => ({
-    params: { slug: property.slug },
-    props: { property },
-  }));
+  return propertyList.map((property: Property) => {
+    console.log(property);
+    return {
+      params: { slug: property.slug },
+      props: { property },
+    };
+  });
 }
 
 const { lodgify, ...property } = Astro.props.property;

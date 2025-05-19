@@ -5,17 +5,12 @@ import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
 import lodgifyFetch from './lodgifyFetch';
 import type { LodgifyProperty } from '../types';
+import aboutTheArea from './aboutTheArea';
 
 // Load environment variables from .env file
 config();
 
-console.log('🟢🟢', process.env.OPENAI_API_KEY);
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const aboutTheArea = fs.readFileSync(
-  path.join(__dirname, '../src/data/about-the-area.txt'),
-  'utf-8'
-);
 
 // Verify required environment variables
 const requiredEnvVars = ['OPENAI_API_KEY', 'LODGIFY_PUBLIC_KEY'];
@@ -37,12 +32,13 @@ async function optimizeProperty(property: LodgifyProperty): Promise<string> {
 Please provide:
 1. A concise title (without the property name), i.e. "5 bedroom cottage"
 2. The actual property name, i.e. "Le Logis"
-3. A short & appealing intro (max 200 characters)
-4. A longer description with markdown formatting (max 1200 characters). It should be engaging, highlighting unique features about the property and the appeals of the general area. Should not include the ammenities, as these will be listed separately. 
-5. A list of features, i.e. "2 double beds", "Wifi, Parking, Swimming Pool"
+3. A slug for the property, i.e. "le-logis"
+4. A short & appealing intro (max 200 characters)
+5. A longer description with markdown formatting (max 1200 characters). It should be engaging, highlighting unique features about the property and the appeals of the general area. Should not include the ammenities, as these will be listed separately. 
+6. A list of features, i.e. "2 double beds", "Wifi, Parking, Swimming Pool"
 6. A list of highlights
 
-Your response must be a JSON object with the following keys: "id", "name", "title", "intro", "description", "features", "highlights". The values for these should be strings, except for "features" and "highlights" which should be an array of strings, and "id" which should be a number. The "description" should be a markdown formatted string with line breaks.
+Your response must be a JSON object with the following keys: "id", "slug", "name", "title", "intro", "description", "features", "highlights". The values for these should be strings, except for "features" and "highlights" which should be an array of strings, and "id" which should be a number. The "description" should be a markdown formatted string with line breaks.
 
 Here is a general description of the location & area where the property is located:
 
@@ -97,7 +93,7 @@ async function main(): Promise<void> {
     const fullJSONString = `[${newData.join(',')}]`;
     const fullJSON = JSON.parse(fullJSONString);
 
-    const outputPath = path.join(__dirname, '../src/content/properties/data/optimizedInfo.json');
+    const outputPath = path.join(__dirname, './optimizedInfo.json');
     fs.writeFileSync(outputPath, JSON.stringify(fullJSON, null, 2));
     console.log('Optimization complete!');
   } catch (error) {
