@@ -1,18 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import type { Property } from '../types/lodgify';
-import properties from '../content/properties';
-import { buildSlug } from '../lib/slug';
+import properties, { type Property } from '../content/properties';
 
 export async function getStaticPaths() {
   const propertyList = properties as Property[];
   return propertyList.map((property: Property) => ({
-    params: { slug: buildSlug(property.name) },
+    params: { slug: property.slug },
     props: { property },
   }));
 }
 
-const { property } = Astro.props;
+const { lodgify, ...property } = Astro.props.property;
 ---
 
 <Layout>
@@ -25,11 +23,9 @@ const { property } = Astro.props;
       {property.name}
     </h1>
     {
-      property.image_url && (
+      lodgify.imageUrl && (
         <img
-          src={
-            property.image_url.startsWith('//') ? `https:${property.image_url}` : property.image_url
-          }
+          src={lodgify.imageUrl.startsWith('//') ? `https:${lodgify.imageUrl}` : lodgify.imageUrl}
           alt={property.name}
           class="w-full h-[400px] object-cover rounded-lg mb-8"
         />
@@ -46,11 +42,11 @@ const { property } = Astro.props;
         <dl class="space-y-4">
           <div>
             <dt class="font-medium">Location</dt>
-            <dd>{property.address}, {property.zip} {property.city}, {property.country}</dd>
+            <dd>{lodgify.address}, {lodgify.zip} {lodgify.city}, {lodgify.country}</dd>
           </div>
           <div>
             <dt class="font-medium">Price Range</dt>
-            <dd>{property.min_price} - {property.max_price} {property.currency_code} per night</dd>
+            <dd>{lodgify.minPrice} - {lodgify.maxPrice} {lodgify.currencyCode} per night</dd>
           </div>
         </dl>
       </div>

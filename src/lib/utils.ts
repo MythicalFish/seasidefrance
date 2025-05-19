@@ -1,7 +1,3 @@
-export function buildSlug(text: string | null | undefined): string {
-  return text?.trim().toLowerCase().replace(/\s+/g, '-') ?? '';
-}
-
 type CurrencyCode = 'EUR' | 'USD' | 'GBP' | 'CAD';
 
 export function currencySymbol(currencyCode: string | null | undefined): string {

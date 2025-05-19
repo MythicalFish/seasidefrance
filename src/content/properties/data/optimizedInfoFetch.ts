@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
-import { fetchProperties } from '../src/content/properties';
-import type { Property } from '../src/content/properties';
+import lodgifyFetch from './lodgifyFetch';
+import type { LodgifyProperty } from '../types';
 
 // Load environment variables from .env file
 config();
@@ -31,7 +31,7 @@ const openai = new OpenAI({
 
 const basePrompt = `You strictly output raw JSON, without backticks, comments or explanation. You first analyze the given title and description as a professional holiday home marketing expert, in order to provide the JSON object as described below.`;
 
-async function optimizeProperty(property: Property): Promise<string> {
+async function optimizeProperty(property: LodgifyProperty): Promise<string> {
   const prompt = `${basePrompt}
 
 Please provide:
@@ -83,9 +83,7 @@ ${property.description}
 
 async function main(): Promise<void> {
   try {
-    const properties = (await fetchProperties(
-      process.env.LODGIFY_PUBLIC_KEY as string
-    )) as Property[];
+    const properties = await lodgifyFetch(process.env.LODGIFY_PUBLIC_KEY || '');
     if (!Array.isArray(properties) || properties.length === 0) {
       throw new Error('No properties found');
     }
@@ -99,9 +97,9 @@ async function main(): Promise<void> {
     const fullJSONString = `[${newData.join(',')}]`;
     const fullJSON = JSON.parse(fullJSONString);
 
-    const outputPath = path.join(__dirname, '../src/data/property-info.json');
+    const outputPath = path.join(__dirname, '../src/content/properties/data/optimizedInfo.json');
     fs.writeFileSync(outputPath, JSON.stringify(fullJSON, null, 2));
-    console.log('Optimization complete! Results saved to property-info.json');
+    console.log('Optimization complete!');
   } catch (error) {
     console.error('Error:', error);
     process.exit(1);

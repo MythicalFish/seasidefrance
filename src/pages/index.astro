@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../modules/Hero.astro';
 import photo1 from '../images/old/chateau-pool-1.jpg';
 import properties from '../content/properties';
-import { buildSlug, currencySymbol } from '../lib/utils';
+import { currencySymbol } from '../lib/utils';
 ---
 
 <Layout>
@@ -11,17 +11,15 @@ import { buildSlug, currencySymbol } from '../lib/utils';
   <section class="container mx-auto px-4 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        properties.map(property => (
+        properties.map(({ lodgify, ...property }) => (
           <a
-            href={`/${buildSlug(property.name)}`}
+            href={`/${property.slug}`}
             class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
-            {property.imageUrl && (
+            {lodgify.imageUrl && (
               <img
                 src={
-                  property.imageUrl.startsWith('//')
-                    ? `https:${property.imageUrl}`
-                    : property.imageUrl
+                  lodgify.imageUrl.startsWith('//') ? `https:${lodgify.imageUrl}` : lodgify.imageUrl
                 }
                 alt={property.name}
                 class="w-full h-48 object-cover"
@@ -30,11 +28,11 @@ import { buildSlug, currencySymbol } from '../lib/utils';
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">{property.name}</h3>
               <p class="text-gray-600 mb-4">
-                {property.address}, {property.city}
+                {lodgify.address}, {lodgify.city}
               </p>
               <div class="flex justify-between items-center">
                 <span class="text-lg font-medium">
-                  From {`${currencySymbol(property.currencyCode)}${property.minPrice}`} per night
+                  From {`${currencySymbol(lodgify.currencyCode)}${lodgify.minPrice}`} per night
                 </span>
               </div>
             </div>
