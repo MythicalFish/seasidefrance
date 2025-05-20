@@ -1,32 +1,52 @@
 import type { LodgifyAvailability } from 'src/content/availability/types';
-export type Availabilities = string[][];
+
+export type Availability = {
+  nights: string[];
+  checkInDate: string;
+  checkOutDate: string;
+};
+
+export type Availabilities = Availability[];
 
 const getAvailability = (availability: LodgifyAvailability[]): Availabilities => {
-  let availableDates: Availabilities = [];
+  let availabilities: Availabilities = [];
   const availabilityData = availability[0];
 
   if (!availabilityData?.periods) return [];
 
-  availabilityData.periods.forEach(period => {
-    const periodInfo: string[] = [];
+  availabilityData.periods.forEach((period) => {
+    const nights: string[] = [];
     if (period.available === 1 && period.start && period.end) {
-      const endDate = new Date(period.end);
-      let currentDate = new Date(period.start);
-      while (currentDate <= endDate) {
-        periodInfo.push(currentDate.toISOString().split('T')[0]);
-        currentDate.setDate(currentDate.getDate() + 1);
+      const lastNight = new Date(period.end);
+      const firstNight = new Date(period.start);
+      firstNight.setDate(firstNight.getDate() + 1);
+
+      const checkInDate = new Date(period.start);
+      const checkOutDate = new Date(period.end);
+      checkOutDate.setDate(checkOutDate.getDate() + 1);
+      const checkInDateStr = checkInDate.toISOString().split('T')[0];
+      const checkOutDateStr = checkOutDate.toISOString().split('T')[0];
+
+      let night = new Date(firstNight);
+      while (night <= checkOutDate) {
+        nights.push(night.toISOString().split('T')[0]);
+        night.setDate(night.getDate() + 1);
       }
+      availabilities.push({
+        nights,
+        checkInDate: checkInDateStr,
+        checkOutDate: checkOutDateStr,
+      });
     }
-    availableDates.push(periodInfo.sort());
   });
 
-  const currentDate = new Date().toISOString().split('T')[0];
-  availableDates = availableDates.map(arr => {
-    return arr.filter(date => date >= currentDate);
-  });
-  availableDates = availableDates.filter(arr => !!arr.length);
+  // const currentDate = new Date().toISOString().split('T')[0];
+  // availabilities = availabilities.map((arr) => {
+  //   return arr.filter((date) => date >= currentDate);
+  // });
+  // availabilities = availabilities.filter((arr) => !!arr.length);
 
-  return availableDates;
+  return availabilities;
 };
 
 export default getAvailability;

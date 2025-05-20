@@ -12,7 +12,6 @@ type Props = {
 
 const AvailablePeriods = ({ rates, availability, currencyCode, propertyId }: Props) => {
   const periods = findAvailablePeriods(rates, availability)?.slice(0, 4);
-  console.log('🟢🟢🟢 periods', periods);
 
   return (
     <div className="space-y-4">

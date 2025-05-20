@@ -1,23 +1,15 @@
 import type { Availabilities } from './getAvailability';
 
 const getBookingPeriods = (availabilities: Availabilities): Availabilities => {
-  const result: Availabilities = [];
-
-  for (const dateArray of availabilities) {
-    // If the array has 7 or fewer dates, add it as is
-    if (dateArray.length <= 7) {
-      result.push(dateArray);
-    } else {
-      // Split the array into chunks of 7
-      for (let i = 0; i < dateArray.length; i += 7) {
-        const chunk = dateArray.slice(i, i + 7);
-        result.push(chunk);
-      }
-    }
-  }
-
-  return result.map((arr) => arr.sort());
-  // return result.map((arr) => arr.sort((a, b) => new Date(a).getTime() - new Date(b).getTime()));
+  return availabilities.map((availability) => {
+    const nights = availability.nights.slice(0, 7).sort();
+    const checkOutDate = nights[nights.length - 1];
+    return {
+      nights,
+      checkInDate: availability.checkInDate,
+      checkOutDate: checkOutDate,
+    };
+  });
 };
 
 export default getBookingPeriods;

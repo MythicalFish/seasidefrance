@@ -20,7 +20,7 @@ const formatDate = (date: string | Date): string => {
 };
 
 export const getCheckoutUrl = (
-  propertyId: string,
+  propertyId: number,
   arrival: string | Date,
   departure: string | Date
 ) => {

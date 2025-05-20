@@ -6,12 +6,14 @@ import getAvailability from './utils/getAvailability';
 import getBookingPeriods from './utils/getBookingPeriods';
 
 export type AvailablePeriod = {
-  dates: string[];
+  nights: string[];
   totalPrice: number;
-  nights: number;
-  startDate: string;
-  endDate: string;
+  nightLength: number;
+  checkInDate: string;
+  checkOutDate: string;
   discount: number;
+  promoName: string;
+  prices: number[];
 };
 
 export function findAvailablePeriods(
@@ -26,23 +28,29 @@ export function findAvailablePeriods(
   const availability = getAvailability(availabilityResponse);
   const bookingPeriods = getBookingPeriods(availability);
 
-  console.log('🟢🟢🟢 dateInfo', dateInfo);
+  console.log('🟢🟢🟢 promoInfo', promoInfo);
+  // console.log('🟢🟢🟢 dateInfo', dateInfo);
+  // console.log('🟢🟢🟢 bookingPeriods', bookingPeriods);
+  // console.log('🟢🟢🟢 availability', availability);
 
   const withPrices = bookingPeriods.map((period) => {
     let totalPrice = 0;
     let minStay = 0;
-    period.forEach((dateStr) => {
+    const prices: number[] = [];
+    period.nights.forEach((dateStr) => {
       const info = dateInfo[dateStr];
       totalPrice += info.price;
       if (info.minStay > minStay) minStay = info.minStay;
+      prices.push(info.price);
     });
     return {
-      dates: period,
+      nights: period.nights,
       totalPrice,
       minStay,
-      nights: period.length,
-      startDate: period[0],
-      endDate: period[period.length - 1],
+      nightLength: period.nights.length,
+      checkInDate: period.checkInDate,
+      checkOutDate: period.checkOutDate,
+      prices,
     };
   });
 
@@ -50,13 +58,15 @@ export function findAvailablePeriods(
 
   const withPromo = withPrices.map((period) => {
     let discount = 0;
-    const { startDate, endDate, nights, dates, totalPrice: originalPrice } = period;
+    let promoName = '';
+    const { checkInDate, checkOutDate, nightLength, totalPrice: originalPrice } = period;
     for (const promo of promoInfo) {
+      if (nightLength < promo.minStay) continue;
       for (const dateRange of promo.dateRanges) {
-        if (nights < promo.minStay) continue;
-        if (dateRange.includes(startDate) && dateRange.includes(endDate)) {
+        if (dateRange.includes(checkInDate) && dateRange.includes(checkOutDate)) {
           if (promo.discount > discount) {
             discount = promo.discount;
+            promoName = promo.name;
           }
         }
       }
@@ -66,14 +76,20 @@ export function findAvailablePeriods(
       originalPrice,
       discount,
       totalPrice,
-      startDate,
-      endDate,
-      nights,
-      dates,
+      promoName,
+      checkInDate,
+      checkOutDate,
+      nightLength,
+      nights: period.nights,
+      prices: period.prices,
     };
+  });
+
+  const afterToday = withPromo.filter((period) => {
+    return new Date(period.checkInDate) > new Date();
   });
 
   // console.log('🟢🟢🟢 withPromo', withPromo);
 
-  return withPromo;
+  return afterToday;
 }
