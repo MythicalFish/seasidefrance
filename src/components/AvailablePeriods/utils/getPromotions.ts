@@ -6,38 +6,35 @@ type StayDate = {
   upper?: string | undefined; // YYYY-MM-DD
 };
 
-type DateRange = Date[];
-
 type PromoInfo = {
   name: string;
   discount: number;
-  dateRanges: DateRange[];
+  dateRanges: string[][];
+  minStay: number;
 };
 
-const getDateRange = ({ lower, upper }: StayDate): DateRange => {
+const getDateRange = ({ lower, upper }: StayDate): string[] => {
   if (!lower || !upper) return [];
   const startDate = new Date(lower);
   const endDate = new Date(upper);
-  const dateRange: DateRange = [];
+  const dateRange: string[] = [];
   for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
-    dateRange.push(new Date(date));
+    dateRange.push(date.toISOString().split('T')[0]);
   }
   return dateRange;
 };
 
 const getPromoInfo = (rates: RatesResponse): PromoInfo[] => {
-  // All rates have all the promotion info, we just need 1
   const allPromotions = rates.rateSettings?.promotions as LodgifyPromotion[];
-  // console.log('🉑', rates.calendarItems[1]);
-
   const promoInfo: PromoInfo[] = [];
 
   for (const promotion of allPromotions) {
     const promo: PromoInfo = {
       name: promotion.name || '',
       discount: promotion.price?.percentage || 0,
+      minStay: promotion.minimumStayDays || 0,
       dateRanges:
-        promotion.stayDates?.map(stayDate => {
+        promotion.stayDates?.map((stayDate) => {
           return getDateRange(stayDate);
         }) || [],
     };

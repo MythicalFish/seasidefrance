@@ -1,5 +1,5 @@
 import type { LodgifyAvailability } from 'src/content/availability/types';
-export type Availabilities = Date[][];
+export type Availabilities = string[][];
 
 const getAvailability = (availability: LodgifyAvailability[]): Availabilities => {
   let availableDates: Availabilities = [];
@@ -17,10 +17,10 @@ const getAvailability = (availability: LodgifyAvailability[]): Availabilities =>
         currentDate.setDate(currentDate.getDate() + 1);
       }
     }
-    availableDates.push(periodInfo.sort().map(dateStr => new Date(dateStr)));
+    availableDates.push(periodInfo.sort());
   });
 
-  const currentDate = new Date();
+  const currentDate = new Date().toISOString().split('T')[0];
   availableDates = availableDates.map(arr => {
     return arr.filter(date => date >= currentDate);
   });

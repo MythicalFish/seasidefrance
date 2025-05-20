@@ -16,7 +16,8 @@ const getBookingPeriods = (availabilities: Availabilities): Availabilities => {
     }
   }
 
-  return result.map(arr => arr.sort((a, b) => a.getTime() - b.getTime()));
+  return result.map((arr) => arr.sort());
+  // return result.map((arr) => arr.sort((a, b) => new Date(a).getTime() - new Date(b).getTime()));
 };
 
 export default getBookingPeriods;
