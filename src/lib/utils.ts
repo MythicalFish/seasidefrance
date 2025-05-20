@@ -29,3 +29,14 @@ export const getCheckoutUrl = (
 
   return `https://checkout.lodgify.com/rochebonne/${propertyId}/reservation?currency=EUR&arrival=${formattedArrival}&departure=${formattedDeparture}`;
 };
+
+export const getBookingDotComUrl = (
+  propertyId: string,
+  arrival: string | Date,
+  departure: string | Date
+) => {
+  const formattedArrival = formatDate(arrival);
+  const formattedDeparture = formatDate(departure);
+
+  return `https://www.booking.com/hotel/fr/domaine-de-rochebonne.html?checkin=${formattedArrival}&checkout=${formattedDeparture}`;
+};
