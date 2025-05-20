@@ -28,7 +28,7 @@ export function findAvailablePeriods(
   const availability = getAvailability(availabilityResponse);
   const bookingPeriods = getBookingPeriods(availability);
 
-  console.log('🟢🟢🟢 promoInfo', promoInfo);
+  // console.log('🟢🟢🟢 promoInfo', promoInfo);
   // console.log('🟢🟢🟢 dateInfo', dateInfo);
   // console.log('🟢🟢🟢 bookingPeriods', bookingPeriods);
   // console.log('🟢🟢🟢 availability', availability);

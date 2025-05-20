@@ -49,7 +49,7 @@ export const fetchRates = async (
       endDate,
     });
 
-    console.log('🟢🟢🟢 rates', rates);
+    // console.log('🟢🟢🟢 rates', rates);
 
     if (rates?.calendarItems) {
       // Cache it

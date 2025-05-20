@@ -2,8 +2,9 @@ import type { Availabilities } from './getAvailability';
 
 const getBookingPeriods = (availabilities: Availabilities): Availabilities => {
   return availabilities.map((availability) => {
+    if (availability.nights.length <= 7) return availability;
     const nights = availability.nights.slice(0, 7).sort();
-    const checkOutDate = nights[nights.length - 1];
+    const checkOutDate = availability.nights[nights.length];
     return {
       nights,
       checkInDate: availability.checkInDate,

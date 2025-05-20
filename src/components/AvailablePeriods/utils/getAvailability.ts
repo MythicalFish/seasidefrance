@@ -17,9 +17,9 @@ const getAvailability = (availability: LodgifyAvailability[]): Availabilities =>
   availabilityData.periods.forEach((period) => {
     const nights: string[] = [];
     if (period.available === 1 && period.start && period.end) {
-      const lastNight = new Date(period.end);
       const firstNight = new Date(period.start);
-      firstNight.setDate(firstNight.getDate() + 1);
+      const lastNight = new Date(period.end);
+      lastNight.setDate(lastNight.getDate() - 1);
 
       const checkInDate = new Date(period.start);
       const checkOutDate = new Date(period.end);
@@ -28,7 +28,7 @@ const getAvailability = (availability: LodgifyAvailability[]): Availabilities =>
       const checkOutDateStr = checkOutDate.toISOString().split('T')[0];
 
       let night = new Date(firstNight);
-      while (night <= checkOutDate) {
+      while (night < checkOutDate) {
         nights.push(night.toISOString().split('T')[0]);
         night.setDate(night.getDate() + 1);
       }
