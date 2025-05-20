@@ -1,11 +1,8 @@
 import type {
+  RatesCalendarV2200Response,
   RatesCalendarV2200ResponseCalendarItemsInner,
-  RatesCalendarV2200ResponseRateSettings,
 } from 'src/lib/lodgify-sdk';
 
 export type LodgifyRate = RatesCalendarV2200ResponseCalendarItemsInner;
 
-export interface RatesResponse {
-  calendarItems: LodgifyRate[];
-  rateSettings: RatesCalendarV2200ResponseRateSettings;
-}
+export type RatesResponse = RatesCalendarV2200Response;

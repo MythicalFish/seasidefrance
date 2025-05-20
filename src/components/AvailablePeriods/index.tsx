@@ -1,17 +1,17 @@
-import type { LodgifyRate } from '../../content/rates/types';
+import type { RatesResponse } from '../../content/rates/types';
 import type { LodgifyAvailability } from '../../content/availability/types';
 import { findAvailablePeriods, type AvailablePeriod } from './availability';
 import Item from './Item';
 
 type Props = {
-  rates: LodgifyRate[];
+  rates: RatesResponse[];
   availability: LodgifyAvailability[];
   currencyCode: string;
   propertyId: number;
 };
 
 const AvailablePeriods = ({ rates, availability, currencyCode, propertyId }: Props) => {
-  const periods = findAvailablePeriods(rates, availability);
+  const periods = findAvailablePeriods(rates);
 
   return (
     <div className="space-y-4">

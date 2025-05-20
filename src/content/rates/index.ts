@@ -1,5 +1,5 @@
 import * as lodgify from '../../lib/lodgify-sdk';
-import type { LodgifyRate } from './types';
+import type { RatesResponse } from './types';
 import { getCachedData, setCachedData } from '../../lib/cache';
 
 const apiKey = import.meta.env.LODGIFY_PUBLIC_KEY;
@@ -9,7 +9,7 @@ export const fetchRates = async (
   roomTypeId = 0,
   startDate: string,
   endDate: string
-): Promise<LodgifyRate[]> => {
+): Promise<RatesResponse> => {
   if (!apiKey) {
     throw new Error('LODGIFY_PUBLIC_KEY is not set');
   }
@@ -23,13 +23,15 @@ export const fetchRates = async (
   }
 
   // Try to get data from cache first
-  const cachedData = await getCachedData<LodgifyRate[]>({
+  const cachedData = await getCachedData<RatesResponse>({
     type: 'rates',
     propertyId,
     roomTypeId,
     startDate,
     endDate,
   });
+
+  console.log('🟢🟢🟢 cachedData', cachedData);
 
   if (cachedData) {
     return cachedData;
@@ -42,27 +44,17 @@ export const fetchRates = async (
 
   try {
     // https://docs.lodgify.com/reference/ratescalendar-v2
-    const res = await api.ratesCalendarV2({
+    const rates = await api.ratesCalendarV2({
       houseId: propertyId,
       roomTypeId,
       startDate,
       endDate,
     });
 
-    if (res?.calendarItems) {
-      const rates = res.calendarItems.map(item => ({
-        propertyId,
-        roomTypeId,
-        date: item.date || '',
-        isDefault: item.isDefault || false,
-        prices: item.prices || [],
-        rateSettings: res.rateSettings || {
-          bookability: 'BookingRequest',
-          currencyCode: 'EUR',
-        },
-      })) as LodgifyRate[];
+    console.log('🟢🟢🟢 rates', rates);
 
-      // Cache the results
+    if (rates?.calendarItems) {
+      // Cache it
       await setCachedData(
         {
           type: 'rates',
@@ -81,5 +73,5 @@ export const fetchRates = async (
       `Error fetching rates for property ${propertyId}/${roomTypeId} (${startDate} - ${endDate}): ${error?.response?.statusText}`
     );
   }
-  return [];
+  return {} as RatesResponse;
 };

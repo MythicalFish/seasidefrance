@@ -1,7 +1,6 @@
-import type { LodgifyRate } from '../../content/rates/types';
-import type { LodgifyAvailability } from '../../content/availability/types';
+import type { RatesResponse } from '../../content/rates/types';
 import getDateInfo from './utils/getDateInfo';
-import getPromotions from './utils/getPromotions';
+import getPromoInfo from './utils/getPromotions';
 
 export type AvailablePeriod = {
   startDate: Date;
@@ -10,30 +9,15 @@ export type AvailablePeriod = {
   nights: number;
 };
 
-export function findAvailablePeriods(
-  rates: LodgifyRate[],
-  availability: LodgifyAvailability[]
-): AvailablePeriod[] {
-  if (!availability.length || !rates.length) return [];
-  console.log('');
-  console.log('🟢🟢🟢🟢');
-  console.log('');
-  console.log('rate', rates[0]);
-  console.log('stayDates', rates[0]?.rateSettings);
-  console.log('');
-  console.log('rate', rates[1]);
-  console.log('stayDates', rates[1]?.rateSettings);
+export function findAvailablePeriods(rateResponses: RatesResponse[]): AvailablePeriod[] {
+  const ratesResponse = rateResponses[0];
+  if (!ratesResponse?.calendarItems?.length) return [];
 
-  const promotions = getPromotions(rates);
+  const promoInfo = getPromoInfo(ratesResponse);
+  const dateInfo = getDateInfo(ratesResponse);
 
-  // for (const rate of rates) {
-  //   console.log('');
-  //   for (const promotion of rate?.rateSettings?.promotions) {
-  //     console.log('promotion.stayDates', promotion?.stayDates.length);
-  //   }
-  // }
-
-  const dateInfo = getDateInfo(rates);
+  console.log('dateInfo', dateInfo);
+  return [];
 
   // Build array of available dates
   let availableDates: string[] = [];

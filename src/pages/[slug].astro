@@ -60,7 +60,7 @@ const descriptionHtml = property.description ? marked.parse(property.description
         <div class="mt-8">
           <AvailablePeriods
             propertyId={lodgify.id || 0}
-            rates={property.rates[0]?.data || []}
+            rates={property.rates}
             availability={property.availability || []}
             currencyCode={lodgify.currencyCode || 'EUR'}
           />

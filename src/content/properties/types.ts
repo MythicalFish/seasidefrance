@@ -1,6 +1,6 @@
 import type { GetAllPropertiesAsync200ResponseItemsInner } from 'src/lib/lodgify-sdk';
 import type { LodgifyAvailability } from '../availability/types';
-import type { LodgifyRate } from '../rates/types';
+import type { LodgifyRate, RatesResponse } from '../rates/types';
 
 export type LodgifyProperty = GetAllPropertiesAsync200ResponseItemsInner;
 
@@ -16,5 +16,5 @@ export type Property = {
   features: string[];
   lodgify: LodgifyProperty;
   availability: LodgifyAvailability[];
-  rates: Rates;
+  rates: RatesResponse[];
 };

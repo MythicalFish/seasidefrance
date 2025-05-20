@@ -1,4 +1,4 @@
-import type { LodgifyRate } from 'src/content/rates/types';
+import type { LodgifyRate, RatesResponse } from 'src/content/rates/types';
 
 type DateInfo = {
   [key: string]: {
@@ -7,7 +7,8 @@ type DateInfo = {
   };
 };
 
-const getDateInfo = (rates: LodgifyRate[]): DateInfo => {
+const getDateInfo = (ratesResponse: RatesResponse): DateInfo => {
+  const rates = ratesResponse.calendarItems || [];
   const defaultRate = rates.find(rate => rate.isDefault);
   const defaultPrice = defaultRate?.prices?.[0]?.pricePerDay;
   const defaultMinStay = defaultRate?.prices?.[0]?.minStay || 2;
