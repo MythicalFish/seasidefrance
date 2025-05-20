@@ -1,5 +1,7 @@
 import type { LodgifyRate } from '../../content/rates/types';
 import type { LodgifyAvailability } from '../../content/availability/types';
+import getDateInfo from './utils/getDateInfo';
+import getPromotions from './utils/getPromotions';
 
 export type AvailablePeriod = {
   startDate: Date;
@@ -8,39 +10,33 @@ export type AvailablePeriod = {
   nights: number;
 };
 
-interface PricePerDay {
-  [key: string]: number;
-}
-
 export function findAvailablePeriods(
   rates: LodgifyRate[],
   availability: LodgifyAvailability[]
 ): AvailablePeriod[] {
   if (!availability.length || !rates.length) return [];
+  console.log('');
+  console.log('🟢🟢🟢🟢');
+  console.log('');
+  console.log('rate', rates[0]);
+  console.log('stayDates', rates[0]?.rateSettings);
+  console.log('');
+  console.log('rate', rates[1]);
+  console.log('stayDates', rates[1]?.rateSettings);
 
-  const defaultRate = rates.find(rate => rate.isDefault);
-  const defaultPrice = defaultRate?.prices?.[0]?.pricePerDay;
-  const defaultMinStay = defaultRate?.prices?.[0]?.minStay;
+  const promotions = getPromotions(rates);
 
-  const priceMap: PricePerDay = {};
-  const minStayMap: PricePerDay = {};
+  // for (const rate of rates) {
+  //   console.log('');
+  //   for (const promotion of rate?.rateSettings?.promotions) {
+  //     console.log('promotion.stayDates', promotion?.stayDates.length);
+  //   }
+  // }
 
-  rates.forEach(rate => {
-    const { date } = rate;
-    if (!date) return;
-    const price = rate.prices?.[0];
-    const priceValue = price?.pricePerDay || defaultPrice;
-    const minStay = price?.minStay || defaultMinStay;
-    if (priceValue) {
-      priceMap[`${date}`] = priceValue as unknown as number;
-    }
-    if (minStay) {
-      minStayMap[`${date}`] = minStay;
-    }
-  });
+  const dateInfo = getDateInfo(rates);
 
   // Build array of available dates
-  const availableDates: string[] = [];
+  let availableDates: string[] = [];
   const availabilityData = availability[0];
 
   if (!availabilityData?.periods) return [];
@@ -60,6 +56,10 @@ export function findAvailablePeriods(
 
   // Sort available dates
   availableDates.sort();
+  const currentDate = new Date();
+  const currentDateString = currentDate.toISOString().split('T')[0];
+  const currentDateIndex = availableDates.findIndex(date => date === currentDateString);
+  availableDates = availableDates.slice(currentDateIndex);
 
   // Group dates into consecutive sequences
   const sequences: string[][] = [];
@@ -103,25 +103,18 @@ export function findAvailablePeriods(
     const nights = sequence.length - 1;
     if (nights === 0) return []; // Skip single day sequences
 
-    // Get minStay for the start date
     const startDate = sequence[0];
-    const requiredMinStay = minStayMap[startDate] || defaultMinStay || 1;
+    const minStay = dateInfo[startDate].minStay;
+    if (nights < minStay) return [];
 
-    // If sequence is shorter than required minStay, return empty array
-    if (nights < requiredMinStay) return [];
-
-    // For sequences longer than 7 nights, split into multiple valid periods
     const validPeriods: AvailablePeriod[] = [];
-
-    // Create the initial period that respects minStay
     const initialSequence = sequence.slice(0, Math.min(sequence.length, 8)); // Max 7 nights (8 days)
 
     // Calculate total price for this period
     let totalPrice = 0;
     initialSequence.forEach(date => {
-      if (priceMap[date]) {
-        totalPrice += priceMap[date];
-      }
+      const price = dateInfo[date].price;
+      totalPrice += price;
     });
 
     validPeriods.push({

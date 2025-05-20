@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import type { LodgifyRate } from '../../content/rates/types';
 import type { LodgifyAvailability } from '../../content/availability/types';
 import { findAvailablePeriods, type AvailablePeriod } from './availability';
@@ -7,12 +6,11 @@ import Item from './Item';
 type Props = {
   rates: LodgifyRate[];
   availability: LodgifyAvailability[];
-  minStay: number;
   currencyCode: string;
-  propertyId: string;
+  propertyId: number;
 };
 
-const AvailablePeriods = ({ rates, availability, minStay, currencyCode, propertyId }: Props) => {
+const AvailablePeriods = ({ rates, availability, currencyCode, propertyId }: Props) => {
   const periods = findAvailablePeriods(rates, availability);
 
   return (
