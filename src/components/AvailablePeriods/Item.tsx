@@ -9,7 +9,6 @@ type Props = {
 };
 
 const Item = ({ period, currencyCode, propertyId }: Props) => {
-  console.log('🟢🟢🟢 period', period);
   return (
     <a
       className="block bg-white p-4 rounded-lg shadow"

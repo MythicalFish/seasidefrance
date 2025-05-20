@@ -6,11 +6,12 @@ type StayDate = {
   upper?: string | undefined; // YYYY-MM-DD
 };
 
-type PromoInfo = {
+export type PromoInfo = {
   name: string;
   discount: number;
   dateRanges: string[][];
   minStay: number;
+  bookingDates: string[][];
 };
 
 const getDateRange = ({ lower, upper }: StayDate): string[] => {
@@ -36,6 +37,10 @@ const getPromoInfo = (rates: RatesResponse): PromoInfo[] => {
       dateRanges:
         promotion.stayDates?.map((stayDate) => {
           return getDateRange(stayDate);
+        }) || [],
+      bookingDates:
+        promotion.bookingDates?.map((bookingDate) => {
+          return getDateRange(bookingDate);
         }) || [],
     };
     promoInfo.push(promo);

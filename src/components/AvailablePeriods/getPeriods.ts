@@ -4,6 +4,7 @@ import getDateInfo from './utils/getDateInfo';
 import getPromoInfo from './utils/getPromotions';
 import getAvailability from './utils/getAvailability';
 import getBookingPeriods from './utils/getBookingPeriods';
+import isPromoActive from './utils/isPromoActive';
 
 export type AvailablePeriod = {
   nights: string[];
@@ -28,7 +29,9 @@ export function findAvailablePeriods(
   const availability = getAvailability(availabilityResponse);
   const bookingPeriods = getBookingPeriods(availability);
 
-  // console.log('🟢🟢🟢 promoInfo', promoInfo);
+  // promoInfo.forEach((p) => {
+  //   console.log(p.name, p.bookingDates);
+  // });
   // console.log('🟢🟢🟢 dateInfo', dateInfo);
   // console.log('🟢🟢🟢 bookingPeriods', bookingPeriods);
   // console.log('🟢🟢🟢 availability', availability);
@@ -61,6 +64,7 @@ export function findAvailablePeriods(
     let promoName = '';
     const { checkInDate, checkOutDate, nightLength, totalPrice: originalPrice } = period;
     for (const promo of promoInfo) {
+      if (!isPromoActive(promo)) continue;
       if (nightLength < promo.minStay) continue;
       for (const dateRange of promo.dateRanges) {
         if (dateRange.includes(checkInDate) && dateRange.includes(checkOutDate)) {
