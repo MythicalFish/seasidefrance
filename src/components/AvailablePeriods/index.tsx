@@ -1,6 +1,6 @@
 import type { RatesResponse } from '../../content/rates/types';
 import type { LodgifyAvailability } from '../../content/availability/types';
-import { findAvailablePeriods, type AvailablePeriod } from './availability';
+import { findAvailablePeriods } from './getPeriods';
 import Item from './Item';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const AvailablePeriods = ({ rates, availability, currencyCode, propertyId }: Props) => {
-  const periods = findAvailablePeriods(rates);
+  const periods = findAvailablePeriods(rates, availability);
 
   return (
     <div className="space-y-4">

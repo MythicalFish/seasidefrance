@@ -28,11 +28,12 @@ const getDateRange = ({ lower, upper }: StayDate): DateRange => {
 const getPromoInfo = (rates: RatesResponse): PromoInfo[] => {
   // All rates have all the promotion info, we just need 1
   const allPromotions = rates.rateSettings?.promotions as LodgifyPromotion[];
+  // console.log('🉑', rates.calendarItems[1]);
 
   const promoInfo: PromoInfo[] = [];
 
   for (const promotion of allPromotions) {
-    const promoInfo: PromoInfo = {
+    const promo: PromoInfo = {
       name: promotion.name || '',
       discount: promotion.price?.percentage || 0,
       dateRanges:
@@ -40,6 +41,7 @@ const getPromoInfo = (rates: RatesResponse): PromoInfo[] => {
           return getDateRange(stayDate);
         }) || [],
     };
+    promoInfo.push(promo);
   }
 
   return promoInfo;

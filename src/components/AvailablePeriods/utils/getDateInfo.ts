@@ -1,6 +1,6 @@
-import type { LodgifyRate, RatesResponse } from 'src/content/rates/types';
+import type { RatesResponse } from 'src/content/rates/types';
 
-type DateInfo = {
+export type DateInfo = {
   [key: string]: {
     price: number;
     minStay: number;

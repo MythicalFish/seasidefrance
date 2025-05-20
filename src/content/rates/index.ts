@@ -31,8 +31,6 @@ export const fetchRates = async (
     endDate,
   });
 
-  console.log('🟢🟢🟢 cachedData', cachedData);
-
   if (cachedData) {
     return cachedData;
   }

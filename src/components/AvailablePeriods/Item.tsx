@@ -1,6 +1,6 @@
 import { formatDate } from 'src/lib/date';
 import { currencySymbol, getCheckoutUrl } from 'src/lib/utils';
-import type { AvailablePeriod } from './availability';
+import type { AvailablePeriod } from './getPeriods';
 
 type Props = {
   period: AvailablePeriod;
