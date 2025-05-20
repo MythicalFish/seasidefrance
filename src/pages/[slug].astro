@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import properties from '../content/properties';
 import AvailablePeriods from '../components/AvailablePeriods';
+import { marked } from 'marked';
 
 export async function getStaticPaths() {
   return properties
     .filter(property => property.lodgify)
     .map(property => {
-      console.log(property);
       return {
         params: { slug: property.slug },
         props: { property },
@@ -16,12 +16,8 @@ export async function getStaticPaths() {
 }
 
 const { lodgify, ...property } = Astro.props.property;
-const minStay =
-  (property.rates &&
-    property.rates[0]?.data &&
-    property.rates[0].data[0]?.prices &&
-    property.rates[0].data[0].prices[0]?.minStay) ||
-  1;
+const descriptionHtml = property.description ? marked.parse(property.description) : '';
+// console.log(property.rates[0]?.data[0]?.rateSettings?.promotions);
 ---
 
 <Layout>
@@ -45,7 +41,7 @@ const minStay =
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
-        <div class="prose max-w-none" set:html={property.description} />
+        <div class="prose max-w-none" set:html={descriptionHtml} />
       </div>
 
       <div class="bg-gray-50 p-6 rounded-lg">
@@ -59,21 +55,13 @@ const minStay =
             <dt class="font-medium">Price Range</dt>
             <dd>{lodgify.minPrice} - {lodgify.maxPrice} {lodgify.currencyCode} per night</dd>
           </div>
-          <div>
-            <dt class="font-medium">Minimum Stay</dt>
-            <dd>
-              {minStay}
-              {minStay === 1 ? 'night' : 'nights'}
-            </dd>
-          </div>
         </dl>
 
         <div class="mt-8">
           <AvailablePeriods
-            propertyId={lodgify.id}
+            propertyId={lodgify.id || 0}
             rates={property.rates[0]?.data || []}
             availability={property.availability || []}
-            minStay={minStay}
             currencyCode={lodgify.currencyCode || 'EUR'}
           />
         </div>
