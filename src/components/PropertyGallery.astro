@@ -15,7 +15,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/photos/**/*.{j
 // Get all images for this property
 const propertyImages = Object.keys(images)
   .filter((imagePath) => imagePath.includes(`/photos/${property.id}/`))
-  .sort()
   .map((filePath) => {
     const fileName = filePath.split('/').pop() || '';
     const fileInfo = imageInfo.find((info: any) => info.url.includes(fileName));
@@ -25,6 +24,9 @@ const propertyImages = Object.keys(images)
       fileName,
       description,
     };
+  })
+  .sort((a, b) => {
+    return a.description.localeCompare(b.description);
   });
 ---
 
