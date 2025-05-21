@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import properties from '../data/properties';
 import AvailablePeriods from '../components/AvailablePeriods';
 import PropertyGallery from '../components/PropertyGallery.astro';
+import MainImage from '../components/MainImage.astro';
 import { marked } from 'marked';
 
 export async function getStaticPaths() {
@@ -60,15 +61,7 @@ const descriptionHtml = property.description ? marked.parse(property.description
       <div>[checkout buttons here]</div>
     </section>
 
-    {
-      lodgify.imageUrl && (
-        <img
-          src={lodgify.imageUrl.startsWith('//') ? `https:${lodgify.imageUrl}` : lodgify.imageUrl}
-          alt={property.name}
-          class="w-full h-[400px] object-cover rounded-lg mb-8"
-        />
-      )
-    }
+    <MainImage property={property} />
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
