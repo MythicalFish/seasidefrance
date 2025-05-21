@@ -42,6 +42,7 @@ export function findAvailablePeriods(
     const prices: number[] = [];
     period.nights.forEach((dateStr) => {
       const info = dateInfo[dateStr];
+      if (!info) return;
       totalPrice += info.price;
       if (info.minStay > minStay) minStay = info.minStay;
       prices.push(info.price);

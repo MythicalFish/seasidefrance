@@ -24,7 +24,6 @@ const Item = ({ period, currencyCode, propertyId }: Props) => {
         <div className="text-lg font-semibold">
           {`${currencySymbol(currencyCode)}${period.totalPrice.toFixed(2)}`}
         </div>
-        <div className="text-sm text-gray-600">{period.promoName}</div>
       </div>
     </a>
   );

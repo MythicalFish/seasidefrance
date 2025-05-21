@@ -4,6 +4,7 @@ import Hero from '../modules/Hero.astro';
 import photo1 from '../images/old/chateau-pool-1.jpg';
 import properties from '../content/properties';
 import { currencySymbol } from '../lib/utils';
+console.log(properties.map((property) => property.id + ' ' + property.name + ' ' + property.title));
 ---
 
 <Layout>

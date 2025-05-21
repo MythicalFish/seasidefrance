@@ -6,8 +6,8 @@ import { marked } from 'marked';
 
 export async function getStaticPaths() {
   return properties
-    .filter(property => property.lodgify)
-    .map(property => {
+    .filter((property) => property.lodgify)
+    .map((property) => {
       return {
         params: { slug: property.slug },
         props: { property },
@@ -27,8 +27,38 @@ const descriptionHtml = property.description ? marked.parse(property.description
       Back to homepage
     </a>
     <h1 class="text-4xl font-bold mb-6">
-      {property.name}
+      {`${property.title} "${property.name}"`}
     </h1>
+    <div class="p-8">
+      <div class="prose max-w-none">{property.intro} Make this longer</div>
+    </div>
+    <section class="p-8 mb-8 bg-[#EEEEEE]">
+      <div>[gallery here]</div>
+    </section>
+    <section class="p-8 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Features</h2>
+          <ul>
+            {
+              property.features.map((feature) => (
+                <li>
+                  <i class="codicon codicon-check" /> {feature}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Nearby</h2>
+          <ul></ul>
+        </div>
+      </div>
+    </section>
+    <section class="p-8 mb-8 bg-[#EEEEEE]">
+      <div>[checkout buttons here]</div>
+    </section>
+
     {
       lodgify.imageUrl && (
         <img

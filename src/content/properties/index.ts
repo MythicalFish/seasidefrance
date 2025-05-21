@@ -7,7 +7,6 @@ import type { Property, Rates } from './types';
 
 import optimizedInfo from './data/optimizedInfo.json';
 import type { RatesResponse } from '../rates/types';
-import type { LodgifyAvailability } from '../availability/types';
 const lodgifyInfo = await lodgifyFetch(apiKey || '');
 
 const properties = (await Promise.all(
@@ -18,8 +17,12 @@ const properties = (await Promise.all(
 
     for (const { roomTypeId } of availability || []) {
       if (!roomTypeId) continue;
-      console.log('🟢🟢🟢 roomTypeId', roomTypeId);
-      const rates = await fetchRates(property.id, roomTypeId, '2025-05-01', '2026-01-01');
+      const currentDate = new Date();
+      const currentDateStr = currentDate.toISOString().split('T')[0];
+      const oneYearFromNow = new Date(currentDate);
+      oneYearFromNow.setFullYear(currentDate.getFullYear() + 1);
+      const oneYearFromNowStr = oneYearFromNow.toISOString().split('T')[0];
+      const rates = await fetchRates(property.id, roomTypeId, currentDateStr, oneYearFromNowStr);
       propertyRates.push(rates);
     }
 
