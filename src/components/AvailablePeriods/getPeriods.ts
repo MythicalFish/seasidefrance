@@ -18,10 +18,9 @@ export type AvailablePeriod = {
 };
 
 export function findAvailablePeriods(
-  rateResponses: RatesResponse[],
+  ratesResponse: RatesResponse,
   availabilities: Availability
 ): AvailablePeriod[] {
-  const ratesResponse = rateResponses[0];
   if (!ratesResponse?.calendarItems?.length) return [];
 
   const promoInfo = getPromoInfo(ratesResponse);

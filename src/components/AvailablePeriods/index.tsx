@@ -4,7 +4,7 @@ import { findAvailablePeriods } from './getPeriods';
 import Item from './Item';
 
 type Props = {
-  rates: RatesResponse[];
+  rates: RatesResponse;
   availability: Availability;
   currencyCode: string;
   propertyId: number;

@@ -16,6 +16,6 @@ export type PropertyPage = {
   features: string[];
   lodgify: LodgifyProperty;
   availability: Availability;
-  rates: RatesResponse[];
+  rates: RatesResponse;
   roomInfo: any;
 };
