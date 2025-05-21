@@ -15,12 +15,13 @@ const lodgifyConfig = new lodgify.Configuration({ apiKey });
 const lodgifyAPI = new lodgify.PropertiesApi(lodgifyConfig);
 
 const fetchProperties = async (): Promise<LodgifyProperty[]> => {
-  const properties = await lodgifyAPI.getAllPropertiesAsync({
-    includeCount: true,
+  const res = await lodgifyAPI.getAllPropertiesAsync({
+    includeCount: false,
     includeInOut: false,
     page: 1,
     size: 50,
   });
+  const properties = res?.items;
 
   if (!Array.isArray(properties) || properties.length === 0) {
     throw new Error('No properties found');

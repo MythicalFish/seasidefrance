@@ -23,10 +23,10 @@
     },
     "rating": 4.4,
     "priceUnitInDays": 1,
-    "minPrice": 34,
-    "originalMinPrice": 34,
-    "maxPrice": 95,
-    "originalMaxPrice": 95,
+    "minPrice": 33,
+    "originalMinPrice": 33,
+    "maxPrice": 90,
+    "originalMaxPrice": 90,
     "rooms": [
       {
         "id": 343130,
@@ -66,8 +66,8 @@
     },
     "rating": 5,
     "priceUnitInDays": 1,
-    "minPrice": 74,
-    "originalMinPrice": 74,
+    "minPrice": 76,
+    "originalMinPrice": 76,
     "maxPrice": 350,
     "originalMaxPrice": 350,
     "rooms": [
@@ -109,8 +109,8 @@
     },
     "rating": 4.7,
     "priceUnitInDays": 1,
-    "minPrice": 42,
-    "originalMinPrice": 42,
+    "minPrice": 40,
+    "originalMinPrice": 40,
     "maxPrice": 250,
     "originalMaxPrice": 250,
     "rooms": [
@@ -197,8 +197,8 @@
     "priceUnitInDays": 1,
     "minPrice": 108,
     "originalMinPrice": 108,
-    "maxPrice": 220,
-    "originalMaxPrice": 220,
+    "maxPrice": 206,
+    "originalMaxPrice": 206,
     "rooms": [
       {
         "id": 343144,
@@ -238,8 +238,8 @@
     },
     "rating": 5,
     "priceUnitInDays": 1,
-    "minPrice": 42,
-    "originalMinPrice": 42,
+    "minPrice": 40,
+    "originalMinPrice": 40,
     "maxPrice": 250,
     "originalMaxPrice": 250,
     "rooms": [
@@ -281,8 +281,8 @@
     },
     "rating": 4.33,
     "priceUnitInDays": 1,
-    "minPrice": 42,
-    "originalMinPrice": 42,
+    "minPrice": 39,
+    "originalMinPrice": 39,
     "maxPrice": 250,
     "originalMaxPrice": 250,
     "rooms": [
@@ -324,8 +324,8 @@
     },
     "rating": 4.17,
     "priceUnitInDays": 1,
-    "minPrice": 54,
-    "originalMinPrice": 54,
+    "minPrice": 52,
+    "originalMinPrice": 52,
     "maxPrice": 275,
     "originalMaxPrice": 275,
     "rooms": [
@@ -367,8 +367,8 @@
     },
     "rating": 0,
     "priceUnitInDays": 1,
-    "minPrice": 84,
-    "originalMinPrice": 84,
+    "minPrice": 86,
+    "originalMinPrice": 86,
     "maxPrice": 400,
     "originalMaxPrice": 400,
     "rooms": [
