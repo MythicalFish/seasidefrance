@@ -1,4 +1,4 @@
-import type { RatesResponse } from 'src/data/rates/types';
+import type { RatesResponse } from 'src/data/fetchRates/types';
 
 export type DateInfo = {
   [key: string]: {

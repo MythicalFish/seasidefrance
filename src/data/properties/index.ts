@@ -19,14 +19,15 @@ const fullPropertyPages = (await Promise.all(
     const availability = await fetchAvailability(property.id, currentDateStr, oneYearFromNowStr);
     const propertyRates: RatesResponse[] = [];
 
-    for (const { roomTypeId } of availability || []) {
-      if (!roomTypeId) continue;
-      const rates = await fetchRates(property.id, roomTypeId, currentDateStr, oneYearFromNowStr);
+    const idString = String(property.id);
+    const allRoomInfo = roomInfos[idString as keyof typeof roomInfos];
+    const roomInfo = Array.isArray(allRoomInfo) && allRoomInfo.length > 0 ? allRoomInfo[0] : null;
+
+    // If we have roomInfo with an ID, fetch rates
+    if (roomInfo?.id) {
+      const rates = await fetchRates(property.id, roomInfo.id, currentDateStr, oneYearFromNowStr);
       propertyRates.push(rates);
     }
-
-    const idString = String(property.id);
-    const roomInfo = roomInfos[idString as keyof typeof roomInfos];
 
     return {
       ...property,

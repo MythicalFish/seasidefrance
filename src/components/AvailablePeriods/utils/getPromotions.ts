@@ -1,5 +1,5 @@
-import type { LodgifyPromotion } from 'src/data/availability/types';
-import type { LodgifyRate, RatesResponse } from 'src/data/rates/types';
+import type { LodgifyPromotion } from 'src/data/fetchAvailability/types';
+import type { LodgifyRate, RatesResponse } from 'src/data/fetchRates/types';
 
 type StayDate = {
   lower?: string | undefined; // YYYY-MM-DD

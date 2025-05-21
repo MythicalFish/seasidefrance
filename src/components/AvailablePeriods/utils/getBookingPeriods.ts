@@ -1,6 +1,6 @@
-import type { Availabilities } from './getAvailability';
+import type { AvailabilityObj } from './getAvailability';
 
-const getBookingPeriods = (availabilities: Availabilities): Availabilities => {
+const getBookingPeriods = (availabilities: AvailabilityObj[]): AvailabilityObj[] => {
   return availabilities.map((availability) => {
     if (availability.nights.length <= 7) return availability;
     const nights = availability.nights.slice(0, 7).sort();

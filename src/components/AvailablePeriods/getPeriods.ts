@@ -1,5 +1,5 @@
-import type { LodgifyAvailability } from 'src/data/availability/types';
-import type { RatesResponse } from '../../data/rates/types';
+import type { Availability } from 'src/data/fetchAvailability/types';
+import type { RatesResponse } from '../../data/fetchRates/types';
 import getDateInfo from './utils/getDateInfo';
 import getPromoInfo from './utils/getPromotions';
 import getAvailability from './utils/getAvailability';
@@ -19,22 +19,23 @@ export type AvailablePeriod = {
 
 export function findAvailablePeriods(
   rateResponses: RatesResponse[],
-  availabilityResponse: LodgifyAvailability[]
+  availabilities: Availability
 ): AvailablePeriod[] {
   const ratesResponse = rateResponses[0];
   if (!ratesResponse?.calendarItems?.length) return [];
 
   const promoInfo = getPromoInfo(ratesResponse);
   const dateInfo = getDateInfo(ratesResponse);
-  const availability = getAvailability(availabilityResponse);
+  const availability = getAvailability(availabilities);
   const bookingPeriods = getBookingPeriods(availability);
 
   // promoInfo.forEach((p) => {
   //   console.log(p.name, p.bookingDates);
   // });
   // console.log('🟢🟢🟢 dateInfo', dateInfo);
-  // console.log('🟢🟢🟢 bookingPeriods', bookingPeriods);
-  // console.log('🟢🟢🟢 availability', availability);
+  console.log('availabilities', availabilities);
+  console.log('🟢🟢🟢 bookingPeriods', bookingPeriods);
+  console.log('🟢🟢🟢 availability', availability);
 
   const withPrices = bookingPeriods.map((period) => {
     let totalPrice = 0;

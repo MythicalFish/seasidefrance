@@ -1,11 +1,11 @@
-import type { RatesResponse } from '../../data/rates/types';
-import type { LodgifyAvailability } from '../../data/availability/types';
+import type { RatesResponse } from '../../data/fetchRates/types';
+import type { Availability } from '../../data/fetchAvailability/types';
 import { findAvailablePeriods } from './getPeriods';
 import Item from './Item';
 
 type Props = {
   rates: RatesResponse[];
-  availability: LodgifyAvailability[];
+  availability: Availability;
   currencyCode: string;
   propertyId: number;
 };

@@ -1,5 +1,5 @@
 import * as lodgify from '../../lib/lodgify-sdk';
-import type { LodgifyAvailability } from './types';
+import type { Availability } from './types';
 import { getCachedData, setCachedData } from '../../lib/cache';
 
 const apiKey = import.meta.env.LODGIFY_PUBLIC_KEY;
@@ -8,7 +8,7 @@ const fetchAvailability = async (
   propertyId = 0,
   startDate: string,
   endDate: string
-): Promise<LodgifyAvailability[]> => {
+): Promise<Availability> => {
   if (!apiKey) {
     throw new Error('LODGIFY_PUBLIC_KEY is not set');
   }
@@ -18,20 +18,16 @@ const fetchAvailability = async (
   }
 
   // Try to get data from cache first
-  const cachedData = await getCachedData<LodgifyAvailability[]>({
+  const cachedData = await getCachedData<Availability>({
     type: 'availability',
     propertyId,
     startDate,
     endDate,
   });
 
-  if (cachedData) {
-    return cachedData;
-  }
+  if (cachedData) return cachedData;
 
-  const config = new lodgify.Configuration({
-    apiKey,
-  });
+  const config = new lodgify.Configuration({ apiKey });
   const api = new lodgify.ReservationsApi(config);
 
   try {
@@ -43,7 +39,9 @@ const fetchAvailability = async (
       includeDetails: true,
     });
 
-    if (res) {
+    if (res && res.length > 0) {
+      const availability = res[0]?.periods || [];
+
       // Cache the results
       await setCachedData(
         {
@@ -52,10 +50,10 @@ const fetchAvailability = async (
           startDate,
           endDate,
         },
-        res as LodgifyAvailability[]
+        availability
       );
 
-      return res as LodgifyAvailability[];
+      return availability;
     }
   } catch (error: any) {
     console.error(

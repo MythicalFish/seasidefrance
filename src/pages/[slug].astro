@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 
 const { lodgify, ...property } = Astro.props.property;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
-console.log(property);
+console.log(property.roomInfo.images);
 ---
 
 <Layout>

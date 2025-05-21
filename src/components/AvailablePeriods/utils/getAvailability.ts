@@ -1,20 +1,16 @@
-import type { LodgifyAvailability } from 'src/data/availability/types';
+import type { Availability } from 'src/data/fetchAvailability/types';
 
-export type Availability = {
+export type AvailabilityObj = {
   nights: string[];
   checkInDate: string;
   checkOutDate: string;
 };
 
-export type Availabilities = Availability[];
+const getAvailability = (availability: Availability): AvailabilityObj[] => {
+  if (!availability) return [];
+  let availabilities: AvailabilityObj[] = [];
 
-const getAvailability = (availability: LodgifyAvailability[]): Availabilities => {
-  let availabilities: Availabilities = [];
-  const availabilityData = availability[0];
-
-  if (!availabilityData?.periods) return [];
-
-  availabilityData.periods.forEach((period) => {
+  availability.forEach((period) => {
     const nights: string[] = [];
     if (period.available === 1 && period.start && period.end) {
       const firstNight = new Date(period.start);
