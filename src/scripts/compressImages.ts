@@ -9,7 +9,7 @@ const QUALITY_DECREMENT = 5; // How much to reduce quality each step
 /**
  * Optimizes a single image to be under the max size
  */
-async function optimizeImage(imagePath: string): Promise<void> {
+async function compressImage(imagePath: string): Promise<void> {
   const stats = fs.statSync(imagePath);
   const fileSizeInBytes = stats.size;
 
@@ -100,7 +100,7 @@ async function processDirectory(directory: string): Promise<void> {
       await processDirectory(itemPath);
     } else if (stats.isFile() && /\.(jpg|jpeg|png)$/i.test(item)) {
       // Process image files
-      await optimizeImage(itemPath);
+      await compressImage(itemPath);
     }
   }
 }

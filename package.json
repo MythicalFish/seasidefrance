@@ -6,14 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
     "fetch-properties": "tsx src/scripts/fetchProperties.ts",
     "fetch-roomInfo": "tsx src/scripts/fetchRoomInfo.ts",
     "fetch-images": "tsx src/scripts/fetchImages.ts",
-    "optimize-images": "tsx src/scripts/optimizeImages.ts",
-    "optimize": "tsx src/scripts/fetchOptimized.ts"
+    "compress-images": "tsx src/scripts/optimizeImages.ts",
+    "optimize-text": "tsx src/scripts/fetchOptimized.ts"
   },
   "dependencies": {
     "@api/lodgify": "file:.api/apis/lodgify",

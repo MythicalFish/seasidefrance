@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import properties from '../data/properties';
 import AvailablePeriods from '../components/AvailablePeriods';
+import PropertyGallery from '../components/PropertyGallery.astro';
 import { marked } from 'marked';
 
 export async function getStaticPaths() {
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
 
 const { lodgify, ...property } = Astro.props.property;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
-// console.log(property.rates[0]?.data[0]?.rateSettings?.promotions);
+console.log(property);
 ---
 
 <Layout>
@@ -33,7 +34,7 @@ const descriptionHtml = property.description ? marked.parse(property.description
       <div class="prose max-w-none">{property.intro} Make this longer</div>
     </div>
     <section class="p-8 mb-8 bg-[#EEEEEE]">
-      <div>[gallery here]</div>
+      <PropertyGallery id={property.id} />
     </section>
     <section class="p-8 mb-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
