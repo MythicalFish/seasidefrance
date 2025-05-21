@@ -16,9 +16,9 @@ export async function getStaticPaths() {
     });
 }
 
-const { lodgify, ...property } = Astro.props.property;
+const property = Astro.props.property;
+const { lodgify } = property;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
-console.log(property.roomInfo.images);
 ---
 
 <Layout>
@@ -34,7 +34,7 @@ console.log(property.roomInfo.images);
       <div class="prose max-w-none">{property.intro} Make this longer</div>
     </div>
     <section class="p-8 mb-8 bg-[#EEEEEE]">
-      <PropertyGallery id={property.id} />
+      <PropertyGallery property={property} />
     </section>
     <section class="p-8 mb-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -33,9 +33,9 @@ export function findAvailablePeriods(
   //   console.log(p.name, p.bookingDates);
   // });
   // console.log('🟢🟢🟢 dateInfo', dateInfo);
-  console.log('availabilities', availabilities);
-  console.log('🟢🟢🟢 bookingPeriods', bookingPeriods);
-  console.log('🟢🟢🟢 availability', availability);
+  // console.log('availabilities', availabilities);
+  // console.log('🟢🟢🟢 bookingPeriods', bookingPeriods);
+  // console.log('🟢🟢🟢 availability', availability);
 
   const withPrices = bookingPeriods.map((period) => {
     let totalPrice = 0;
