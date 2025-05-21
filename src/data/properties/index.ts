@@ -1,5 +1,6 @@
 import propertyPages from '../_fixtures/property-pages.json';
 import propertyInfo from '../_fixtures/properties.json';
+import roomInfos from '../_fixtures/roomInfo.json';
 import fetchAvailability from '../fetchAvailability';
 import fetchRates from '../fetchRates';
 
@@ -24,11 +25,15 @@ const fullPropertyPages = (await Promise.all(
       propertyRates.push(rates);
     }
 
+    const idString = String(property.id);
+    const roomInfo = roomInfos[idString as keyof typeof roomInfos];
+
     return {
       ...property,
       lodgify,
       availability,
       rates: propertyRates,
+      roomInfo,
     };
   })
 )) as PropertyPage[];

@@ -1,10 +1,11 @@
 import * as lodgify from '../lib/lodgify-sdk';
-import type { LodgifyProperty } from '../data/properties/types';
 import { config } from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import type { V2PropertiesIdRoomsGet200ResponseInner as RoomInfo } from '../lib/lodgify-sdk';
+
+export type { RoomInfo };
 
 config();
 const apiKey = process.env.LODGIFY_PUBLIC_KEY;
@@ -26,11 +27,11 @@ const fetchRoomInfo = async (propertyId: number): Promise<Array<RoomInfo>> => {
     throw new Error(`No rooms found for property ${propertyId}`);
   }
 
-  return properties;
+  return rooms;
 };
 
 type RoomInfos = {
-  [id: number]: RoomInfo[];
+  [id: string]: RoomInfo[];
 };
 
 async function main(): Promise<void> {
