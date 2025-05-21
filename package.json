@@ -9,7 +9,9 @@
     "astro": "astro",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "optimize-properties": "tsx src/data/properties/data/optimizedInfoFetch.ts"
+    "fetch-properties": "tsx src/scripts/fetchProperties.ts",
+    "fetch-rooms": "tsx src/scripts/fetchRooms.ts",
+    "fetch-optimized": "tsx src/scripts/fetchOptimized.ts"
   },
   "dependencies": {
     "@api/lodgify": "file:.api/apis/lodgify",

@@ -6,7 +6,7 @@ export type LodgifyProperty = GetAllPropertiesAsync200ResponseItemsInner;
 
 export type Rates = { roomTypeId: number; data: LodgifyRate[] }[];
 
-export type Property = {
+export type PropertyPage = {
   id: number;
   name: string;
   slug: string;

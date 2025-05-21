@@ -3,26 +3,17 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
-import lodgifyFetch from './lodgifyFetch';
-import type { LodgifyProperty, Property } from '../types';
-import aboutTheArea from './aboutTheArea';
+import type { LodgifyProperty, PropertyPage } from '../data/properties/types';
+import aboutTheArea from '../data/_fixtures/aboutTheArea';
 
-// Load environment variables from .env file
 config();
+const apiKey = process.env.OPENAI_API_KEY;
+if (!apiKey) throw new Error('OPENAI_API_KEY is not set');
 
+const openai = new OpenAI({ apiKey });
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// Verify required environment variables
-const requiredEnvVars = ['OPENAI_API_KEY', 'LODGIFY_PUBLIC_KEY'];
-for (const envVar of requiredEnvVars) {
-  if (!process.env[envVar]) {
-    throw new Error(`Missing required environment variable: ${envVar}`);
-  }
-}
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const propertiesPath = path.join(__dirname, '../_fixtures/properties.json');
+const properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf8'));
 
 const basePrompt = `You strictly output raw JSON, without backticks, comments or explanation. You first analyze the given title and description as a professional holiday home marketing expert, in order to provide the JSON object as described below.`;
 
@@ -79,12 +70,11 @@ ${property.description}
 
 async function main(): Promise<void> {
   try {
-    const properties = await lodgifyFetch(process.env.LODGIFY_PUBLIC_KEY || '');
     if (!Array.isArray(properties) || properties.length === 0) {
       throw new Error('No properties found');
     }
 
-    const newData: Property[] = [];
+    const newData: PropertyPage[] = [];
     for (const property of properties) {
       console.log(`🟢 Optimizing property: ${property.name}`);
       const optimized = await optimizeProperty(property);
@@ -98,11 +88,11 @@ async function main(): Promise<void> {
     const outputPath = path.join(__dirname, './optimizedInfo.json');
 
     const existingData = fs.readFileSync(outputPath, 'utf-8');
-    const existingProperties = JSON.parse(existingData) as Property[];
+    const existingProperties = JSON.parse(existingData) as PropertyPage[];
 
     // Match the IDs and update all data except for slug
-    const updatedProperties = existingProperties.map(property => {
-      const match = newData.find(p => p.id === property.id);
+    const updatedProperties = existingProperties.map((property) => {
+      const match = newData.find((p) => p.id === property.id);
       if (!match) return property;
       return { ...match, slug: property.slug };
     });
