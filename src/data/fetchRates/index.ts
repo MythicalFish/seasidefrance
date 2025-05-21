@@ -49,10 +49,27 @@ const fetchRates = async (
       endDate,
     });
 
-    // console.log('🟢🟢🟢 rates', rates);
+    rates.calendarItems = rates.calendarItems?.map((item) => {
+      // Remove unused attributes
+      const price = item.prices?.[0];
+      const newItem = {
+        date: item.date,
+        prices: [
+          {
+            minStay: price?.minStay,
+            pricePerDay: price?.pricePerDay,
+          },
+        ],
+      };
+      if (item.isDefault) {
+        // @ts-ignore
+        newItem.isDefault = true;
+      }
+      return newItem;
+    });
 
     if (rates?.calendarItems) {
-      // Cache it
+      // Cache it (for build, not client)
       await setCachedData(
         {
           type: 'rates',
