@@ -19,14 +19,15 @@ export type AvailablePeriod = {
 
 export function findAvailablePeriods(
   ratesResponse: RatesResponse,
-  availabilities: Availability
+  availabilities: Availability,
+  desiredStay = 0
 ): AvailablePeriod[] {
   if (!ratesResponse?.calendarItems?.length) return [];
 
   const promoInfo = getPromoInfo(ratesResponse);
   const dateInfo = getDateInfo(ratesResponse);
   const availability = getAvailability(availabilities);
-  const bookingPeriods = getBookingPeriods(availability);
+  const bookingPeriods = getBookingPeriods(availability, desiredStay);
 
   // promoInfo.forEach((p) => {
   //   console.log(p.name, p.bookingDates);

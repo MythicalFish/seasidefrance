@@ -1,6 +1,16 @@
 import type { AvailabilityObj } from './getAvailability';
 
-const getBookingPeriods = (availabilities: AvailabilityObj[]): AvailabilityObj[] => {
+const getBookingPeriods = (
+  availabilities: AvailabilityObj[],
+  desiredStay: number
+): AvailabilityObj[] => {
+  let strict = false;
+  let maxNights = 7;
+  if (desiredStay > 0) {
+    strict = true;
+    maxNights = desiredStay;
+  }
+
   const result: AvailabilityObj[] = [];
 
   availabilities.forEach((availability) => {
@@ -10,11 +20,13 @@ const getBookingPeriods = (availabilities: AvailabilityObj[]): AvailabilityObj[]
     }
 
     // Process the nights in chunks of 7
-    for (let i = 0; i < availability.nights.length; i += 7) {
-      const nightsChunk = availability.nights.slice(i, i + 7).sort();
+    for (let i = 0; i < availability.nights.length; i += maxNights) {
+      const nightsChunk = availability.nights.slice(i, i + maxNights).sort();
 
       // Skip if less than 2 nights
       if (nightsChunk.length < 2) continue;
+
+      if (strict && nightsChunk.length !== maxNights) continue;
 
       const checkInDate = nightsChunk[0];
       const checkOutDateIndex = nightsChunk.length;
