@@ -36,14 +36,14 @@ type RoomInfos = {
 async function main(): Promise<void> {
   try {
     const roomInfos: RoomInfos = {};
-    properties.forEach(async (property: LodgifyProperty) => {
-      if (!property.id) return;
+    for (const property of properties) {
+      if (!property.id) continue;
       console.log('ℹ️ Fetching room info for "' + property.name + '"');
       const roomInfo = await fetchRoomInfo(property.id);
-      roomInfos[property.id] = roomInfo;
       console.log(`ℹ️ Fetched ${roomInfo.length} objects`);
       console.log('');
-    });
+      roomInfos[property.id] = roomInfo;
+    }
     fs.writeFileSync(outputPath, JSON.stringify(roomInfos, null, 2));
     console.log('✅ Room infos updated');
   } catch (error) {

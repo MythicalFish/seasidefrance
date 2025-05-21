@@ -10,8 +10,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "fetch-properties": "tsx src/scripts/fetchProperties.ts",
-    "fetch-rooms": "tsx src/scripts/fetchRooms.ts",
-    "optimize-pages": "tsx src/scripts/fetchOptimized.ts"
+    "fetch-roomInfo": "tsx src/scripts/fetchRoomInfo.ts",
+    "optimize": "tsx src/scripts/fetchOptimized.ts"
   },
   "dependencies": {
     "@api/lodgify": "file:.api/apis/lodgify",

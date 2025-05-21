@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
 import type { LodgifyProperty, PropertyPage } from '../data/properties/types';
 import aboutTheArea from '../data/_fixtures/aboutTheArea';
+import properties from '../data/_fixtures/properties.json';
 
 config();
 const apiKey = process.env.OPENAI_API_KEY;
@@ -12,8 +13,6 @@ if (!apiKey) throw new Error('OPENAI_API_KEY is not set');
 
 const openai = new OpenAI({ apiKey });
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const propertiesPath = path.join(__dirname, '../_fixtures/properties.json');
-const properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf8'));
 
 const basePrompt = `You strictly output raw JSON, without backticks, comments or explanation. You first analyze the given title and description as a professional holiday home marketing expert, in order to provide the JSON object as described below.`;
 
@@ -77,7 +76,7 @@ async function main(): Promise<void> {
     const newData: PropertyPage[] = [];
     for (const property of properties) {
       console.log(`🟢 Optimizing property: ${property.name}`);
-      const optimized = await optimizeProperty(property);
+      const optimized = await optimizeProperty(property as any);
       try {
         newData.push(JSON.parse(optimized));
       } catch {
@@ -85,7 +84,7 @@ async function main(): Promise<void> {
       }
     }
 
-    const outputPath = path.join(__dirname, './optimizedInfo.json');
+    const outputPath = path.join(__dirname, '../data/_fixtures/property-pages.json');
 
     const existingData = fs.readFileSync(outputPath, 'utf-8');
     const existingProperties = JSON.parse(existingData) as PropertyPage[];
