@@ -1,4 +1,4 @@
-import type { LodgifyAvailability } from 'src/content/availability/types';
+import type { LodgifyAvailability } from 'src/data/availability/types';
 
 export type Availability = {
   nights: string[];

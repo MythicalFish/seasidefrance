@@ -1,5 +1,5 @@
-import type { RatesResponse } from '../../content/rates/types';
-import type { LodgifyAvailability } from '../../content/availability/types';
+import type { RatesResponse } from '../../data/rates/types';
+import type { LodgifyAvailability } from '../../data/availability/types';
 import { findAvailablePeriods } from './getPeriods';
 import Item from './Item';
 

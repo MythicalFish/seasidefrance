@@ -1,5 +1,5 @@
-import type { LodgifyAvailability } from 'src/content/availability/types';
-import type { RatesResponse } from '../../content/rates/types';
+import type { LodgifyAvailability } from 'src/data/availability/types';
+import type { RatesResponse } from '../../data/rates/types';
 import getDateInfo from './utils/getDateInfo';
 import getPromoInfo from './utils/getPromotions';
 import getAvailability from './utils/getAvailability';

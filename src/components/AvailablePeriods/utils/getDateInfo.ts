@@ -1,4 +1,4 @@
-import type { RatesResponse } from 'src/content/rates/types';
+import type { RatesResponse } from 'src/data/rates/types';
 
 export type DateInfo = {
   [key: string]: {
@@ -9,7 +9,7 @@ export type DateInfo = {
 
 const getDateInfo = (ratesResponse: RatesResponse): DateInfo => {
   const rates = ratesResponse.calendarItems || [];
-  const defaultRate = rates.find(rate => rate.isDefault);
+  const defaultRate = rates.find((rate) => rate.isDefault);
   const defaultPrice = defaultRate?.prices?.[0]?.pricePerDay;
   const defaultMinStay = defaultRate?.prices?.[0]?.minStay || 2;
 
