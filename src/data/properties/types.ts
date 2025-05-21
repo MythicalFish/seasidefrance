@@ -1,6 +1,6 @@
 import type { GetAllPropertiesAsync200ResponseItemsInner } from 'src/lib/lodgify-sdk';
-import type { LodgifyAvailability } from '../availability/types';
-import type { LodgifyRate, RatesResponse } from '../rates/types';
+import type { LodgifyAvailability } from '../fetchAvailability/types';
+import type { LodgifyRate, RatesResponse } from '../fetchRates/types';
 
 export type LodgifyProperty = GetAllPropertiesAsync200ResponseItemsInner;
 

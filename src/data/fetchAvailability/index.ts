@@ -4,7 +4,7 @@ import { getCachedData, setCachedData } from '../../lib/cache';
 
 const apiKey = import.meta.env.LODGIFY_PUBLIC_KEY;
 
-export const fetchAvailability = async (
+const fetchAvailability = async (
   propertyId = 0,
   startDate: string,
   endDate: string
@@ -64,3 +64,5 @@ export const fetchAvailability = async (
   }
   return [];
 };
+
+export default fetchAvailability;

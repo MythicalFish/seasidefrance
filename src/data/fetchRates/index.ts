@@ -4,7 +4,7 @@ import { getCachedData, setCachedData } from '../../lib/cache';
 
 const apiKey = import.meta.env.LODGIFY_PUBLIC_KEY;
 
-export const fetchRates = async (
+const fetchRates = async (
   propertyId = 0,
   roomTypeId = 0,
   startDate: string,
@@ -73,3 +73,5 @@ export const fetchRates = async (
   }
   return {} as RatesResponse;
 };
+
+export default fetchRates;

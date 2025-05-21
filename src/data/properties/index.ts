@@ -1,11 +1,10 @@
 import propertyPages from '../_fixtures/property-pages.json';
 import propertyInfo from '../_fixtures/properties.json';
-import { fetchAvailability } from '../availability';
-import { fetchRates } from '../rates';
+import fetchAvailability from '../fetchAvailability';
+import fetchRates from '../fetchRates';
 
 import type { PropertyPage, LodgifyProperty } from './types';
-
-import type { RatesResponse } from '../rates/types';
+import type { RatesResponse } from '../fetchRates/types';
 
 const currentDate = new Date();
 const currentDateStr = currentDate.toISOString().split('T')[0];

@@ -11,7 +11,7 @@
     "format:check": "prettier --check .",
     "fetch-properties": "tsx src/scripts/fetchProperties.ts",
     "fetch-rooms": "tsx src/scripts/fetchRooms.ts",
-    "fetch-optimized": "tsx src/scripts/fetchOptimized.ts"
+    "optimize-pages": "tsx src/scripts/fetchOptimized.ts"
   },
   "dependencies": {
     "@api/lodgify": "file:.api/apis/lodgify",
