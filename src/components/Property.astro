@@ -61,6 +61,7 @@ const photoLayout = expanded ? 'gallery' : 'single';
   }{
     layout === 'fullPage' && (
       <>
+        <h1 class="text-2xl font-bold mb-4">{property.name}</h1>
         <PropertyPhotos property={property} layout={photoLayout} class="mb-4" />
         <PropertyIntro property={property} />
         <AvailablePeriods

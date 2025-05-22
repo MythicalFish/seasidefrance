@@ -2,50 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import properties from '../data/properties';
 import Property from '../components/Property.astro';
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+import SiteHeader from '../modules/SiteHeader.astro';
 ---
 
 <Layout>
-  <section class="py-12">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-4">Visit south west France</h1>
-      <p class="text-gray-600 mb-8">
-        The area is known for its beautiful countryside, delicious food, and friendly people.
-      </p>
-      <p class="text-gray-600 mb-8">
-        At Le Domaine de Rochebonne, we offer a range of properties to suit your needs. Whether
-        you're looking for a cozy getaway or a luxurious vacation, we have something for everyone.
-      </p>
-      <button class="bg-transparent text-white underline"> Read more </button>
-    </div>
-    <div class="container mx-auto px-4">
-      <h2 class="text-2xl font-bold mb-4">Your stay</h2>
-      <select class="w-full p-2 rounded-md mb-2">
-        <option value="1">1 night</option>
-        <option value="2">2 nights</option>
-        <option value="3">3 nights</option>
-        <option value="4">4 nights</option>
-        <option value="5">5 nights</option>
-      </select>
-      <select class="w-full p-2 rounded-md">
-        {months.map((month) => <option value={month}>{month}</option>)}
-      </select>
-    </div>
-  </section>
-
+  <SiteHeader />
   <main
     class="mx-auto bg-white md:p-4 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-4"
   >

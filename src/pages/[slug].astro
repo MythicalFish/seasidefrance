@@ -2,33 +2,34 @@
 import properties from '../data/properties';
 import Layout from '../layouts/Layout.astro';
 import Property from '../components/Property.astro';
-
+import SiteHeader from '../modules/SiteHeader.astro';
 export async function getStaticPaths() {
   return properties
     .filter((property) => property.lodgify)
     .map((property) => {
       return {
         params: { slug: property.slug },
-        props: { slug: property.slug },
+        props: { property },
       };
     });
 }
 
 const { slug } = Astro.params;
-const firstProperty = properties.find((property) => property.slug === slug);
-const remainingProperties = properties.filter((property) => property.slug !== slug);
+const { property } = Astro.props;
+const otherProperties = properties.filter((property) => property.slug !== slug);
 ---
 
 <Layout>
+  <SiteHeader />
   <main
     class="mx-auto bg-white md:p-4 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-4"
   >
     <section
       class="bg-white md:p-4 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-4"
     >
-      {!!firstProperty && <Property property={firstProperty} layout="fullPage" />}
+      <Property property={property} layout="fullPage" />
       <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {remainingProperties.map((property) => <Property property={property} layout="gridItem" />)}
+        {otherProperties.map((property) => <Property property={property} layout="gridItem" />)}
       </div>
     </section>
   </main>
