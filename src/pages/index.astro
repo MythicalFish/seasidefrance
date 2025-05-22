@@ -4,7 +4,7 @@ import Hero from '../modules/Hero.astro';
 import photo1 from '../images/old/chateau-pool-1.jpg';
 import properties from '../data/properties';
 import { currencySymbol } from '../lib/utils';
-console.log(properties.map((property) => property.id + ' ' + property.name + ' ' + property.title));
+import AvailablePeriods from '../components/AvailablePeriods';
 ---
 
 <Layout>
@@ -13,10 +13,7 @@ console.log(properties.map((property) => property.id + ' ' + property.name + ' '
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
         properties.map(({ lodgify, ...property }) => (
-          <a
-            href={`/${property.slug}`}
-            class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-          >
+          <div class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
             {lodgify.imageUrl && (
               <img
                 src={
@@ -34,8 +31,16 @@ console.log(properties.map((property) => property.id + ' ' + property.name + ' '
                   From {`${currencySymbol(lodgify.currencyCode)}${lodgify.minPrice}`} per night
                 </span>
               </div>
+              <AvailablePeriods
+                client:load
+                propertyId={property.id}
+                rates={property.rates}
+                availability={property.availability}
+                currencyCode={lodgify.currencyCode}
+                limit={1}
+              />
             </div>
-          </a>
+          </div>
         ))
       }
     </div>
