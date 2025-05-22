@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { RatesResponse } from '../../data/fetchRates/types';
 import type { Availability } from '../../data/fetchAvailability/types';
 import { findAvailablePeriods } from './getPeriods';
 import Item from './Item';
+import SwiperSection from '../Swiper';
 
 type Props = {
   rates: RatesResponse;
@@ -10,6 +11,7 @@ type Props = {
   currencyCode?: string | null;
   propertyId: number;
   limit?: number;
+  useSwiper?: boolean;
 };
 
 const AvailablePeriods = ({
@@ -18,33 +20,30 @@ const AvailablePeriods = ({
   currencyCode = 'EUR',
   propertyId,
   limit = 4,
+  useSwiper = false,
 }: Props) => {
+  const [enableSwiper, setEnableSwiper] = useState(false);
   const [desiredStay, setDesiredStay] = useState(7);
   const periods = findAvailablePeriods(rates, availability, desiredStay)?.slice(0, limit);
-  return (
-    <div className="space-y-4">
-      <div>
-        <select onChange={(e) => setDesiredStay(Number(e.target.value))}>
-          <option value={2}>2 nights</option>
-          <option value={3}>3 nights</option>
-          <option value={4}>4 nights</option>
-          <option value={5}>5 nights</option>
-          <option value={6}>6 nights</option>
-          <option value={7}>7 nights</option>
-        </select>
-      </div>
-      <div className="grid gap-4">
-        {periods.map((period, index) => (
-          <Item
-            key={propertyId + index}
-            period={period}
-            currencyCode={currencyCode || 'EUR'}
-            propertyId={propertyId}
-          />
-        ))}
-      </div>
-    </div>
-  );
+
+  useEffect(() => {
+    if (!useSwiper) return;
+    setEnableSwiper(true);
+  }, [useSwiper]);
+
+  const items = periods.map((period, index) => (
+    <Item
+      key={propertyId + index}
+      period={period}
+      currencyCode={currencyCode || 'EUR'}
+      propertyId={propertyId}
+    />
+  ));
+
+  if (enableSwiper) {
+    return <SwiperSection>{items}</SwiperSection>;
+  }
+  return <div className="flex gap-4">{items}</div>;
 };
 
 export default AvailablePeriods;

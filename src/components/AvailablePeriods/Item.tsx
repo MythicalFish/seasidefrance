@@ -11,7 +11,7 @@ type Props = {
 const Item = ({ period, currencyCode, propertyId }: Props) => {
   return (
     <a
-      className="block bg-white p-4 rounded-lg shadow"
+      className="block bg-white p-4 rounded-lg shadow min-w-[240px]"
       href={getCheckoutUrl(propertyId, period.checkInDate, period.checkOutDate)}
     >
       <div className="flex justify-between items-center">
