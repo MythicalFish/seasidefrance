@@ -28,6 +28,7 @@ const photoLayout = expanded ? 'gallery' : 'single';
         <div class="w-1/2 ml-4">
           <PropertyIntro property={property} />
           <AvailablePeriods
+            grid
             client:load
             propertyId={property.id}
             rates={property.rates}

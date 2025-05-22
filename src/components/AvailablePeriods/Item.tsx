@@ -21,8 +21,11 @@ const Item = ({ period, currencyCode, propertyId }: Props) => {
           </div>
           <div className="text-sm text-gray-600">{period.nightLength} nights</div>
         </div>
-        <div className="text-lg font-semibold">
-          {`${currencySymbol(currencyCode)}${period.totalPrice.toFixed(2)}`}
+        <div className="flex flex-col items-end">
+          <div className="text-lg font-semibold leading-none">
+            {`${currencySymbol(currencyCode)}${period.pricePerNight.toFixed(2)}`}
+          </div>
+          <div className="text-xs text-gray-500">per night</div>
         </div>
       </div>
     </a>

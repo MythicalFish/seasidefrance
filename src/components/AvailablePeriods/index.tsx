@@ -12,6 +12,7 @@ type Props = {
   propertyId: number;
   limit?: number;
   useSwiper?: boolean;
+  grid?: boolean;
 };
 
 const AvailablePeriods = ({
@@ -21,6 +22,7 @@ const AvailablePeriods = ({
   propertyId,
   limit = 4,
   useSwiper = false,
+  grid = false,
 }: Props) => {
   const [enableSwiper, setEnableSwiper] = useState(false);
   const [desiredStay, setDesiredStay] = useState(7);
@@ -43,7 +45,7 @@ const AvailablePeriods = ({
   if (enableSwiper) {
     return <SwiperSection>{items}</SwiperSection>;
   }
-  return <div className="flex gap-4">{items}</div>;
+  return <div className={grid ? 'grid grid-cols-2 gap-4' : 'flex gap-4'}>{items}</div>;
 };
 
 export default AvailablePeriods;

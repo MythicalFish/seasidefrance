@@ -15,6 +15,7 @@ export type AvailablePeriod = {
   discount: number;
   promoName: string;
   prices: number[];
+  pricePerNight: number;
 };
 
 export function findAvailablePeriods(
@@ -88,6 +89,7 @@ export function findAvailablePeriods(
       nightLength,
       nights: period.nights,
       prices: period.prices,
+      pricePerNight: totalPrice / nightLength,
     };
   });
 
