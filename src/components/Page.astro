@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import properties from '../data/properties';
+import Property from '../components/Property.astro';
+
+const { slug = '' } = Astro.props;
+const firstProperty = properties.find((property) => property.slug === slug);
+const remainingProperties = properties.filter((property) => property.slug !== slug);
+---
+
+<Layout>
+  <main class="mx-auto">
+    <section
+      class="bg-white md:p-4 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-4"
+    >
+      {!!firstProperty && <Property property={firstProperty} expanded />}
+      {remainingProperties.map((property) => <Property property={property} linked />)}
+    </section>
+  </main>
+</Layout>

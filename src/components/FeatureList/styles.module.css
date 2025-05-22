@@ -1,0 +1,21 @@
+.highlights {
+  padding: 2rem;
+  background-color: #f7f7f7;
+  max-width: 800px;
+  margin: auto;
+}
+
+.highlights h3 {
+  margin-top: 1.5rem;
+}
+
+.highlights ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.highlights li::before {
+  content: '✓ ';
+  color: green;
+  margin-right: 0.5rem;
+}

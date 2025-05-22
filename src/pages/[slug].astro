@@ -1,10 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import properties from '../data/properties';
-import AvailablePeriods from '../components/AvailablePeriods';
-import PropertyGallery from '../components/PropertyGallery.astro';
-import MainImage from '../components/MainImage.astro';
-import { marked } from 'marked';
+import Page from '../components/Page.astro';
 
 export async function getStaticPaths() {
   return properties
@@ -12,85 +8,12 @@ export async function getStaticPaths() {
     .map((property) => {
       return {
         params: { slug: property.slug },
-        props: { property },
+        props: { slug: property.slug },
       };
     });
 }
 
-const property = Astro.props.property;
-const { lodgify } = property;
-const descriptionHtml = property.description ? marked.parse(property.description) : '';
+const { slug } = Astro.params;
 ---
 
-<Layout>
-  <main class="container mx-auto px-4 py-8">
-    <a href="/" class="text-blue-500 hover:text-blue-700 mb-4 block">
-      <i class="codicon codicon-chevron-left"></i>
-      Back to homepage
-    </a>
-    <h1 class="text-4xl font-bold mb-6">
-      {`${property.title} "${property.name}"`}
-    </h1>
-    <div class="p-8">
-      <div class="prose max-w-none">{property.intro} Make this longer</div>
-    </div>
-    <section class="p-8 mb-8 bg-[#EEEEEE]">
-      <PropertyGallery property={property} />
-    </section>
-    <section class="p-8 mb-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h2 class="text-2xl font-semibold mb-4">Features</h2>
-          <ul>
-            {
-              property.features.map((feature) => (
-                <li>
-                  <i class="codicon codicon-check" /> {feature}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div>
-          <h2 class="text-2xl font-semibold mb-4">Nearby</h2>
-          <ul></ul>
-        </div>
-      </div>
-    </section>
-    <section class="p-8 mb-8 bg-[#EEEEEE]">
-      <div>[checkout buttons here]</div>
-    </section>
-
-    <MainImage property={property} />
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div>
-        <div class="prose max-w-none" set:html={descriptionHtml} />
-      </div>
-
-      <div class="bg-gray-50 p-6 rounded-lg">
-        <h2 class="text-2xl font-semibold mb-4">Property Details</h2>
-        <dl class="space-y-4">
-          <div>
-            <dt class="font-medium">Location</dt>
-            <dd>{lodgify.address}, {lodgify.zip} {lodgify.city}, {lodgify.country}</dd>
-          </div>
-          <div>
-            <dt class="font-medium">Price Range</dt>
-            <dd>{lodgify.minPrice} - {lodgify.maxPrice} {lodgify.currencyCode} per night</dd>
-          </div>
-        </dl>
-
-        <div class="mt-8">
-          <AvailablePeriods
-            client:load
-            propertyId={lodgify.id || 0}
-            rates={property.rates}
-            availability={property.availability || []}
-            currencyCode={lodgify.currencyCode || 'EUR'}
-          />
-        </div>
-      </div>
-    </div>
-  </main>
-</Layout>
+<Page slug={slug} />
