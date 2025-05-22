@@ -10,7 +10,8 @@
     "fetch-roomInfo": "tsx src/scripts/fetchRoomInfo.ts",
     "fetch-images": "tsx src/scripts/fetchImages.ts",
     "compress-images": "tsx src/scripts/optimizeImages.ts",
-    "optimize-text": "tsx src/scripts/fetchOptimized.ts"
+    "generate-pages": "tsx src/scripts/generatePages.ts",
+    "generate-about": "tsx src/scripts/generateAbout.ts"
   },
   "dependencies": {
     "@api/lodgify": "file:.api/apis/lodgify",
