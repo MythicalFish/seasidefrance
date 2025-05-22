@@ -48,7 +48,7 @@ const AvailablePeriods = ({
       <div>
         <SwiperSection>{items}</SwiperSection>
         <div className="mt-4">
-          <BookingWidget />
+          <BookingWidget propertyId={propertyId} />
         </div>
       </div>
     );
@@ -59,7 +59,7 @@ const AvailablePeriods = ({
       <div>
         <div className="grid grid-cols-2 gap-4">{items}</div>
         <div className="mt-4">
-          <BookingWidget />
+          <BookingWidget propertyId={propertyId} />
         </div>
       </div>
     );
@@ -69,7 +69,7 @@ const AvailablePeriods = ({
     <div className="flex gap-4">
       {items}
       <div className="mt-4">
-        <BookingWidget />
+        <BookingWidget propertyId={propertyId} />
       </div>
     </div>
   );

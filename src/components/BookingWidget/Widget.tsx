@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 
-const BookingWidget = () => {
+type Props = {
+  propertyId: number;
+};
+
+const BookingWidget = ({ propertyId }: Props) => {
   useEffect(() => {
     // Check if script is already loaded
     if (
@@ -26,10 +30,10 @@ const BookingWidget = () => {
   }, []);
 
   return (
-    <div className="absolute top-0 left-0 w-[330px] h-[217px]">
+    <div className="absolute top-0 left-0 w-[330px] min-h-[217px] border-2 border-gray-500 rounded-lg">
       <div
         id="lodgify-book-now-box"
-        data-rental-id="280249"
+        data-rental-id={String(propertyId)}
         data-website-id="280907"
         data-slug="rochebonne"
         data-language-code="en"

@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import Widget from './Widget';
 
-const BookingWidget = () => {
+type Props = {
+  propertyId: number;
+};
+
+const BookingWidget = ({ propertyId }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -20,8 +24,10 @@ const BookingWidget = () => {
 
   return (
     <div className="relative" ref={wrapperRef}>
-      <button onClick={() => setIsOpen(!isOpen)}>Select specific dates</button>
-      {isOpen && <Widget />}
+      <button className="text-sm text-gray-500 underline" onClick={() => setIsOpen(!isOpen)}>
+        Select specific dates
+      </button>
+      {isOpen && <Widget propertyId={propertyId} />}
     </div>
   );
 };
