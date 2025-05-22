@@ -1,6 +1,7 @@
 ---
 import properties from '../data/properties';
-import Page from '../components/Page.astro';
+import Layout from '../layouts/Layout.astro';
+import Property from '../components/Property.astro';
 
 export async function getStaticPaths() {
   return properties
@@ -14,6 +15,19 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
+const firstProperty = properties.find((property) => property.slug === slug);
+const remainingProperties = properties.filter((property) => property.slug !== slug);
 ---
 
-<Page slug={slug} />
+<Layout>
+  <main class="mx-auto">
+    <section
+      class="bg-white md:p-4 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-4"
+    >
+      {!!firstProperty && <Property property={firstProperty} layout="fullPage" />}
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        {remainingProperties.map((property) => <Property property={property} layout="gridItem" />)}
+      </div>
+    </section>
+  </main>
+</Layout>

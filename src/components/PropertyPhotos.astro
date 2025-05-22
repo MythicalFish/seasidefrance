@@ -6,9 +6,10 @@ import type { PropertyPage } from 'src/data/properties/types';
 interface Props {
   property: PropertyPage;
   layout?: 'single' | 'gallery';
+  class?: string;
 }
 
-const { property, layout = 'single' } = Astro.props;
+const { property, layout = 'single', class: className } = Astro.props;
 const {
   lodgify: { imageUrl },
 } = property;
@@ -24,7 +25,8 @@ const getMainImage = () => {
   return imagePath ? images[imagePath] : null;
 };
 
-const photos = Object.keys(images)
+let firstPhoto = null;
+let photos = Object.keys(images)
   .filter((imagePath) => imagePath.includes(`/photos/${property.id}/`))
   .map((filePath) => {
     const fileName = filePath.split('/').pop() || '';
@@ -40,36 +42,46 @@ const photos = Object.keys(images)
     return a.description.localeCompare(b.description);
   });
 
+if (layout === 'gallery') {
+  firstPhoto = photos[0];
+  photos = photos.slice(1);
+}
+
 const mainPhoto = getMainImage()?.();
 ---
 
-{
-  !photos.length ? null : layout === 'single' && !!mainPhoto ? (
-    <a href={`/${property.slug}`}>
-      <Image src={mainPhoto} alt={photos[0].description} width={1200} height={800} class="photo" />
-    </a>
-  ) : (
-    <div class="property-gallery">
-      {
-        <div class="gallery-grid">
-          {photos.map(({ filePath, description }) => {
-            return (
-              <div class="gallery-item">
-                <Image
-                  src={images[filePath]()}
-                  alt={description}
-                  width={800}
-                  height={600}
-                  class="gallery-image"
-                />
-              </div>
-            );
-          })}
-        </div>
-      }
-    </div>
-  )
-}
+<div class={className}>
+  {
+    !photos.length ? null : (
+      <>
+        {layout === 'single' && !!mainPhoto ? (
+          <Image src={mainPhoto} alt="" width={1200} height={800} class="photo" />
+        ) : (
+          <div>
+            {!!firstPhoto && (
+              <Image src={firstPhoto.filePath} alt="" width={1200} height={800} class="photo" />
+            )}
+            <div class="gallery-grid mt-4">
+              {photos.slice(0, 8).map(({ filePath, description }) => {
+                return (
+                  <div class="gallery-item">
+                    <Image
+                      src={images[filePath]()}
+                      alt={description}
+                      width={600}
+                      height={400}
+                      class="gallery-image"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </>
+    )
+  }
+</div>
 
 <style>
   .property-gallery {
@@ -83,8 +95,8 @@ const mainPhoto = getMainImage()?.();
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
   }
 
   .gallery-item {

@@ -1,5 +1,9 @@
 ---
-import Page from '../components/Page.astro';
+import Layout from '../layouts/Layout.astro';
+import properties from '../data/properties';
+import Property from '../components/Property.astro';
 ---
 
-<Page />
+<Layout>
+  {properties.map((property) => <Property property={property} layout="list" />)}
+</Layout>

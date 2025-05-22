@@ -4,7 +4,15 @@ import AvailablePeriods from './AvailablePeriods';
 import FeatureList from './FeatureList';
 import PropertyPhotos from './PropertyPhotos.astro';
 import PropertyIntro from './PropertyIntro.astro';
-const { property, expanded = false, linked = false } = Astro.props;
+import type { PropertyPage } from 'src/data/properties/types';
+
+interface Props {
+  property: PropertyPage;
+  layout?: 'gridItem' | 'list' | 'fullPage';
+}
+
+const { property, layout = 'gridItem' } = Astro.props;
+const expanded = layout === 'fullPage';
 const lodgify = property?.lodgify;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
 const photoLayout = expanded ? 'gallery' : 'single';
@@ -12,33 +20,62 @@ const photoLayout = expanded ? 'gallery' : 'single';
 
 <div class="p-6">
   {
-    linked ? (
-      <a href={`/${property.slug}`}>
-        <PropertyPhotos property={property} layout="single" />
-        <PropertyIntro property={property} />
-      </a>
-    ) : (
-      <>
-        <PropertyPhotos property={property} layout={photoLayout} />
-        <PropertyIntro property={property} />
-      </>
+    layout === 'list' && (
+      <div class="flex">
+        <a href={`/${property.slug}`} class="block w-1/2">
+          <PropertyPhotos property={property} layout="single" class="mb-4" />
+        </a>
+        <div class="w-1/2 ml-4">
+          <PropertyIntro property={property} />
+          <AvailablePeriods
+            client:load
+            propertyId={property.id}
+            rates={property.rates}
+            availability={property.availability}
+            currencyCode={lodgify.currencyCode}
+            limit={4}
+          />
+        </div>
+      </div>
     )
-  }
-  <AvailablePeriods
-    client:load
-    useSwiper
-    propertyId={property.id}
-    rates={property.rates}
-    availability={property.availability}
-    currencyCode={lodgify.currencyCode}
-    limit={8}
-  />
-  {
-    expanded && (
+  }{
+    layout === 'gridItem' && (
+      <div>
+        <a href={`/${property.slug}`} class="block mb-4">
+          <PropertyPhotos property={property} layout="single" />
+        </a>
+        <div>
+          <PropertyIntro property={property} />
+          <AvailablePeriods
+            client:load
+            propertyId={property.id}
+            rates={property.rates}
+            availability={property.availability}
+            currencyCode={lodgify.currencyCode}
+            limit={4}
+          />
+        </div>
+      </div>
+    )
+  }{
+    layout === 'fullPage' && (
       <>
+        <PropertyPhotos property={property} layout={photoLayout} class="mb-4" />
+        <PropertyIntro property={property} />
+        <AvailablePeriods
+          client:load
+          useSwiper
+          propertyId={property.id}
+          rates={property.rates}
+          availability={property.availability}
+          currencyCode={lodgify.currencyCode}
+          limit={8}
+        />
         <div class="mt-4" set:html={descriptionHtml} />
-        <FeatureList title="Features" items={property.features} />
-        <FeatureList title="Highlights" items={property.highlights} />
+        <div class="mt-4 flex">
+          <FeatureList title="Features" items={property.features} />
+          <FeatureList title="Highlights" items={property.highlights} />
+        </div>
       </>
     )
   }

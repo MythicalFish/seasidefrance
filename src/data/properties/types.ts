@@ -14,6 +14,7 @@ export type PropertyPage = {
   intro: string;
   description: string;
   features: string[];
+  highlights: string[];
   lodgify: LodgifyProperty;
   availability: Availability;
   rates: RatesResponse;

@@ -12,6 +12,10 @@ import '@vscode/codicons/dist/codicon.css';
     <link rel="icon" href="/favicon-dark.png" media="(prefers-color-scheme: light)" />
   </head>
   <body class="md:p-4 bg-[#2bb6f3]">
-    <slot />
+    <main
+      class="mx-auto bg-white md:p-4 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-4"
+    >
+      <slot />
+    </main>
   </body>
 </html>

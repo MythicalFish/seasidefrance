@@ -8,7 +8,7 @@ type Props = {
 const FeatureList: React.FC<Props> = ({ title, items }: Props) => {
   return (
     <section className={styles.highlights}>
-      <h3>{title}</h3>
+      <h3 className="text-lg font-semibold mb-2">{title}</h3>
       <ul>
         {items.map((item, index) => (
           <li key={index}>{item}</li>
