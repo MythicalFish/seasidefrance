@@ -15,11 +15,13 @@
   "dependencies": {
     "@api/lodgify": "file:.api/apis/lodgify",
     "@astrojs/react": "^4.2.7",
+    "@nanostores/react": "^1.0.0",
     "@tailwindcss/typography": "^0.5.16",
     "@vscode/codicons": "^0.0.36",
     "astro": "^5.7.13",
     "axios": "^1.9.0",
     "marked": "^15.0.11",
+    "nanostores": "^1.0.1",
     "openai": "^4.100.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

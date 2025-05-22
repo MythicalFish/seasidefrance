@@ -4,6 +4,7 @@ import type { Availability } from '../../data/fetchAvailability/types';
 import { findAvailablePeriods } from './getPeriods';
 import Item from './Item';
 import SwiperSection from '../Swiper';
+import BookingWidget from '@components/BookingWidget';
 
 type Props = {
   rates: RatesResponse;
@@ -43,9 +44,35 @@ const AvailablePeriods = ({
   ));
 
   if (enableSwiper) {
-    return <SwiperSection>{items}</SwiperSection>;
+    return (
+      <div>
+        <SwiperSection>{items}</SwiperSection>
+        <div className="mt-4">
+          <BookingWidget />
+        </div>
+      </div>
+    );
   }
-  return <div className={grid ? 'grid grid-cols-2 gap-4' : 'flex gap-4'}>{items}</div>;
+
+  if (grid) {
+    return (
+      <div>
+        <div className="grid grid-cols-2 gap-4">{items}</div>
+        <div className="mt-4">
+          <BookingWidget />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex gap-4">
+      {items}
+      <div className="mt-4">
+        <BookingWidget />
+      </div>
+    </div>
+  );
 };
 
 export default AvailablePeriods;

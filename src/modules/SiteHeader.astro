@@ -1,18 +1,5 @@
 ---
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+import Toolbar from '../components/Toolbar';
 ---
 
 <section class="py-12">
@@ -29,16 +16,6 @@ const months = [
   </div>
   <div class="container mx-auto px-4">
     <h2 class="text-2xl font-bold mb-4">Your stay</h2>
-    <select class="w-full p-2 rounded-md mb-2">
-      <option value="2">2 nights</option>
-      <option value="3">3 nights</option>
-      <option value="4">4 nights</option>
-      <option value="5">5 nights</option>
-      <option value="6">6 nights</option>
-      <option value="7">7 nights</option>
-    </select>
-    <select class="w-full p-2 rounded-md">
-      {months.map((month) => <option value={month}>{month}</option>)}
-    </select>
+    <Toolbar client:load />
   </div>
 </section>

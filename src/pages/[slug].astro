@@ -1,8 +1,9 @@
 ---
 import properties from '../data/properties';
-import Layout from '../layouts/Layout.astro';
+import Layout from '../modules/Layout.astro';
 import Property from '../components/Property.astro';
 import SiteHeader from '../modules/SiteHeader.astro';
+
 export async function getStaticPaths() {
   return properties
     .filter((property) => property.lodgify)
