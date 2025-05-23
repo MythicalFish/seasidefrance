@@ -1,12 +1,15 @@
 ---
 import WhyVisit1 from '../data/_fixtures/why-visit-1.md';
-import AreaPhotos from '../components/AreaPhotos.astro';
+import AreaPhotos from '../components/AreaPhotos/index.astro';
 import Box from '../components/Box.astro';
 ---
 
 <section class="py-12">
   <div class="flex flex-col md:flex-row gap-4">
-    <div class="flex-auto">Seaside France</div>
+    <div class="flex-auto">
+      <img src="/favicon-light.png" />
+      Seaside France
+    </div>
     <Box>
       <div class="flex items-center gap-4">
         <i class="codicon codicon-info text-blue-500" style="font-size: 36px"></i>
