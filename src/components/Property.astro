@@ -21,7 +21,7 @@ const photoLayout = expanded ? 'gallery' : 'single';
 <div class="p-6">
   {
     layout === 'list' && (
-      <div class="flex">
+      <div class="flex border border-gray-300 shadow-lg p-8 rounded-lg">
         <a href={`/${property.slug}`} class="block w-1/2">
           <PropertyPhotos property={property} layout="single" class="mb-4" />
         </a>

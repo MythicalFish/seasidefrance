@@ -8,7 +8,7 @@ import Box from '../components/Box.astro';
 
 <Layout>
   <SiteHeader />
-  <main>
+  <main class="bg-gray-100">
     <Box>
       {properties.map((property) => <Property property={property} layout="list" />)}
     </Box>
