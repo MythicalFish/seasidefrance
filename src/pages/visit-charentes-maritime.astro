@@ -1,0 +1,28 @@
+---
+import Layout from '../modules/Layout.astro';
+import Toolbar from '../components/Toolbar';
+import WhyVisit1 from '../data/_fixtures/why-visit-1.md';
+import WhyVisit2 from '../data/_fixtures/why-visit-2.md';
+import AreaPhotos from '../components/AreaPhotos.astro';
+import Box from '../components/Box.astro';
+---
+
+<Layout>
+  <main>
+    <Box>
+      <h1 class="text-4xl font-bold mb-4">Visit south west France</h1>
+      <article class="prose">
+        <WhyVisit1 />
+        <button class="bg-transparent text-white underline">Read more</button>
+      </article>
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="max-w-[600px]">
+          <article class="prose">
+            <WhyVisit2 />
+          </article>
+        </div>
+        <div class=""><AreaPhotos /></div>
+      </div>
+    </Box>
+  </main>
+</Layout>

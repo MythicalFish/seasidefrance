@@ -26,7 +26,7 @@ const photoLayout = expanded ? 'gallery' : 'single';
           <PropertyPhotos property={property} layout="single" class="mb-4" />
         </a>
         <div class="w-1/2 ml-4">
-          <PropertyIntro property={property} />
+          <PropertyIntro property={property} className="mb-4" />
           <AvailablePeriods
             grid
             client:load
@@ -63,7 +63,7 @@ const photoLayout = expanded ? 'gallery' : 'single';
       <>
         <h1 class="text-2xl font-bold mb-4">{property.name}</h1>
         <PropertyPhotos property={property} layout={photoLayout} class="mb-4" />
-        <PropertyIntro property={property} />
+        <PropertyIntro property={property} className="mb-8" />
         <AvailablePeriods
           client:load
           useSwiper

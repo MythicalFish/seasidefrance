@@ -3,6 +3,7 @@ import properties from '../data/properties';
 import Layout from '../modules/Layout.astro';
 import Property from '../components/Property.astro';
 import SiteHeader from '../modules/SiteHeader.astro';
+import Box from '../components/Box.astro';
 
 export async function getStaticPaths() {
   return properties
@@ -22,16 +23,12 @@ const otherProperties = properties.filter((property) => property.slug !== slug);
 
 <Layout>
   <SiteHeader />
-  <main
-    class="mx-auto bg-white md:p-4 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-4"
-  >
-    <section
-      class="bg-white md:p-4 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 mb-4"
-    >
+  <main>
+    <Box>
       <Property property={property} layout="fullPage" />
       <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
         {otherProperties.map((property) => <Property property={property} layout="gridItem" />)}
       </div>
-    </section>
+    </Box>
   </main>
 </Layout>
