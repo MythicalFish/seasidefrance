@@ -1,0 +1,41 @@
+---
+import Layout from '../modules/Layout.astro';
+import WhyVisit1 from '../data/_fixtures/why-visit-1.md';
+import WhyVisit2 from '../data/_fixtures/why-visit-2.md';
+import AreaPhotos from '../components/AreaPhotos/index.astro';
+import Box from '../components/Box.astro';
+import properties from '../data/properties';
+import Property from '../components/Property/index.astro';
+import SiteHeader from '../modules/SiteHeader.astro';
+---
+
+<Layout>
+  <SiteHeader />
+  <main class="container mx-auto py-12 flex gap-4">
+    <Box cozy>
+      <div class="prose mb-4">
+        <h2 class="mb-4">Discover Charente-Maritime</h2>
+        <WhyVisit1 />
+      </div>
+      <AreaPhotos layout="grid" />
+      <div class="my-8">
+        <a href="/" class="bg-blue-500 text-white px-4 py-2 rounded-md">Explore properties</a>
+      </div>
+      <div class="prose">
+        <WhyVisit2 />
+      </div>
+    </Box>
+    <Box cozy>
+      {
+        properties.map((property) => (
+          <Property property={property} layout="gridItem" showReadMore />
+        ))
+      }
+    </Box>
+  </main>
+</Layout>
+<!-- <a
+        href="https://www.tripadvisor.com/Tourism-g2064961-Charente_Maritime_Nouvelle_Aquitaine-Vacations.html"
+        class="bg-transparent text-white underline"
+        target="_blank">Read more on TripAdvisor</a
+      > -->

@@ -1,0 +1,26 @@
+---
+import PropertyPhotos from '../PropertyPhotos.astro';
+import PropertyIntro from '../PropertyIntro.astro';
+import AvailablePeriods from '../AvailablePeriods';
+
+const { property } = Astro.props;
+const { lodgify } = property;
+---
+
+<div class="flex border bg-white border-gray-300 shadow-lg p-8 rounded-lg">
+  <a href={`/${property.slug}`} class="block w-1/2">
+    <PropertyPhotos property={property} layout="single" class="mb-4" />
+  </a>
+  <div class="w-1/2 ml-4">
+    <PropertyIntro property={property} className="mb-4" />
+    <AvailablePeriods
+      grid
+      client:load
+      propertyId={property.id}
+      rates={property.rates}
+      availability={property.availability}
+      currencyCode={lodgify.currencyCode}
+      limit={4}
+    />
+  </div>
+</div>

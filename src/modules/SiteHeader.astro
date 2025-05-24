@@ -2,27 +2,21 @@
 import WhyVisit1 from '../data/_fixtures/why-visit-1.md';
 import AreaPhotos from '../components/AreaPhotos/index.astro';
 import Box from '../components/Box.astro';
-import headerBg from '../photos/area/chateau-de-la-roche-courbon.jpg';
+import headerBg from '../images/bg.png';
+import Contact from '../components/Contact.astro';
 ---
 
 <header
-  class="py-12"
   style={`background-image: url(${headerBg.src}); background-size: cover; background-position: center;`}
+  <div
+  class="flex flex-col md:flex-row gap-4 justify-between"
 >
-  <div class="container mx-auto flex flex-col md:flex-row gap-4">
-    <div class="flex-auto">
-      <img src="/favicon-light.png" />
-      <a class="text-2xl font-bold text-white" href="/">Seaside France</a>
-    </div>
-    <Box>
-      <div class="flex items-center gap-4">
-        <i class="codicon codicon-info text-blue-500" style="font-size: 36px"></i>
-        <article class="prose">
-          <WhyVisit1 />
-        </article>
-      </div>
-      <div class="max-w-[600px]"><AreaPhotos /></div>
-    </Box>
+  <div class="p-4 flex items-center gap-4">
+    <img src="/favicon-light.png" width={32} height={32} />
+    <a class="text-2xl text-white" href="/">Seaside France</a>
   </div>
-  <!-- Could add last-minute super-deal CTA here -->
+  <div class="p-4 text-right">
+    <Contact />
+  </div>
 </header>
+<!-- Could add last-minute super-deal CTA here -->
