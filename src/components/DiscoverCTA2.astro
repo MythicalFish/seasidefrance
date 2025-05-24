@@ -4,8 +4,12 @@ import WhyVisit1 from '../data/_fixtures/why-visit-1.md';
 import AreaPhotos from './AreaPhotos/index.astro';
 ---
 
-<div class="prose">
-  <h2>Discover Charente-Maritime</h2>
-  <WhyVisit1 />
+<div>
+  <div class="flex items-start gap-4">
+    <i class="codicon codicon-info text-blue-500 mr-4" style="font-size: 36px"></i>
+    <div class="prose mb-4">
+      <WhyVisit1 />
+    </div>
+  </div>
+  <div class="max-w-[600px]"><AreaPhotos /></div>
 </div>
-<div class="max-w-[600px]"><AreaPhotos /></div>

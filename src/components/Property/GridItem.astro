@@ -7,7 +7,7 @@ const { property, showReadMore = false } = Astro.props;
 const { lodgify } = property;
 ---
 
-<div class="border bg-white border-gray-300 shadow-lg p-8 rounded-lg lg:w-1/2">
+<div class="border bg-white border-gray-300 shadow-lg p-8 rounded-lg overflow-hidden">
   <a href={`/${property.slug}`} class="block mb-4">
     <PropertyPhotos property={property} layout="single" />
   </a>
