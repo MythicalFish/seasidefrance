@@ -8,6 +8,7 @@ import FeatureList from '../FeatureList';
 const { property } = Astro.props;
 const { lodgify } = property;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
+console.log(property);
 ---
 
 <div>
@@ -19,7 +20,6 @@ const descriptionHtml = property.description ? marked.parse(property.description
       <PropertyIntro property={property} className="mb-8" />
       <AvailablePeriods
         client:load
-        useSwiper
         propertyId={property.id}
         rates={property.rates}
         availability={property.availability}
