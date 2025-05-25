@@ -6,12 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "fetch-properties": "tsx src/scripts/fetchProperties.ts",
-    "fetch-roomInfo": "tsx src/scripts/fetchRoomInfo.ts",
-    "fetch-images": "tsx src/scripts/fetchImages.ts",
-    "compress-images": "tsx src/scripts/optimizeImages.ts",
-    "generate-pages": "tsx src/scripts/generatePages.ts",
-    "generate-about": "tsx src/scripts/generateAbout.ts"
+    "fetch-properties": "tsx src/lib/scripts/fetchProperties.ts",
+    "fetch-roomInfo": "tsx src/lib/scripts/fetchRoomInfo.ts",
+    "fetch-images": "tsx src/lib/scripts/fetchImages.ts",
+    "compress-images": "tsx src/lib/scripts/optimizeImages.ts",
+    "generate-pages": "tsx src/lib/scripts/generatePages.ts",
+    "generate-about": "tsx src/lib/scripts/generateAbout.ts"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.2.5",
