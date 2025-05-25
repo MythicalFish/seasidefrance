@@ -9,12 +9,29 @@ interface Props {
 }
 
 const { property, showFirstPhoto = true } = Astro.props;
+const {
+  lodgify: { imageUrl },
+} = property;
 const imageInfo = property.roomInfo.images;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/photos/**/*.{jpg,jpeg,png}', {
   eager: true,
 });
 
-let photos = Object.keys(images)
+const getMainImage = () => {
+  if (!imageUrl) return null;
+  const filename = imageUrl.split('/').pop()?.split('?')[0];
+  const imagePath = Object.keys(images).find(
+    (path) => path.includes(`/photos/${property.id}/`) && path.includes(filename || '')
+  );
+  return imagePath ? { 
+    filePath: imagePath, 
+    fileName: filename || '', 
+    description: 'Main image', 
+    image: images[imagePath].default 
+  } : null;
+};
+
+let allPhotos = Object.keys(images)
   .filter((imagePath) => imagePath.includes(`/photos/${property.id}/`))
   .map((filePath) => {
     const fileName = filePath.split('/').pop() || '';
@@ -31,49 +48,64 @@ let photos = Object.keys(images)
     return a.description.localeCompare(b.description);
   });
 
-const firstPhoto = showFirstPhoto ? photos[0] : null;
-if (showFirstPhoto) {
-  photos = photos.slice(1);
+// Get the main image and move it to the front if it exists
+const mainImage = getMainImage();
+if (mainImage) {
+  // Remove main image from allPhotos if it exists there
+  allPhotos = allPhotos.filter(photo => photo.filePath !== mainImage.filePath);
+  // Add main image to the front
+  allPhotos.unshift(mainImage);
 }
 
 const carouselId = `carousel-${property.id}`;
 ---
 
 <div class="property-photo-carousel">
-  {firstPhoto && (
-    <div class="main-photo mb-4">
-      <Picture 
-        src={firstPhoto.image} 
-        alt={firstPhoto.description || ''} 
-        width={1200} 
-        height={800} 
-        class="w-full h-auto object-cover rounded-lg" 
-      />
-    </div>
-  )}
-  
-  {photos.length > 0 && (
-    <div class={`swiper ${carouselId}`}>
-      <div class="swiper-wrapper">
-        {photos.slice(0, 8).map((photo) => (
-          <div class="swiper-slide">
-            <Picture
-              src={photo.image}
-              alt={photo.description || ''}
-              width={600}
-              height={400}
-              class="w-full h-auto object-cover rounded-lg"
-            />
-          </div>
-        ))}
+  {allPhotos.length > 0 && (
+    <div class="photo-gallery">
+      <div class={`swiper main-swiper ${carouselId}`}>
+        <div class="swiper-wrapper">
+          {allPhotos.map((photo, index) => (
+            <div class="swiper-slide">
+              <Picture
+                src={photo.image}
+                alt={photo.description || ''}
+                width={810}
+                height={540}
+                class="main-image"
+              />
+            </div>
+          ))}
+        </div>
+        
+        <!-- Navigation buttons -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
-      
-      <!-- Navigation buttons -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      
-      <!-- Pagination -->
-      <div class="swiper-pagination"></div>
+
+      <!-- Thumbnail Strip -->
+      <div class="thumbnail-container">
+        <div class="thumbnail-strip">
+          {allPhotos.map((photo, index) => (
+            <button 
+              class={`thumbnail ${index === 0 ? 'active' : ''}`}
+              data-slide-index={index}
+              type="button"
+            >
+              <Picture
+                src={photo.image}
+                alt={photo.description || ''}
+                width={150}
+                height={100}
+                class="thumbnail-image"
+              />
+              {index === 0 && mainImage && (
+                <div class="main-badge">Main</div>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   )}
 </div>
@@ -83,24 +115,27 @@ const carouselId = `carousel-${property.id}`;
     width: 100%;
   }
 
-  .main-photo img {
+  .photo-gallery {
     width: 100%;
-    height: auto;
-    object-fit: cover;
   }
 
-  .swiper {
+  /* Main Swiper Styles */
+  .main-swiper {
     width: 100%;
-    height: 300px;
+    height: 540px;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
   }
 
-  .swiper-slide {
+  .main-swiper .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #f8f9fa;
   }
 
-  .swiper-slide img {
+  .main-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -109,10 +144,16 @@ const carouselId = `carousel-${property.id}`;
   .swiper-button-next,
   .swiper-button-prev {
     color: #fff;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     border-radius: 50%;
     width: 44px;
     height: 44px;
+    transition: all 0.3s ease;
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    background: rgba(0, 0, 0, 0.8);
   }
 
   .swiper-button-next:after,
@@ -120,71 +161,170 @@ const carouselId = `carousel-${property.id}`;
     font-size: 18px;
   }
 
-  .swiper-pagination-bullet {
-    background: #fff;
+  /* Thumbnail Strip Styles */
+  .thumbnail-container {
+    width: 100%;
+    padding: 0.5rem 0;
   }
 
-  .swiper-pagination-bullet-active {
-    background: #007aff;
+  .thumbnail-strip {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 #f7fafc;
+  }
+
+  .thumbnail-strip::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .thumbnail-strip::-webkit-scrollbar-track {
+    background: #f7fafc;
+    border-radius: 3px;
+  }
+
+  .thumbnail-strip::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+  }
+
+  .thumbnail-strip::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+  }
+
+  .thumbnail {
+    position: relative;
+    flex: 0 0 auto;
+    width: 120px;
+    height: 80px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: none;
+    padding: 0;
+  }
+
+  .thumbnail:hover {
+    border-color: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .thumbnail.active {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+
+  .thumbnail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .main-badge {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background: #3b82f6;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
   }
 
   @media (max-width: 768px) {
-    .swiper {
-      height: 250px;
+    .main-swiper {
+      height: 400px;
+    }
+    
+    .thumbnail {
+      width: 100px;
+      height: 67px;
+    }
+    
+    .main-badge {
+      font-size: 0.625rem;
+      padding: 1px 4px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .main-swiper {
+      height: 300px;
+    }
+    
+    .thumbnail {
+      width: 80px;
+      height: 53px;
     }
   }
 </style>
 
 <script>
   import Swiper from 'swiper';
-  import { Navigation, Pagination, Autoplay, Mousewheel } from 'swiper/modules';
+  import { Navigation, Mousewheel } from 'swiper/modules';
   import 'swiper/css';
   import 'swiper/css/navigation';
-  import 'swiper/css/pagination';
 
   // Initialize all carousels on the page
   document.addEventListener('DOMContentLoaded', () => {
-    const carousels = document.querySelectorAll('.swiper');
+    const carousels = document.querySelectorAll('.main-swiper');
     
-    carousels.forEach((carousel) => {
-      new Swiper(carousel as HTMLElement, {
-        modules: [Navigation, Pagination, Autoplay, Mousewheel],
-        slidesPerView: 1,
-        spaceBetween: 10,
-        loop: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-        mousewheel: {
-          enabled: true,
-          forceToAxis: true,
-          sensitivity: 1,
-          releaseOnEdges: true,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
+    // Add 2 second delay before initialization
+    setTimeout(() => {
+      carousels.forEach((carousel) => {
+        // Get thumbnails for this carousel first
+        const thumbnails = carousel.parentElement?.querySelectorAll('.thumbnail');
+        
+        function updateActiveThumbnail(activeIndex: number) {
+          if (thumbnails) {
+            thumbnails.forEach((thumb, index) => {
+              thumb.classList.toggle('active', index === activeIndex);
+            });
+          }
+        }
+
+        const swiper = new Swiper(carousel as HTMLElement, {
+          modules: [Navigation, Mousewheel],
+          slidesPerView: 1,
+          spaceBetween: 0,
+          loop: true,
+          autoplay: false,
+          mousewheel: {
+            enabled: true,
+            forceToAxis: true,
+            sensitivity: 1,
+            releaseOnEdges: true,
+            thresholdDelta: 10,
+            thresholdTime: 600,
           },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 30,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
           },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-        },
+          on: {
+            slideChange: function(swiper) {
+              updateActiveThumbnail(swiper.activeIndex);
+            }
+          }
+        });
+        
+        if (thumbnails) {
+          thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', () => {
+              swiper.slideToLoop(index);
+              updateActiveThumbnail(index);
+            });
+          });
+        }
       });
-    });
+    }, 2000);
   });
 </script> 
