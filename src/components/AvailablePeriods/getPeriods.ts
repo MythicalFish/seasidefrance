@@ -94,11 +94,10 @@ export function findAvailablePeriods(
     return periodData;
   });
 
+  const currentDateStr = new Date().toISOString().split('T')[0];
   const afterToday = withPromo.filter((period) => {
-    return new Date(period.checkInDate) > new Date();
+    return period.checkInDate >= currentDateStr;
   });
-
-  // console.log('🟢🟢🟢 withPromo', withPromo);
 
   return afterToday;
 }
