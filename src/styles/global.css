@@ -24,3 +24,8 @@
     color: var(--tw-prose-links);
   }
 }
+.container {
+  @media (min-width: 640px) {
+    padding: 0 16px;
+  }
+}

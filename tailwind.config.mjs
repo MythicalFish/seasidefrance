@@ -55,7 +55,6 @@ export default {
     screens,
     container: {
       center: true,
-      padding: '30px',
       screens: {
         sm: '1280px',
         md: '1280px',
