@@ -7,7 +7,9 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@modules/*": ["src/modules/*"],
+      "@pages/*": ["src/pages/*"],
       "@images/*": ["src/images/*"],
+      "@photos/*": ["src/images/photos/*"],
       "@utils/*": ["src/utils/*"],
       "@data/*": ["src/data/*"],
       "@lib/*": ["src/lib/*"],

@@ -12,9 +12,12 @@ interface Props {
 
 const { property, layout = 'single', class: className } = Astro.props;
 const { lodgify } = property;
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/photos/**/*.{jpg,jpeg,png}', {
-  eager: true,
-});
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/images/photos/**/*.{jpg,jpeg,png}',
+  {
+    eager: true,
+  }
+);
 
 const getMainImage = () => {
   if (!lodgify.imageUrl) return null;

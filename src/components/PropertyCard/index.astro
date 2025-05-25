@@ -1,0 +1,15 @@
+---
+import LayoutSmall from './LayoutSmall.astro';
+import LayoutWide from './LayoutWide.astro';
+import type { PropertyPage } from '@data/properties/types';
+
+interface Props {
+  property: PropertyPage;
+  wide?: boolean;
+}
+
+const { property, wide = false } = Astro.props;
+---
+
+{wide && <LayoutWide property={property} />}
+{!wide && <LayoutSmall property={property} />}

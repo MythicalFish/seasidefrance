@@ -1,0 +1,26 @@
+---
+import clsx from 'clsx';
+import PropertyPhotos from '@components/PropertyPhotos/index.astro';
+
+const { property, className } = Astro.props;
+---
+
+<div
+  class={clsx(
+    'border bg-white border-gray-300 shadow-lg p-8 rounded-lg overflow-hidden',
+    className
+  )}
+>
+  <a href={`/${property.slug}`} class="block mb-4">
+    <PropertyPhotos property={property} layout="single" />
+  </a>
+  <div>
+    <div class="prose">
+      <h3>{property.name}</h3>
+      <p>
+        {property.intro}
+        <a href={`/${property.slug}`}>Read more</a>
+      </p>
+    </div>
+  </div>
+</div>

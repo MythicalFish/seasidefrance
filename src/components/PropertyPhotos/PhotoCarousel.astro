@@ -13,7 +13,7 @@ const {
   lodgify: { imageUrl },
 } = property;
 const imageInfo = property.roomInfo.images;
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/photos/**/*.{jpg,jpeg,png}', {
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/images/photos/**/*.{jpg,jpeg,png}', {
   eager: true,
 });
 

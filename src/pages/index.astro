@@ -1,20 +1,20 @@
 ---
 import Layout from '@modules/Layout/index.astro';
 import properties from '@data/properties';
-import Property from '@components/Property/index.astro';
+import PropertyCard from '@components/PropertyCard/index.astro';
 import SiteHeader from '@modules/SiteHeader/index.astro';
-import AreaInfo from '@components/AreaInfo/index.astro';
+import AreaInfo from '@modules/AreaInfo/index.astro';
 ---
 
 <Layout>
   <SiteHeader />
   <main class="container bg-white p-8 flex flex-col gap-4">
     <div class="flex-auto pt-8">
-      <div class="prose prose-stone">
-        <h2 class="">Find your stay in South West France</h2>
+      <div class="prose">
+        <h2 class="font-medium">Find your stay in South West France</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-        {properties.map((property) => <Property property={property} layout="square" />)}
+      <div class="mt-8">
+        {properties.map((property) => <PropertyCard property={property} wide />)}
       </div>
     </div>
     <div class="flex-auto p-8">

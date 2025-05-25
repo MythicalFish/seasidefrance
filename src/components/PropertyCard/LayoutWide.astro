@@ -1,7 +1,6 @@
 ---
-import PropertyPhotos from './Photos.astro';
-import PropertyIntro from './Intro.astro';
-import AvailablePeriods from './AvailablePeriods';
+import PropertyPhotos from '@components/PropertyPhotos/index.astro';
+import AvailablePeriods from '@components/Property/AvailablePeriods';
 
 const { property } = Astro.props;
 const { lodgify } = property;
@@ -12,8 +11,15 @@ const { lodgify } = property;
     <PropertyPhotos property={property} layout="single" class="mb-4" />
   </a>
   <div class="w-1/2 ml-4">
-    <PropertyIntro property={property} className="mb-4" />
+    <div class="prose mb-4">
+      <h3>{property.name}</h3>
+      <p>
+        {property.intro}
+        <a href={`/${property.slug}`}>Read more</a>
+      </p>
+    </div>
     <AvailablePeriods
+      grid
       propertyId={property.id}
       rates={property.rates}
       availability={property.availability}

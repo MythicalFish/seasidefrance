@@ -9,7 +9,7 @@ interface Props {
 }
 
 const photoModules = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/photos/area/*.{jpg,jpeg,png}'
+  '/src/images/photos/area/*.{jpg,jpeg,png}'
 );
 const photoEntries = Object.entries(photoModules);
 

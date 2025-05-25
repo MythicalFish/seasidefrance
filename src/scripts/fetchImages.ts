@@ -11,7 +11,7 @@ const fetchImages = async () => {
     const room = roomInfo[0] as RoomInfo;
 
     // Create directory for property if it doesn't exist
-    const photosDir = path.join('src', 'photos', String(id));
+    const photosDir = path.join('src', 'images', 'photos', String(id));
     if (!fs.existsSync(photosDir)) {
       fs.mkdirSync(photosDir, { recursive: true });
     }

@@ -3,7 +3,7 @@ import path from 'path';
 import sharp from 'sharp';
 
 const MAX_SIZE_IN_BYTES = 2 * 1024 * 1024; // 2MB in bytes
-const PHOTOS_DIR = path.join('src', 'photos');
+const PHOTOS_DIR = path.join('src', 'images', 'photos');
 const QUALITY_DECREMENT = 5; // How much to reduce quality each step
 
 /**
