@@ -15,7 +15,7 @@ export default {
             '--tw-prose-body': '#334155',
             '--tw-prose-headings': '#334155',
             '--tw-prose-lead': '#475569',
-            '--tw-prose-links': '#0f172a',
+            '--tw-prose-links': '#1678ff',
             '--tw-prose-bold': '#0f172a',
             '--tw-prose-counters': '#64748b',
             '--tw-prose-bullets': '#cbd5e1',

@@ -1,7 +1,7 @@
 ---
 import properties from '@data/properties';
 import Layout from '@modules/Layout/index.astro';
-import Property from '@components/Property/index.astro';
+import PropertyPage from '@components/PropertyPage/index.astro';
 import PropertyCard from '@components/PropertyCard/index.astro';
 import SiteHeader from '@modules/SiteHeader/index.astro';
 
@@ -24,7 +24,7 @@ const otherProperties = properties.filter((property) => property.slug !== slug);
 <Layout>
   <SiteHeader />
   <main class="container md:p-8 pt-16">
-    <Property property={property} layout="full" />
+    <PropertyPage property={property} />
     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
       {otherProperties.map((property) => <PropertyCard property={property} />)}
     </div>

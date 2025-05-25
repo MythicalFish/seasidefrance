@@ -1,0 +1,16 @@
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item {
+  flex: none;
+  padding: 8px 15px;
+  border-radius: 99px;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  font-family: var(--font-default);
+  color: #334155;
+}

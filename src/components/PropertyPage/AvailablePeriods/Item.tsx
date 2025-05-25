@@ -3,6 +3,8 @@ import { currencySymbol, getCheckoutUrl } from '@lib/utils';
 import type { AvailablePeriod } from './getPeriods';
 import headerBg from '@images/bg.png';
 
+import styles from './styles.module.css';
+
 type Props = {
   period: AvailablePeriod;
   currencyCode: string;
@@ -12,12 +14,7 @@ type Props = {
 const Item = ({ period, currencyCode, propertyId }: Props) => {
   return (
     <a
-      className="block bg-blue-500 text-white px-4 py-2 rounded-lg shadow min-w-[240px]"
-      style={{
-        backgroundImage: `url(${headerBg.src})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      className={styles.item}
       href={getCheckoutUrl(propertyId, period.checkInDate, period.checkOutDate)}
     >
       <div className="flex justify-between items-center">

@@ -3,7 +3,9 @@ import { marked } from 'marked';
 import PropertyPhotos from '@components/PropertyPhotos/index.astro';
 import PropertyIntro from './Intro.astro';
 import AvailablePeriods from './AvailablePeriods';
-import FeatureList from './FeatureList';
+import List from '@components/List';
+import Box from '@components/Box/index.astro';
+import Features from '@components/Features/index.astro';
 
 const { property } = Astro.props;
 const { lodgify } = property;
@@ -15,17 +17,21 @@ const descriptionHtml = property.description ? marked.parse(property.description
     <div class="flex-auto w-full lg:w-2/3">
       <PropertyIntro property={property} className="mb-4" />
       <PropertyPhotos property={property} layout="gallery" class="mb-4" />
+      <Features property={property} />
     </div>
     <div class="flex-auto w-full lg:w-1/3">
+      <Box>
+        <List title="Highlights" items={property.highlights} />
+      </Box>
       <a class="block bg-blue-500 text-white px-4 py-2 rounded-lg shadow mb-4" href="#book"
         >Book your stay</a
       >
-      <FeatureList title="Features" items={property.features} className="mb-4" />
-      <FeatureList title="Highlights" items={property.highlights} />
     </div>
   </div>
-  <div class="mt-4 prose" set:html={descriptionHtml} />
-  <div id="book" class="p-8 border border-gray-200 rounded-lg shadow-lg">
+  <div class="flex flex-col lg:flex-row gap-8 mt-4">
+    <div class="my-4 prose" set:html={descriptionHtml} />
+  </div>
+  <Box id="book" class="p-8 border border-gray-200 rounded-lg shadow-lg">
     <div class="prose mb-4">
       <h4 class="">Book your stay</h4>
     </div>
@@ -38,6 +44,6 @@ const descriptionHtml = property.description ? marked.parse(property.description
       currencyCode={lodgify.currencyCode}
       limit={9}
     />
-  </div>
+  </Box>
   <div class="mt-4 flex"></div>
 </div>

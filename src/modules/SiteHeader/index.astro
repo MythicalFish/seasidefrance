@@ -6,11 +6,14 @@ import Contact from './Contact.astro';
 <header
   style={`background-image: url(${headerBg.src}); background-size: cover; background-position: center;`}
 >
-  <div class="container flex flex-col md:flex-row gap-4 justify-between pt-12 p-4">
+  <div class="container flex flex-col md:flex-row gap-4 justify-between pt-12">
     <div>
-      <a class="pb-4 flex items-center gap-4 opacity-80" href="/">
-        <img src="/favicon-light.png" width={26} height={26} />
-        <span class="text-xl text-white">Seaside France</span>
+      <a class="pb-2 flex items-center gap-2 leading-none opacity-90" href="/">
+        <img src="/favicon-light.png" width={20} height={20} />
+        <span class="text-xl text-white opacity-90"
+          ><span class="opacity-90">seaside</span><span class="ml-[1px] font-semibold">france</span
+          ></span
+        >
       </a>
       <div class="text-white text-2xl">Holiday homes in South West France</div>
     </div>
