@@ -5,7 +5,7 @@ type Props = {
   propertyId: number;
 };
 
-const BookingWidget = ({ propertyId }: Props) => {
+const CalendarWidget = ({ propertyId }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -32,4 +32,4 @@ const BookingWidget = ({ propertyId }: Props) => {
   );
 };
 
-export default BookingWidget;
+export default CalendarWidget;

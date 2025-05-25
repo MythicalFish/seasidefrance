@@ -1,0 +1,12 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+import styles from './styles.module.css';
+---
+
+<div class={styles.features}>
+  {items.map((item) => <div class={styles.item}>{item}</div>)}
+</div>

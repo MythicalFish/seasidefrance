@@ -6,7 +6,7 @@ import DateSelector from '@components/DateSelector';
 import AreaInfo from '@modules/AreaInfo/index.astro';
 import List from '@components/List';
 import Box from '@components/Box/index.astro';
-import Features from '@components/Features/index.astro';
+import Pills from '@components/Pills/index.astro';
 
 const { property } = Astro.props;
 const { lodgify } = property;
@@ -23,7 +23,7 @@ const descriptionHtml = property.description ? marked.parse(property.description
           mainImageUrl={property.lodgify?.imageUrl}
           imageInfo={property.roomInfo.images}
         />
-        <Features property={property} />
+        <Pills items={property.features} />
         <div class="my-4 prose" set:html={descriptionHtml} />
       </Box>
     </div>
