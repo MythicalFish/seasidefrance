@@ -26,11 +26,7 @@ import SiteHeader from '../modules/SiteHeader.astro';
       </div>
     </Box>
     <Box cozy>
-      {
-        properties.map((property) => (
-          <Property property={property} layout="gridItem" showReadMore />
-        ))
-      }
+      {properties.map((property) => <Property property={property} layout="square" showReadMore />)}
     </Box>
   </main>
 </Layout>

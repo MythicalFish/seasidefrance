@@ -8,7 +8,7 @@ import FeatureList from '../FeatureList';
 const { property } = Astro.props;
 const { lodgify } = property;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
-console.log(property);
+// console.log(property);
 ---
 
 <div>
@@ -20,11 +20,12 @@ console.log(property);
       <PropertyIntro property={property} className="mb-8" />
       <AvailablePeriods
         client:load
+        grid
         propertyId={property.id}
         rates={property.rates}
         availability={property.availability}
         currencyCode={lodgify.currencyCode}
-        limit={8}
+        limit={6}
       />
     </div>
   </div>

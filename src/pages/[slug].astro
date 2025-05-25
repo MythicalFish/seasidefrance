@@ -24,9 +24,9 @@ const otherProperties = properties.filter((property) => property.slug !== slug);
 <Layout>
   <SiteHeader />
   <main class="container p-8 pt-16">
-    <Property property={property} layout="fullPage" />
+    <Property property={property} layout="full" />
     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-      {otherProperties.map((property) => <Property property={property} layout="gridItem" />)}
+      {otherProperties.map((property) => <Property property={property} layout="square" />)}
     </div>
   </main>
 </Layout>

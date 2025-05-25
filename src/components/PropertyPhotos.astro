@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import type { PropertyPage } from 'src/data/properties/types';
+import PropertyPhotoCarousel from './PropertyPhotoCarousel.astro';
 
 interface Props {
   property: PropertyPage;
@@ -14,7 +15,9 @@ const {
   lodgify: { imageUrl },
 } = property;
 const imageInfo = property.roomInfo.images;
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/photos/**/*.{jpg,jpeg,png}');
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/photos/**/*.{jpg,jpeg,png}', {
+  eager: true,
+});
 
 const getMainImage = () => {
   if (!imageUrl) return null;
@@ -22,63 +25,18 @@ const getMainImage = () => {
   const imagePath = Object.keys(images).find(
     (path) => path.includes(`/photos/${property.id}/`) && path.includes(filename || '')
   );
-  return imagePath ? images[imagePath] : null;
+  return imagePath ? images[imagePath].default : null;
 };
 
-let firstPhoto = null;
-let photos = Object.keys(images)
-  .filter((imagePath) => imagePath.includes(`/photos/${property.id}/`))
-  .map((filePath) => {
-    const fileName = filePath.split('/').pop() || '';
-    const fileInfo = imageInfo.find((info: any) => info.url.includes(fileName));
-    const description = fileInfo?.text || '';
-    return {
-      filePath,
-      fileName,
-      description,
-    };
-  })
-  .sort((a, b) => {
-    return a.description.localeCompare(b.description);
-  });
-
-if (layout === 'gallery') {
-  firstPhoto = photos[0];
-  photos = photos.slice(1);
-}
-
-const mainPhoto = getMainImage()?.();
+const mainPhoto = getMainImage();
 ---
 
 <div class={className}>
   {
-    !photos.length ? null : (
-      <>
-        {layout === 'single' && !!mainPhoto ? (
-          <Picture src={mainPhoto} alt="" width={1200} height={800} class="photo" />
-        ) : (
-          <div>
-            {!!firstPhoto && (
-              <Picture src={firstPhoto.filePath} alt="" width={1200} height={800} class="photo" />
-            )}
-            <div class="gallery-grid mt-4">
-              {photos.slice(0, 8).map(({ filePath, description }) => {
-                return (
-                  <div class="gallery-item">
-                    <Picture
-                      src={images[filePath]()}
-                      alt={description}
-                      width={600}
-                      height={400}
-                      class="gallery-image"
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </>
+    layout === 'single' && !!mainPhoto ? (
+      <Picture src={mainPhoto} alt="" width={1200} height={800} class="photo" />
+    ) : (
+      <PropertyPhotoCarousel property={property} showFirstPhoto={layout === 'gallery'} />
     )
   }
 </div>

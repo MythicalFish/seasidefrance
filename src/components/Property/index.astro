@@ -1,18 +1,18 @@
 ---
-import FullPage from './FullPage.astro';
-import GridItem from './GridItem.astro';
-import ListItem from './ListItem.astro';
+import FullPage from './LayoutFull.astro';
+import ListItem from './LayoutCompact.astro';
+import GridItem from './LayoutSquare.astro';
 import type { PropertyPage } from 'src/data/properties/types';
 
 interface Props {
   property: PropertyPage;
-  layout?: 'gridItem' | 'list' | 'fullPage';
+  layout?: 'square' | 'compact' | 'full';
   showReadMore?: boolean;
 }
 
-const { property, showReadMore = false, layout = 'gridItem' } = Astro.props;
+const { property, showReadMore = false, layout = 'square' } = Astro.props;
 ---
 
-{layout === 'list' && <ListItem property={property} showReadMore={showReadMore} />}
-{layout === 'gridItem' && <GridItem property={property} showReadMore={showReadMore} />}
-{layout === 'fullPage' && <FullPage property={property} showReadMore={showReadMore} />}
+{layout === 'compact' && <ListItem property={property} showReadMore={showReadMore} />}
+{layout === 'square' && <GridItem property={property} showReadMore={showReadMore} />}
+{layout === 'full' && <FullPage property={property} showReadMore={showReadMore} />}
