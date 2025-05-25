@@ -66,7 +66,7 @@ const AvailablePeriods = ({
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col gap-4">
       {items}
       <div className="mt-4">
         <BookingWidget propertyId={propertyId} />

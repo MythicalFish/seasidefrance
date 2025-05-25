@@ -14,7 +14,6 @@ const { property, layout = 'single', class: className } = Astro.props;
 const {
   lodgify: { imageUrl },
 } = property;
-const imageInfo = property.roomInfo.images;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/photos/**/*.{jpg,jpeg,png}', {
   eager: true,
 });
