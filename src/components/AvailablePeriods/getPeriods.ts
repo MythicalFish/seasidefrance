@@ -79,7 +79,7 @@ export function findAvailablePeriods(
       }
     }
     const totalPrice = Math.round(originalPrice * (1 - discount / 100) * 100) / 100;
-    return {
+    const periodData = {
       originalPrice,
       discount,
       totalPrice,
@@ -91,6 +91,7 @@ export function findAvailablePeriods(
       prices: period.prices,
       pricePerNight: totalPrice / nightLength,
     };
+    return periodData;
   });
 
   const afterToday = withPromo.filter((period) => {
