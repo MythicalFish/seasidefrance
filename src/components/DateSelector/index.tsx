@@ -4,16 +4,17 @@ import type { Availability } from '@data/fetchAvailability/types';
 import { findAvailablePeriods } from './getPeriods';
 import Item from './Item';
 import SwiperSection from '@components/Swiper';
-import BookingWidget from '@components/BookingWidget';
 
 type Props = {
   rates: RatesResponse;
   availability: Availability;
   currencyCode?: string | null;
   propertyId: number;
+  propertySlug: string;
   limit?: number;
   useSwiper?: boolean;
   grid?: boolean;
+  showMore?: boolean;
 };
 
 const AvailablePeriods = ({
@@ -21,9 +22,11 @@ const AvailablePeriods = ({
   availability,
   currencyCode = 'EUR',
   propertyId,
+  propertySlug,
   limit = 4,
   useSwiper = false,
   grid = false,
+  showMore = false,
 }: Props) => {
   const [enableSwiper, setEnableSwiper] = useState(false);
   const [desiredStay, setDesiredStay] = useState(7);
@@ -40,16 +43,18 @@ const AvailablePeriods = ({
       period={period}
       currencyCode={currencyCode || 'EUR'}
       propertyId={propertyId}
+      propertySlug={propertySlug}
     />
   ));
+
+  if (showMore) {
+    items.push(<Item key="more" showMore propertyId={propertyId} propertySlug={propertySlug} />);
+  }
 
   if (enableSwiper) {
     return (
       <div>
         <SwiperSection>{items}</SwiperSection>
-        <div className="mt-4">
-          <BookingWidget propertyId={propertyId} />
-        </div>
       </div>
     );
   }
@@ -58,21 +63,11 @@ const AvailablePeriods = ({
     return (
       <div>
         <div className="grid md:grid-cols-2 gap-4">{items}</div>
-        <div className="mt-4">
-          <BookingWidget propertyId={propertyId} />
-        </div>
       </div>
     );
   }
 
-  return (
-    <div className="flex flex-col gap-4">
-      {items}
-      <div className="mt-4">
-        <BookingWidget propertyId={propertyId} />
-      </div>
-    </div>
-  );
+  return <div className="flex flex-col gap-4">{items}</div>;
 };
 
 export default AvailablePeriods;

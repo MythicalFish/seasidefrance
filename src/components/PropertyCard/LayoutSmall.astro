@@ -1,6 +1,6 @@
 ---
 import clsx from 'clsx';
-import PropertyPhotos from '@components/PropertyPhotos/index.astro';
+import PropertyPhoto from '@components/PropertyPhoto/index.astro';
 
 const { property, className } = Astro.props;
 ---
@@ -12,7 +12,7 @@ const { property, className } = Astro.props;
   )}
 >
   <a href={`/${property.slug}`} class="block mb-4">
-    <PropertyPhotos property={property} layout="single" />
+    <PropertyPhoto propertyId={property.id} imageUrl={property.lodgify?.imageUrl} />
   </a>
   <div>
     <div class="prose">

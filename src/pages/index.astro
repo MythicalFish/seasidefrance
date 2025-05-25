@@ -8,14 +8,12 @@ import AreaInfo from '@modules/AreaInfo/index.astro';
 
 <Layout>
   <SiteHeader />
-  <main class="container bg-white md:p-8 flex flex-col gap-4">
-    <div class="flex-auto pt-8">
-      <div class="prose">
+  <main class="container bg-white md:p-8">
+    <div class="flex-auto md:pt-8">
+      <!-- <div class="prose">
         <h2 class="font-medium">Find your stay in South West France</h2>
-      </div>
-      <div class="mt-8">
-        {properties.map((property) => <PropertyCard property={property} wide />)}
-      </div>
+      </div> -->
+      {properties.map((property) => <PropertyCard property={property} wide />)}
     </div>
     <div class="flex-auto p-8">
       <div class="flex flex-col gap-4">

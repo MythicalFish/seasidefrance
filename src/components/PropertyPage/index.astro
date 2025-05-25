@@ -1,8 +1,8 @@
 ---
 import { marked } from 'marked';
-import PropertyPhotos from '@components/PropertyPhotos/index.astro';
+import PropertyGallery from '@modules/PropertyGallery/index.astro';
 import PropertyIntro from './Intro.astro';
-import AvailablePeriods from './AvailablePeriods';
+import DateSelector from '@components/DateSelector';
 import AreaInfo from '@modules/AreaInfo/index.astro';
 import List from '@components/List';
 import Box from '@components/Box/index.astro';
@@ -18,7 +18,11 @@ const descriptionHtml = property.description ? marked.parse(property.description
     <div class="flex-auto w-full lg:w-2/3">
       <Box>
         <PropertyIntro property={property} className="mb-4" />
-        <PropertyPhotos property={property} layout="gallery" class="mb-4" />
+        <PropertyGallery
+          propertyId={property.id}
+          mainImageUrl={property.lodgify?.imageUrl}
+          imageInfo={property.roomInfo.images}
+        />
         <Features property={property} />
         <div class="my-4 prose" set:html={descriptionHtml} />
       </Box>
@@ -38,10 +42,11 @@ const descriptionHtml = property.description ? marked.parse(property.description
     <div class="prose mb-4">
       <h4 class="">Book your stay</h4>
     </div>
-    <AvailablePeriods
+    <DateSelector
       client:load
       grid
       propertyId={property.id}
+      propertySlug={property.slug}
       rates={property.rates}
       availability={property.availability}
       currencyCode={lodgify.currencyCode}

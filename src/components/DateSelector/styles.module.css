@@ -1,0 +1,14 @@
+.item {
+  display: block;
+  border-radius: 16px;
+  background-color: #fff;
+  border: 1px solid #dee3ea;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  transition: all 0.2s ease-in-out;
+}
+
+.item:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}

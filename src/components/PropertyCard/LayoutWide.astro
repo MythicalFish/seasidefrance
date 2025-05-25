@@ -1,16 +1,16 @@
 ---
-import PropertyPhotos from '@components/PropertyPhotos/index.astro';
-import AvailablePeriods from '@components/PropertyPage/AvailablePeriods';
+import PropertyPhoto from '@components/PropertyPhoto/index.astro';
+import DateSelector from '@components/DateSelector';
 
 const { property } = Astro.props;
 const { lodgify } = property;
 ---
 
-<div class="flex flex-col lg:flex-row border bg-white border-gray-300 shadow-lg p-8 rounded-lg">
-  <a href={`/${property.slug}`} class="block lg:w-1/2">
-    <PropertyPhotos property={property} layout="single" class="mb-4" />
+<div class="flex flex-col lg:flex-row border bg-white shadow-lg rounded-xl overflow-hidden mb-4">
+  <a href={`/${property.slug}`} class="block lg:w-1/2 rounded-l-lg overflow-hidden">
+    <PropertyPhoto propertyId={property.id} imageUrl={property.lodgify?.imageUrl} />
   </a>
-  <div class="lg:w-1/2">
+  <div class="lg:w-1/2 p-8">
     <div class="prose mb-4">
       <h3>{property.name}</h3>
       <p>
@@ -18,13 +18,18 @@ const { lodgify } = property;
         <a href={`/${property.slug}`}>Read more</a>
       </p>
     </div>
-    <AvailablePeriods
+    <DateSelector
       grid
       propertyId={property.id}
+      propertySlug={property.slug}
       rates={property.rates}
       availability={property.availability}
       currencyCode={lodgify.currencyCode}
       limit={4}
+      showMore
     />
+    <!-- <div class="mt-4">
+      <BookingWidget propertyId={property.id} client:load />
+    </div> -->
   </div>
 </div>

@@ -1,0 +1,33 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  propertyId: number;
+  imageUrl: string;
+  className?: string;
+}
+
+const { propertyId, imageUrl, className } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/images/photos/**/*.{jpg,jpeg,png}',
+  {
+    eager: true,
+  }
+);
+
+const getPhoto = () => {
+  if (!imageUrl) return null;
+  const filename = imageUrl.split('/').pop()?.split('?')[0];
+  const imageKeys = Object.keys(images);
+  let imagePath = imageKeys.find(
+    (path) => path.includes(`/photos/${propertyId}/`) && path.includes(filename || '')
+  );
+  if (!imagePath) return images[0].default;
+  return images[imagePath].default;
+};
+
+const photo = getPhoto();
+---
+
+{!!photo && <Picture src={photo} alt="" width={1200} height={800} class={className} />}

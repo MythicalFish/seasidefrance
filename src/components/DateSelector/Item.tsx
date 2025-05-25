@@ -1,17 +1,26 @@
 import { formatDate } from 'src/lib/date';
 import { currencySymbol, getCheckoutUrl } from '@lib/utils';
 import type { AvailablePeriod } from './getPeriods';
-import headerBg from '@images/bg.png';
 
 import styles from './styles.module.css';
 
 type Props = {
-  period: AvailablePeriod;
-  currencyCode: string;
+  period?: AvailablePeriod;
+  currencyCode?: string;
   propertyId: number;
+  propertySlug?: string;
+  showMore?: boolean;
 };
 
-const Item = ({ period, currencyCode, propertyId }: Props) => {
+const Item = ({ period, currencyCode, propertyId, propertySlug, showMore = false }: Props) => {
+  if (showMore) {
+    return (
+      <a className={styles.item} href={`/${propertySlug}#book`}>
+        <div className="text-sm opacity-80">Choose exact dates</div>
+      </a>
+    );
+  }
+  if (!period) return null;
   return (
     <a
       className={styles.item}
