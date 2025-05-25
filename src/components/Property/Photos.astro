@@ -1,8 +1,8 @@
 ---
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import type { PropertyPage } from 'src/data/properties/types';
-import PropertyPhotoCarousel from './PropertyPhotoCarousel.astro';
+import type { PropertyPage } from '@data/properties/types';
+import PropertyPhotoCarousel from './PhotoCarousel.astro';
 
 interface Props {
   property: PropertyPage;
@@ -11,16 +11,14 @@ interface Props {
 }
 
 const { property, layout = 'single', class: className } = Astro.props;
-const {
-  lodgify: { imageUrl },
-} = property;
+const { lodgify } = property;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/photos/**/*.{jpg,jpeg,png}', {
   eager: true,
 });
 
 const getMainImage = () => {
-  if (!imageUrl) return null;
-  const filename = imageUrl.split('/').pop()?.split('?')[0];
+  if (!lodgify.imageUrl) return null;
+  const filename = lodgify.imageUrl.split('/').pop()?.split('?')[0];
   const imagePath = Object.keys(images).find(
     (path) => path.includes(`/photos/${property.id}/`) && path.includes(filename || '')
   );

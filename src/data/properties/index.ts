@@ -5,7 +5,7 @@ import fetchAvailability from '../fetchAvailability';
 import fetchRates from '../fetchRates';
 
 import type { PropertyPage, LodgifyProperty } from './types';
-import { getFirstAvailableDate } from '@components/AvailablePeriods/utils/getAvailability';
+import { getFirstAvailableDate } from '@components/Property/AvailablePeriods/utils/getAvailability';
 
 const currentDate = new Date();
 const currentDateStr = currentDate.toISOString().split('T')[0];

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import type { RatesResponse } from '../../data/fetchRates/types';
-import type { Availability } from '../../data/fetchAvailability/types';
+import type { RatesResponse } from '@data/fetchRates/types';
+import type { Availability } from '@data/fetchAvailability/types';
 import { findAvailablePeriods } from './getPeriods';
 import Item from './Item';
-import SwiperSection from '../Swiper';
+import SwiperSection from '@components/Swiper';
 import BookingWidget from '@components/BookingWidget';
 
 type Props = {
@@ -57,7 +57,7 @@ const AvailablePeriods = ({
   if (grid) {
     return (
       <div>
-        <div className="grid grid-cols-2 gap-4">{items}</div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">{items}</div>
         <div className="mt-4">
           <BookingWidget propertyId={propertyId} />
         </div>

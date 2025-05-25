@@ -1,7 +1,7 @@
 import { formatDate } from 'src/lib/date';
-import { currencySymbol, getCheckoutUrl } from 'src/lib/utils';
+import { currencySymbol, getCheckoutUrl } from '@lib/utils';
 import type { AvailablePeriod } from './getPeriods';
-import headerBg from '../../images/bg.png';
+import headerBg from '@images/bg.png';
 
 type Props = {
   period: AvailablePeriod;

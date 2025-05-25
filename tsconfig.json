@@ -8,7 +8,10 @@
       "@components/*": ["src/components/*"],
       "@modules/*": ["src/modules/*"],
       "@images/*": ["src/images/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@data/*": ["src/data/*"],
+      "@lib/*": ["src/lib/*"],
+      "@styles/*": ["src/styles/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"

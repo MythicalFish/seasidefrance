@@ -1,16 +1,18 @@
 ---
-import Layout from '../modules/Layout.astro';
-import properties from '../data/properties';
-import Property from '../components/Property/index.astro';
-import SiteHeader from '../modules/SiteHeader.astro';
-import DiscoverCTA2 from '../components/DiscoverCTA2.astro';
+import Layout from '@modules/Layout/index.astro';
+import properties from '@data/properties';
+import Property from '@components/Property/index.astro';
+import SiteHeader from '@modules/SiteHeader/index.astro';
+import AreaInfo from '@components/AreaInfo/index.astro';
 ---
 
 <Layout>
   <SiteHeader />
   <main class="container bg-white p-8 flex flex-col gap-4">
     <div class="flex-auto pt-8">
-      <h2 class="text-2xl font-bold">Your next holiday in South West France</h2>
+      <div class="prose prose-stone">
+        <h2 class="">Find your stay in South West France</h2>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
         {properties.map((property) => <Property property={property} layout="square" />)}
       </div>
@@ -18,7 +20,7 @@ import DiscoverCTA2 from '../components/DiscoverCTA2.astro';
     <div class="flex-auto p-8">
       <div class="flex flex-col gap-4">
         <div class="mb-8">
-          <DiscoverCTA2 />
+          <AreaInfo />
         </div>
         <div class="">
           <div class="prose">

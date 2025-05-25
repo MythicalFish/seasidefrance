@@ -1,9 +1,8 @@
 ---
-import properties from '../data/properties';
-import Layout from '../modules/Layout.astro';
-import Property from '../components/Property/index.astro';
-import SiteHeader from '../modules/SiteHeader.astro';
-import Box from '../components/Box.astro';
+import properties from '@data/properties';
+import Layout from '@modules/Layout/index.astro';
+import Property from '@components/Property/index.astro';
+import SiteHeader from '@modules/SiteHeader/index.astro';
 
 export async function getStaticPaths() {
   return properties
@@ -23,7 +22,7 @@ const otherProperties = properties.filter((property) => property.slug !== slug);
 
 <Layout>
   <SiteHeader />
-  <main class="container p-8 pt-16">
+  <main class="container md:p-8 pt-16">
     <Property property={property} layout="full" />
     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
       {otherProperties.map((property) => <Property property={property} layout="square" />)}
