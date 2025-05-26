@@ -1,7 +1,51 @@
-import type { GetCalendarByUser200ResponseInner } from 'src/lib/lodgify-sdk';
-import type { LodgifyApiRatesModelsV2RatePromotion } from 'src/lib/lodgify-sdk/models/LodgifyApiRatesModelsV2RatePromotion';
+type PeriodBooking = {
+  id?: number;
+  status?: string;
+};
 
-type AvailabilityObject = GetCalendarByUser200ResponseInner;
-export type Availability = AvailabilityObject['periods'];
+type ClosedPeriod = {
+  id?: number;
+};
 
-export type LodgifyPromotion = LodgifyApiRatesModelsV2RatePromotion;
+export interface AvailabilityPeriod {
+  start?: string;
+  end?: string;
+  available?: number;
+  closedPeriod?: ClosedPeriod;
+  bookings?: PeriodBooking[];
+  channelCalendars?: ClosedPeriod[];
+}
+
+export interface Availability {
+  userId?: number;
+  propertyId?: number;
+  roomTypeId?: number;
+  periods?: AvailabilityPeriod[];
+}
+
+export interface PromotionPrice {
+  rateType?: string;
+  amount?: object;
+  percentage?: number;
+}
+
+export interface PromotionBookingDates {
+  lower?: string;
+  upper?: string;
+}
+
+export interface PromotionCode {
+  code?: string;
+  isActive?: boolean;
+}
+
+export interface Promotion {
+  name?: string;
+  price?: PromotionPrice;
+  earlyBookerDays?: number;
+  lastMinuteDays?: number;
+  minimumStayDays?: number;
+  bookingDates?: PromotionBookingDates[];
+  stayDates?: PromotionBookingDates[];
+  codes?: PromotionCode[];
+}

@@ -1,5 +1,5 @@
-import type { LodgifyPromotion } from 'src/data/fetchAvailability/types';
-import type { LodgifyRate, RatesResponse } from 'src/data/fetchRates/types';
+import type { Promotion } from '@data/fetchAvailability/types';
+import type { LodgifyRate, RatesResponse } from '@data/fetchRates/types';
 
 type StayDate = {
   lower?: string | undefined; // YYYY-MM-DD
@@ -26,7 +26,7 @@ const getDateRange = ({ lower, upper }: StayDate): string[] => {
 };
 
 const getPromoInfo = (rates: RatesResponse): PromoInfo[] => {
-  const allPromotions = rates.rateSettings?.promotions as LodgifyPromotion[];
+  const allPromotions = rates.rateSettings?.promotions as Promotion[];
   const promoInfo: PromoInfo[] = [];
 
   for (const promotion of allPromotions) {

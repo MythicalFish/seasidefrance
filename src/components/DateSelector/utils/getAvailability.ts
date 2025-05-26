@@ -1,4 +1,4 @@
-import type { Availability } from 'src/data/fetchAvailability/types';
+import type { AvailabilityPeriod } from '@data/fetchAvailability/types';
 
 export type AvailabilityObj = {
   nights: string[];
@@ -6,12 +6,12 @@ export type AvailabilityObj = {
   checkOutDate: string;
 };
 
-export const getFirstAvailableDate = (availability: Availability): string => {
+export const getFirstAvailableDate = (availability: AvailabilityPeriod[]): string => {
   if (!availability) return '';
   return availability.find((period) => period.available === 1)?.start || '';
 };
 
-const getAvailability = (availability: Availability): AvailabilityObj[] => {
+const getAvailability = (availability: AvailabilityPeriod[], offset = 0): AvailabilityObj[] => {
   if (!availability) return [];
   let availabilities: AvailabilityObj[] = [];
 

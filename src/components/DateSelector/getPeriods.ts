@@ -1,5 +1,5 @@
-import type { Availability } from 'src/data/fetchAvailability/types';
-import type { RatesResponse } from '../../data/fetchRates/types';
+import type { AvailabilityPeriod } from '@data/fetchAvailability/types';
+import type { RatesResponse } from '@data/fetchRates/types';
 import getDateInfo from './utils/getDateInfo';
 import getPromoInfo from './utils/getPromotions';
 import getAvailability from './utils/getAvailability';
@@ -20,8 +20,9 @@ export type AvailablePeriod = {
 
 export function findAvailablePeriods(
   ratesResponse: RatesResponse,
-  availabilities: Availability,
-  desiredStay = 0
+  availabilities: AvailabilityPeriod[],
+  desiredStay = 0,
+  startDate = new Date()
 ): AvailablePeriod[] {
   if (!ratesResponse?.calendarItems?.length) return [];
 
@@ -94,7 +95,7 @@ export function findAvailablePeriods(
     return periodData;
   });
 
-  const currentDateStr = new Date().toISOString().split('T')[0];
+  const currentDateStr = startDate.toISOString().split('T')[0];
   const afterToday = withPromo.filter((period) => {
     return period.checkInDate >= currentDateStr;
   });

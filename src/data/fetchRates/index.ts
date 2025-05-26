@@ -42,12 +42,12 @@ const fetchRates = async (
 
   try {
     // https://docs.lodgify.com/reference/ratescalendar-v2
-    const rates = await api.ratesCalendarV2({
+    const rates = (await api.ratesCalendarV2({
       houseId: propertyId,
       roomTypeId,
       startDate,
       endDate,
-    });
+    })) as RatesResponse;
 
     rates.calendarItems = rates.calendarItems?.map((item) => {
       // Remove unused attributes
