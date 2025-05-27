@@ -5,8 +5,8 @@ import type { PropertyPage } from '@data/properties/types';
 
 interface Props {
   propertyId: number;
-  mainImageUrl: string;
-  imageInfo: PropertyPage['roomInfo']['images'];
+  mainImageUrl?: string | null;
+  imageInfo: PropertyPage['roomInfo']['images'] | null;
 }
 
 const { propertyId, mainImageUrl, imageInfo } = Astro.props;

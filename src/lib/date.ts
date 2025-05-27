@@ -7,3 +7,10 @@ export const formatDate = (date: Date | string | undefined): string => {
     day: 'numeric',
   });
 };
+
+export const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'EUR',
+  }).format(amount);
+};
