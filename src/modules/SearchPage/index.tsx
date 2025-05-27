@@ -23,19 +23,15 @@ const SearchPage = ({ properties, className }: Props) => {
       const rates = property.rates;
       const availability = property.availability || [];
       const periods = getPeriods(rates, availability, stayLength, startDate);
-      if (periods && periods.length > 0) {
-        results.push({ property, periods: [periods[0]] });
-      } else {
-        results.push({ property, periods: [] });
-      }
+      results.push({ property, periods });
     }
     setResults(results);
     setIsLoading(false);
   }, [properties, stayLength, startDate]);
 
-  let displayMode = 'multiplePeriods';
+  let displayMode = 'multiple';
   if (properties.length === 1) {
-    displayMode = 'singlePeriod';
+    displayMode = 'singleProperty';
   }
 
   return (

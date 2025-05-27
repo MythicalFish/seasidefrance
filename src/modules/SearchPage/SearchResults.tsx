@@ -1,6 +1,7 @@
 import type { PropertyPage } from '@data/properties/types';
 import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
 import { formatDate, formatCurrency } from '@lib/date';
+import { useState } from 'react';
 
 export type Result = {
   property: PropertyPage;
@@ -13,7 +14,11 @@ type Props = {
   displayMode?: string;
 };
 
-const SearchResults: React.FC<Props> = ({ results, isLoading, displayMode = 'singlePeriod' }) => {
+const SearchResults: React.FC<Props> = ({ results, isLoading, displayMode = 'multiple' }) => {
+  const defaultResultsShown = displayMode === 'singleProperty' ? 10 : 1;
+  const [resultsShown, setResultsShown] = useState(defaultResultsShown);
+  console.log('🟢🟢🟢 defaultResultsShown', defaultResultsShown);
+
   if (isLoading) {
     return (
       <div className="text-center py-8">
@@ -33,10 +38,9 @@ const SearchResults: React.FC<Props> = ({ results, isLoading, displayMode = 'sin
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      {/* Table Header */}
       <div className="bg-gray-50 px-6 py-3 border-b">
         <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-700">
-          <div className="col-span-3">Property</div>
+          {displayMode === 'multiple' && <div className="col-span-3">Property</div>}
           <div className="col-span-2">Check-in</div>
           <div className="col-span-2">Check-out</div>
           <div className="col-span-1 text-center">Nights</div>
@@ -45,80 +49,85 @@ const SearchResults: React.FC<Props> = ({ results, isLoading, displayMode = 'sin
         </div>
       </div>
 
-      {/* Property Rows */}
       <div className="divide-y divide-gray-200">
         {results.map((result, index) => {
-          const period = result.periods[0]; // Only show first period for this mode
-          return (
-            <div key={index} className="px-6 py-4 hover:bg-gray-50 transition-colors">
-              {period ? (
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  {/* Property Name */}
-                  <div className="col-span-3">
-                    <h3 className="font-medium text-gray-900">
-                      {result.property.name || `Property ${index + 1}`}
-                    </h3>
-                    {period.discount > 0 && (
-                      <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">
-                        {period.promoName} -{period.discount}%
-                      </span>
+          const property = result.property;
+          const shownPeriods = result.periods.slice(0, resultsShown);
+          return shownPeriods.map((period, index) => {
+            return (
+              <div key={index} className="px-6 py-4 hover:bg-gray-50 transition-colors">
+                {period ? (
+                  <div className="grid grid-cols-12 gap-4 items-center">
+                    {displayMode === 'multiple' && (
+                      <div className="col-span-3">
+                        <h3 className="font-medium text-gray-900">
+                          {property.name || `Property ${index + 1}`}
+                        </h3>
+                        {period.discount > 0 && (
+                          <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">
+                            {period.promoName} -{period.discount}%
+                          </span>
+                        )}
+                      </div>
                     )}
-                  </div>
 
-                  {/* Check-in Date */}
-                  <div className="col-span-2">
-                    <span className="text-sm text-gray-900">{formatDate(period.checkInDate)}</span>
-                  </div>
-
-                  {/* Check-out Date */}
-                  <div className="col-span-2">
-                    <span className="text-sm text-gray-900">{formatDate(period.checkOutDate)}</span>
-                  </div>
-
-                  {/* Nights */}
-                  <div className="col-span-1 text-center">
-                    <span className="text-sm text-gray-900">{period.nightLength}</span>
-                  </div>
-
-                  {/* Per Night Price */}
-                  <div className="col-span-2 text-right">
-                    <span className="text-sm font-medium text-gray-900">
-                      {formatCurrency(period.pricePerNight)}
-                    </span>
-                  </div>
-
-                  {/* Total Price */}
-                  <div className="col-span-2 text-right">
-                    <div className="flex flex-col items-end">
-                      <span className="text-lg font-semibold text-gray-900">
-                        {formatCurrency(period.totalPrice)}
+                    {/* Check-in Date */}
+                    <div className="col-span-2">
+                      <span className="text-sm text-gray-900">
+                        {formatDate(period.checkInDate)}
                       </span>
-                      <button className="mt-1 bg-blue-600 text-white py-1 px-3 rounded text-sm hover:bg-blue-700 transition-colors">
-                        Book Now
-                      </button>
+                    </div>
+
+                    {/* Check-out Date */}
+                    <div className="col-span-2">
+                      <span className="text-sm text-gray-900">
+                        {formatDate(period.checkOutDate)}
+                      </span>
+                    </div>
+
+                    {/* Nights */}
+                    <div className="col-span-1 text-center">
+                      <span className="text-sm text-gray-900">{period.nightLength}</span>
+                    </div>
+
+                    {/* Per Night Price */}
+                    <div className="col-span-2 text-right">
+                      <span className="text-sm font-medium text-gray-900">
+                        {formatCurrency(period.pricePerNight)}
+                      </span>
+                    </div>
+
+                    {/* Total Price */}
+                    <div className="col-span-2 text-right">
+                      <div className="flex flex-col items-end">
+                        <span className="text-lg font-semibold text-gray-900">
+                          {formatCurrency(period.totalPrice)}
+                        </span>
+                        <button className="mt-1 bg-blue-600 text-white py-1 px-3 rounded text-sm hover:bg-blue-700 transition-colors">
+                          Book Now
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-12 gap-4 items-center">
-                  <div className="col-span-3">
-                    <h3 className="font-medium text-gray-900">
-                      {result.property.name || `Property ${index + 1}`}
-                    </h3>
+                ) : (
+                  <div className="grid grid-cols-12 gap-4 items-center">
+                    <div className="col-span-3">
+                      <h3 className="font-medium text-gray-900">
+                        {property.name || `Property ${index + 1}`}
+                      </h3>
+                    </div>
+                    <div className="col-span-9 text-center text-gray-500">
+                      No available periods for your selected criteria
+                    </div>
                   </div>
-                  <div className="col-span-9 text-center text-gray-500">
-                    No available periods for your selected criteria
-                  </div>
-                </div>
-              )}
-            </div>
-          );
+                )}
+              </div>
+            );
+          });
         })}
       </div>
     </div>
   );
-
-  return null; // Should not happen if displayMode is one of the valid options
 };
 
 export default SearchResults;
