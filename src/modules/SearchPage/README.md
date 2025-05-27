@@ -6,7 +6,11 @@ This module handles the display of property search results with support for two 
 
 ### SearchPage (`index.tsx`)
 
-Main container component that manages search state and coordinates between search controls and results display.
+Main container component that manages search state and coordinates between search controls and results display with:
+
+- **Default view**: Shows all available periods for any stay length (2-14 nights)
+- **Hidden controls**: Search refinement options behind a "Refine dates" button
+- **Filter toggle**: Ability to switch between filtered and unfiltered results
 
 ### SearchResults (`SearchResults.tsx`)
 
@@ -30,9 +34,39 @@ Dedicated component for single property results with:
 
 Responsive chevron-based search controls with adaptive layout:
 
+- **Hidden by default**: Controls are hidden behind a "Refine dates" button
 - **Desktop**: Single horizontal line with all controls: From [Year] [Month] For [Stay Length]
 - **Mobile**: Stacked layout with grouped "From" and "For" sections
 - **Consistent UI**: All controls use the same chevron-based interaction pattern
+
+## Default Behavior
+
+### Unfiltered Results (Default)
+
+- **Shows all stay lengths**: Displays periods from 2-14 nights automatically
+- **No date restrictions**: Shows all available periods from the current month onward
+- **Comprehensive view**: Users see all possible booking options immediately
+- **Sorted by date**: Results ordered by check-in date for easy browsing
+
+### Filtered Results (After Refinement)
+
+- **Specific criteria**: Shows only periods matching selected month/year and stay length
+- **Targeted results**: Focused on user's specific requirements
+- **Easy toggle**: Can switch back to "Show all results" at any time
+
+## Control Visibility
+
+### Hidden Controls (Default State)
+
+- **"Refine dates" button**: Blue button with filter icon to reveal controls
+- **Clean interface**: Minimal UI showing just results and refinement option
+- **Immediate results**: Users see availability without needing to set filters first
+
+### Revealed Controls (Refinement Mode)
+
+- **"Hide filters" button**: Gray button to collapse controls back
+- **"Show all results" button**: Reset to unfiltered view
+- **Full control access**: All date and stay length refinement options available
 
 ## Control Design
 
@@ -74,24 +108,17 @@ Responsive chevron-based search controls with adaptive layout:
 
 ## Stay Length Logic
 
-The stay length selector works with specific night counts rather than maximum limits:
+### Default Mode (Unfiltered)
 
-### Specific Night Counts (2-7 nights)
+- **All stay lengths**: Shows periods from 2-14 nights automatically
+- **Comprehensive results**: Maximum availability visibility
+- **No user input required**: Immediate results without configuration
 
-- Shows **exactly** the selected number of consecutive nights
-- Example: Selecting "5 nights" shows only 5-night periods
+### Filtered Mode (After Refinement)
 
-### 8+ Nights Option
-
-- Shows periods with **8 or more** consecutive nights
-- Includes 8, 9, 10, 11+ night options up to available inventory
-- Useful for longer stays and extended bookings
-
-### Consecutive Nights Requirement
-
-- All generated periods consist of consecutive nights only
-- No gaps or non-consecutive date ranges
-- Ensures realistic booking scenarios
+- **Specific night counts (2-7)**: Shows exactly the selected number of consecutive nights
+- **8+ nights option**: Shows periods with 8 or more consecutive nights
+- **Consecutive nights requirement**: All periods consist of consecutive nights only
 
 ## Display Modes
 
@@ -121,6 +148,9 @@ Components use CSS Modules for better maintainability and performance:
 
 ## Key Features
 
+- **Default comprehensive results** - Shows all available periods without requiring filters
+- **Hidden controls** - Clean interface with optional refinement behind a button
+- **Easy filter toggle** - Switch between filtered and unfiltered views
 - **Responsive layout** - Single line on desktop, stacked on mobile
 - **Chevron-based navigation** for all controls with consistent interaction patterns
 - **Year toggle button** for simple year selection between current and next year
@@ -143,13 +173,13 @@ Components use CSS Modules for better maintainability and performance:
 
 ## Recent Improvements
 
-1. **Single-line desktop layout** - All controls on one horizontal line for compact desktop experience
-2. **Responsive design** - Adaptive layout that stacks on mobile while staying inline on desktop
-3. **Inline label positioning** - "From" and "For" labels integrated into the control flow
-4. **Fixed control widths** - Consistent sizing for professional appearance
-5. **Chevron-based control design** - Unified interaction pattern across all controls
-6. **Year toggle button** - Simple click to switch between current and next year
-7. **Month navigation chevrons** - Intuitive left/right navigation with year rollover
-8. **Stay length chevrons** - Consistent navigation for duration selection
+1. **Default unfiltered results** - Shows all stay lengths (2-14 nights) by default for maximum visibility
+2. **Hidden controls interface** - Clean default view with optional "Refine dates" button
+3. **Filter toggle functionality** - Easy switching between filtered and unfiltered views
+4. **Comprehensive period generation** - Automatically shows all possible booking options
+5. **Single-line desktop layout** - All controls on one horizontal line for compact desktop experience
+6. **Responsive design** - Adaptive layout that stacks on mobile while staying inline on desktop
+7. **Inline label positioning** - "From" and "For" labels integrated into the control flow
+8. **Fixed control widths** - Consistent sizing for professional appearance
 9. **Enhanced accessibility** - ARIA labels and keyboard navigation support
-10. **Improved visual consistency** - All controls share the same interaction paradigm
+10. **Improved user experience** - Immediate results without requiring user configuration
