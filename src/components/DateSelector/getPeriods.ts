@@ -29,10 +29,7 @@ export function findAvailablePeriods(
   const promoInfo = getPromoInfo(ratesResponse);
   const dateInfo = getDateInfo(ratesResponse);
   const availableDates = getAvailability(allPeriods);
-
-  // Pass desiredStay to getBookingPeriods, default to 7 if 0
-  const maxNights = desiredStay > 0 ? desiredStay : 7;
-  const bookingPeriods = getBookingPeriods(availableDates, maxNights);
+  const bookingPeriods = getBookingPeriods(availableDates, desiredStay);
 
   // Filter booking periods based on startDate
   const startDateStr = startDate.toISOString().split('T')[0];

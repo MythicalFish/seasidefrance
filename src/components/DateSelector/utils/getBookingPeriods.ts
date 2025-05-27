@@ -1,4 +1,5 @@
 import type { AvailabilityObj } from './getAvailability';
+import getBookingPeriodsAny from './getBookingPeriodsAny';
 
 const getBookingPeriods = (
   availabilities: AvailabilityObj[],
@@ -74,4 +75,9 @@ const areConsecutiveNights = (nights: string[]): boolean => {
   return true;
 };
 
-export default getBookingPeriods;
+export default (availabilities: AvailabilityObj[], desiredStay?: number): AvailabilityObj[] => {
+  if (!desiredStay) {
+    return getBookingPeriodsAny(availabilities);
+  }
+  return getBookingPeriods(availabilities, desiredStay);
+};

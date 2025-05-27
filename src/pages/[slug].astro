@@ -12,6 +12,7 @@ import List from '@components/List';
 import Box from '@components/Box/index.astro';
 import AreaInfo from '@modules/AreaInfo/index.astro';
 import SearchPage from '@modules/SearchPage';
+import { generatePropertySearchResults } from '@utils/generateSearchResults';
 
 export async function getStaticPaths() {
   return properties
@@ -29,6 +30,9 @@ const { property } = Astro.props;
 const { lodgify } = property;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
 const otherProperties = properties.filter((property) => property.slug !== slug);
+
+// Generate search results at build time
+const searchResults = generatePropertySearchResults(property);
 ---
 
 <Layout>
@@ -70,7 +74,7 @@ const otherProperties = properties.filter((property) => property.slug !== slug);
         <div class="prose mb-4">
           <h4 class="">Book your stay</h4>
         </div>
-        <SearchPage client:load properties={[property]} />
+        <SearchPage client:load properties={[property]} initialResults={[searchResults]} />
       </Box>
     </div>
     <section>

@@ -1,6 +1,7 @@
 ---
 import headerBg from '@images/bg.png';
 import Contact from './Contact.astro';
+import Button from '@components/Button';
 ---
 
 <header
@@ -19,7 +20,7 @@ import Contact from './Contact.astro';
       <div class="text-white text-2xl">Holiday homes in South West France</div>
     </div>
     <div class="p-4 text-right">
-      <Contact />
+      <Button variant="primary" href="/search"> Search </Button>
     </div>
   </div>
 </header>

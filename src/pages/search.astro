@@ -3,13 +3,19 @@ import SearchPage from '@modules/SearchPage';
 import properties from '@data/properties';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/SiteHeader/index.astro';
+import { generateSearchResults } from '@utils/generateSearchResults';
+
+// Generate search results at build time for all properties
+const searchResults = generateSearchResults(properties);
 ---
 
 <Layout>
   <SiteHeader />
-  <div class="text-center mb-8">
-    <h1 class="text-3xl font-bold text-gray-900 mb-2">Find Your Perfect Stay</h1>
-    <p class="text-gray-600">Search available properties for your desired dates and duration</p>
-  </div>
-  <SearchPage properties={properties} client:load />
+  <main class="container md:p-8 pt-16">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Find Your Perfect Stay</h1>
+      <p class="text-gray-600">Search available properties for your desired dates and duration</p>
+    </div>
+    <SearchPage properties={properties} client:load initialResults={searchResults} />
+  </main>
 </Layout>

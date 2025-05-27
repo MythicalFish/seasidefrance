@@ -3,12 +3,13 @@ import type { PropertyPage } from '@data/properties/types';
 import getPeriods from '@components/DateSelector/getPeriods';
 import SearchResults, { type Result, type DisplayMode } from './SearchResults';
 import SearchControls, { type StayLengthOption } from './SearchControls';
+import Button from '@components/Button';
 import clsx from 'clsx';
 
 type Props = {
   properties: PropertyPage[];
   className?: string;
-  initialResults?: Result[]; // Add support for pre-computed results
+  initialResults?: Result[]; // Back to optional - provides default 7-night results
 };
 
 const SearchPage = ({ properties, className, initialResults }: Props) => {
@@ -19,56 +20,35 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
   const [showControls, setShowControls] = useState<boolean>(false);
   const [useFilters, setUseFilters] = useState<boolean>(false);
 
-  // Function to get all periods regardless of stay length
-  const getAllPeriods = (rates: any, availability: any[], startDate: Date) => {
-    const allPeriods: any[] = [];
-    // Get periods for all possible stay lengths (2-14 nights)
-    for (let nights = 2; nights <= 14; nights++) {
-      const periods = getPeriods(rates, availability, nights, startDate);
-      allPeriods.push(...periods);
+  // Generate initial results if not provided (fallback for client-side)
+  useEffect(() => {
+    if (!initialResults && !useFilters) {
+      setIsLoading(true);
+      const defaultResults: Result[] = properties.map((property) => {
+        const rates = property.rates;
+        const availability = property.availability || [];
+        const periods = getPeriods(rates, availability, 0, startDate); // Get all natural periods
+        return { property, periods };
+      });
+      setResults(defaultResults);
+      setIsLoading(false);
     }
+  }, [properties, initialResults, useFilters, startDate]);
 
-    // Remove duplicates and sort by check-in date
-    const uniquePeriods = allPeriods.filter(
-      (period, index, self) =>
-        index ===
-        self.findIndex(
-          (p) => p.checkInDate === period.checkInDate && p.checkOutDate === period.checkOutDate
-        )
-    );
-
-    return uniquePeriods.sort(
-      (a, b) => new Date(a.checkInDate).getTime() - new Date(b.checkInDate).getTime()
-    );
-  };
-
-  // Only run effects when filters are being used (client-side only)
+  // Only run client-side filtering when filters are explicitly enabled
   useEffect(() => {
     if (!useFilters) return;
 
     setIsLoading(true);
-    const results: Result[] = properties.map((property) => {
+    const filteredResults: Result[] = properties.map((property) => {
       const rates = property.rates;
       const availability = property.availability || [];
       const periods = getPeriods(rates, availability, stayLength, startDate);
       return { property, periods };
     });
-    setResults(results);
+    setResults(filteredResults);
     setIsLoading(false);
   }, [properties, stayLength, startDate, useFilters]);
-
-  // Initialize with all periods if no initial results provided
-  useEffect(() => {
-    if (!initialResults && !useFilters) {
-      const allResults: Result[] = properties.map((property) => {
-        const rates = property.rates;
-        const availability = property.availability || [];
-        const periods = getAllPeriods(rates, availability, startDate);
-        return { property, periods };
-      });
-      setResults(allResults);
-    }
-  }, [properties, initialResults, useFilters]);
 
   const handleToggleControls = () => {
     setShowControls(!showControls);
@@ -81,18 +61,17 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
   const handleResetFilters = () => {
     setUseFilters(false);
     setShowControls(false);
-
-    // Reset to initial results or recalculate all periods
+    // Reset to initial build-time results or generate default 7-night results
     if (initialResults) {
       setResults(initialResults);
     } else {
-      const allResults: Result[] = properties.map((property) => {
+      const defaultResults: Result[] = properties.map((property) => {
         const rates = property.rates;
         const availability = property.availability || [];
-        const periods = getAllPeriods(rates, availability, startDate);
+        const periods = getPeriods(rates, availability, 0, startDate); // Get all natural periods
         return { property, periods };
       });
-      setResults(allResults);
+      setResults(defaultResults);
     }
   };
 
@@ -103,29 +82,17 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
       {/* Controls Toggle Button */}
       <div className="mb-6">
         {!showControls ? (
-          <button
-            onClick={handleToggleControls}
-            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-          >
-            <FilterIcon className="w-4 h-4 mr-2" />
+          <Button variant="primary" onClick={handleToggleControls} icon={<FilterIcon />}>
             Refine dates
-          </button>
+          </Button>
         ) : (
           <div className="flex items-center gap-3 mb-4">
-            <button
-              onClick={handleToggleControls}
-              className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium"
-            >
-              <ChevronUpIcon className="w-4 h-4 mr-2" />
+            <Button variant="secondary" onClick={handleToggleControls} icon={<ChevronUpIcon />}>
               Hide filters
-            </button>
-            <button
-              onClick={handleResetFilters}
-              className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
-            >
-              <XIcon className="w-4 h-4 mr-2" />
-              Show all results
-            </button>
+            </Button>
+            <Button variant="ghost" onClick={handleResetFilters} icon={<XIcon />}>
+              Show default results
+            </Button>
           </div>
         )}
       </div>
@@ -143,38 +110,6 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
       <SearchResults results={results} isLoading={isLoading} displayMode={displayMode} />
     </div>
   );
-};
-
-// Server-side helper function to generate initial results
-export const generateInitialResults = (properties: PropertyPage[]): Result[] => {
-  const startDate = new Date();
-
-  return properties.map((property) => {
-    const rates = property.rates;
-    const availability = property.availability || [];
-    const allPeriods: any[] = [];
-
-    // Get periods for all possible stay lengths (2-14 nights)
-    for (let nights = 2; nights <= 14; nights++) {
-      const periods = getPeriods(rates, availability, nights, startDate);
-      allPeriods.push(...periods);
-    }
-
-    // Remove duplicates and sort by check-in date
-    const uniquePeriods = allPeriods.filter(
-      (period, index, self) =>
-        index ===
-        self.findIndex(
-          (p) => p.checkInDate === period.checkInDate && p.checkOutDate === period.checkOutDate
-        )
-    );
-
-    const periods = uniquePeriods.sort(
-      (a, b) => new Date(a.checkInDate).getTime() - new Date(b.checkInDate).getTime()
-    );
-
-    return { property, periods };
-  });
 };
 
 // Icon components
