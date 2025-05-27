@@ -113,95 +113,93 @@ const SearchPage = ({ properties }: Props) => {
 
         {/* Results */}
         {!isLoading && (
-          <div className="space-y-6">
-            {results.map((result, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                {/* Property Header */}
-                <div className="bg-blue-50 px-6 py-4 border-b">
-                  <h2 className="text-xl font-semibold text-gray-900">
-                    {result.property.name || `Property ${index + 1}`}
-                  </h2>
-                  <p className="text-sm text-gray-600 mt-1">
-                    {result.periods.length} available period{result.periods.length !== 1 ? 's' : ''}{' '}
-                    found
-                  </p>
-                </div>
-
-                {/* Available Periods */}
-                <div className="p-6">
-                  {result.periods.length === 0 ? (
-                    <div className="text-center py-8 text-gray-500">
-                      <p>No available periods found for your selected criteria.</p>
-                      <p className="text-sm mt-1">Try adjusting your dates or stay length.</p>
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {result.periods.map((period, periodIndex) => (
-                        <div
-                          key={periodIndex}
-                          className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                        >
-                          {/* Dates */}
-                          <div className="mb-3">
-                            <div className="flex items-center justify-between text-sm text-gray-600 mb-1">
-                              <span>Check-in</span>
-                              <span>Check-out</span>
-                            </div>
-                            <div className="flex items-center justify-between font-medium">
-                              <span>{formatDateDisplay(period.checkInDate)}</span>
-                              <span className="text-gray-400">→</span>
-                              <span>{formatDateDisplay(period.checkOutDate)}</span>
-                            </div>
-                          </div>
-
-                          {/* Duration */}
-                          <div className="mb-3">
-                            <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                              {period.nightLength} night{period.nightLength !== 1 ? 's' : ''}
-                            </span>
-                          </div>
-
-                          {/* Pricing */}
-                          <div className="space-y-2">
-                            <div className="flex justify-between items-center">
-                              <span className="text-sm text-gray-600">Total Price:</span>
-                              <span className="font-semibold text-lg">
-                                {formatCurrency(period.totalPrice)}
-                              </span>
-                            </div>
-                            <div className="flex justify-between items-center">
-                              <span className="text-sm text-gray-600">Per Night:</span>
-                              <span className="text-sm">
-                                {formatCurrency(period.pricePerNight)}
-                              </span>
-                            </div>
-
-                            {/* Discount */}
-                            {period.discount > 0 && (
-                              <div className="bg-green-50 border border-green-200 rounded p-2 mt-2">
-                                <div className="flex justify-between items-center">
-                                  <span className="text-sm text-green-700 font-medium">
-                                    {period.promoName}
-                                  </span>
-                                  <span className="text-sm text-green-700 font-semibold">
-                                    -{period.discount}%
-                                  </span>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Book Button */}
-                          <button className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium">
-                            Book Now
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            {/* Table Header */}
+            <div className="bg-gray-50 px-6 py-3 border-b">
+              <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-700">
+                <div className="col-span-3">Property</div>
+                <div className="col-span-2">Check-in</div>
+                <div className="col-span-2">Check-out</div>
+                <div className="col-span-1 text-center">Nights</div>
+                <div className="col-span-2 text-right">Per Night</div>
+                <div className="col-span-2 text-right">Total Price</div>
               </div>
-            ))}
+            </div>
+
+            {/* Property Rows */}
+            <div className="divide-y divide-gray-200">
+              {results.map((result, index) => {
+                const period = result.periods[0]; // Only show first period
+                return (
+                  <div key={index} className="px-6 py-4 hover:bg-gray-50 transition-colors">
+                    {period ? (
+                      <div className="grid grid-cols-12 gap-4 items-center">
+                        {/* Property Name */}
+                        <div className="col-span-3">
+                          <h3 className="font-medium text-gray-900">
+                            {result.property.name || `Property ${index + 1}`}
+                          </h3>
+                          {period.discount > 0 && (
+                            <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">
+                              {period.promoName} -{period.discount}%
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Check-in Date */}
+                        <div className="col-span-2">
+                          <span className="text-sm text-gray-900">
+                            {formatDateDisplay(period.checkInDate)}
+                          </span>
+                        </div>
+
+                        {/* Check-out Date */}
+                        <div className="col-span-2">
+                          <span className="text-sm text-gray-900">
+                            {formatDateDisplay(period.checkOutDate)}
+                          </span>
+                        </div>
+
+                        {/* Nights */}
+                        <div className="col-span-1 text-center">
+                          <span className="text-sm text-gray-900">{period.nightLength}</span>
+                        </div>
+
+                        {/* Per Night Price */}
+                        <div className="col-span-2 text-right">
+                          <span className="text-sm font-medium text-gray-900">
+                            {formatCurrency(period.pricePerNight)}
+                          </span>
+                        </div>
+
+                        {/* Total Price */}
+                        <div className="col-span-2 text-right">
+                          <div className="flex flex-col items-end">
+                            <span className="text-lg font-semibold text-gray-900">
+                              {formatCurrency(period.totalPrice)}
+                            </span>
+                            <button className="mt-1 bg-blue-600 text-white py-1 px-3 rounded text-sm hover:bg-blue-700 transition-colors">
+                              Book Now
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-12 gap-4 items-center">
+                        <div className="col-span-3">
+                          <h3 className="font-medium text-gray-900">
+                            {result.property.name || `Property ${index + 1}`}
+                          </h3>
+                        </div>
+                        <div className="col-span-9 text-center text-gray-500">
+                          No available periods for your selected criteria
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
 
