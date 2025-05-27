@@ -1,0 +1,11 @@
+---
+import SearchPage from '@modules/SearchPage';
+import properties from '@data/properties';
+import Layout from '@modules/Layout/index.astro';
+import SiteHeader from '@modules/SiteHeader/index.astro';
+---
+
+<Layout>
+  <SiteHeader />
+  <SearchPage properties={properties} client:load />
+</Layout>

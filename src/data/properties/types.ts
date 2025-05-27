@@ -1,4 +1,4 @@
-import type { Availability } from '../fetchAvailability/types';
+import type { AvailabilityPeriod } from '../fetchAvailability/types';
 import type { LodgifyRate, RatesResponse } from '../fetchRates/types';
 
 export interface PropertyContact {
@@ -70,7 +70,7 @@ export type PropertyPage = {
   features: string[];
   highlights: string[];
   lodgify: LodgifyProperty;
-  availability: Availability;
+  availability: AvailabilityPeriod[];
   rates: RatesResponse;
   roomInfo: any;
 };

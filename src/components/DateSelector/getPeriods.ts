@@ -20,7 +20,7 @@ export type AvailablePeriod = {
 
 export function findAvailablePeriods(
   ratesResponse: RatesResponse,
-  availabilities: AvailabilityPeriod[],
+  allPeriods: AvailabilityPeriod[],
   desiredStay = 0,
   startDate = new Date()
 ): AvailablePeriod[] {
@@ -28,18 +28,48 @@ export function findAvailablePeriods(
 
   const promoInfo = getPromoInfo(ratesResponse);
   const dateInfo = getDateInfo(ratesResponse);
-  const availability = getAvailability(availabilities);
-  const bookingPeriods = getBookingPeriods(availability, desiredStay);
+  const availableDates = getAvailability(allPeriods);
+
+  // Pass desiredStay to getBookingPeriods, default to 7 if 0
+  const maxNights = desiredStay > 0 ? desiredStay : 7;
+  const bookingPeriods = getBookingPeriods(availableDates, maxNights);
+
+  // Filter booking periods based on startDate
+  const startDateStr = startDate.toISOString().split('T')[0];
+  let filteredPeriods = bookingPeriods.filter((period) => {
+    // Check if the period starts on or after the startDate
+    return period.checkInDate >= startDateStr;
+  });
+
+  // If no periods start on or after startDate, try to find periods that include the startDate
+  if (filteredPeriods.length === 0) {
+    filteredPeriods = bookingPeriods.filter((period) => {
+      // Check if startDate falls within the period's nights
+      return period.nights.includes(startDateStr);
+    });
+  }
+
+  // If still no periods found, return all available periods
+  if (filteredPeriods.length === 0) {
+    filteredPeriods = bookingPeriods;
+  }
+
+  // console.log(
+  //   '🟢🟢🟢 ratesResponse',
+  //   ratesResponse.calendarItems.map((item) => item.prices)
+  // );
 
   // promoInfo.forEach((p) => {
   //   console.log(p.name, p.bookingDates);
   // });
   // console.log('🟢🟢🟢 dateInfo', dateInfo);
-  // console.log('availabilities', availabilities);
-  // console.log('🟢🟢🟢 bookingPeriods', bookingPeriods);
+  // console.log('availableDates', availableDates);
+  // console.log('bookingPeriods', bookingPeriods);
+  // console.log('startDateStr', startDateStr);
+  // console.log('filteredPeriods', filteredPeriods);
   // console.log('🟢🟢🟢 availability', availability);
 
-  const withPrices = bookingPeriods.map((period) => {
+  const withPrices = filteredPeriods.map((period) => {
     let totalPrice = 0;
     let minStay = 0;
     const prices: number[] = [];
@@ -95,10 +125,7 @@ export function findAvailablePeriods(
     return periodData;
   });
 
-  const currentDateStr = startDate.toISOString().split('T')[0];
-  const afterToday = withPromo.filter((period) => {
-    return period.checkInDate >= currentDateStr;
-  });
-
-  return afterToday;
+  return withPromo;
 }
+
+export default findAvailablePeriods;

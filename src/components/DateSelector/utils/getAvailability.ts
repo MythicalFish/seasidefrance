@@ -11,11 +11,11 @@ export const getFirstAvailableDate = (availability: AvailabilityPeriod[]): strin
   return availability.find((period) => period.available === 1)?.start || '';
 };
 
-const getAvailability = (availability: AvailabilityPeriod[], offset = 0): AvailabilityObj[] => {
-  if (!availability) return [];
+const getAvailability = (periods: AvailabilityPeriod[]): AvailabilityObj[] => {
+  if (!periods) return [];
   let availabilities: AvailabilityObj[] = [];
 
-  availability.forEach((period) => {
+  periods.forEach((period) => {
     const nights: string[] = [];
     if (period.available === 1 && period.start && period.end) {
       const firstNight = new Date(period.start);
@@ -30,9 +30,11 @@ const getAvailability = (availability: AvailabilityPeriod[], offset = 0): Availa
 
       let night = new Date(firstNight);
       while (night < checkOutDate) {
-        nights.push(night.toISOString().split('T')[0]);
+        const dateStr = night.toISOString().split('T')[0];
+        nights.push(dateStr);
         night.setDate(night.getDate() + 1);
       }
+
       availabilities.push({
         nights,
         checkInDate: checkInDateStr,
