@@ -2,132 +2,167 @@ import type { PropertyPage } from '@data/properties/types';
 import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
 import { formatDate, formatCurrency } from '@lib/date';
 import { useState } from 'react';
+import styles from './SearchResults.module.css';
+import SinglePropertyResults from './SinglePropertyResults';
 
 export type Result = {
   property: PropertyPage;
   periods: AvailablePeriod[];
 };
 
+export type DisplayMode = 'multiple' | 'singleProperty';
+
 type Props = {
   results: Result[];
   isLoading: boolean;
-  displayMode?: string;
+  displayMode?: DisplayMode;
 };
 
 const SearchResults: React.FC<Props> = ({ results, isLoading, displayMode = 'multiple' }) => {
-  const defaultResultsShown = displayMode === 'singleProperty' ? 10 : 1;
-  const [resultsShown, setResultsShown] = useState(defaultResultsShown);
-  console.log('🟢🟢🟢 defaultResultsShown', defaultResultsShown);
+  // Use the dedicated SinglePropertyResults component for single property mode
+  if (displayMode === 'singleProperty') {
+    return <SinglePropertyResults results={results} isLoading={isLoading} />;
+  }
+
+  // Continue with the existing multiple properties layout
+  return <MultiplePropertiesResults results={results} isLoading={isLoading} />;
+};
+
+const MultiplePropertiesResults: React.FC<{
+  results: Result[];
+  isLoading: boolean;
+}> = ({ results, isLoading }) => {
+  const [resultsShown] = useState<number>(1); // Show 1 period per property in multiple mode
 
   if (isLoading) {
-    return (
-      <div className="text-center py-8">
-        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <p className="mt-2 text-gray-600">Searching available periods...</p>
-      </div>
-    );
+    return <LoadingState />;
   }
 
   if (results.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <p className="text-gray-500 text-lg">No properties available.</p>
-      </div>
-    );
+    return <EmptyState />;
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="bg-gray-50 px-6 py-3 border-b">
-        <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-700">
-          {displayMode === 'multiple' && <div className="col-span-3">Property</div>}
-          <div className="col-span-2">Check-in</div>
-          <div className="col-span-2">Check-out</div>
-          <div className="col-span-1 text-center">Nights</div>
-          <div className="col-span-2 text-right">Per Night</div>
-          <div className="col-span-2 text-right">Total Price</div>
-        </div>
-      </div>
-
-      <div className="divide-y divide-gray-200">
-        {results.map((result, index) => {
-          const property = result.property;
-          const shownPeriods = result.periods.slice(0, resultsShown);
-          return shownPeriods.map((period, index) => {
-            return (
-              <div key={index} className="px-6 py-4 hover:bg-gray-50 transition-colors">
-                {period ? (
-                  <div className="grid grid-cols-12 gap-4 items-center">
-                    {displayMode === 'multiple' && (
-                      <div className="col-span-3">
-                        <h3 className="font-medium text-gray-900">
-                          {property.name || `Property ${index + 1}`}
-                        </h3>
-                        {period.discount > 0 && (
-                          <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-1">
-                            {period.promoName} -{period.discount}%
-                          </span>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Check-in Date */}
-                    <div className="col-span-2">
-                      <span className="text-sm text-gray-900">
-                        {formatDate(period.checkInDate)}
-                      </span>
-                    </div>
-
-                    {/* Check-out Date */}
-                    <div className="col-span-2">
-                      <span className="text-sm text-gray-900">
-                        {formatDate(period.checkOutDate)}
-                      </span>
-                    </div>
-
-                    {/* Nights */}
-                    <div className="col-span-1 text-center">
-                      <span className="text-sm text-gray-900">{period.nightLength}</span>
-                    </div>
-
-                    {/* Per Night Price */}
-                    <div className="col-span-2 text-right">
-                      <span className="text-sm font-medium text-gray-900">
-                        {formatCurrency(period.pricePerNight)}
-                      </span>
-                    </div>
-
-                    {/* Total Price */}
-                    <div className="col-span-2 text-right">
-                      <div className="flex flex-col items-end">
-                        <span className="text-lg font-semibold text-gray-900">
-                          {formatCurrency(period.totalPrice)}
-                        </span>
-                        <button className="mt-1 bg-blue-600 text-white py-1 px-3 rounded text-sm hover:bg-blue-700 transition-colors">
-                          Book Now
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-12 gap-4 items-center">
-                    <div className="col-span-3">
-                      <h3 className="font-medium text-gray-900">
-                        {property.name || `Property ${index + 1}`}
-                      </h3>
-                    </div>
-                    <div className="col-span-9 text-center text-gray-500">
-                      No available periods for your selected criteria
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          });
-        })}
+    <div className={styles.container}>
+      <MultiplePropertiesHeader />
+      <div className={styles.resultsList}>
+        {results.map((result, resultIndex) => (
+          <PropertyResults
+            key={resultIndex}
+            result={result}
+            resultIndex={resultIndex}
+            resultsShown={resultsShown}
+          />
+        ))}
       </div>
     </div>
   );
 };
+
+const LoadingState: React.FC = () => (
+  <div className={styles.loadingContainer}>
+    <div className={styles.loadingSpinner}></div>
+    <p className={styles.loadingText}>Searching available periods...</p>
+  </div>
+);
+
+const EmptyState: React.FC = () => (
+  <div className={styles.emptyContainer}>
+    <p className={styles.emptyText}>No properties available.</p>
+  </div>
+);
+
+const MultiplePropertiesHeader: React.FC = () => (
+  <div className={styles.header}>
+    <div className={styles.headerGrid}>
+      <div className={styles.headerProperty}>Property</div>
+      <div className={styles.headerCheckIn}>Check-in</div>
+      <div className={styles.headerCheckOut}>Check-out</div>
+      <div className={styles.headerNights}>Nights</div>
+      <div className={styles.headerPerNight}>Per Night</div>
+      <div className={styles.headerTotal}>Total Price</div>
+    </div>
+  </div>
+);
+
+const PropertyResults: React.FC<{
+  result: Result;
+  resultIndex: number;
+  resultsShown: number;
+}> = ({ result, resultIndex, resultsShown }) => {
+  const { property, periods } = result;
+  const shownPeriods = periods.slice(0, resultsShown);
+
+  if (periods.length === 0) {
+    return <NoPeriodsAvailable property={property} resultIndex={resultIndex} />;
+  }
+
+  return (
+    <>
+      {shownPeriods.map((period, periodIndex) => (
+        <PeriodResult
+          key={`${resultIndex}-${periodIndex}`}
+          property={property}
+          period={period}
+          resultIndex={resultIndex}
+        />
+      ))}
+    </>
+  );
+};
+
+const PeriodResult: React.FC<{
+  property: PropertyPage;
+  period: AvailablePeriod;
+  resultIndex: number;
+}> = ({ property, period, resultIndex }) => (
+  <div className={styles.resultItem}>
+    <div className={styles.resultGrid}>
+      <PropertyInfo property={property} period={period} resultIndex={resultIndex} />
+
+      <div className={styles.dateInfo}>{formatDate(period.checkInDate)}</div>
+
+      <div className={styles.dateInfo}>{formatDate(period.checkOutDate)}</div>
+
+      <div className={styles.nightsInfo}>{period.nightLength}</div>
+
+      <div className={styles.pricePerNight}>{formatCurrency(period.pricePerNight)}</div>
+
+      <div className={styles.totalPriceContainer}>
+        <span className={styles.totalPrice}>{formatCurrency(period.totalPrice)}</span>
+        <button className={styles.bookButton}>Book Now</button>
+      </div>
+    </div>
+  </div>
+);
+
+const PropertyInfo: React.FC<{
+  property: PropertyPage;
+  period: AvailablePeriod;
+  resultIndex: number;
+}> = ({ property, period, resultIndex }) => (
+  <div className={styles.propertyInfo}>
+    <h3 className={styles.propertyName}>{property.name || `Property ${resultIndex + 1}`}</h3>
+    {period.discount > 0 && (
+      <span className={styles.discountBadge}>
+        {period.promoName} -{period.discount}%
+      </span>
+    )}
+  </div>
+);
+
+const NoPeriodsAvailable: React.FC<{
+  property: PropertyPage;
+  resultIndex: number;
+}> = ({ property, resultIndex }) => (
+  <div className={styles.resultItem}>
+    <div className={styles.resultGrid}>
+      <div className={styles.propertyInfo}>
+        <h3 className={styles.propertyName}>{property.name || `Property ${resultIndex + 1}`}</h3>
+      </div>
+      <div className={styles.noPeriodsMessage}>No available periods for your selected criteria</div>
+    </div>
+  </div>
+);
 
 export default SearchResults;

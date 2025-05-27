@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { PropertyPage } from '@data/properties/types';
 import getPeriods from '@components/DateSelector/getPeriods';
-import SearchResults, { type Result } from './SearchResults';
-import SearchControls from './SearchControls';
+import SearchResults, { type Result, type DisplayMode } from './SearchResults';
+import SearchControls, { type StayLengthOption } from './SearchControls';
 import clsx from 'clsx';
 
 type Props = {
@@ -12,27 +12,23 @@ type Props = {
 
 const SearchPage = ({ properties, className }: Props) => {
   const [startDate, setStartDate] = useState<Date>(new Date());
-  const [stayLength, setStayLength] = useState<number>(7);
+  const [stayLength, setStayLength] = useState<StayLengthOption>(7);
   const [results, setResults] = useState<Result[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
-    let results: Result[] = [];
-    for (const property of properties) {
+    const results: Result[] = properties.map((property) => {
       const rates = property.rates;
       const availability = property.availability || [];
       const periods = getPeriods(rates, availability, stayLength, startDate);
-      results.push({ property, periods });
-    }
+      return { property, periods };
+    });
     setResults(results);
     setIsLoading(false);
   }, [properties, stayLength, startDate]);
 
-  let displayMode = 'multiple';
-  if (properties.length === 1) {
-    displayMode = 'singleProperty';
-  }
+  const displayMode: DisplayMode = properties.length === 1 ? 'singleProperty' : 'multiple';
 
   return (
     <div className={clsx(className)}>

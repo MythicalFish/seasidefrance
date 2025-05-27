@@ -1,0 +1,230 @@
+.container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.loadingContainer {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.loadingSpinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  border: 2px solid transparent;
+  border-bottom: 2px solid #2563eb;
+}
+
+.loadingText {
+  margin-top: 0.5rem;
+  color: #4b5563;
+}
+
+.emptyContainer {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.emptyText {
+  color: #6b7280;
+  font-size: 1.125rem;
+}
+
+.header {
+  background-color: #f9fafb;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.headerGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 0.8fr 1.2fr 1.5fr;
+  gap: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.headerCheckIn,
+.headerCheckOut,
+.headerNights,
+.headerPerNight,
+.headerTotal {
+  display: flex;
+  align-items: center;
+}
+
+.headerNights {
+  justify-content: center;
+}
+
+.headerPerNight,
+.headerTotal {
+  justify-content: flex-end;
+}
+
+.resultsList {
+  border-top: 1px solid #e5e7eb;
+}
+
+.periodRow {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.periodRow:hover {
+  background-color: #f9fafb;
+}
+
+.periodRow:last-child {
+  border-bottom: none;
+}
+
+.periodGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 0.8fr 1.2fr 1.5fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.checkInDate,
+.checkOutDate {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dateValue {
+  font-size: 0.875rem;
+  color: #111827;
+  font-weight: 500;
+}
+
+.discountBadge {
+  display: inline-block;
+  background-color: #dcfce7;
+  color: #166534;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  width: fit-content;
+}
+
+.nights {
+  display: flex;
+  justify-content: center;
+}
+
+.nightsValue {
+  font-size: 0.875rem;
+  color: #111827;
+  font-weight: 500;
+}
+
+.pricePerNight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.priceValue {
+  font-size: 0.875rem;
+  color: #111827;
+  font-weight: 500;
+}
+
+.totalPriceSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.totalPrice {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.bookButton {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+  min-width: 80px;
+}
+
+.bookButton:hover {
+  background-color: #1d4ed8;
+}
+
+.showMoreContainer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+.showMoreButton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.showMoreButton:hover {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .headerGrid,
+  .periodGrid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .periodGrid {
+    padding: 1rem;
+  }
+  
+  .checkInDate,
+  .checkOutDate,
+  .nights,
+  .pricePerNight,
+  .totalPriceSection {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  .totalPriceSection {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+} 
