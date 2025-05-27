@@ -3,6 +3,7 @@ import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
 import { formatDate, formatCurrency } from '@lib/date';
 import { useState } from 'react';
 import styles from './SinglePropertyResults.module.css';
+import { getCheckoutUrl } from '@lib/utils';
 
 export type Result = {
   property: PropertyPage;
@@ -54,7 +55,7 @@ const SinglePropertyResults: React.FC<Props> = ({ results, isLoading }) => {
 
       <div className={styles.resultsList}>
         {shownPeriods.map((period, index) => (
-          <PeriodRow key={index} period={period} />
+          <PeriodRow key={index} period={period} propertyId={result.property.id} />
         ))}
 
         {hasMorePeriods && (
@@ -91,7 +92,10 @@ const NoPeriodsAvailable: React.FC = () => (
   </div>
 );
 
-const PeriodRow: React.FC<{ period: AvailablePeriod }> = ({ period }) => (
+const PeriodRow: React.FC<{ period: AvailablePeriod; propertyId: number }> = ({
+  period,
+  propertyId,
+}) => (
   <div className={styles.periodRow}>
     <div className={styles.periodGrid}>
       <div className={styles.checkInDate}>
@@ -117,7 +121,12 @@ const PeriodRow: React.FC<{ period: AvailablePeriod }> = ({ period }) => (
 
       <div className={styles.totalPriceSection}>
         <div className={styles.totalPrice}>{formatCurrency(period.totalPrice)}</div>
-        <button className={styles.bookButton}>Book Now</button>
+        <a
+          href={getCheckoutUrl(propertyId, period.checkInDate, period.checkOutDate)}
+          className={styles.bookButton}
+        >
+          Book Now
+        </a>
       </div>
     </div>
   </div>

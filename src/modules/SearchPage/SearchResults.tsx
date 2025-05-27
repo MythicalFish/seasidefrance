@@ -4,6 +4,7 @@ import { formatDate, formatCurrency } from '@lib/date';
 import { useState } from 'react';
 import styles from './SearchResults.module.css';
 import SinglePropertyResults from './SinglePropertyResults';
+import { getCheckoutUrl } from '@lib/utils';
 
 export type Result = {
   property: PropertyPage;
@@ -130,7 +131,12 @@ const PeriodResult: React.FC<{
 
       <div className={styles.totalPriceContainer}>
         <span className={styles.totalPrice}>{formatCurrency(period.totalPrice)}</span>
-        <button className={styles.bookButton}>Book Now</button>
+        <a
+          href={getCheckoutUrl(property.lodgify.id, period.checkInDate, period.checkOutDate)}
+          className={styles.bookButton}
+        >
+          Book Now
+        </a>
       </div>
     </div>
   </div>
