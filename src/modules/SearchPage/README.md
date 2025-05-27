@@ -22,39 +22,59 @@ Dedicated component for single property results with:
 - Clean 5-column grid layout (Check-in, Check-out, Nights, Per Night, Total)
 - No property name column (since there's only one property)
 - Optimized spacing and typography
-- **Progressive loading**: Shows 1 result initially, then +5 more with each "Show More" click
+- **Progressive loading**: Shows 6 results initially, then +5 more with each "Show More" click
 - Discount badges positioned under check-in dates
 - Responsive design for mobile devices
 
 ### SearchControls (`SearchControls.tsx`)
 
-Handles date selection and stay length controls with:
+Responsive chevron-based search controls with adaptive layout:
 
-- **Custom DatePicker**: Enhanced date selection with chevron navigation
-- **Stay Length**: Dropdown with specific night options:
-  - 2 nights
-  - 3 nights
-  - 4 nights
-  - 5 nights
-  - 6 nights
-  - 7 nights
-  - 8+ nights (shows periods with 8 or more consecutive nights)
+- **Desktop**: Single horizontal line with all controls: From [Year] [Month] For [Stay Length]
+- **Mobile**: Stacked layout with grouped "From" and "For" sections
+- **Consistent UI**: All controls use the same chevron-based interaction pattern
 
-### DatePicker (`components/DatePicker.tsx`)
+## Control Design
 
-Custom date picker component with enhanced UX:
+### Desktop Layout
 
-- **Chevron navigation**: Click left/right arrows to increment/decrement days
-- **Clickable month selection**: Click month name to open month grid selector
-- **Year dropdown**: Select between current year and next year
-- **Minimum date validation**: Prevents selection of past dates
-- **Keyboard accessibility**: Full ARIA support and keyboard navigation
-- **Click-outside handling**: Closes month selector when clicking elsewhere
-- **Responsive design**: Adapts to mobile screens
+- **Single line**: All controls arranged horizontally for compact desktop experience
+- **Inline labels**: "From" and "For" labels positioned inline with controls
+- **Optimal spacing**: Proper gaps between controls for visual clarity
+- **Fixed widths**: Consistent control sizing for professional appearance
+
+### Mobile Layout
+
+- **Stacked sections**: "From" and "For" sections stacked vertically
+- **Full-width controls**: Controls expand to use available mobile screen space
+- **Grouped organization**: Related controls grouped under section labels
+
+### Year Selection
+
+- **Toggle button**: Click to switch between current year and next year
+- **Simple interaction**: Single click toggles between the two available years
+- **Clear display**: Shows the selected year prominently
+- **Fixed width**: Consistent 80px minimum width
+
+### Month Navigation
+
+- **Left/Right chevrons**: Navigate between months intuitively
+- **Automatic year rollover**: Seamlessly handles year transitions
+- **Past month prevention**: Disables navigation to past months
+- **Clear month display**: Shows full month name in the center
+- **Fixed width**: 120px minimum width for month names
+
+### Stay Length Selection
+
+- **Chevron navigation**: Use left/right arrows to adjust stay length
+- **Sequential options**: 2, 3, 4, 5, 6, 7, 8+ nights
+- **Boundary handling**: Disables chevrons at min/max values
+- **Clear formatting**: Shows "X nights" or "8+ nights" format
+- **Fixed width**: 100px minimum width for stay length display
 
 ## Stay Length Logic
 
-The stay length selector now works with specific night counts rather than maximum limits:
+The stay length selector works with specific night counts rather than maximum limits:
 
 ### Specific Night Counts (2-7 nights)
 
@@ -87,23 +107,26 @@ The stay length selector now works with specific night counts rather than maximu
 
 - Uses `SinglePropertyResults` component
 - Clean 5-column layout without property names
-- **Initially displays 1 result**
+- **Initially displays 6 results**
 - **"Show More" reveals 5 additional results** with remaining count
 - Used on individual property pages
 - Better spacing and visual hierarchy
 
 ## Styling
 
-Both components use CSS Modules for better maintainability and performance:
+Components use CSS Modules for better maintainability and performance:
 
 - `SearchResults.module.css` - For multiple properties layout
 - `SinglePropertyResults.module.css` - For single property layout
-- `DatePicker.module.css` - For custom date picker component
 
 ## Key Features
 
-- **Enhanced date picker** with chevron navigation and month/year selection
-- **Progressive result loading** for single property (1 initial, +5 increments)
+- **Responsive layout** - Single line on desktop, stacked on mobile
+- **Chevron-based navigation** for all controls with consistent interaction patterns
+- **Year toggle button** for simple year selection between current and next year
+- **Month navigation** with automatic year rollover and past month prevention
+- **Stay length chevrons** for intuitive duration selection
+- **Progressive result loading** for single property (6 initial, +5 increments)
 - **Specific stay length filtering** with exact night counts
 - **Consecutive nights validation** for realistic bookings
 - **8+ nights option** for extended stays
@@ -120,13 +143,13 @@ Both components use CSS Modules for better maintainability and performance:
 
 ## Recent Improvements
 
-1. **Custom DatePicker component** - Enhanced date selection with chevrons, month grid, and year selector
-2. **Improved accessibility** - Added ARIA labels, roles, and keyboard navigation support
-3. **Click-outside handling** - Month selector closes when clicking elsewhere
-4. **Optimized pagination** - Single property now shows 1 result initially, +5 more per click
-5. **Enhanced stay length selector** - Now offers specific night counts (2-7) and 8+ option
-6. **Consecutive nights filtering** - Ensures all periods have consecutive dates
-7. **Improved search logic** - Results now match exactly the selected stay length
-8. **Better TypeScript types** - Added `StayLengthOption` type for type safety
-9. **Separated layout components** - Created dedicated `SinglePropertyResults` for cleaner single property display
-10. **Enhanced responsive design** for mobile devices
+1. **Single-line desktop layout** - All controls on one horizontal line for compact desktop experience
+2. **Responsive design** - Adaptive layout that stacks on mobile while staying inline on desktop
+3. **Inline label positioning** - "From" and "For" labels integrated into the control flow
+4. **Fixed control widths** - Consistent sizing for professional appearance
+5. **Chevron-based control design** - Unified interaction pattern across all controls
+6. **Year toggle button** - Simple click to switch between current and next year
+7. **Month navigation chevrons** - Intuitive left/right navigation with year rollover
+8. **Stay length chevrons** - Consistent navigation for duration selection
+9. **Enhanced accessibility** - ARIA labels and keyboard navigation support
+10. **Improved visual consistency** - All controls share the same interaction paradigm

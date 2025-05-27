@@ -14,7 +14,7 @@ type Props = {
   isLoading: boolean;
 };
 
-const INITIAL_PERIODS_SHOWN = 1;
+const INITIAL_PERIODS_SHOWN = 6;
 const PERIODS_TO_ADD = 5;
 
 const SinglePropertyResults: React.FC<Props> = ({ results, isLoading }) => {
