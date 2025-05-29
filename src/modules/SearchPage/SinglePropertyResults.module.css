@@ -2,6 +2,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
   overflow: hidden;
 }
 
@@ -162,6 +163,9 @@
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
   min-width: 80px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
 
 .bookButton:hover {
@@ -201,30 +205,107 @@
   }
 }
 
-/* Responsive design for smaller screens */
+/* Mobile card layout */
 @media (max-width: 768px) {
-  .headerGrid,
-  .periodGrid {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
+  .header {
+    display: none;
   }
   
-  .periodGrid {
+  .resultsList {
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     padding: 1rem;
   }
   
-  .checkInDate,
-  .checkOutDate,
-  .nights,
-  .pricePerNight,
-  .totalPriceSection {
-    justify-content: flex-start;
-    align-items: flex-start;
+  .periodRow {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 0;
   }
   
-  .totalPriceSection {
+  .periodRow:hover {
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .periodGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    padding: 1.5rem;
+  }
+  
+  .checkInDate,
+  .checkOutDate {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    gap: 0;
+  }
+  
+  .checkInDate::before {
+    content: "Check-in: ";
+    font-weight: 500;
+    color: #6b7280;
+  }
+  
+  .checkOutDate::before {
+    content: "Check-out: ";
+    font-weight: 500;
+    color: #6b7280;
+  }
+  
+  .nights {
+    justify-content: space-between;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+  }
+  
+  .nights::before {
+    content: "Nights: ";
+    font-weight: 500;
+    color: #6b7280;
+  }
+  
+  .pricePerNight {
+    justify-content: space-between;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+  }
+  
+  .pricePerNight::before {
+    content: "Per night: ";
+    font-weight: 500;
+    color: #6b7280;
+  }
+  
+  .totalPriceSection {
+    align-items: stretch;
+    margin-top: 0.5rem;
+  }
+  
+  .totalPrice {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .bookButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+    min-width: unset;
   }
 } 

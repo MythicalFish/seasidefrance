@@ -11,9 +11,9 @@ const searchResults = generateSearchResults(properties);
 
 <Layout>
   <SiteHeader />
-  <main class="container md:p-8 pt-16">
+  <main class="container p-4 md:p-8 pt-8 md:pt-16">
     <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">Find Your Perfect Stay</h1>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Find Your Perfect Stay</h1>
       <p class="text-gray-600">Search available properties for your desired dates and duration</p>
     </div>
     <SearchPage properties={properties} client:load initialResults={searchResults} />

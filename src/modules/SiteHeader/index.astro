@@ -5,12 +5,15 @@ import Button from '@components/Button';
 ---
 
 <header
-  class="pt-12"
+  class="pt-12 border-b border-gray-200"
   style={`background-image: url(${headerBg.src}); background-size: cover; background-position: center;`}
 >
   <div class="container flex flex-col md:flex-row gap-4 justify-between">
-    <div>
-      <a class="pb-2 flex items-center gap-2 leading-none opacity-90" href="/">
+    <div class="text-center md:text-left">
+      <a
+        class="pb-2 flex items-center gap-2 leading-none opacity-90 justify-center md:justify-start"
+        href="/"
+      >
         <img src="/favicon-light.png" width={20} height={20} />
         <span class="text-xl text-white opacity-90"
           ><span class="opacity-90">seaside</span><span class="ml-[1px] font-semibold">france</span
@@ -19,7 +22,7 @@ import Button from '@components/Button';
       </a>
       <div class="text-white text-2xl">Holiday homes in South West France</div>
     </div>
-    <div class="p-4 text-right">
+    <div class="p-4 text-center md:text-right">
       <Button variant="primary" href="/search"> Search </Button>
     </div>
   </div>

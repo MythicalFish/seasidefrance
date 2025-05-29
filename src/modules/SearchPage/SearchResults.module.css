@@ -2,6 +2,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
   overflow: hidden;
 }
 
@@ -177,12 +178,15 @@
   margin-top: 0.25rem;
   background-color: #2563eb;
   color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
   font-size: 0.875rem;
+  font-weight: 500;
   border: none;
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .bookButton:hover {
@@ -209,6 +213,142 @@
 
 .showMoreButton:hover {
   background-color: #e5e7eb;
+}
+
+/* Mobile card layout */
+@media (max-width: 768px) {
+  .header {
+    display: none;
+  }
+  
+  .resultsList {
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .resultItem {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 0;
+  }
+  
+  .resultItem:hover {
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resultGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .propertyInfo {
+    grid-column: unset;
+    order: 1;
+  }
+  
+  .propertyName {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .dateInfo {
+    grid-column: unset;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    order: 2;
+  }
+  
+  .dateInfo:first-of-type::before {
+    content: "Check-in: ";
+    font-weight: 500;
+    color: #6b7280;
+  }
+  
+  .dateInfo:nth-of-type(2)::before {
+    content: "Check-out: ";
+    font-weight: 500;
+    color: #6b7280;
+  }
+  
+  .nightsInfo {
+    grid-column: unset;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    order: 3;
+  }
+  
+  .nightsInfo::before {
+    content: "Nights: ";
+    font-weight: 500;
+    color: #6b7280;
+  }
+  
+  .pricePerNight {
+    grid-column: unset;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    order: 4;
+  }
+  
+  .pricePerNight::before {
+    content: "Per night: ";
+    font-weight: 500;
+    color: #6b7280;
+  }
+  
+  .totalPriceContainer {
+    grid-column: unset;
+    text-align: left;
+    align-items: stretch;
+    order: 5;
+    margin-top: 0.5rem;
+  }
+  
+  .totalPrice {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .bookButton {
+    margin-top: 0;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .noPeriodsMessage {
+    grid-column: unset;
+    text-align: center;
+    padding: 2rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+  }
 }
 
 @keyframes spin {

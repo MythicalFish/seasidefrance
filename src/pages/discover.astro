@@ -11,7 +11,7 @@ import SiteHeader from '@modules/SiteHeader/index.astro';
 
 <Layout>
   <SiteHeader />
-  <main class="container py-12 flex gap-4">
+  <main class="container py-8 md:py-12 px-4 md:px-8 flex flex-col lg:flex-row gap-4">
     <Box cozy>
       <div class="prose mb-4">
         <h2 class="mb-4">Discover Charente-Maritime</h2>
@@ -19,7 +19,11 @@ import SiteHeader from '@modules/SiteHeader/index.astro';
       </div>
       <AreaPhotos layout="grid" />
       <div class="my-8">
-        <a href="/" class="bg-blue-500 text-white px-4 py-2 rounded-md">Explore properties</a>
+        <a
+          href="/"
+          class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md transition-colors inline-block"
+          >Explore properties</a
+        >
       </div>
       <div class="prose">
         <WhyVisit2 />
