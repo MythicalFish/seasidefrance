@@ -1,0 +1,138 @@
+.propertyPhotoCarousel {
+  width: 100%;
+}
+
+.photoGallery {
+  width: 100%;
+}
+
+/* Main Swiper Styles */
+.mainSwiper {
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.mainSwiper :global(.swiper-slide) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  transition: all 0.3s ease;
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  &:after {
+    font-size: 18px;
+  }
+}
+
+/* Thumbnail Strip Styles */
+.thumbnailContainer {
+  width: 100%;
+  padding: 4px 0;
+}
+
+.thumbnailStrip {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+.thumbnailStrip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.thumbnailStrip::-webkit-scrollbar-track {
+  background: #f7fafc;
+  border-radius: 3px;
+}
+
+.thumbnailStrip::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+.thumbnailStrip::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+.thumbnail {
+  position: relative;
+  flex: 0 0 auto;
+  width: 120px;
+  height: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: none;
+  padding: 0;
+}
+
+.thumbnail:hover {
+  border-color: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail.active {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.thumbnail picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mainBadge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: #3b82f6;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+@media (max-width: 768px) {
+  .thumbnail {
+    width: 100px;
+    height: 67px;
+  }
+
+  .mainBadge {
+    font-size: 0.625rem;
+    padding: 1px 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .thumbnail {
+    width: 80px;
+    height: 53px;
+  }
+}

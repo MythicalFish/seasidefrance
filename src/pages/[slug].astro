@@ -37,7 +37,7 @@ const searchResults = generatePropertySearchResults(property);
 
 <Layout>
   <SiteHeader />
-  <main class="container p-4 md:p-8 pt-8 md:pt-16">
+  <main class="container">
     <div>
       <div class="flex flex-col lg:flex-row gap-8">
         <div class="flex-auto w-full lg:w-2/3">
@@ -61,16 +61,15 @@ const searchResults = generatePropertySearchResults(property);
           <Box>
             <List title="Highlights" items={property.highlights} />
           </Box>
-          <Button variant="primary" fullWidth href="#book"> Book your stay </Button>
+          <Button variant="primary" fullWidth href="#availability">Book your stay</Button>
           <Box class="mt-4">
             <AreaInfo />
           </Box>
         </div>
       </div>
-      <div class="flex flex-col lg:flex-row gap-8 mt-4"></div>
       <Box id="availability" class="p-6 md:p-8 border border-gray-200 rounded-lg shadow-lg">
         <div class="prose mb-4">
-          <h4 class="">Book your stay</h4>
+          <h2 class="text-2xl text-gray-900 mb-4 font-semibold">Book your stay</h2>
         </div>
         <SearchPage client:load properties={[property]} initialResults={[searchResults]} />
       </Box>
