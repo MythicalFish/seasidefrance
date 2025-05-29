@@ -11,7 +11,8 @@
     "fetch-images": "tsx src/lib/scripts/fetchImages.ts",
     "compress-images": "tsx src/lib/scripts/optimizeImages.ts",
     "generate-pages": "tsx src/lib/scripts/generatePages.ts",
-    "generate-about": "tsx src/lib/scripts/generateAbout.ts"
+    "generate-about": "tsx src/lib/scripts/generateAbout.ts",
+    "download-thumbnails": "tsx src/lib/scripts/downloadThumbnails.ts"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.2.5",

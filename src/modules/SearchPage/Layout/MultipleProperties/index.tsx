@@ -19,13 +19,11 @@ const MultiplePropertiesResults = ({ results, isLoading }: Props) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <div className="border-t border-gray-200">
-        {results.map((result, index) => (
-          <PropertyResults key={result.property.slug} result={result} resultIndex={index} />
-        ))}
-      </div>
-    </div>
+    <>
+      {results.map((result, index) => (
+        <PropertyResults key={result.property.slug} result={result} resultIndex={index} />
+      ))}
+    </>
   );
 };
 
