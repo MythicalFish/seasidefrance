@@ -1,39 +1,65 @@
 ---
+import SearchPage from '@modules/SearchPage';
+import properties from '@data/properties';
 import Layout from '@modules/Layout/index.astro';
+import SiteHeader from '@modules/SiteHeader/index.astro';
+import { generateSearchResults } from '@utils/generateSearchResults';
+import Box from '@components/Box/index.astro';
+import PropertyCard from '@components/PropertyCard/index.astro';
+import AreaPhotos from '@modules/AreaPhotos/index.astro';
 import WhyVisit1 from '@data/_fixtures/why-visit-1.md';
 import WhyVisit2 from '@data/_fixtures/why-visit-2.md';
-import AreaPhotos from '@modules/AreaPhotos/index.astro';
-import Box from '@components/Box/index.astro';
-import properties from '@data/properties';
-import PropertyCard from '@components/PropertyCard/index.astro';
-import SiteHeader from '@modules/SiteHeader/index.astro';
+
+// Generate search results at build time for all properties
+const searchResults = generateSearchResults(properties);
 ---
 
 <Layout>
-  <SiteHeader />
-  <main class="container py-8 md:py-12 px-4 md:px-8 flex flex-col lg:flex-row gap-4">
-    <Box cozy>
+  <SiteHeader page="discover" />
+  <main class="container p-4 md:p-8 pt-8 md:pt-16">
+    <Box cozy class="mb-8">
       <div class="prose mb-4">
         <h2 class="mb-4">Discover Charente-Maritime</h2>
         <WhyVisit1 />
       </div>
       <AreaPhotos layout="grid" />
-      <div class="my-8">
-        <a
-          href="/"
-          class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md transition-colors inline-block"
-          >Explore properties</a
-        >
-      </div>
-      <div class="prose">
+      <button
+        id="read-more-btn"
+        class="text-blue-600 hover:text-blue-800 underline cursor-pointer bg-transparent border-none p-0 font-inherit"
+      >
+        Read more...
+      </button>
+      <div class="prose" id="why-visit-2" style="display: none;">
         <WhyVisit2 />
       </div>
     </Box>
+    <section id="availability" class="pt-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Book your stay</h2>
+      <SearchPage properties={properties} client:load initialResults={searchResults} />
+    </section>
     <Box cozy>
-      {properties.map((property) => <PropertyCard property={property} />)}
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Other properties</h2>
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        {properties.map((property) => <PropertyCard property={property} />)}
+      </div>
     </Box>
   </main>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const readMoreBtn = document.getElementById('read-more-btn');
+    const whyVisit2 = document.getElementById('why-visit-2');
+
+    if (readMoreBtn && whyVisit2) {
+      readMoreBtn.addEventListener('click', function () {
+        whyVisit2.style.display = 'block';
+        readMoreBtn.style.display = 'none';
+      });
+    }
+  });
+</script>
+
 <!-- <a
         href="https://www.tripadvisor.com/Tourism-g2064961-Charente_Maritime_Nouvelle_Aquitaine-Vacations.html"
         class="bg-transparent text-white underline"

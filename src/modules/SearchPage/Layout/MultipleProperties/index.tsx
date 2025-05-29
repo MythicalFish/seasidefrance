@@ -23,15 +23,6 @@ const MultipleProperties = ({ results, isLoading }: Props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.headerGrid}>
-          <div className={styles.headerProperty}>Property</div>
-          <div className={styles.headerDate}>Date</div>
-          <div className={styles.headerPerNight}>Per Night</div>
-          <div className={styles.headerTotal}>Total Price</div>
-          <div className={styles.headerBookButton}>Book</div>
-        </div>
-      </div>
       <div className={styles.resultsList}>
         {results.map((result, resultIndex) => (
           <PropertyResults

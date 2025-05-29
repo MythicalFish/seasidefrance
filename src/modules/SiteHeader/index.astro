@@ -21,16 +21,16 @@ const { page }: Props = Astro.props;
           ></span
         >
       </a>
-      <div class="text-white text-2xl">Holiday homes in South West France</div>
+      <div class="text-blue-900 text-2xl">Holiday homes in South West France</div>
     </div>
     <div class="p-4 text-center md:text-right">
       {
-        page === 'search' ? (
-          <Button variant="primary" href="/">
-            See all properties
+        page === 'discover' ? (
+          <Button variant="primary" href="#availability">
+            Book your stay
           </Button>
         ) : (
-          <Button variant="primary" href="/search">
+          <Button variant="primary" href="/discover">
             Find availability
           </Button>
         )

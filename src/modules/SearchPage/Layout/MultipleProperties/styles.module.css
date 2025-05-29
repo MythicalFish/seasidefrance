@@ -6,44 +6,6 @@
   overflow: hidden;
 }
 
-.header {
-  background-color: #f9fafb;
-  padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.headerGrid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #374151;
-}
-
-.headerProperty {
-  grid-column: span 3;
-}
-
-.headerDate {
-  grid-column: span 2;
-}
-
-.headerPerNight {
-  grid-column: span 2;
-  text-align: right;
-}
-
-.headerTotal {
-  grid-column: span 2;
-  text-align: right;
-}
-
-.headerBookButton {
-  grid-column: span 3;
-  text-align: right;
-}
-
 .resultsList {
   border-top: 1px solid #e5e7eb;
 }
@@ -63,7 +25,7 @@
 }
 
 .resultGrid {
-  display: grid;
+  display: grid;  
   grid-template-columns: repeat(12, 1fr);
   gap: 1rem;
   align-items: center;
@@ -156,10 +118,6 @@
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
-  .header {
-    padding: 0.5rem 1rem;
-  }
-
   .resultsList {
     padding: 0;
   }
