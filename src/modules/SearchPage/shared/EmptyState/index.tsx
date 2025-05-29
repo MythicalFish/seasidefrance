@@ -1,12 +1,10 @@
-import styles from './styles.module.css';
-
 type Props = {
   message?: string;
 };
 
 const EmptyState = ({ message = 'No properties available.' }: Props) => (
-  <div className={styles.emptyContainer}>
-    <p className={styles.emptyText}>{message}</p>
+  <div className="text-center py-12">
+    <p className="text-gray-500 text-lg">{message}</p>
   </div>
 );
 

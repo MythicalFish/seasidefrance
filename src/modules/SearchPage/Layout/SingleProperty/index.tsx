@@ -3,7 +3,6 @@ import type { Result } from '../index';
 import LoadingState from '../../shared/LoadingState';
 import EmptyState from '../../shared/EmptyState';
 import PeriodRow from './PeriodRow';
-import styles from './styles.module.css';
 
 type Props = {
   results: Result[];
@@ -37,26 +36,28 @@ const SingleProperty = ({ results, isLoading }: Props) => {
   const remainingCount = periods.length - periodsShown;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.headerGrid}>
-          <div className={styles.headerCheckIn}>Check-in</div>
-          <div className={styles.headerCheckOut}>Check-out</div>
-          <div className={styles.headerNights}>Nights</div>
-          <div className={styles.headerPerNight}>Per Night</div>
-          <div className={styles.headerTotal}>Total Price</div>
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      {/* Header */}
+      <div className="bg-gray-50 px-6 py-3 border-b border-gray-200 max-md:px-4 max-md:py-2">
+        <div className="grid grid-cols-[1.5fr_1.5fr_0.8fr_1.2fr_1.5fr] gap-4 text-sm font-medium text-gray-700 max-md:hidden">
+          <div className="flex items-center">Check-in</div>
+          <div className="flex items-center">Check-out</div>
+          <div className="flex items-center justify-center">Nights</div>
+          <div className="flex items-center justify-end">Per Night</div>
+          <div className="flex items-center justify-end">Total Price</div>
         </div>
       </div>
 
-      <div className={styles.resultsList}>
+      {/* Results List */}
+      <div className="border-t border-gray-200 max-md:p-0">
         {shownPeriods.map((period, index) => (
           <PeriodRow key={index} period={period} propertyId={result.property.id} />
         ))}
 
         {hasMorePeriods && (
-          <div className={styles.showMoreContainer}>
+          <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
             <button
-              className={styles.showMoreButton}
+              className="w-full py-3 px-4 bg-white text-gray-700 border border-gray-300 rounded-md cursor-pointer transition-all duration-150 text-sm font-medium hover:bg-gray-50 hover:border-gray-400"
               onClick={() => setPeriodsShown((prev) => prev + PERIODS_TO_ADD)}
             >
               Show More Results ({remainingCount} remaining)

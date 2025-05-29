@@ -2,7 +2,6 @@ import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
 import { formatDate, formatCurrency } from '@lib/date';
 import { getCheckoutUrl } from '@lib/utils';
 import Button from '@components/Button';
-import styles from './styles.module.css';
 
 type Props = {
   period: AvailablePeriod;
@@ -10,35 +9,45 @@ type Props = {
 };
 
 const PeriodRow = ({ period, propertyId }: Props) => (
-  <div className={styles.periodRow}>
-    <div className={styles.periodGrid}>
-      <div className={styles.checkInDate}>
-        <div className={styles.dateValue}>{formatDate(period.checkInDate)}</div>
+  <div className="border-b border-gray-200 transition-colors duration-150 hover:bg-gray-50 last:border-b-0 md:hover:bg-gray-50 max-md:hover:bg-white max-md:p-0 max-md:m-0">
+    <div className="grid grid-cols-[1.5fr_1.5fr_0.8fr_1.2fr_1.5fr] gap-4 items-center px-6 py-4 max-md:block max-md:p-4">
+      {/* Check-in Date */}
+      <div className="flex flex-col gap-1 max-md:mb-3 max-md:pb-3 max-md:border-b max-md:border-gray-100 max-md:before:content-['Check-in:'] max-md:before:text-gray-500 max-md:before:text-xs max-md:before:font-medium max-md:before:block max-md:before:mb-1">
+        <div className="text-sm text-gray-900 font-medium">{formatDate(period.checkInDate)}</div>
         {period.discount > 0 && (
-          <div className={styles.discountBadge}>
+          <div className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full w-fit">
             {period.promoName} -{period.discount}%
           </div>
         )}
       </div>
 
-      <div className={styles.checkOutDate}>
-        <div className={styles.dateValue}>{formatDate(period.checkOutDate)}</div>
+      {/* Check-out Date */}
+      <div className="flex flex-col gap-1 max-md:mb-3 max-md:pb-3 max-md:border-b max-md:border-gray-100 max-md:before:content-['Check-out:'] max-md:before:text-gray-500 max-md:before:text-xs max-md:before:font-medium max-md:before:block max-md:before:mb-1">
+        <div className="text-sm text-gray-900 font-medium">{formatDate(period.checkOutDate)}</div>
       </div>
 
-      <div className={styles.nights}>
-        <span className={styles.nightsValue}>{period.nightLength}</span>
+      {/* Nights */}
+      <div className="flex justify-center max-md:justify-start max-md:mb-3 max-md:pb-3 max-md:border-b max-md:border-gray-100 max-md:before:content-['Nights:'] max-md:before:text-gray-500 max-md:before:text-xs max-md:before:font-medium max-md:before:block max-md:before:mb-1">
+        <span className="text-sm text-gray-900 font-medium">{period.nightLength}</span>
       </div>
 
-      <div className={styles.pricePerNight}>
-        <span className={styles.priceValue}>{formatCurrency(period.pricePerNight)}</span>
+      {/* Price Per Night */}
+      <div className="flex justify-end max-md:justify-start max-md:mb-3 max-md:pb-3 max-md:border-b max-md:border-gray-100 max-md:before:content-['Per_Night:'] max-md:before:text-gray-500 max-md:before:text-xs max-md:before:font-medium max-md:before:block max-md:before:mb-1">
+        <span className="text-sm text-gray-900 font-medium">
+          {formatCurrency(period.pricePerNight)}
+        </span>
       </div>
 
-      <div className={styles.totalPriceSection}>
-        <div className={styles.totalPrice}>{formatCurrency(period.totalPrice)}</div>
+      {/* Total Price Section */}
+      <div className="flex flex-col items-end gap-2 max-md:items-start max-md:border-b-0">
+        <div className="text-lg font-semibold text-gray-900 max-md:text-xl">
+          {formatCurrency(period.totalPrice)}
+        </div>
         <Button
           variant="primary"
           size="sm"
           href={getCheckoutUrl(propertyId, period.checkInDate, period.checkOutDate)}
+          className="max-md:w-full max-md:py-3 max-md:px-4"
         >
           Book Now
         </Button>

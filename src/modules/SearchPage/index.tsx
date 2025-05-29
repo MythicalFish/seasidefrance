@@ -19,7 +19,7 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
   const [results, setResults] = useState<Result[]>(initialResults || []);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showControls, setShowControls] = useState<boolean>(!isSingleProperty);
-  const [useFilters, setUseFilters] = useState<boolean>(false);
+  const [useFilters, setUseFilters] = useState<boolean>(!isSingleProperty);
 
   // Generate initial results if not provided (fallback for client-side)
   useEffect(() => {

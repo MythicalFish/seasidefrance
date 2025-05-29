@@ -1,7 +1,6 @@
 import type { PropertyPage } from '@data/properties/types';
 import type { Result } from '../index';
 import PeriodResult from './PeriodResult';
-import styles from './styles.module.css';
 
 type Props = {
   result: Result;
@@ -38,12 +37,16 @@ const NoPeriodsAvailable = ({
   property: PropertyPage;
   resultIndex: number;
 }) => (
-  <div className={styles.resultItem}>
-    <div className={styles.resultGrid}>
-      <div className={styles.propertyInfo}>
-        <h3 className={styles.propertyName}>{property.name || `Property ${resultIndex + 1}`}</h3>
+  <div className="border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+      <div className="block">
+        <h3 className="font-semibold text-lg mb-2">
+          {property.name || `Property ${resultIndex + 1}`}
+        </h3>
       </div>
-      <div className={styles.noPeriodsMessage}>No available periods for your selected criteria</div>
+      <div className="col-span-3 text-gray-600 text-center md:text-left">
+        No available periods for your selected criteria
+      </div>
     </div>
   </div>
 );
