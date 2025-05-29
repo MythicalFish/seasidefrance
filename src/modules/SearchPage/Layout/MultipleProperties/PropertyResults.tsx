@@ -5,29 +5,18 @@ import PeriodResult from './PeriodResult';
 type Props = {
   result: Result;
   resultIndex: number;
-  resultsShown: number;
 };
 
-const PropertyResults = ({ result, resultIndex, resultsShown }: Props) => {
+const PropertyResults = ({ result, resultIndex }: Props) => {
   const { property, periods } = result;
-  const shownPeriods = periods.slice(0, resultsShown);
 
   if (periods.length === 0) {
     return <NoPeriodsAvailable property={property} resultIndex={resultIndex} />;
   }
 
-  return (
-    <>
-      {shownPeriods.map((period, periodIndex) => (
-        <PeriodResult
-          key={`${resultIndex}-${periodIndex}`}
-          property={property}
-          period={period}
-          resultIndex={resultIndex}
-        />
-      ))}
-    </>
-  );
+  const period = periods[0];
+
+  return <PeriodResult property={property} period={period} resultIndex={resultIndex} />;
 };
 
 const NoPeriodsAvailable = ({

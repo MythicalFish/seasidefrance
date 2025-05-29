@@ -15,6 +15,18 @@ const PeriodResult = ({ property, period, resultIndex }: Props) => (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
       <PropertyInfo property={property} period={period} resultIndex={resultIndex} />
 
+      <div className="flex flex-col gap-2 md:flex-row md:justify-end">
+        <Button variant="secondary" size="xs" href={`/${property.slug}#availability`}>
+          See all dates
+        </Button>
+        <Button
+          variant="primary"
+          size="sm"
+          href={getCheckoutUrl(property.lodgify.id, period.checkInDate, period.checkOutDate)}
+        >
+          Book Now
+        </Button>
+      </div>
       <div className="text-sm">
         {`${formatDate(period.checkInDate)} - ${formatDate(period.checkOutDate)}`}
         <div className="text-gray-500 text-xs mt-1">{period.nightLength} nights</div>
@@ -30,20 +42,8 @@ const PeriodResult = ({ property, period, resultIndex }: Props) => (
           <span className="text-xl font-medium">{formatCurrency(period.pricePerNight)}</span>
         </div>
         <div>
-          <span className="opacity-50">{formatCurrency(period.totalPrice)}</span>
+          <span className="opacity-50">{formatCurrency(period.totalPrice)} total</span>
         </div>
-      </div>
-      <div className="flex flex-col gap-2 md:flex-row md:justify-end">
-        <Button variant="secondary" size="xs" href={`/${property.slug}#availability`}>
-          See all dates
-        </Button>
-        <Button
-          variant="primary"
-          size="sm"
-          href={getCheckoutUrl(property.lodgify.id, period.checkInDate, period.checkOutDate)}
-        >
-          Book Now
-        </Button>
       </div>
     </div>
   </div>
@@ -58,11 +58,9 @@ const PropertyInfo = ({
   period: AvailablePeriod;
   resultIndex: number;
 }) => (
-  <a href={`/${property.slug}`} className="block">
-    <h3 className="font-semibold text-lg mb-2">{property.name || `Property ${resultIndex + 1}`}</h3>
-    <Button variant="secondary" size="xs">
-      More info
-    </Button>
+  <a href={`/${property.slug}`} className="block prose">
+    <h3 className="mb-2 text-md">{property.title || `Property ${resultIndex + 1}`}</h3>
+    {property.intro && <p className="text-sm">{property.intro}</p>}
   </a>
 );
 
