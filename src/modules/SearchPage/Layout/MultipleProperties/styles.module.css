@@ -86,7 +86,7 @@
   color: #111827;
 }
 
-.bookButtonContainer {
+.actions {
   grid-column: span 3;
   text-align: right;
 }

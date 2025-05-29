@@ -1,9 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
-import styles from './Button.module.css';
+import styles from './styles.module.css';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';
 
 interface BaseButtonProps {
   children: React.ReactNode;

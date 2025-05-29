@@ -2,6 +2,7 @@ import type { PropertyPage } from '@data/properties/types';
 import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
 import { formatDate, formatCurrency } from '@lib/date';
 import { getCheckoutUrl } from '@lib/utils';
+import Button from '@components/Button';
 import styles from './styles.module.css';
 
 type Props = {
@@ -19,18 +20,27 @@ const PeriodResult = ({ property, period, resultIndex }: Props) => (
         {`${formatDate(period.checkInDate)} - ${formatDate(period.checkOutDate)}`}
         <div className={styles.nights}>{period.nightLength} nights</div>
       </div>
-      <div className={styles.pricePerNight}>{formatCurrency(period.pricePerNight)}</div>
 
       <div className={styles.totalPriceContainer}>
-        <span className={styles.totalPrice}>{formatCurrency(period.totalPrice)}</span>
+        <div>
+          {period.discount > 0 && <span className={styles.discountBadge}>-{period.discount}%</span>}
+          <span className="text-xl font-medium">{formatCurrency(period.pricePerNight)}</span>
+        </div>
+        <div>
+          <span className="opacity-50">{formatCurrency(period.totalPrice)}</span>
+        </div>
       </div>
-      <div className={styles.bookButtonContainer}>
-        <a
+      <div className={styles.actions}>
+        <Button variant="secondary" size="xs" href={`/${property.slug}#availability`}>
+          See all dates
+        </Button>
+        <Button
+          variant="primary"
+          size="sm"
           href={getCheckoutUrl(property.lodgify.id, period.checkInDate, period.checkOutDate)}
-          className={styles.bookButton}
         >
           Book Now
-        </a>
+        </Button>
       </div>
     </div>
   </div>
@@ -47,11 +57,9 @@ const PropertyInfo = ({
 }) => (
   <a href={`/${property.slug}`} className={styles.propertyInfo}>
     <h3 className={styles.propertyName}>{property.name || `Property ${resultIndex + 1}`}</h3>
-    {period.discount > 0 && (
-      <span className={styles.discountBadge}>
-        {period.promoName} -{period.discount}%
-      </span>
-    )}
+    <Button variant="secondary" size="xs">
+      More info
+    </Button>
   </a>
 );
 

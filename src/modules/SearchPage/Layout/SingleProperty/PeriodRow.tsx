@@ -1,6 +1,7 @@
 import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
 import { formatDate, formatCurrency } from '@lib/date';
 import { getCheckoutUrl } from '@lib/utils';
+import Button from '@components/Button';
 import styles from './styles.module.css';
 
 type Props = {
@@ -34,12 +35,13 @@ const PeriodRow = ({ period, propertyId }: Props) => (
 
       <div className={styles.totalPriceSection}>
         <div className={styles.totalPrice}>{formatCurrency(period.totalPrice)}</div>
-        <a
+        <Button
+          variant="primary"
+          size="sm"
           href={getCheckoutUrl(propertyId, period.checkInDate, period.checkOutDate)}
-          className={styles.bookButton}
         >
           Book Now
-        </a>
+        </Button>
       </div>
     </div>
   </div>
