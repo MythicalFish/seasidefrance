@@ -1,13 +1,14 @@
 ---
-import headerBg from '@images/bg.png';
-import Contact from './Contact.astro';
 import Button from '@components/Button';
+
+type Props = {
+  page?: string;
+};
+
+const { page }: Props = Astro.props;
 ---
 
-<header
-  class="pt-12 border-b border-gray-200"
-  style={`background-image: url(${headerBg.src}); background-size: cover; background-position: center;`}
->
+<header class="pt-12 border-b border-gray-200">
   <div class="container flex flex-col md:flex-row gap-4 justify-between">
     <div class="text-center md:text-left">
       <a
@@ -15,7 +16,7 @@ import Button from '@components/Button';
         href="/"
       >
         <img src="/favicon-light.png" width={20} height={20} />
-        <span class="text-xl text-white opacity-90"
+        <span class="text-xl text-blue-900 opacity-90"
           ><span class="opacity-90">seaside</span><span class="ml-[1px] font-semibold">france</span
           ></span
         >
@@ -23,7 +24,17 @@ import Button from '@components/Button';
       <div class="text-white text-2xl">Holiday homes in South West France</div>
     </div>
     <div class="p-4 text-center md:text-right">
-      <Button variant="primary" href="/search"> Search </Button>
+      {
+        page === 'search' ? (
+          <Button variant="primary" href="/">
+            See all properties
+          </Button>
+        ) : (
+          <Button variant="primary" href="/search">
+            Find availability
+          </Button>
+        )
+      }
     </div>
   </div>
 </header>
