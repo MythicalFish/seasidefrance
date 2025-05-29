@@ -87,7 +87,7 @@ const SearchControls: React.FC<Props> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+    <div className="mb-8">
       {/* Desktop Layout - Single Row */}
       <div className="hidden md:flex items-center gap-6">
         {/* From Label */}

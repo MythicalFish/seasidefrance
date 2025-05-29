@@ -3,6 +3,7 @@ import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
 import { formatDate, formatCurrency } from '@lib/date';
 import { getCheckoutUrl } from '@lib/utils';
 import Button from '@components/Button';
+import Pills from '@components/Pills';
 
 type Props = {
   property: PropertyPage;
@@ -56,7 +57,7 @@ const PeriodResult = ({ property, period, resultIndex }: Props) => (
 
           <div className="flex-1">
             <PropertyTitle property={property} resultIndex={resultIndex} />
-            <FeaturePills property={property} />
+            <Pills items={getKeyFeatures(property)} small />
             <DateInfo period={period} />
           </div>
 
@@ -152,25 +153,6 @@ const DateInfo = ({ period }: { period: AvailablePeriod }) => (
     </div>
   </div>
 );
-
-const FeaturePills = ({ property }: { property: PropertyPage }) => {
-  const features = getKeyFeatures(property);
-
-  if (features.length === 0) return null;
-
-  return (
-    <div className="flex flex-wrap gap-2 mt-3">
-      {features.map((feature, index) => (
-        <span
-          key={index}
-          className="px-3 py-1 bg-gray-50 text-gray-700 text-xs font-medium rounded-full border border-gray-200"
-        >
-          {feature}
-        </span>
-      ))}
-    </div>
-  );
-};
 
 const PricingInfo = ({ period }: { period: AvailablePeriod }) => (
   <div>

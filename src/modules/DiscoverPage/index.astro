@@ -12,10 +12,11 @@ import WhyVisit2 from '@data/_fixtures/why-visit-2.md';
 
 // Generate search results at build time for all properties
 const searchResults = generateSearchResults(properties);
+const { showMore = false, page = 'home' } = Astro.props;
 ---
 
 <Layout>
-  <SiteHeader page="discover" />
+  <SiteHeader page={page} />
   <main class="container p-4 md:p-8 pt-8 md:pt-16">
     <Box cozy class="mb-8">
       <div class="prose mb-4">
@@ -23,9 +24,13 @@ const searchResults = generateSearchResults(properties);
         <WhyVisit1 />
       </div>
       <AreaPhotos layout="grid" />
-      <div class="prose">
-        <WhyVisit2 />
-      </div>
+      {
+        showMore && (
+          <div class="prose">
+            <WhyVisit2 />
+          </div>
+        )
+      }
     </Box>
     <section id="availability" class="pt-8">
       <h2 class="text-2xl text-gray-900 mb-4 font-semibold">Book your stay</h2>
