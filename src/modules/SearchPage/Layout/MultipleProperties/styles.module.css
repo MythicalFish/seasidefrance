@@ -25,17 +25,8 @@
   grid-column: span 3;
 }
 
-.headerCheckIn {
+.headerDate {
   grid-column: span 2;
-}
-
-.headerCheckOut {
-  grid-column: span 2;
-}
-
-.headerNights {
-  grid-column: span 1;
-  text-align: center;
 }
 
 .headerPerNight {
@@ -45,6 +36,11 @@
 
 .headerTotal {
   grid-column: span 2;
+  text-align: right;
+}
+
+.headerBookButton {
+  grid-column: span 3;
   text-align: right;
 }
 
@@ -126,6 +122,11 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: #111827;
+}
+
+.bookButtonContainer {
+  grid-column: span 3;
+  text-align: right;
 }
 
 .bookButton {

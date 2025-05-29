@@ -15,16 +15,16 @@ const PeriodResult = ({ property, period, resultIndex }: Props) => (
     <div className={styles.resultGrid}>
       <PropertyInfo property={property} period={period} resultIndex={resultIndex} />
 
-      <div className={styles.dateInfo}>{formatDate(period.checkInDate)}</div>
-
-      <div className={styles.dateInfo}>{formatDate(period.checkOutDate)}</div>
-
-      <div className={styles.nightsInfo}>{period.nightLength}</div>
-
+      <div className={styles.dateInfo}>
+        {`${formatDate(period.checkInDate)} - ${formatDate(period.checkOutDate)}`}
+        <div className={styles.nights}>{period.nightLength} nights</div>
+      </div>
       <div className={styles.pricePerNight}>{formatCurrency(period.pricePerNight)}</div>
 
       <div className={styles.totalPriceContainer}>
         <span className={styles.totalPrice}>{formatCurrency(period.totalPrice)}</span>
+      </div>
+      <div className={styles.bookButtonContainer}>
         <a
           href={getCheckoutUrl(property.lodgify.id, period.checkInDate, period.checkOutDate)}
           className={styles.bookButton}
@@ -45,14 +45,14 @@ const PropertyInfo = ({
   period: AvailablePeriod;
   resultIndex: number;
 }) => (
-  <div className={styles.propertyInfo}>
+  <a href={`/${property.slug}`} className={styles.propertyInfo}>
     <h3 className={styles.propertyName}>{property.name || `Property ${resultIndex + 1}`}</h3>
     {period.discount > 0 && (
       <span className={styles.discountBadge}>
         {period.promoName} -{period.discount}%
       </span>
     )}
-  </div>
+  </a>
 );
 
 export default PeriodResult;

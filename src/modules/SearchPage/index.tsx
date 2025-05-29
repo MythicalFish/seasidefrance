@@ -13,11 +13,12 @@ type Props = {
 };
 
 const SearchPage = ({ properties, className, initialResults }: Props) => {
+  const isSingleProperty = properties.length === 1;
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [stayLength, setStayLength] = useState<StayLengthOption>(7);
   const [results, setResults] = useState<Result[]>(initialResults || []);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showControls, setShowControls] = useState<boolean>(false);
+  const [showControls, setShowControls] = useState<boolean>(!isSingleProperty);
   const [useFilters, setUseFilters] = useState<boolean>(false);
 
   // Generate initial results if not provided (fallback for client-side)
@@ -75,15 +76,15 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
     }
   };
 
-  const displayMode: DisplayMode = properties.length === 1 ? 'singleProperty' : 'multiple';
-
   return (
     <div className={clsx(className)}>
-      <ControlsToggle
-        showControls={showControls}
-        onToggleControls={handleToggleControls}
-        onResetFilters={handleResetFilters}
-      />
+      {isSingleProperty && (
+        <ControlsToggle
+          showControls={showControls}
+          onToggleControls={handleToggleControls}
+          onResetFilters={handleResetFilters}
+        />
+      )}
 
       {/* Search Controls */}
       {showControls && (
@@ -95,7 +96,7 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
         />
       )}
 
-      <Layout results={results} isLoading={isLoading} displayMode={displayMode} />
+      <Layout results={results} isLoading={isLoading} isSingleProperty={isSingleProperty} />
     </div>
   );
 };

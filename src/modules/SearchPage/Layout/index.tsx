@@ -13,11 +13,11 @@ export type DisplayMode = 'multiple' | 'singleProperty';
 type Props = {
   results: Result[];
   isLoading: boolean;
-  displayMode: DisplayMode;
+  isSingleProperty: boolean;
 };
 
-const Layout = ({ results, isLoading, displayMode }: Props) => {
-  if (displayMode === 'singleProperty') {
+const Layout = ({ results, isLoading, isSingleProperty }: Props) => {
+  if (isSingleProperty) {
     return <SingleProperty results={results} isLoading={isLoading} />;
   }
 
