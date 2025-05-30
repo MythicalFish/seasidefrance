@@ -20,7 +20,7 @@ const { showMore = false, page = 'home' } = Astro.props;
   <main class="container p-4 md:p-8 pt-8 md:pt-16">
     <Box cozy class="mb-8">
       <div class="prose mb-4">
-        <h2 class="mb-4">Discover Charente-Maritime</h2>
+        <h2 class="mb-4 text-blue-900">Discover Charente-Maritime</h2>
         <WhyVisit1 />
       </div>
       <AreaPhotos layout="grid" />
@@ -32,12 +32,12 @@ const { showMore = false, page = 'home' } = Astro.props;
         )
       }
     </Box>
-    <section id="availability" class="pt-8">
-      <h2 class="text-2xl text-gray-900 mb-4 font-semibold">Book your stay</h2>
+    <Box cozy id="availability" class="pt-8">
+      <h2 class="text-2xl text-blue-900 mb-4 font-semibold">Book your stay</h2>
       <SearchPage properties={properties} client:load initialResults={searchResults} />
-    </section>
+    </Box>
     <Box cozy>
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Other properties</h2>
+      <h2 class="text-2xl font-bold text-blue-900 mb-4">Other properties</h2>
       <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
         {properties.map((property) => <PropertyCard property={property} />)}
       </div>

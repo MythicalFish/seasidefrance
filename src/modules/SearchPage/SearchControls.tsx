@@ -10,18 +10,18 @@ type Props = {
 };
 
 const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
   'May',
   'June',
   'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 
 const STAY_OPTIONS: StayLengthOption[] = [2, 3, 4, 5, 6, 7, 8];
@@ -88,21 +88,7 @@ const SearchControls: React.FC<Props> = ({
 
   return (
     <div className="mb-8">
-      {/* Desktop Layout - Single Row */}
-      <div className="hidden md:flex items-center gap-6">
-        {/* From Label */}
-        <div className="text-sm font-medium text-gray-700">From</div>
-
-        {/* Year Toggle */}
-        <button
-          type="button"
-          onClick={handleYearToggle}
-          className="px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-center font-medium text-gray-900 hover:bg-gray-100 transition-colors min-w-[80px]"
-        >
-          {selectedYear}
-        </button>
-
-        {/* Month Navigation */}
+      <div className="flex items-center gap-2">
         <div className="flex items-center border border-gray-300 rounded-lg">
           <button
             type="button"
@@ -114,7 +100,7 @@ const SearchControls: React.FC<Props> = ({
             <ChevronLeftIcon />
           </button>
 
-          <div className="px-4 py-3 font-medium text-gray-900 min-w-[120px] text-center">
+          <div className="px-2 py-3 font-medium text-gray-900 min-w-[60px] text-center">
             {MONTHS[selectedMonth]}
           </div>
 
@@ -127,6 +113,13 @@ const SearchControls: React.FC<Props> = ({
             <ChevronRightIcon />
           </button>
         </div>
+        <button
+          type="button"
+          onClick={handleYearToggle}
+          className="px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-center font-medium text-gray-900 hover:bg-gray-100 transition-colors min-w-[80px]"
+        >
+          {selectedYear}
+        </button>
 
         {/* For Label */}
         <div className="text-sm font-medium text-gray-700">For</div>
@@ -156,82 +149,6 @@ const SearchControls: React.FC<Props> = ({
           >
             <ChevronRightIcon />
           </button>
-        </div>
-      </div>
-
-      {/* Mobile Layout - Stacked */}
-      <div className="md:hidden space-y-6">
-        {/* From Section */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">From</label>
-          <div className="space-y-4">
-            {/* Year Toggle */}
-            <div className="flex items-center">
-              <button
-                type="button"
-                onClick={handleYearToggle}
-                className="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-center font-medium text-gray-900 hover:bg-gray-100 transition-colors"
-              >
-                {selectedYear}
-              </button>
-            </div>
-
-            {/* Month Navigation */}
-            <div className="flex items-center border border-gray-300 rounded-lg">
-              <button
-                type="button"
-                onClick={() => handleMonthChange('prev')}
-                disabled={isPrevMonthDisabled()}
-                className="p-3 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                aria-label="Previous month"
-              >
-                <ChevronLeftIcon />
-              </button>
-
-              <div className="flex-1 text-center py-3 font-medium text-gray-900">
-                {MONTHS[selectedMonth]}
-              </div>
-
-              <button
-                type="button"
-                onClick={() => handleMonthChange('next')}
-                className="p-3 hover:bg-gray-50 transition-colors"
-                aria-label="Next month"
-              >
-                <ChevronRightIcon />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* For Section */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">For</label>
-          <div className="flex items-center border border-gray-300 rounded-lg">
-            <button
-              type="button"
-              onClick={() => handleStayLengthChange('prev')}
-              disabled={STAY_OPTIONS.indexOf(stayLength) === 0}
-              className="p-3 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              aria-label="Decrease stay length"
-            >
-              <ChevronLeftIcon />
-            </button>
-
-            <div className="flex-1 text-center py-3 font-medium text-gray-900">
-              {formatStayLength(stayLength)}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => handleStayLengthChange('next')}
-              disabled={STAY_OPTIONS.indexOf(stayLength) === STAY_OPTIONS.length - 1}
-              className="p-3 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              aria-label="Increase stay length"
-            >
-              <ChevronRightIcon />
-            </button>
-          </div>
         </div>
       </div>
     </div>

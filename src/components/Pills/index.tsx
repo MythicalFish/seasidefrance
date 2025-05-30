@@ -9,8 +9,10 @@ import styles from './styles.module.css';
 
 const Pills = ({ items, className, small }: Props) => (
   <div className={clsx(styles.features, className, { [styles.small]: small })}>
-    {items.map((item) => (
-      <div className={styles.item}>{item}</div>
+    {items.map((item, index) => (
+      <div className={styles.item} key={index}>
+        {item}
+      </div>
     ))}
   </div>
 );

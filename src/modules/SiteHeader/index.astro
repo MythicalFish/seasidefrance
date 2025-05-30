@@ -8,21 +8,18 @@ type Props = {
 const { page }: Props = Astro.props;
 ---
 
-<header class="pt-12 border-b border-gray-200">
+<header class="p-12 border-b border-gray-200">
   <div class="container flex flex-col md:flex-row gap-4 justify-between">
     <div class="text-center md:text-left">
-      <a
-        class="pb-2 flex items-center gap-2 leading-none opacity-90 justify-center md:justify-start"
-        href="/"
-      >
-        <span class="text-xl text-blue-900 opacity-90"
-          ><span class="opacity-90">seaside</span><span class="ml-[1px] font-semibold">france</span
-          ></span
-        >
+      <a class="leading-none opacity-90 block" href="/">
+        <span class="text-xl text-blue-900 opacity-90">
+          <span class="opacity-90">seaside</span>
+          <span class="ml-[1px] font-semibold">france</span>
+        </span>
       </a>
       <!-- <div class="text-blue-900 text-2xl">Holiday homes in South West France</div> -->
     </div>
-    <div class="p-4 text-center md:text-right">
+    <div class="hidden md:block">
       {
         page === 'discover' ? (
           <Button variant="primary" href="#availability">
