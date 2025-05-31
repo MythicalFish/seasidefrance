@@ -5,6 +5,7 @@ import SearchControls, { type StayLengthOption } from './SearchControls';
 import Layout, { type Result, type DisplayMode } from './Layout';
 import ControlsToggle from './shared/ControlsToggle';
 import clsx from 'clsx';
+import Box from '@components/Box';
 
 type Props = {
   properties: PropertyPage[];
@@ -12,7 +13,7 @@ type Props = {
   initialResults?: Result[]; // Back to optional - provides default 7-night results
 };
 
-const SearchPage = ({ properties, className, initialResults }: Props) => {
+const Availability = ({ properties, className, initialResults }: Props) => {
   const isSingleProperty = properties.length === 1;
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [stayLength, setStayLength] = useState<StayLengthOption>(7);
@@ -77,7 +78,9 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
   };
 
   return (
-    <div className={clsx(className)}>
+    <Box className={clsx(className)} id="availability">
+      <h2 className="text-2xl text-blue-900 mb-4 font-semibold">Book your stay</h2>
+
       {isSingleProperty && (
         <ControlsToggle
           showControls={showControls}
@@ -97,8 +100,8 @@ const SearchPage = ({ properties, className, initialResults }: Props) => {
       )}
 
       <Layout results={results} isLoading={isLoading} isSingleProperty={isSingleProperty} />
-    </div>
+    </Box>
   );
 };
 
-export default SearchPage;
+export default Availability;

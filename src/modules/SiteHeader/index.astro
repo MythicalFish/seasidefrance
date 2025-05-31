@@ -8,8 +8,8 @@ type Props = {
 const { page }: Props = Astro.props;
 ---
 
-<header class="p-12 border-b border-gray-200">
-  <div class="container flex flex-col md:flex-row gap-4 justify-between">
+<header class="p-4 md:p-8 border-b border-gray-200">
+  <div class="container flex items-center flex-col md:flex-row gap-4 justify-between">
     <div class="text-center md:text-left">
       <a class="leading-none opacity-90 block" href="/">
         <span class="text-xl text-blue-900 opacity-90">
@@ -21,12 +21,12 @@ const { page }: Props = Astro.props;
     </div>
     <div class="hidden md:block">
       {
-        page === 'discover' ? (
+        ['discover', 'home'].includes(page ?? '') ? (
           <Button variant="primary" href="#availability">
             Book your stay
           </Button>
         ) : (
-          <Button variant="primary" href="#availability">
+          <Button variant="primary" href="/#availability">
             Book your stay
           </Button>
         )

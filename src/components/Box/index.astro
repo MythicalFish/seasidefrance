@@ -4,6 +4,9 @@ const { id, class: className, cozy = false, glassy = false } = Astro.props;
 import styles from './styles.module.css';
 ---
 
-<div id={id} class={clsx(styles.box, className, { [styles.cozy]: cozy, [styles.glassy]: glassy })}>
+<section
+  id={id}
+  class={clsx(styles.box, className, { [styles.cozy]: cozy, [styles.glassy]: glassy })}
+>
   <slot />
-</div>
+</section>

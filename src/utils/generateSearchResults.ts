@@ -1,6 +1,6 @@
 import type { PropertyPage } from '@data/properties/types';
 import getPeriods from '@components/DateSelector/getPeriods';
-import type { Result } from '@modules/SearchPage/SearchResults';
+import type { Result } from '@modules/Availability/SearchResults';
 
 /**
  * Generate default search results for properties at build time.

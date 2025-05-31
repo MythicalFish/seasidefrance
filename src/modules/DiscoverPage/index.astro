@@ -1,5 +1,5 @@
 ---
-import SearchPage from '@modules/SearchPage';
+import Availability from '@modules/Availability';
 import properties from '@data/properties';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/SiteHeader/index.astro';
@@ -7,8 +7,8 @@ import { generateSearchResults } from '@utils/generateSearchResults';
 import Box from '@components/Box/index.astro';
 import PropertyCard from '@components/PropertyCard/index.astro';
 import AreaPhotos from '@modules/AreaPhotos/index.astro';
-import WhyVisit1 from '@data/_fixtures/why-visit-1.md';
 import WhyVisit2 from '@data/_fixtures/why-visit-2.md';
+import AreaInfo from '@components/AreaInfo/index.astro';
 
 // Generate search results at build time for all properties
 const searchResults = generateSearchResults(properties);
@@ -19,11 +19,7 @@ const { showMore = false, page = 'home' } = Astro.props;
   <SiteHeader page={page} />
   <main class="container p-4 md:p-8 pt-8 md:pt-16">
     <Box cozy class="mb-8">
-      <div class="prose mb-4">
-        <h2 class="mb-4 text-blue-900">Discover Charente-Maritime</h2>
-        <WhyVisit1 />
-      </div>
-      <AreaPhotos layout="grid" />
+      <AreaInfo showReadMore={!showMore} title="Discover Charente-Maritime" />
       {
         showMore && (
           <div class="prose">
@@ -32,10 +28,7 @@ const { showMore = false, page = 'home' } = Astro.props;
         )
       }
     </Box>
-    <Box cozy id="availability" class="pt-8">
-      <h2 class="text-2xl text-blue-900 mb-4 font-semibold">Book your stay</h2>
-      <SearchPage properties={properties} client:load initialResults={searchResults} />
-    </Box>
+    <Availability properties={properties} client:load initialResults={searchResults} />
     <Box cozy>
       <h2 class="text-2xl font-bold text-blue-900 mb-4">Other properties</h2>
       <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">

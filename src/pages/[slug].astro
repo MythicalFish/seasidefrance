@@ -5,13 +5,12 @@ import properties from '@data/properties';
 import Layout from '@modules/Layout/index.astro';
 import PropertyCard from '@components/PropertyCard/index.astro';
 import SiteHeader from '@modules/SiteHeader/index.astro';
-import PropertyIntro from '@modules/PropertyPage/Intro.astro';
 import PropertyGallery from '@modules/PropertyGallery/index.astro';
 import Pills from '@components/Pills';
 import List from '@components/List';
 import Box from '@components/Box/index.astro';
-import AreaInfo from '@modules/AreaInfo/index.astro';
-import SearchPage from '@modules/SearchPage';
+import AreaInfo from '@components/AreaInfo/index.astro';
+import Availability from '@modules/Availability';
 import { generatePropertySearchResults } from '@utils/generateSearchResults';
 
 export async function getStaticPaths() {
@@ -67,13 +66,8 @@ const searchResults = generatePropertySearchResults(property);
           </Box>
         </div>
       </div>
-      <Box id="availability" class="p-6 md:p-8 border border-gray-200 rounded-lg shadow-lg">
-        <div class="prose mb-4">
-          <h2 class="text-2xl text-gray-900 mb-4 font-semibold">Book your stay</h2>
-        </div>
-        <SearchPage client:load properties={[property]} initialResults={[searchResults]} />
-      </Box>
     </div>
+    <Availability client:load properties={[property]} initialResults={[searchResults]} />
     <section class="mt-8">
       <h2 class="text-2xl font-bold text-gray-900 mb-4">Other properties</h2>
       <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
