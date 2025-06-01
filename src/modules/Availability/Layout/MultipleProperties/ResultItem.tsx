@@ -30,18 +30,20 @@ const getKeyFeatures = (property: PropertyPage): string[] => {
   return features.slice(0, 4);
 };
 
-const PeriodResult = ({ property, period, resultIndex }: Props) => (
+const ResultItem = ({ property, period, resultIndex }: Props) => (
   <div className="border border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 mb-6">
     <div className="block">
       {/* Mobile Layout */}
       <div className="block lg:hidden">
         <PropertyImageMobile property={property} period={period} resultIndex={resultIndex} />
         <div className="p-4">
-          <PropertyTitle property={property} resultIndex={resultIndex} />
-          <DateInfo period={period} />
+          <a href={`/${property.slug}`} className="block">
+            <PropertyTitle property={property} resultIndex={resultIndex} />
+            <DateInfo period={period} />
+          </a>
           <div className="flex justify-between items-start mt-4">
             <div className="flex-1">
-              <PricingInfo period={period} />
+              <PricingInfo period={period} property={property} />
             </div>
             <div className="ml-4">
               <ActionButtons property={property} period={period} />
@@ -55,14 +57,14 @@ const PeriodResult = ({ property, period, resultIndex }: Props) => (
         <div className="flex gap-6">
           <PropertyImageDesktop property={property} period={period} resultIndex={resultIndex} />
 
-          <div className="flex-1">
+          <a href={`/${property.slug}`} className="flex-1">
             <PropertyTitle property={property} resultIndex={resultIndex} />
             <Pills items={getKeyFeatures(property)} small />
             <DateInfo period={period} />
-          </div>
+          </a>
 
           <div className="text-right">
-            <PricingInfo period={period} />
+            <PricingInfo period={period} property={property} />
             <div className="mt-4">
               <ActionButtons property={property} period={period} />
             </div>
@@ -81,14 +83,14 @@ const PropertyImageMobile = ({
   period: AvailablePeriod;
   resultIndex: number;
 }) => (
-  <div className="w-full h-48 overflow-hidden rounded-t-xl">
+  <a href={`/${property.slug}`} className="w-full h-48 overflow-hidden rounded-t-xl">
     <img
       src={`/thumbnails/${property.lodgify.id}.jpg`}
       alt={property.title || `Property ${resultIndex + 1}`}
       className="w-full h-full object-cover"
       loading="lazy"
     />
-  </div>
+  </a>
 );
 
 const PropertyImageDesktop = ({
@@ -116,11 +118,9 @@ const PropertyTitle = ({
   property: PropertyPage;
   resultIndex: number;
 }) => (
-  <a href={`/${property.slug}`} className="block group">
-    <h3 className="text-xl font-semibold text-gray-800 transition-colors duration-200 mb-3">
-      {property.title || `Property ${resultIndex + 1}`}
-    </h3>
-  </a>
+  <h3 className="text-xl font-semibold text-gray-800 transition-colors duration-200 mb-3">
+    {property.title || `Property ${resultIndex + 1}`}
+  </h3>
 );
 
 const DateInfo = ({ period }: { period: AvailablePeriod }) => (
@@ -154,8 +154,8 @@ const DateInfo = ({ period }: { period: AvailablePeriod }) => (
   </div>
 );
 
-const PricingInfo = ({ period }: { period: AvailablePeriod }) => (
-  <div>
+const PricingInfo = ({ period, property }: { period: AvailablePeriod; property: PropertyPage }) => (
+  <a href={`/${property.slug}`} className="block">
     <div className="flex items-center justify-end gap-3 mb-1">
       {period.discount > 0 && (
         <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-semibold">
@@ -172,7 +172,7 @@ const PricingInfo = ({ period }: { period: AvailablePeriod }) => (
     <div className="text-base text-gray-600 font-medium text-right">
       {formatCurrencyRounded(period.totalPrice)} total
     </div>
-  </div>
+  </a>
 );
 
 const ActionButtons = ({
@@ -197,4 +197,4 @@ const ActionButtons = ({
   </div>
 );
 
-export default PeriodResult;
+export default ResultItem;

@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import type { Result } from '../index';
 import LoadingState from '../../shared/LoadingState';
 import EmptyState from '../../shared/EmptyState';
-import PropertyResults from './PropertyResults';
+import ResultList from './ResultList';
 
 type Props = {
   results: Result[];
@@ -21,7 +20,7 @@ const MultiplePropertiesResults = ({ results, isLoading }: Props) => {
   return (
     <>
       {results.map((result, index) => (
-        <PropertyResults key={result.property.slug} result={result} resultIndex={index} />
+        <ResultList key={result.property.slug} result={result} resultIndex={index} />
       ))}
     </>
   );

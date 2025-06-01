@@ -1,13 +1,13 @@
 import type { PropertyPage } from '@data/properties/types';
 import type { Result } from '../index';
-import PeriodResult from './PeriodResult';
+import ResultItem from './ResultItem';
 
 type Props = {
   result: Result;
   resultIndex: number;
 };
 
-const PropertyResults = ({ result, resultIndex }: Props) => {
+const ResultList = ({ result, resultIndex }: Props) => {
   const { property, periods } = result;
 
   if (periods.length === 0) {
@@ -16,7 +16,7 @@ const PropertyResults = ({ result, resultIndex }: Props) => {
 
   const period = periods[0];
 
-  return <PeriodResult property={property} period={period} resultIndex={resultIndex} />;
+  return <ResultItem property={property} period={period} resultIndex={resultIndex} />;
 };
 
 const NoPeriodsAvailable = ({
@@ -40,4 +40,4 @@ const NoPeriodsAvailable = ({
   </div>
 );
 
-export default PropertyResults;
+export default ResultList;
