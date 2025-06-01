@@ -64,5 +64,26 @@ export default {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    function ({ addBase, theme }) {
+      function extractColorVars(colorObj, colorGroup = '') {
+        return Object.keys(colorObj).reduce((vars, colorKey) => {
+          const value = colorObj[colorKey];
+
+          const cssVariable = colorGroup
+            ? `--color${colorGroup}-${colorKey}`
+            : `--color${colorKey}`;
+
+          const newVars = typeof value === 'string'
+            ? { [cssVariable]: value }
+            : extractColorVars(value, `${colorGroup}-${colorKey}`);
+
+          return { ...vars, ...newVars };
+        }, {});
+      }
+
+      addBase({
+        ':root': extractColorVars(theme('colors')),
+      });
+    },
   ],
 } 

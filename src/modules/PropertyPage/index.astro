@@ -22,42 +22,34 @@ const searchResults = generatePropertySearchResults(property);
 <Layout>
   <SiteHeader />
   <main class="container">
-    <div>
-      <div class="flex flex-col lg:flex-row gap-8">
-        <div class="flex-auto w-full lg:w-2/3">
-          <Box cozy>
-            <div class="prose mb-4">
-              <h3>{property.name}</h3>
-              <p>
-                {property.intro}
-              </p>
-            </div>
-            <PropertyGallery
-              propertyId={property.id}
-              mainImageUrl={property.lodgify?.imageUrl}
-              imageInfo={property.roomInfo.images}
-            />
-            <Pills items={property.features} className="mt-4" />
-            <div class="my-4 prose" set:html={descriptionHtml} />
-          </Box>
-        </div>
-        <div class="flex-auto w-full lg:w-1/3">
-          <Box>
-            <List title="Highlights" items={property.highlights} />
-          </Box>
-          <Button variant="primary" fullWidth href="#availability">Book your stay</Button>
-          <Box class="mt-4">
-            <AreaInfo />
-          </Box>
-        </div>
+    <Box cozy>
+      <div class="prose mb-4">
+        <h3>{property.name}</h3>
+        <p>
+          {property.intro}
+        </p>
       </div>
-    </div>
-    <Availability client:load properties={[property]} initialResults={[searchResults]} />
-    <section class="mt-8">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Other properties</h2>
-      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {otherProperties.map((property) => <PropertyCard property={property} />)}
-      </div>
-    </section>
+      <PropertyGallery
+        propertyId={property.id}
+        mainImageUrl={property.lodgify?.imageUrl}
+        imageInfo={property.roomInfo.images}
+      />
+      <Pills items={property.features} className="mt-4" />
+      <div class="my-4 prose" set:html={descriptionHtml} />
+      <Box>
+        <List title="Highlights" items={property.highlights} />
+      </Box>
+      <Button variant="primary" fullWidth href="#availability">Book your stay</Button>
+      <Box class="mt-4">
+        <AreaInfo />
+      </Box>
+    </Box>
   </main>
+  <Availability client:load properties={[property]} initialResults={[searchResults]} />
+  <section class="mt-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Other properties</h2>
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+      {otherProperties.map((property) => <PropertyCard property={property} />)}
+    </div>
+  </section>
 </Layout>

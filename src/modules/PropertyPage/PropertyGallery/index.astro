@@ -74,52 +74,50 @@ if (mainImage) {
 const carouselId = `carousel-${propertyId}`;
 ---
 
-<div class={styles.propertyPhotoCarousel}>
-  {
-    allPhotos.length > 0 && (
-      <div class={styles.photoGallery}>
-        <div class={clsx(styles.swiper, styles.mainSwiper, 'swiper', 'main-swiper', carouselId)}>
-          <div class="swiper-wrapper">
-            {allPhotos.map((photo, index) => (
-              <div class="swiper-slide">
-                <Picture
-                  src={photo.image}
-                  alt={photo.description || ''}
-                  width={810}
-                  height={540}
-                  class="main-image"
-                />
-              </div>
-            ))}
-          </div>
-
-          <div class="swiper-button-next" />
-          <div class="swiper-button-prev" />
+{
+  allPhotos.length > 0 && (
+    <div class={styles.photoGallery}>
+      <div class={clsx(styles.swiper, styles.mainSwiper, 'swiper', 'main-swiper', carouselId)}>
+        <div class="swiper-wrapper">
+          {allPhotos.map((photo, index) => (
+            <div class="swiper-slide">
+              <Picture
+                src={photo.image}
+                alt={photo.description || ''}
+                width={810}
+                height={540}
+                class="main-image"
+              />
+            </div>
+          ))}
         </div>
 
-        <div class={styles.thumbnailContainer}>
-          <div class={styles.thumbnailStrip}>
-            {allPhotos.map((photo, index) => (
-              <button
-                class={`thumbnail ${index === 0 ? 'active' : ''}`}
-                data-slide-index={index}
-                type="button"
-              >
-                <Picture
-                  src={photo.image}
-                  alt={photo.description || ''}
-                  width={150}
-                  height={100}
-                  class={styles.thumbnailImage}
-                />
-              </button>
-            ))}
-          </div>
+        <div class="swiper-button-next" />
+        <div class="swiper-button-prev" />
+      </div>
+
+      <div class={styles.thumbnailContainer}>
+        <div class={styles.thumbnailStrip}>
+          {allPhotos.map((photo, index) => (
+            <button
+              class={clsx(styles.thumbnail, 'thumbnail', index === 0 ? 'active' : '')}
+              data-slide-index={index}
+              type="button"
+            >
+              <Picture
+                src={photo.image}
+                alt={photo.description || ''}
+                width={150}
+                height={100}
+                class={styles.thumbnailImage}
+              />
+            </button>
+          ))}
         </div>
       </div>
-    )
-  }
-</div>
+    </div>
+  )
+}
 
 <script>
   import Swiper from 'swiper';
@@ -131,7 +129,7 @@ const carouselId = `carousel-${propertyId}`;
   document.addEventListener('DOMContentLoaded', () => {
     const carousels = document.querySelectorAll('.main-swiper');
 
-    // Add 2 second delay before initialization
+    // Add delay before initialization
     setTimeout(() => {
       carousels.forEach((carousel) => {
         // Get thumbnails for this carousel first
@@ -192,6 +190,6 @@ const carouselId = `carousel-${propertyId}`;
           });
         }
       });
-    }, 2000);
+    }, 500);
   });
 </script>
