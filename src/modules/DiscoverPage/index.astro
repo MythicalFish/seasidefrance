@@ -27,7 +27,7 @@ const { showMore = false, page = 'home' } = Astro.props;
         )
       }
     </Box>
-    <Availability properties={properties} client:load initialResults={searchResults} />
+    <Availability properties={properties} client:visible initialResults={searchResults} />
     <PropertyList title="Other properties" />
   </main>
 </Layout>

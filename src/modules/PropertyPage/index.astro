@@ -41,7 +41,7 @@ const searchResults = generatePropertySearchResults(property);
       <Pills items={property.features} className="mt-4" />
       <div class="my-4 prose" set:html={descriptionHtml} />
     </Box>
-    <Availability client:load properties={[property]} initialResults={[searchResults]} />
+    <Availability client:visible properties={[property]} initialResults={[searchResults]} />
     <Box class="mt-4">
       <AreaInfo />
     </Box>

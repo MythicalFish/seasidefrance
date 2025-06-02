@@ -16,20 +16,6 @@ const formatCurrencyRounded = (amount: number) => {
   return formatCurrency(Math.ceil(amount)).replace(/\.00$/, '');
 };
 
-// Helper function to get key features for pills
-const getKeyFeatures = (property: PropertyPage): string[] => {
-  const features = [...(property.features || []), ...(property.highlights || [])];
-
-  // Extract bedroom count from rooms data
-  const bedroomCount = property.lodgify.rooms?.length || 0;
-  if (bedroomCount > 0) {
-    features.unshift(`${bedroomCount} bedroom${bedroomCount !== 1 ? 's' : ''}`);
-  }
-
-  // Return first 4 features for display
-  return features.slice(0, 4);
-};
-
 const ResultItem = ({ property, period, resultIndex }: Props) => (
   <div className="border border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 mb-6">
     <div className="block">
@@ -59,7 +45,7 @@ const ResultItem = ({ property, period, resultIndex }: Props) => (
 
           <a href={`/${property.slug}`} className="flex-1">
             <PropertyTitle property={property} resultIndex={resultIndex} />
-            <Pills items={getKeyFeatures(property)} small />
+            <Pills items={property.features.slice(0, 8)} small />
             <DateInfo period={period} />
           </a>
 
