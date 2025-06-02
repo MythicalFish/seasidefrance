@@ -36,9 +36,6 @@ const searchResults = generatePropertySearchResults(property);
       />
       <Pills items={property.features} className="mt-4" />
       <div class="my-4 prose" set:html={descriptionHtml} />
-      <Box>
-        <List title="Highlights" items={property.highlights} />
-      </Box>
       <Button variant="primary" fullWidth href="#availability">Book your stay</Button>
       <Box class="mt-4">
         <AreaInfo />
