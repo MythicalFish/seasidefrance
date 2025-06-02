@@ -1,21 +1,19 @@
 ---
 import { marked } from 'marked';
-import Button from '@components/Button';
 import properties from '@data/properties';
 import Layout from '@modules/Layout/index.astro';
-import PropertyCard from '@components/PropertyCard/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader/index.astro';
 import PropertyGallery from './PropertyGallery/index.astro';
 import Pills from '@components/Pills';
-import List from '@components/List';
 import Box from '@components/Box/index.astro';
 import AreaInfo from '@components/AreaInfo/index.astro';
 import Availability from '@modules/Availability';
 import { generatePropertySearchResults } from '@utils/generateSearchResults';
+import UserIcon from './UserIcon';
+import PropertyList from '@modules/PropertyList/index.astro';
 
 const { property } = Astro.props;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
-const otherProperties = properties.filter((property) => property.slug !== property.slug);
 const searchResults = generatePropertySearchResults(property);
 ---
 
@@ -24,7 +22,13 @@ const searchResults = generatePropertySearchResults(property);
   <main class="container">
     <Box cozy>
       <div class="prose mb-4">
-        <h3>{property.name}</h3>
+        <div class="flex items-center gap-4">
+          <h3 class="m-0">{property.name}</h3>
+          <span class="flex items-center font-default gap-1 opacity-70">
+            <UserIcon width={19} height={19} />
+            <span class="text-lg font-semibold">{property.maxPeople}</span>
+          </span>
+        </div>
         <p>
           {property.intro}
         </p>
@@ -36,17 +40,11 @@ const searchResults = generatePropertySearchResults(property);
       />
       <Pills items={property.features} className="mt-4" />
       <div class="my-4 prose" set:html={descriptionHtml} />
-      <Button variant="primary" fullWidth href="#availability">Book your stay</Button>
-      <Box class="mt-4">
-        <AreaInfo />
-      </Box>
     </Box>
+    <Availability client:load properties={[property]} initialResults={[searchResults]} />
+    <Box class="mt-4">
+      <AreaInfo />
+    </Box>
+    <PropertyList exclude={property.slug} title="Other properties" />
   </main>
-  <Availability client:load properties={[property]} initialResults={[searchResults]} />
-  <section class="mt-8">
-    <h2 class="text-2xl font-bold text-gray-900 mb-4">Other properties</h2>
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-      {otherProperties.map((property) => <PropertyCard property={property} />)}
-    </div>
-  </section>
 </Layout>

@@ -1,0 +1,18 @@
+---
+import PropertyCard from '@components/PropertyCard/index.astro';
+import properties from '@data/properties';
+import type { PropertyPage } from '@data/properties/types';
+import Box from '@components/Box/index.astro';
+
+const { title = '', exclude = '' } = Astro.props;
+const filteredProperties = properties.filter((property) => {
+  return property.slug !== exclude;
+});
+---
+
+<Box>
+  {!!title && <h2 class="text-2xl font-bold text-gray-900 mb-4">{title}</h2>}
+  <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+    {filteredProperties.map((property: PropertyPage) => <PropertyCard property={property} />)}
+  </div>
+</Box>

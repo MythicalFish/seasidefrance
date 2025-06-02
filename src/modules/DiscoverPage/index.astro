@@ -5,9 +5,9 @@ import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader/index.astro';
 import { generateSearchResults } from '@utils/generateSearchResults';
 import Box from '@components/Box/index.astro';
-import PropertyCard from '@components/PropertyCard/index.astro';
 import WhyVisit2 from '@data/_fixtures/why-visit-2.md';
 import AreaInfo from '@components/AreaInfo/index.astro';
+import PropertyList from '@modules/PropertyList/index.astro';
 
 // Generate search results at build time for all properties
 const searchResults = generateSearchResults(properties);
@@ -28,12 +28,7 @@ const { showMore = false, page = 'home' } = Astro.props;
       }
     </Box>
     <Availability properties={properties} client:load initialResults={searchResults} />
-    <Box cozy>
-      <h2 class="text-2xl font-bold text-blue-900 mb-4">Other properties</h2>
-      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {properties.map((property) => <PropertyCard property={property} />)}
-      </div>
-    </Box>
+    <PropertyList title="Other properties" />
   </main>
 </Layout>
 
