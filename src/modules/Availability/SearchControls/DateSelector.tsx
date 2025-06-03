@@ -36,6 +36,7 @@ const DateSelector: React.FC<Props> = ({
 
   const handleMonthChange = (direction: 'prev' | 'next') => {
     const newDate = new Date(startDate);
+    newDate.setDate(1);
     if (direction === 'prev') {
       newDate.setMonth(selectedMonth - 1);
     } else {
