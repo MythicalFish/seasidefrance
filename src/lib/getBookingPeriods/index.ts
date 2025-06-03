@@ -21,7 +21,7 @@ export type AvailablePeriod = {
 function getBookingPeriodsWithPrices(
   ratesResponse: RatesResponse,
   allPeriods: AvailabilityPeriod[],
-  desiredStay = 0,
+  stayLength = 0,
   startDate = new Date()
 ): AvailablePeriod[] {
   if (!ratesResponse?.calendarItems?.length) return [];
@@ -29,7 +29,7 @@ function getBookingPeriodsWithPrices(
   const promoInfo = getPromoInfo(ratesResponse);
   const dateInfo = getDateInfo(ratesResponse);
   const availableDates = getAvailability(allPeriods);
-  const bookingPeriods = getBookingPeriods(availableDates, desiredStay);
+  const bookingPeriods = getBookingPeriods(availableDates, stayLength);
 
   console.log('🟢🟢🟢 bookingPeriods', bookingPeriods.length);
   // Filter booking periods based on startDate

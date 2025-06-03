@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import type { PropertyPage } from '@data/properties/types';
-// TODO: prevent this from running unless stay length is changed
 import getBookingPeriods from '@lib/getBookingPeriods';
 import SearchControls, { type StayLengthOption } from './SearchControls';
 import Layout, { type Result } from './Layout';
-import ControlsToggle from './shared/ControlsToggle';
 import clsx from 'clsx';
 import Box from '@components/Box';
+import { DEFAULT_STAY_LENGTH } from '@lib/getBookingPeriods/constants';
+
+// TODO: check with JS disabled, JSON size, etc.
 
 type Props = {
   properties: PropertyPage[];
@@ -17,11 +18,9 @@ type Props = {
 const Availability = ({ properties, className, initialResults }: Props) => {
   const isSingleProperty = properties.length === 1;
   const [startDate, setStartDate] = useState<Date>(new Date());
-  const [stayLength, setStayLength] = useState<StayLengthOption>(7);
+  const [stayLength, setStayLength] = useState<StayLengthOption>(DEFAULT_STAY_LENGTH);
   const [results, setResults] = useState<Result[]>(initialResults || []);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showControls, setShowControls] = useState<boolean>(!isSingleProperty);
-  const [useFilters, setUseFilters] = useState<boolean>(!isSingleProperty);
   const [filterChanged, setFilterChanged] = useState<boolean>(false);
   const [initialized, setInitialized] = useState<boolean>(false);
 
@@ -51,18 +50,7 @@ const Availability = ({ properties, className, initialResults }: Props) => {
     setIsLoading(false);
   }, [properties, stayLength, startDate, filterChanged]);
 
-  const handleToggleControls = () => {
-    setShowControls(!showControls);
-    if (!showControls) {
-      // When showing controls, enable filters
-      setUseFilters(true);
-    }
-  };
-
   const handleResetFilters = () => {
-    setUseFilters(false);
-    setShowControls(false);
-    // Reset to initial build-time results or generate default 7-night results
     if (initialResults) {
       setResults(initialResults);
     } else {
@@ -80,23 +68,12 @@ const Availability = ({ properties, className, initialResults }: Props) => {
     <Box className={clsx(className)} id="availability">
       <h2 className="text-2xl text-blue-900 mb-4 font-semibold">Book your stay</h2>
 
-      {isSingleProperty && (
-        <ControlsToggle
-          showControls={showControls}
-          onToggleControls={handleToggleControls}
-          onResetFilters={handleResetFilters}
-        />
-      )}
-
-      {/* Search Controls */}
-      {showControls && (
-        <SearchControls
-          startDate={startDate}
-          setStartDate={setStartDate}
-          stayLength={stayLength}
-          setStayLength={setStayLength}
-        />
-      )}
+      <SearchControls
+        startDate={startDate}
+        setStartDate={setStartDate}
+        stayLength={stayLength}
+        setStayLength={setStayLength}
+      />
 
       <Layout results={results} isLoading={isLoading} isSingleProperty={isSingleProperty} />
     </Box>

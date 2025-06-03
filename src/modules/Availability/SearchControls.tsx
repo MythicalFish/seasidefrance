@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-export type StayLengthOption = 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type StayLengthOption = 0 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15;
 
 type Props = {
   startDate: Date;
@@ -24,7 +22,7 @@ const MONTHS = [
   'Dec',
 ];
 
-const STAY_OPTIONS: StayLengthOption[] = [2, 3, 4, 5, 6, 7, 8];
+const STAY_OPTIONS: StayLengthOption[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 const SearchControls: React.FC<Props> = ({
   startDate,
@@ -83,7 +81,7 @@ const SearchControls: React.FC<Props> = ({
   };
 
   const formatStayLength = (nights: StayLengthOption) => {
-    return nights === 8 ? '8+ nights' : `${nights} nights`;
+    return [0, 15].includes(stayLength) ? 'Any length' : `${nights} nights`;
   };
 
   return (
