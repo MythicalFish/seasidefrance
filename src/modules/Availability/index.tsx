@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import type { PropertyPage } from '@data/properties/types';
-import getBookingPeriods from '@lib/getBookingPeriods';
 import SearchControls, { type StayLengthOption } from './SearchControls';
 import Layout, { type Result } from './Layout';
 import clsx from 'clsx';

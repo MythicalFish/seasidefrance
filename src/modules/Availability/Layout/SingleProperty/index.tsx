@@ -1,23 +1,17 @@
 import { useState } from 'react';
 import type { Result } from '../index';
-import LoadingState from '../../shared/LoadingState';
-import EmptyState from '../../shared/EmptyState';
+import EmptyState from '../../EmptyState';
 import PeriodRow from './PeriodRow';
 
 type Props = {
   results: Result[];
-  isLoading: boolean;
 };
 
 const INITIAL_PERIODS_SHOWN = 6;
 const PERIODS_TO_ADD = 5;
 
-const SingleProperty = ({ results, isLoading }: Props) => {
+const SingleProperty = ({ results }: Props) => {
   const [periodsShown, setPeriodsShown] = useState(INITIAL_PERIODS_SHOWN);
-
-  if (isLoading) {
-    return <LoadingState />;
-  }
 
   if (results.length === 0) {
     return <EmptyState />;
