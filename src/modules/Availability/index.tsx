@@ -6,6 +6,7 @@ import Layout, { type Result } from './Layout';
 import clsx from 'clsx';
 import Box from '@components/Box';
 import { DEFAULT_STAY_LENGTH } from '@lib/getBookingPeriods/constants';
+import getSearchResults from '@lib/getSearchResults';
 
 // TODO: check with JS disabled, JSON size, etc.
 
@@ -38,31 +39,10 @@ const Availability = ({ properties, className, initialResults }: Props) => {
     setFilterChanged(false);
     setIsLoading(true);
     console.log('🟢🟢🟢 get results');
-
-    const filteredResults: Result[] = properties.map((property) => {
-      const rates = property.rates;
-      const availability = property.availability || [];
-      const periods = getBookingPeriods(rates, availability, stayLength, startDate);
-      return { property, periods };
-    });
-
-    setResults(filteredResults);
+    const results = getSearchResults(properties, stayLength, startDate);
+    setResults(results);
     setIsLoading(false);
   }, [properties, stayLength, startDate, filterChanged]);
-
-  const handleResetFilters = () => {
-    if (initialResults) {
-      setResults(initialResults);
-    } else {
-      const defaultResults: Result[] = properties.map((property) => {
-        const rates = property.rates;
-        const availability = property.availability || [];
-        const periods = getBookingPeriods(rates, availability, 0, startDate); // Get all natural periods
-        return { property, periods };
-      });
-      setResults(defaultResults);
-    }
-  };
 
   return (
     <Box className={clsx(className)} id="availability">

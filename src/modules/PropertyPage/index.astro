@@ -8,13 +8,13 @@ import Pills from '@components/Pills';
 import Box from '@components/Box/index.astro';
 import AreaInfo from '@components/AreaInfo/index.astro';
 import Availability from '@modules/Availability';
-import { generatePropertySearchResults } from '@utils/generateSearchResults';
+import getSearchResults from '@lib/getSearchResults';
 import UserIcon from './UserIcon';
 import PropertyList from '@modules/PropertyList/index.astro';
 
 const { property } = Astro.props;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
-const searchResults = generatePropertySearchResults(property);
+const searchResults = getSearchResults([property]);
 ---
 
 <Layout>
@@ -41,7 +41,7 @@ const searchResults = generatePropertySearchResults(property);
       <Pills items={property.features} className="mt-4" />
       <div class="my-4 prose" set:html={descriptionHtml} />
     </Box>
-    <Availability client:visible properties={[property]} initialResults={[searchResults]} />
+    <Availability client:visible properties={[property]} initialResults={searchResults} />
     <Box class="mt-4">
       <AreaInfo />
     </Box>

@@ -1,15 +1,33 @@
 ---
-import LayoutSmall from './LayoutSmall.astro';
-import LayoutWide from './LayoutWide.astro';
 import type { PropertyPage } from '@data/properties/types';
+import PropertyPhoto from './PropertyPhoto/index.astro';
+import clsx from 'clsx';
 
 interface Props {
   property: PropertyPage;
-  wide?: boolean;
+  className?: string;
 }
 
-const { property, wide = false } = Astro.props;
+const { property, className } = Astro.props;
+const imageUrl = property.lodgify?.imageUrl || '';
 ---
 
-{wide && <LayoutWide property={property} />}
-{!wide && <LayoutSmall property={property} />}
+<div
+  class={clsx(
+    'border bg-white border-gray-200 shadow-md p-8 rounded-lg overflow-hidden hover:shadow-lg transition-shadow',
+    className
+  )}
+>
+  <a href={`/${property.slug}`} class="block mb-4">
+    <PropertyPhoto propertyId={property.id} imageUrl={imageUrl} />
+  </a>
+  <div>
+    <div class="prose">
+      <h3>{property.name}</h3>
+      <p>
+        {property.intro}
+        <a href={`/${property.slug}`}>Read more</a>
+      </p>
+    </div>
+  </div>
+</div>
