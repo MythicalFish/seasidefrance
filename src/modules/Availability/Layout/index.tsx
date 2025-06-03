@@ -1,5 +1,5 @@
 import type { PropertyPage } from '@data/properties/types';
-import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
+import type { AvailablePeriod } from '@lib/getBookingPeriods';
 import SingleProperty from './SingleProperty';
 import MultipleProperties from './MultipleProperties';
 

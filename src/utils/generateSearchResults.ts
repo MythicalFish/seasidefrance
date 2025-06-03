@@ -1,6 +1,6 @@
 import type { PropertyPage } from '@data/properties/types';
-import getPeriods from '@components/DateSelector/getPeriods';
-import type { Result } from '@modules/Availability/SearchResults';
+import getBookingPeriods from '@lib/getBookingPeriods';
+import type { Result } from '@modules/Availability/Layout';
 
 /**
  * Generate default search results for properties at build time.
@@ -14,7 +14,7 @@ export const generateSearchResults = (properties: PropertyPage[]): Result[] => {
     const availability = property.availability || [];
 
     // Get all naturally available periods (no stay length filter)
-    const periods = getPeriods(rates, availability, 0, startDate);
+    const periods = getBookingPeriods(rates, availability, 0, startDate);
 
     return { property, periods };
   });
@@ -30,7 +30,7 @@ export const generatePropertySearchResults = (property: PropertyPage): Result =>
   const availability = property.availability || [];
 
   // Get all naturally available periods (no stay length filter)
-  const periods = getPeriods(rates, availability, 0, startDate);
+  const periods = getBookingPeriods(rates, availability, 0, startDate);
 
   return { property, periods };
 };

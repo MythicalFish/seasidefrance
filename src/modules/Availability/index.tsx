@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { PropertyPage } from '@data/properties/types';
-import getPeriods from '@components/DateSelector/getPeriods';
+// TODO: prevent this from running unless stay length is changed
+import getBookingPeriods from '@lib/getBookingPeriods';
 import SearchControls, { type StayLengthOption } from './SearchControls';
-import Layout, { type Result, type DisplayMode } from './Layout';
+import Layout, { type Result } from './Layout';
 import ControlsToggle from './shared/ControlsToggle';
 import clsx from 'clsx';
 import Box from '@components/Box';
@@ -10,7 +11,7 @@ import Box from '@components/Box';
 type Props = {
   properties: PropertyPage[];
   className?: string;
-  initialResults?: Result[]; // Back to optional - provides default 7-night results
+  initialResults?: Result[];
 };
 
 const Availability = ({ properties, className, initialResults }: Props) => {
@@ -29,7 +30,7 @@ const Availability = ({ properties, className, initialResults }: Props) => {
       const defaultResults: Result[] = properties.map((property) => {
         const rates = property.rates;
         const availability = property.availability || [];
-        const periods = getPeriods(rates, availability, 0, startDate); // Get all natural periods
+        const periods = getBookingPeriods(rates, availability, 0, startDate); // Get all natural periods
         return { property, periods };
       });
       setResults(defaultResults);
@@ -45,7 +46,7 @@ const Availability = ({ properties, className, initialResults }: Props) => {
     const filteredResults: Result[] = properties.map((property) => {
       const rates = property.rates;
       const availability = property.availability || [];
-      const periods = getPeriods(rates, availability, stayLength, startDate);
+      const periods = getBookingPeriods(rates, availability, stayLength, startDate);
       return { property, periods };
     });
     setResults(filteredResults);
@@ -70,7 +71,7 @@ const Availability = ({ properties, className, initialResults }: Props) => {
       const defaultResults: Result[] = properties.map((property) => {
         const rates = property.rates;
         const availability = property.availability || [];
-        const periods = getPeriods(rates, availability, 0, startDate); // Get all natural periods
+        const periods = getBookingPeriods(rates, availability, 0, startDate); // Get all natural periods
         return { property, periods };
       });
       setResults(defaultResults);

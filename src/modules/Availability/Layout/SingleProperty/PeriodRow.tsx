@@ -1,4 +1,4 @@
-import type { AvailablePeriod } from '@components/DateSelector/getPeriods';
+import type { AvailablePeriod } from '@lib/getBookingPeriods';
 import { formatDate, formatCurrency } from '@lib/date';
 import { getCheckoutUrl } from '@lib/utils';
 import Button from '@components/Button';

@@ -1,6 +1,6 @@
 import { formatDate } from 'src/lib/date';
 import { currencySymbol, getCheckoutUrl } from '@lib/utils';
-import type { AvailablePeriod } from './getPeriods';
+import type { AvailablePeriod } from '@lib/getBookingPeriods';
 
 import styles from './styles.module.css';
 

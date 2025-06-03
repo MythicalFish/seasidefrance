@@ -6,11 +6,6 @@ export type AvailabilityObj = {
   checkOutDate: string;
 };
 
-export const getFirstAvailableDate = (availability: AvailabilityPeriod[]): string => {
-  if (!availability) return '';
-  return availability.find((period) => period.available === 1)?.start || '';
-};
-
 const getAvailability = (periods: AvailabilityPeriod[]): AvailabilityObj[] => {
   if (!periods) return [];
   let availabilities: AvailabilityObj[] = [];

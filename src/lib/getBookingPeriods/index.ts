@@ -18,7 +18,7 @@ export type AvailablePeriod = {
   pricePerNight: number;
 };
 
-export function findAvailablePeriods(
+function getBookingPeriodsWithPrices(
   ratesResponse: RatesResponse,
   allPeriods: AvailabilityPeriod[],
   desiredStay = 0,
@@ -125,4 +125,4 @@ export function findAvailablePeriods(
   return withPromo;
 }
 
-export default findAvailablePeriods;
+export default getBookingPeriodsWithPrices;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { RatesResponse } from '@data/fetchRates/types';
 import type { AvailabilityPeriod } from '@data/fetchAvailability/types';
-import { findAvailablePeriods } from './getPeriods';
+import getBookingPeriods from '@lib/getBookingPeriods';
 import Item from './Item';
 import SwiperSection from '@components/Swiper';
 
@@ -33,10 +33,7 @@ const AvailablePeriods = ({
   const [enableSwiper, setEnableSwiper] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [desiredStay, setDesiredStay] = useState(7);
-  const periods = findAvailablePeriods(rates, availability, desiredStay, startDate)?.slice(
-    0,
-    limit
-  );
+  const periods = getBookingPeriods(rates, availability, desiredStay, startDate)?.slice(0, limit);
 
   useEffect(() => {
     console.log('🟢🟢🟢 startDate', startDate);
