@@ -31,6 +31,7 @@ function getBookingPeriodsWithPrices(
   const availableDates = getAvailability(allPeriods);
   const bookingPeriods = getBookingPeriods(availableDates, desiredStay);
 
+  console.log('🟢🟢🟢 bookingPeriods', bookingPeriods.length);
   // Filter booking periods based on startDate
   const startDateStr = startDate.toISOString().split('T')[0];
   let filteredPeriods = bookingPeriods.filter((period) => {

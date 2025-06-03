@@ -22,36 +22,34 @@ const Availability = ({ properties, className, initialResults }: Props) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showControls, setShowControls] = useState<boolean>(!isSingleProperty);
   const [useFilters, setUseFilters] = useState<boolean>(!isSingleProperty);
+  const [filterChanged, setFilterChanged] = useState<boolean>(false);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
-  // Generate initial results if not provided (fallback for client-side)
   useEffect(() => {
-    if (!initialResults && !useFilters) {
-      setIsLoading(true);
-      const defaultResults: Result[] = properties.map((property) => {
-        const rates = property.rates;
-        const availability = property.availability || [];
-        const periods = getBookingPeriods(rates, availability, 0, startDate); // Get all natural periods
-        return { property, periods };
-      });
-      setResults(defaultResults);
-      setIsLoading(false);
+    if (!initialized) {
+      setInitialized(true);
+      return;
     }
-  }, [properties, initialResults, useFilters, startDate]);
+    console.log('🟢🟢🟢 filterChanged', stayLength, startDate);
+    setFilterChanged(true);
+  }, [stayLength, startDate]);
 
-  // Only run client-side filtering when filters are explicitly enabled
   useEffect(() => {
-    if (!useFilters) return;
-
+    if (!filterChanged) return;
+    setFilterChanged(false);
     setIsLoading(true);
+    console.log('🟢🟢🟢 get results');
+
     const filteredResults: Result[] = properties.map((property) => {
       const rates = property.rates;
       const availability = property.availability || [];
       const periods = getBookingPeriods(rates, availability, stayLength, startDate);
       return { property, periods };
     });
+
     setResults(filteredResults);
     setIsLoading(false);
-  }, [properties, stayLength, startDate, useFilters]);
+  }, [properties, stayLength, startDate, filterChanged]);
 
   const handleToggleControls = () => {
     setShowControls(!showControls);

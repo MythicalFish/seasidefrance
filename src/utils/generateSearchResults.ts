@@ -1,6 +1,7 @@
 import type { PropertyPage } from '@data/properties/types';
 import getBookingPeriods from '@lib/getBookingPeriods';
 import type { Result } from '@modules/Availability/Layout';
+import { sortResults } from '@lib/getBookingPeriods/utils/sortResults';
 
 /**
  * Generate default search results for properties at build time.
@@ -9,7 +10,7 @@ import type { Result } from '@modules/Availability/Layout';
 export const generateSearchResults = (properties: PropertyPage[]): Result[] => {
   const startDate = new Date();
 
-  return properties.map((property) => {
+  const results = properties.map((property) => {
     const rates = property.rates;
     const availability = property.availability || [];
 
@@ -18,6 +19,8 @@ export const generateSearchResults = (properties: PropertyPage[]): Result[] => {
 
     return { property, periods };
   });
+
+  return sortResults(results);
 };
 
 /**

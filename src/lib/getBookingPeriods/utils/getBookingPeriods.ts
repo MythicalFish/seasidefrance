@@ -3,9 +3,11 @@ import getBookingPeriodsAny from './getBookingPeriodsAny';
 
 const getBookingPeriods = (
   availabilities: AvailabilityObj[],
-  desiredStay = 7
+  desiredStay = 7,
+  limit = 1
 ): AvailabilityObj[] => {
   const result: AvailabilityObj[] = [];
+  let count = 0;
 
   availabilities.forEach((availability) => {
     // Sort nights to ensure consecutive date checking
@@ -29,6 +31,8 @@ const getBookingPeriods = (
               checkInDate,
               checkOutDate,
             });
+            count++;
+            if (limit > 0 && count >= limit) return;
           }
         }
       }
@@ -49,6 +53,8 @@ const getBookingPeriods = (
             checkInDate,
             checkOutDate,
           });
+          count++;
+          if (limit > 0 && count >= limit) return;
         }
       }
     }
