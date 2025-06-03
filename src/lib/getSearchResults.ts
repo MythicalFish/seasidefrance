@@ -21,14 +21,15 @@ function getSearchResults(
   stayLength = DEFAULT_STAY_LENGTH,
   startDate = new Date()
 ): Result[] {
+  let limit = 1;
+  if (properties.length === 1) limit = 10;
   const results = properties.map((property) => {
     const rates = property.rates;
     const availability = property.availability || [];
-    const periods = getBookingPeriods(rates, availability, stayLength, startDate);
+    const periods = getBookingPeriods(rates, availability, stayLength, startDate, limit);
     return { property, periods };
   });
-  return results;
-  // return sortResults(results);
+  return sortResults(results);
 }
 
 export default getSearchResults;

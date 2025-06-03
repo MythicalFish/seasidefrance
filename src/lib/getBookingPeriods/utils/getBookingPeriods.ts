@@ -5,7 +5,8 @@ import { DEFAULT_STAY_LENGTH } from '../constants';
 const getBookingPeriods = (
   availabilities: AvailabilityObj[],
   stayLength = DEFAULT_STAY_LENGTH,
-  limit = 1
+  limit = 10,
+  startDate = new Date()
 ): AvailabilityObj[] => {
   if ([0, 15].includes(stayLength)) {
     return getBookingPeriodsAny(availabilities);
@@ -13,8 +14,12 @@ const getBookingPeriods = (
 
   const result: AvailabilityObj[] = [];
   let count = 0;
+  const startDateStr = startDate.toISOString().split('T')[0];
 
   availabilities.forEach((availability) => {
+    if (availability.checkOutDate < startDateStr) {
+      return;
+    }
     // Sort nights to ensure consecutive date checking
     const sortedNights = availability.nights.sort();
 
@@ -35,7 +40,8 @@ const getBookingPeriods = (
           checkOutDate,
         });
         count++;
-        if (limit > 0 && count >= limit) return;
+        // TODO: not working
+        if (limit > 0 && count >= limit) continue;
       }
     }
   });
@@ -61,6 +67,11 @@ const areConsecutiveNights = (nights: string[]): boolean => {
   return true;
 };
 
-export default (availabilities: AvailabilityObj[], stayLength: number): AvailabilityObj[] => {
-  return getBookingPeriods(availabilities, stayLength);
+export default (
+  availabilities: AvailabilityObj[],
+  stayLength: number,
+  limit: number,
+  startDate: Date
+): AvailabilityObj[] => {
+  return getBookingPeriods(availabilities, stayLength, limit, startDate);
 };

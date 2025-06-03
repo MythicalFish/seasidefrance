@@ -22,14 +22,15 @@ function getBookingPeriodsWithPrices(
   ratesResponse: RatesResponse,
   allPeriods: AvailabilityPeriod[],
   stayLength = 0,
-  startDate = new Date()
+  startDate = new Date(),
+  limit = 10
 ): AvailablePeriod[] {
   if (!ratesResponse?.calendarItems?.length) return [];
 
   const promoInfo = getPromoInfo(ratesResponse);
   const dateInfo = getDateInfo(ratesResponse);
   const availableDates = getAvailability(allPeriods);
-  const bookingPeriods = getBookingPeriods(availableDates, stayLength);
+  const bookingPeriods = getBookingPeriods(availableDates, stayLength, limit, startDate);
 
   console.log('🟢🟢🟢 bookingPeriods', bookingPeriods.length);
   // Filter booking periods based on startDate
@@ -61,7 +62,7 @@ function getBookingPeriodsWithPrices(
   //   console.log(p.name, p.bookingDates);
   // });
   // console.log('🟢🟢🟢 dateInfo', dateInfo);
-  // console.log('availableDates', availableDates);
+  console.log('availableDates', availableDates);
   // console.log('bookingPeriods', bookingPeriods);
   // console.log('startDateStr', startDateStr);
   // console.log('filteredPeriods', filteredPeriods);
