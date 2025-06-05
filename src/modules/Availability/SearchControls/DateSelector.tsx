@@ -16,17 +16,21 @@ const MONTHS = [
 ];
 
 type Props = {
+  selectedDay: number;
   selectedMonth: number;
   selectedYear: number;
   startDate: Date;
   setStartDate: (date: Date) => void;
+  setIsPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const DateSelector: React.FC<Props> = ({
+  selectedDay,
   selectedMonth,
   setStartDate,
   selectedYear,
   startDate,
+  setIsPickerOpen,
 }) => {
   const isPrevMonthDisabled = () => {
     const prevMonth = new Date(selectedYear, selectedMonth - 1, 1);
@@ -71,9 +75,13 @@ const DateSelector: React.FC<Props> = ({
         <ChevronLeftIcon />
       </button>
 
-      <div className="px-2 py-3 font-medium text-gray-900 min-w-[60px] text-center">
-        {MONTHS[selectedMonth]}
-      </div>
+      <button
+        type="button"
+        className="px-2 py-3 font-default text-slate-700 min-w-[60px] text-center whitespace-nowrap"
+        onClick={() => setIsPickerOpen((prev) => !prev)}
+      >
+        {selectedDay} {MONTHS[selectedMonth]} {selectedYear}
+      </button>
 
       <button
         type="button"

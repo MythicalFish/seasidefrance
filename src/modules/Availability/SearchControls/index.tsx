@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import DateSelector from './DateSelector';
-import ExactDateSelector from './ExactDateSelector';
+import DayPicker from './DayPicker';
 import { ChevronLeftIcon, ChevronRightIcon } from './chevrons';
 
 export type StayLengthOption = 0 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15;
@@ -21,8 +22,10 @@ const SearchControls: React.FC<Props> = ({
 }) => {
   const currentYear = new Date().getFullYear();
   const nextYear = currentYear + 1;
+  const selectedDay = new Date(startDate);
   const selectedYear = startDate.getFullYear();
   const selectedMonth = startDate.getMonth();
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   const handleYearToggle = () => {
     const newYear = selectedYear === currentYear ? nextYear : currentYear;
@@ -47,18 +50,13 @@ const SearchControls: React.FC<Props> = ({
     <div className="mb-8">
       <div className="flex items-center gap-2">
         <DateSelector
+          selectedDay={selectedDay.getDate()}
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}
           startDate={startDate}
           setStartDate={setStartDate}
+          setIsPickerOpen={setIsPickerOpen}
         />
-        <button
-          type="button"
-          onClick={handleYearToggle}
-          className="px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-center font-medium text-gray-900 hover:bg-gray-100 transition-colors min-w-[80px]"
-        >
-          {selectedYear}
-        </button>
 
         {/* For Label */}
         <div className="text-sm font-medium text-gray-700">For</div>
@@ -75,7 +73,7 @@ const SearchControls: React.FC<Props> = ({
             <ChevronLeftIcon />
           </button>
 
-          <div className="px-4 py-3 font-medium text-gray-900 min-w-[100px] text-center">
+          <div className="py-3 font-default text-slate-700 min-w-[100px] text-center">
             {formatStayLength(stayLength)}
           </div>
 
@@ -90,7 +88,14 @@ const SearchControls: React.FC<Props> = ({
           </button>
         </div>
       </div>
-      <ExactDateSelector startDate={startDate} setStartDate={setStartDate} />
+      {isPickerOpen && (
+        <DayPicker
+          startDate={startDate}
+          setStartDate={setStartDate}
+          isPickerOpen={isPickerOpen}
+          setIsPickerOpen={setIsPickerOpen}
+        />
+      )}
     </div>
   );
 };

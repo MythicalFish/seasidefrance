@@ -1,0 +1,7 @@
+.dayPicker {
+  font-family: var(--font-default);
+  --rdp-accent-color: var(--highlight);
+  & :global(.rdp-month_caption) {
+    display: none;
+  }
+}
