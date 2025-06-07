@@ -48,8 +48,8 @@ const Availability = ({ properties, className, initialResults }: Props) => {
 
   return (
     <Box className={clsx(className)} id="availability">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl text-blue-900 m-0 font-semibold">Book your stay</h2>
+      <div className="flex flex-col md:flex-row justify-between md:items-center mb-8">
+        <h2 className="text-2xl text-blue-900 mb-4 md:mb-0 m-0 font-semibold">Book your stay</h2>
         <SearchControls
           startDate={startDate}
           setStartDate={setStartDate}

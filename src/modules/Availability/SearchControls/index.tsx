@@ -56,7 +56,7 @@ const SearchControls: React.FC<Props> = ({
             <ChevronLeftIcon />
           </button>
 
-          <div className="py-3 font-default text-slate-700 min-w-[100px] text-center">
+          <div className="py-3 font-default text-slate-700 min-w-[60px] text-center">
             {formatStayLength(stayLength)}
           </div>
 
