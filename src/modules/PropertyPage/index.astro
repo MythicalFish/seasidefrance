@@ -1,6 +1,5 @@
 ---
 import { marked } from 'marked';
-import properties from '@data/properties';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader/index.astro';
 import PropertyGallery from './PropertyGallery/index.astro';
@@ -11,6 +10,7 @@ import Availability from '@modules/Availability';
 import getSearchResults from '@lib/getSearchResults';
 import UserIcon from './UserIcon';
 import PropertyList from '@modules/PropertyList/index.astro';
+import Hero from '@components/Hero/index.astro';
 
 const { property } = Astro.props;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
@@ -20,13 +20,9 @@ const searchResults = getSearchResults([property]);
 <Layout>
   <SiteHeader />
   <main>
-    <div class="container">
+    <Hero title={property.name} />
+    <div class="container -mt-20">
       <Box cozy>
-        <PropertyGallery
-          propertyId={property.id}
-          mainImageUrl={property.lodgify?.imageUrl}
-          imageInfo={property.roomInfo.images}
-        />
         <div class="prose mb-4">
           <div class="flex items-center gap-4">
             <h3 class="m-0">{property.name}</h3>
@@ -39,6 +35,11 @@ const searchResults = getSearchResults([property]);
             {property.intro}
           </p>
         </div>
+        <PropertyGallery
+          propertyId={property.id}
+          mainImageUrl={property.lodgify?.imageUrl}
+          imageInfo={property.roomInfo.images}
+        />
         <Pills items={property.features} className="mt-4" />
         <div class="my-4 prose" set:html={descriptionHtml} />
       </Box>

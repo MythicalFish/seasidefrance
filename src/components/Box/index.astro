@@ -1,12 +1,16 @@
 ---
 import clsx from 'clsx';
-const { id, class: className, cozy = false, glassy = false } = Astro.props;
+const { id, class: className, cozy = false, glassy = false, alt = false } = Astro.props;
 import styles from './styles.module.css';
 ---
 
 <section
   id={id}
-  class={clsx(styles.box, className, { [styles.cozy]: cozy, [styles.glassy]: glassy })}
+  class={clsx(styles.box, className, {
+    [styles.cozy]: cozy,
+    [styles.glassy]: glassy,
+    [styles.alt]: alt,
+  })}
 >
   <slot />
 </section>

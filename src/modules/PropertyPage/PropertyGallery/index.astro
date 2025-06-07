@@ -76,7 +76,7 @@ const carouselId = `carousel-${propertyId}`;
 
 {
   allPhotos.length > 0 && (
-    <>
+    <div class={styles.gallery}>
       <div class={clsx(styles.swiper, styles.mainSwiper, 'swiper', 'main-swiper', carouselId)}>
         <div class="swiper-wrapper">
           {allPhotos.map((photo, index) => (
@@ -116,7 +116,7 @@ const carouselId = `carousel-${propertyId}`;
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -210,11 +210,20 @@ const carouselId = `carousel-${propertyId}`;
               const currentSpeed = swiper.params.speed;
               swiper.params.speed = 0; // Disable animation for the jump
               swiper.slideToLoop(index);
+              swiper.autoplay.stop();
               // Restore speed after a very short delay to ensure the jump is instant
               setTimeout(() => {
                 swiper.params.speed = currentSpeed;
               }, 50); // 50ms should be enough
             });
+          });
+        }
+
+        // Stop autoplay when scrolling thumbnail strip
+        const thumbnailStrip = carousel.parentElement?.querySelector('[class*="thumbnailStrip"]');
+        if (thumbnailStrip) {
+          thumbnailStrip.addEventListener('scroll', () => {
+            swiper.autoplay.stop();
           });
         }
       });

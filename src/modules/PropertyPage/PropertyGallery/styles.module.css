@@ -8,6 +8,9 @@
     align-items: center;
     background: #f8f9fa;
   }
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
 }
 
 .mainImage {
@@ -70,6 +73,9 @@
 .thumbnailContainer {
   width: 100%;
   padding: 4px 0;
+  @media (max-width: 768px) {
+    padding: 1px 0;
+  }
 }
 
 .thumbnailStrip {
@@ -78,6 +84,9 @@
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #cbd5e0 #f7fafc;
+  @media (max-width: 768px) {
+    gap: 1px;
+  }
   &::-webkit-scrollbar {
     height: 6px;
   }
@@ -121,11 +130,21 @@
     object-fit: cover;
   }
   @media (max-width: 768px) {
+    border-radius: 0;
     width: 100px;
     height: 67px;
   }
   @media (max-width: 480px) {
     width: 80px;
     height: 53px;
+  }
+}
+/**
+ * Misx
+ */
+
+.gallery {
+  @media (max-width: 768px) {
+    margin: 0 -20px;
   }
 }
