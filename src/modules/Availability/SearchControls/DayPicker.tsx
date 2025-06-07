@@ -10,12 +10,19 @@ type Props = {
   setStartDate: (date: Date) => void;
   isPickerOpen: boolean;
   setIsPickerOpen: (isOpen: boolean) => void;
+  setExactDateSelected: (isSelected: boolean) => void;
 };
 
-const ExactDateSelector = ({ startDate, setStartDate, setIsPickerOpen }: Props) => {
+const ExactDateSelector = ({
+  startDate,
+  setStartDate,
+  setIsPickerOpen,
+  setExactDateSelected,
+}: Props) => {
   const handleDateSelect = (date: Date | undefined) => {
     if (date) setStartDate(date);
     setIsPickerOpen(false);
+    setExactDateSelected(true);
   };
 
   return (

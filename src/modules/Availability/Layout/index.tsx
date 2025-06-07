@@ -12,16 +12,15 @@ export type DisplayMode = 'multiple' | 'singleProperty';
 
 type Props = {
   results: Result[];
-  isLoading: boolean;
   isSingleProperty: boolean;
 };
 
-const Layout = ({ results, isLoading, isSingleProperty }: Props) => {
+const Layout = ({ results, isSingleProperty }: Props) => {
   if (isSingleProperty) {
-    return <SingleProperty results={results} isLoading={isLoading} />;
+    return <SingleProperty results={results} />;
   }
 
-  return <MultipleProperties results={results} isLoading={isLoading} />;
+  return <MultipleProperties results={results} />;
 };
 
 export default Layout;

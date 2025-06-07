@@ -10,6 +10,8 @@ type Props = {
   setStartDate: (date: Date) => void;
   stayLength: StayLengthOption;
   setStayLength: (length: StayLengthOption) => void;
+  isPickerOpen: boolean;
+  setIsPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const STAY_OPTIONS: StayLengthOption[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
@@ -19,11 +21,12 @@ const SearchControls: React.FC<Props> = ({
   setStartDate,
   stayLength,
   setStayLength,
+  isPickerOpen,
+  setIsPickerOpen,
 }) => {
   const selectedDay = new Date(startDate);
   const selectedYear = startDate.getFullYear();
   const selectedMonth = startDate.getMonth();
-  const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   const handleStayLengthChange = (direction: 'prev' | 'next') => {
     const currentIndex = STAY_OPTIONS.indexOf(stayLength);
@@ -39,22 +42,10 @@ const SearchControls: React.FC<Props> = ({
   };
 
   return (
-    <div className="mb-8">
+    <>
       <div className="flex items-center gap-2">
-        <DateSelector
-          selectedDay={selectedDay.getDate()}
-          selectedMonth={selectedMonth}
-          selectedYear={selectedYear}
-          startDate={startDate}
-          setStartDate={setStartDate}
-          setIsPickerOpen={setIsPickerOpen}
-        />
-
-        {/* For Label */}
-        <div className="text-sm font-medium text-gray-700">For</div>
-
         {/* Stay Length Navigation */}
-        <div className="flex items-center border border-gray-300 rounded-lg">
+        <div className="flex items-center border border-gray-300 rounded-[99px]">
           <button
             type="button"
             onClick={() => handleStayLengthChange('prev')}
@@ -79,16 +70,17 @@ const SearchControls: React.FC<Props> = ({
             <ChevronRightIcon />
           </button>
         </div>
-      </div>
-      {isPickerOpen && (
-        <DayPicker
+        <div className="text-sm font-medium text-gray-700">From</div>
+        <DateSelector
+          selectedDay={selectedDay.getDate()}
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
           startDate={startDate}
           setStartDate={setStartDate}
-          isPickerOpen={isPickerOpen}
           setIsPickerOpen={setIsPickerOpen}
         />
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

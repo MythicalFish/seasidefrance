@@ -31,4 +31,13 @@ function getSearchResults(
   return sortResults(results);
 }
 
+export function exactMatchFound(results: Result[], startDate: Date): boolean {
+  const startDateStr = startDate.toISOString().split('T')[0];
+  return results.some((result) => {
+    return result.periods.some((period) => {
+      return period.checkInDate === startDateStr;
+    });
+  });
+}
+
 export default getSearchResults;

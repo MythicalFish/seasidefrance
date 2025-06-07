@@ -39,7 +39,8 @@ const DateSelector: React.FC<Props> = ({
   };
 
   const handleMonthChange = (direction: 'prev' | 'next') => {
-    const newDate = new Date(startDate);
+    const startDateStr = startDate.toISOString().split('T')[0];
+    const newDate = new Date(startDateStr);
     newDate.setDate(1);
     if (direction === 'prev') {
       newDate.setMonth(selectedMonth - 1);
@@ -64,12 +65,12 @@ const DateSelector: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex items-center border border-gray-300 rounded-lg">
+    <div className="flex items-center border border-gray-300 rounded-[99px] overflow-hidden">
       <button
         type="button"
         onClick={() => handleMonthChange('prev')}
         disabled={isPrevMonthDisabled()}
-        className="p-3 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="px-3 py-4 hover:bg-gray-50 border-r border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         aria-label="Previous month"
       >
         <ChevronLeftIcon />
@@ -77,7 +78,7 @@ const DateSelector: React.FC<Props> = ({
 
       <button
         type="button"
-        className="px-2 py-3 font-default text-slate-700 min-w-[60px] text-center whitespace-nowrap"
+        className="px-2 py-3 font-default text-slate-700 min-w-[60px] text-center whitespace-nowrap hover:bg-gray-50 transition-colors"
         onClick={() => setIsPickerOpen((prev) => !prev)}
       >
         {selectedDay} {MONTHS[selectedMonth]} {selectedYear}
@@ -86,7 +87,7 @@ const DateSelector: React.FC<Props> = ({
       <button
         type="button"
         onClick={() => handleMonthChange('next')}
-        className="p-3 hover:bg-gray-50 transition-colors"
+        className="px-3 py-4 hover:bg-gray-50 border-l border-gray-300 transition-colors"
         aria-label="Next month"
       >
         <ChevronRightIcon />
