@@ -21,13 +21,21 @@ const { page }: Props = Astro.props;
     </div>
     <div class="hidden md:block">
       {
+        page !== 'chateau-de-rochebonne' && (
+          <Button variant="secondary" href="/chateau-de-rochebonne">
+            Stay in Le Château
+          </Button>
+        )
+      }
+      <Button variant="secondary" href="#contact">Contact us</Button>
+      {
         ['discover', 'home'].includes(page ?? '') ? (
           <Button variant="primary" href="#availability">
-            Book your stay
+            See Availability
           </Button>
         ) : (
           <Button variant="primary" href="/#availability">
-            Book your stay
+            See Availability
           </Button>
         )
       }
