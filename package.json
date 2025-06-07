@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "rm -rf .cache && astro build",
     "preview": "astro preview",
     "fetch-properties": "tsx src/lib/scripts/fetchProperties.ts",
     "fetch-roomInfo": "tsx src/lib/scripts/fetchRoomInfo.ts",
