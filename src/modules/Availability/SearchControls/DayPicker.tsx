@@ -27,6 +27,7 @@ const ExactDateSelector = ({ startDate, setStartDate, setIsPickerOpen }: Props) 
       className={styles.dayPicker}
       hideNavigation
       month={startDate}
+      timeZone="+01:00"
     />
   );
 };

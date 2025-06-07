@@ -10,7 +10,6 @@ function sortResults(results: Result[]): Result[] {
 
     const aFirstAvailableDate = aPeriod.checkInDate;
     const bFirstAvailableDate = bPeriod.checkInDate;
-    console.log(aFirstAvailableDate, bFirstAvailableDate);
 
     return aFirstAvailableDate.localeCompare(bFirstAvailableDate);
   });

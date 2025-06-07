@@ -20,18 +20,10 @@ const SearchControls: React.FC<Props> = ({
   stayLength,
   setStayLength,
 }) => {
-  const currentYear = new Date().getFullYear();
-  const nextYear = currentYear + 1;
   const selectedDay = new Date(startDate);
   const selectedYear = startDate.getFullYear();
   const selectedMonth = startDate.getMonth();
   const [isPickerOpen, setIsPickerOpen] = useState(false);
-
-  const handleYearToggle = () => {
-    const newYear = selectedYear === currentYear ? nextYear : currentYear;
-    const newDate = new Date(newYear, selectedMonth, 1);
-    setStartDate(newDate);
-  };
 
   const handleStayLengthChange = (direction: 'prev' | 'next') => {
     const currentIndex = STAY_OPTIONS.indexOf(stayLength);
