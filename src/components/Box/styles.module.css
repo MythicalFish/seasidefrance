@@ -1,7 +1,7 @@
 .box {
   background-color: #fff;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 60px;
   overflow: hidden;
   position: relative;
   border: 1px solid #fff;
@@ -12,9 +12,9 @@
     @apply max-w-screen-lg mx-auto;
   }
   @media (min-width: 768px) {
-    padding: 20px;
+    padding: 40px 50px;
     &.cozy {
-      padding: 40px;
+      padding: 60px 70px;
     }
   }
 }

@@ -1,21 +1,28 @@
 ---
+import clsx from 'clsx';
 import WhyVisit1 from '@data/_fixtures/why-visit-1.md';
 import AreaPhotos from './AreaPhotos/index.astro';
+import styles from './styles.module.css';
 const { showReadMore = false, title } = Astro.props;
 ---
 
-<div class="prose mb-4">
-  {title && <h2 class="mb-4 text-blue-900">{title}</h2>}
-  <WhyVisit1 />
-  {
-    showReadMore && (
-      <p>
-        <a href="/discover">Read more</a>
-      </p>
-    )
-  }
-</div>
-<AreaPhotos />
+<section class={clsx(styles.bg, 'pt-20 pb-24 px-4')}>
+  <div class="container">
+    <div class="prose mb-4 text-white">
+      {title && <h2 class="mb-4 text-white">{title}</h2>}
+      <WhyVisit1 />
+      {
+        showReadMore ? (
+          <p>
+            <a href="/discover#about-the-area">Read more</a>
+          </p>
+        ) : (
+          <AreaPhotos />
+        )
+      }
+    </div>
+  </div>
+</section>
 
 <!-- <a
   href="https://www.tripadvisor.com/Tourism-g2064961-Charente_Maritime_Nouvelle_Aquitaine-Vacations.html"

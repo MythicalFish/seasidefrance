@@ -19,32 +19,34 @@ const searchResults = getSearchResults([property]);
 
 <Layout>
   <SiteHeader />
-  <main class="container">
-    <Box cozy>
-      <div class="prose mb-4">
-        <div class="flex items-center gap-4">
-          <h3 class="m-0">{property.name}</h3>
-          <span class="flex items-center font-default gap-1 opacity-70">
-            <UserIcon width={19} height={19} />
-            <span class="text-lg font-semibold">{property.maxPeople}</span>
-          </span>
+  <main>
+    <PropertyGallery
+      propertyId={property.id}
+      mainImageUrl={property.lodgify?.imageUrl}
+      imageInfo={property.roomInfo.images}
+    />
+    <div class="container">
+      <Box cozy>
+        <div class="prose mb-4">
+          <div class="flex items-center gap-4">
+            <h3 class="m-0">{property.name}</h3>
+            <span class="flex items-center font-default gap-1 opacity-70">
+              <UserIcon width={19} height={19} />
+              <span class="text-lg font-semibold">{property.maxPeople}</span>
+            </span>
+          </div>
+          <p>
+            {property.intro}
+          </p>
         </div>
-        <p>
-          {property.intro}
-        </p>
-      </div>
-      <PropertyGallery
-        propertyId={property.id}
-        mainImageUrl={property.lodgify?.imageUrl}
-        imageInfo={property.roomInfo.images}
-      />
-      <Pills items={property.features} className="mt-4" />
-      <div class="my-4 prose" set:html={descriptionHtml} />
-    </Box>
-    <Availability client:visible properties={[property]} initialResults={searchResults} />
-    <Box class="mt-4">
-      <AreaInfo />
-    </Box>
-    <PropertyList exclude={property.slug} title="Other properties" />
+        <Pills items={property.features} className="mt-4" />
+        <div class="my-4 prose" set:html={descriptionHtml} />
+      </Box>
+      <Availability client:visible properties={[property]} initialResults={searchResults} />
+      <Box class="mt-4">
+        <AreaInfo />
+      </Box>
+      <PropertyList exclude={property.slug} title="Other properties" />
+    </div>
   </main>
 </Layout>

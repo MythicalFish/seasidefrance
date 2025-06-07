@@ -84,7 +84,7 @@ const carouselId = `carousel-${propertyId}`;
               <Picture
                 src={photo.image}
                 alt={photo.description || ''}
-                width={1013}
+                width={1728}
                 height={540}
                 class={styles.mainImage}
               />
@@ -96,7 +96,7 @@ const carouselId = `carousel-${propertyId}`;
         <div class="swiper-button-prev" />
       </div>
 
-      <div class={styles.thumbnailContainer}>
+      {/* <div class={styles.thumbnailContainer}>
         <div class={styles.thumbnailStrip}>
           {allPhotos.map((photo, index) => (
             <button
@@ -114,7 +114,7 @@ const carouselId = `carousel-${propertyId}`;
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
