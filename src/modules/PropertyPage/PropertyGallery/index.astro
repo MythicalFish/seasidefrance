@@ -84,7 +84,7 @@ const carouselId = `carousel-${propertyId}`;
               <Picture
                 src={photo.image}
                 alt={photo.description || ''}
-                width={1728}
+                width={1013}
                 height={540}
                 class={styles.mainImage}
               />
@@ -94,6 +94,7 @@ const carouselId = `carousel-${propertyId}`;
 
         <div class="swiper-button-next" />
         <div class="swiper-button-prev" />
+        <div class="swiper-pagination" />
       </div>
 
       {/* <div class={styles.thumbnailContainer}>
@@ -121,9 +122,10 @@ const carouselId = `carousel-${propertyId}`;
 
 <script>
   import Swiper from 'swiper';
-  import { Navigation, Mousewheel } from 'swiper/modules';
+  import { Navigation, Mousewheel, Autoplay, Pagination } from 'swiper/modules';
   import 'swiper/css';
   import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
 
   // Initialize all carousels on the page
   document.addEventListener('DOMContentLoaded', () => {
@@ -133,30 +135,40 @@ const carouselId = `carousel-${propertyId}`;
     setTimeout(() => {
       carousels.forEach((carousel) => {
         // Get thumbnails for this carousel first
-        const thumbnails = carousel.parentElement?.querySelectorAll('.thumbnail');
+        // const thumbnails = carousel.parentElement?.querySelectorAll('.thumbnail');
 
-        function updateActiveThumbnail(activeIndex: number) {
-          if (thumbnails) {
-            thumbnails.forEach((thumb, index) => {
-              const isActive = index === activeIndex;
-              thumb.classList.toggle('active', isActive);
-              if (isActive) {
-                // thumb.scrollIntoView({
-                //   behavior: 'smooth',
-                //   block: 'nearest',
-                //   inline: 'center'
-                // });
-              }
-            });
-          }
-        }
+        // function updateActiveThumbnail(activeIndex: number) {
+        //   if (thumbnails) {
+        //     thumbnails.forEach((thumb, index) => {
+        //       const isActive = index === activeIndex;
+        //       thumb.classList.toggle('active', isActive);
+        //       if (isActive) {
+        //         // thumb.scrollIntoView({
+        //         //   behavior: 'smooth',
+        //         //   block: 'nearest',
+        //         //   inline: 'center'
+        //         // });
+        //       }
+        //     });
+        //   }
+        // }
 
         const swiper = new Swiper(carousel as HTMLElement, {
-          modules: [Navigation, Mousewheel],
+          modules: [Navigation, Mousewheel, Autoplay, Pagination],
           slidesPerView: 1,
           spaceBetween: 0,
           loop: true,
-          autoplay: false,
+          speed: 1200,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+          },
           mousewheel: {
             enabled: true,
             forceToAxis: true,
@@ -169,26 +181,28 @@ const carouselId = `carousel-${propertyId}`;
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
           },
-          on: {
-            slideChange: function (swiper) {
-              updateActiveThumbnail(swiper.realIndex);
-            },
-          },
+          // on: {
+          //   slideChange: function (swiper) {
+          //     updateActiveThumbnail(swiper.realIndex);
+          //   },
+          // },
         });
 
-        if (thumbnails) {
-          thumbnails.forEach((thumbnail, index) => {
-            thumbnail.addEventListener('click', () => {
-              const currentSpeed = swiper.params.speed;
-              swiper.params.speed = 0; // Disable animation for the jump
-              swiper.slideToLoop(index);
-              // Restore speed after a very short delay to ensure the jump is instant
-              setTimeout(() => {
-                swiper.params.speed = currentSpeed;
-              }, 50); // 50ms should be enough
-            });
-          });
-        }
+        console.log('🟢🟢🟢 swiper', swiper);
+
+        // if (thumbnails) {
+        //   thumbnails.forEach((thumbnail, index) => {
+        //     thumbnail.addEventListener('click', () => {
+        //       const currentSpeed = swiper.params.speed;
+        //       swiper.params.speed = 0; // Disable animation for the jump
+        //       swiper.slideToLoop(index);
+        //       // Restore speed after a very short delay to ensure the jump is instant
+        //       setTimeout(() => {
+        //         swiper.params.speed = currentSpeed;
+        //       }, 50); // 50ms should be enough
+        //     });
+        //   });
+        // }
       });
     }, 500);
   });
