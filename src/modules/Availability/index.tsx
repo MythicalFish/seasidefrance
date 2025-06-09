@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react';
 import type { PropertyPage } from '@data/properties/types';
 import SearchControls, { type StayLengthOption } from './SearchControls';
-import Layout, { type Result } from './Layout';
+import LayoutMultiple from './LayoutMultiple';
+import LayoutSingle from './LayoutSingle';
 import clsx from 'clsx';
 import Box from '@components/Box';
 import { DEFAULT_STAY_LENGTH } from '@lib/getBookingPeriods/constants';
 import getSearchResults, { exactMatchFound } from '@lib/getSearchResults';
 import DayPicker from './SearchControls/DayPicker';
+import type { AvailablePeriod } from '@lib/getBookingPeriods';
+
+export type Result = {
+  property: PropertyPage;
+  periods: AvailablePeriod[];
+};
 
 // TODO: check with JS disabled, JSON size, etc.
 
@@ -83,7 +90,7 @@ const Availability = ({ properties, className, initialResults }: Props) => {
           </p>
         </div>
       )}
-      <Layout results={results} isSingleProperty={isSingleProperty} />
+      {isSingleProperty ? <LayoutSingle results={results} /> : <LayoutMultiple results={results} />}
     </Box>
   );
 };

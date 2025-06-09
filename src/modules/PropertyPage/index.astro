@@ -12,6 +12,7 @@ import UserIcon from './UserIcon';
 import PropertyList from '@modules/PropertyList/index.astro';
 import Hero from '@components/Hero/index.astro';
 
+import properties from '@data/properties';
 const { property } = Astro.props;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
 const searchResults = getSearchResults([property]);

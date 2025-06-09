@@ -64,8 +64,11 @@ const DateSelector: React.FC<Props> = ({
     setStartDate(newDate);
   };
 
+  const currentYear = new Date().getFullYear();
+  const isNextYear = selectedYear > currentYear;
+
   return (
-    <div className="flex items-center border border-gray-300 rounded-[99px] overflow-hidden">
+    <div className="flex items-center border border-gray-300 min-w-[152px] rounded-[99px] overflow-hidden flex-auto w-full">
       <button
         type="button"
         onClick={() => handleMonthChange('prev')}
@@ -78,10 +81,11 @@ const DateSelector: React.FC<Props> = ({
 
       <button
         type="button"
-        className="px-2 py-3 font-default text-slate-700 min-w-[60px] text-center whitespace-nowrap hover:bg-gray-50 transition-colors"
+        className="px-2 py-0 font-default text-slate-700 min-w-[60px] w-full flex-auto text-center whitespace-nowrap hover:bg-gray-50 transition-colors"
         onClick={() => setIsPickerOpen((prev) => !prev)}
       >
-        {selectedDay} {MONTHS[selectedMonth]} {selectedYear}
+        {selectedDay} {MONTHS[selectedMonth]}
+        {isNextYear && <div className="text-sm font-medium text-gray-400">{selectedYear}</div>}
       </button>
 
       <button

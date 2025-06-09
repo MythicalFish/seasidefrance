@@ -177,9 +177,9 @@ const ActionButtons = ({
     >
       Book Now
     </Button>
-    {/* <Button variant="secondary" size="sm" href={`/${property.slug}#availability`}>
-      See all dates
-    </Button> */}
+    <Button variant="secondary" size="sm" href={`/${property.slug}`}>
+      More info
+    </Button>
   </div>
 );
 

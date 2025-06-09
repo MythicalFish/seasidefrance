@@ -17,15 +17,15 @@ const { page }: Props = Astro.props;
       </a>
       <!-- <div class="text-blue-900 text-2xl">Holiday homes in South West France</div> -->
     </div>
-    <div class="hidden md:block">
+    <div class="hidden md:flex items-center gap-4">
       {
         page !== 'chateau-de-rochebonne' && (
-          <Button variant="secondary" href="/chateau-de-rochebonne">
+          <Button variant="plain" href="/chateau-de-rochebonne">
             Stay in Le Château
           </Button>
         )
       }
-      <Button variant="secondary" href="#contact">Contact us</Button>
+      <Button variant="plain" href="#contact" className="mr-2">Contact us</Button>
       {
         ['discover', 'home'].includes(page ?? '') ? (
           <Button variant="primary" href="#availability">

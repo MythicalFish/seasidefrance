@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { Result } from '../index';
-import EmptyState from '../../EmptyState';
 import PeriodRow from './PeriodRow';
 
 type Props = {
@@ -13,18 +12,15 @@ const PERIODS_TO_ADD = 5;
 const SingleProperty = ({ results }: Props) => {
   const [periodsShown, setPeriodsShown] = useState(INITIAL_PERIODS_SHOWN);
 
-  if (results.length === 0) {
-    return <EmptyState />;
-  }
-
-  // For single property, we only have one result
   const result = results[0];
-  const { periods } = result;
 
-  if (periods.length === 0) {
-    return <EmptyState message="No available periods for your selected criteria." />;
+  if (!result?.periods?.length) {
+    return (
+      <div className="text-center py-12">No available periods for your selected criteria.</div>
+    );
   }
 
+  const { periods } = result;
   const shownPeriods = periods.slice(0, periodsShown);
   const hasMorePeriods = periods.length > periodsShown;
   const remainingCount = periods.length - periodsShown;

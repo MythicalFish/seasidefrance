@@ -45,7 +45,7 @@ const SearchControls: React.FC<Props> = ({
     <>
       <div className="flex items-center gap-2">
         {/* Stay Length Navigation */}
-        <div className="flex items-center border border-gray-300 rounded-[99px]">
+        <div className="flex items-center border border-gray-300 rounded-[99px] flex-auto w-full">
           <button
             type="button"
             onClick={() => handleStayLengthChange('prev')}
@@ -56,7 +56,7 @@ const SearchControls: React.FC<Props> = ({
             <ChevronLeftIcon />
           </button>
 
-          <div className="py-3 font-default text-slate-700 min-w-[60px] text-center">
+          <div className="py-3 font-default text-slate-700 min-w-[60px] w-full flex-auto text-center">
             {formatStayLength(stayLength)}
           </div>
 
