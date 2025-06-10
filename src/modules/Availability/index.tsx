@@ -23,10 +23,41 @@ type Props = {
   initialResults?: Result[];
 };
 
+const parseQueryParams = () => {
+  if (typeof window === 'undefined') {
+    return { startDate: new Date(), stayLength: DEFAULT_STAY_LENGTH as StayLengthOption };
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const dateParam = params.get('date');
+  const stayLengthParam = params.get('stayLength');
+
+  let startDate = new Date();
+  if (dateParam) {
+    const parsedDate = new Date(dateParam);
+    if (!isNaN(parsedDate.getTime())) {
+      startDate = parsedDate;
+    }
+  }
+
+  let stayLength: StayLengthOption = DEFAULT_STAY_LENGTH as StayLengthOption;
+  if (stayLengthParam) {
+    const parsedLength = parseInt(stayLengthParam, 10);
+    const validLengths: StayLengthOption[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    if (!isNaN(parsedLength) && validLengths.includes(parsedLength as StayLengthOption)) {
+      stayLength = parsedLength as StayLengthOption;
+    }
+  }
+
+  return { startDate, stayLength };
+};
+
 const Availability = ({ properties, className, initialResults }: Props) => {
   const isSingleProperty = properties.length === 1;
   const [startDate, setStartDate] = useState<Date>(new Date());
-  const [stayLength, setStayLength] = useState<StayLengthOption>(DEFAULT_STAY_LENGTH);
+  const [stayLength, setStayLength] = useState<StayLengthOption>(
+    DEFAULT_STAY_LENGTH as StayLengthOption
+  );
   const [results, setResults] = useState<Result[]>(initialResults || []);
   const [filterChanged, setFilterChanged] = useState(false);
   const [initialized, setInitialized] = useState(false);
@@ -38,13 +69,20 @@ const Availability = ({ properties, className, initialResults }: Props) => {
     hasExactMatch = exactMatchFound(results, startDate);
   }
 
+  // Initialize from query params after hydration
+  useEffect(() => {
+    const { startDate: queryStartDate, stayLength: queryStayLength } = parseQueryParams();
+    setStartDate(queryStartDate);
+    setStayLength(queryStayLength);
+    setInitialized(true);
+  }, []);
+
   useEffect(() => {
     if (!initialized) {
-      setInitialized(true);
       return;
     }
     setFilterChanged(true);
-  }, [stayLength, startDate]);
+  }, [stayLength, startDate, initialized]);
 
   useEffect(() => {
     if (!filterChanged) return;
@@ -52,6 +90,21 @@ const Availability = ({ properties, className, initialResults }: Props) => {
     const results = getSearchResults(properties, stayLength, startDate);
     setResults(results);
   }, [filterChanged]);
+
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const { startDate: newStartDate, stayLength: newStayLength } = parseQueryParams();
+      setStartDate(newStartDate);
+      setStayLength(newStayLength);
+    };
+
+    // Listen for popstate events (browser back/forward)
+    window.addEventListener('popstate', handleUrlChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+    };
+  }, []);
 
   return (
     <Box className={clsx(className)} id="availability">
