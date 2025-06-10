@@ -1,29 +1,16 @@
-import { useState } from 'react';
+import { useStore } from '@nanostores/react';
 import DateSelector from './DateSelector';
 import DayPicker from './DayPicker';
 import { ChevronLeftIcon, ChevronRightIcon } from './chevrons';
+import { searchStore, setStartDate, setStayLength, setIsPickerOpen } from '@stores/searchStore';
 
 export type StayLengthOption = 0 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15;
 
-type Props = {
-  startDate: Date;
-  setStartDate: (date: Date) => void;
-  stayLength: StayLengthOption;
-  setStayLength: (length: StayLengthOption) => void;
-  isPickerOpen: boolean;
-  setIsPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 const STAY_OPTIONS: StayLengthOption[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-const SearchControls: React.FC<Props> = ({
-  startDate,
-  setStartDate,
-  stayLength,
-  setStayLength,
-  isPickerOpen,
-  setIsPickerOpen,
-}) => {
+const SearchControls: React.FC = () => {
+  const { startDate, stayLength, isPickerOpen } = useStore(searchStore);
+
   const selectedDay = new Date(startDate);
   const selectedYear = startDate.getFullYear();
   const selectedMonth = startDate.getMonth();
@@ -77,6 +64,7 @@ const SearchControls: React.FC<Props> = ({
           selectedYear={selectedYear}
           startDate={startDate}
           setStartDate={setStartDate}
+          isPickerOpen={isPickerOpen}
           setIsPickerOpen={setIsPickerOpen}
         />
       </div>

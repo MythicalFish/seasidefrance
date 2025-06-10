@@ -21,12 +21,14 @@ type Props = {
   selectedYear: number;
   startDate: Date;
   setStartDate: (date: Date) => void;
-  setIsPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isPickerOpen: boolean;
+  setIsPickerOpen: (isPickerOpen: boolean) => void;
 };
 
 const DateSelector: React.FC<Props> = ({
   selectedDay,
   selectedMonth,
+  isPickerOpen,
   setStartDate,
   selectedYear,
   startDate,
@@ -82,7 +84,7 @@ const DateSelector: React.FC<Props> = ({
       <button
         type="button"
         className="px-2 py-0 font-default text-slate-700 min-w-[60px] w-full flex-auto text-center whitespace-nowrap hover:bg-gray-50 transition-colors"
-        onClick={() => setIsPickerOpen((prev) => !prev)}
+        onClick={() => setIsPickerOpen(!isPickerOpen)}
       >
         {selectedDay} {MONTHS[selectedMonth]}
         {isNextYear && <div className="text-sm font-medium text-gray-400">{selectedYear}</div>}

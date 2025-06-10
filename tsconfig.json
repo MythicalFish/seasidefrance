@@ -13,7 +13,8 @@
       "@utils/*": ["src/utils/*"],
       "@data/*": ["src/data/*"],
       "@lib/*": ["src/lib/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@stores/*": ["src/stores/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"

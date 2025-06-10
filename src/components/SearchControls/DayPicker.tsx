@@ -1,24 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
 import { DayPicker } from 'react-day-picker';
-import { format } from 'date-fns';
 import 'react-day-picker/style.css';
-
-import styles from './styles.module.css';
-
-type Props = {
-  startDate: Date;
-  setStartDate: (date: Date) => void;
-  isPickerOpen: boolean;
-  setIsPickerOpen: (isOpen: boolean) => void;
-  setExactDateSelected: (isSelected: boolean) => void;
-};
-
-const ExactDateSelector = ({
-  startDate,
+import { useStore } from '@nanostores/react';
+import {
+  searchStore,
   setStartDate,
   setIsPickerOpen,
   setExactDateSelected,
-}: Props) => {
+} from '@stores/searchStore';
+
+import styles from './styles.module.css';
+
+const ExactDateSelector = () => {
+  const { startDate } = useStore(searchStore);
+
   const handleDateSelect = (date: Date | undefined) => {
     if (date) setStartDate(date);
     setIsPickerOpen(false);

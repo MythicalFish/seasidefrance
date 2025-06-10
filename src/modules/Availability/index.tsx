@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useStore } from '@nanostores/react';
 import type { PropertyPage } from '@data/properties/types';
-import SearchControls, { type StayLengthOption } from './SearchControls';
+import SearchControls, { type StayLengthOption } from '@components/SearchControls';
 import LayoutMultiple from './LayoutMultiple';
 import LayoutSingle from './LayoutSingle';
 import clsx from 'clsx';
 import Box from '@components/Box';
 import { DEFAULT_STAY_LENGTH } from '@lib/getBookingPeriods/constants';
 import getSearchResults, { exactMatchFound } from '@lib/getSearchResults';
-import DayPicker from './SearchControls/DayPicker';
+import DayPicker from '@components/SearchControls/DayPicker';
 import type { AvailablePeriod } from '@lib/getBookingPeriods';
+import { searchStore, updateSearchState } from '@stores/searchStore';
 
 export type Result = {
   property: PropertyPage;
@@ -54,15 +56,10 @@ const parseQueryParams = () => {
 
 const Availability = ({ properties, className, initialResults }: Props) => {
   const isSingleProperty = properties.length === 1;
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [stayLength, setStayLength] = useState<StayLengthOption>(
-    DEFAULT_STAY_LENGTH as StayLengthOption
-  );
+  const { startDate, stayLength, isPickerOpen, exactDateSelected } = useStore(searchStore);
   const [results, setResults] = useState<Result[]>(initialResults || []);
   const [filterChanged, setFilterChanged] = useState(false);
   const [initialized, setInitialized] = useState(false);
-  const [isPickerOpen, setIsPickerOpen] = useState(false);
-  const [exactDateSelected, setExactDateSelected] = useState(false);
   let hasExactMatch = true;
 
   if (exactDateSelected) {
@@ -72,8 +69,10 @@ const Availability = ({ properties, className, initialResults }: Props) => {
   // Initialize from query params after hydration
   useEffect(() => {
     const { startDate: queryStartDate, stayLength: queryStayLength } = parseQueryParams();
-    setStartDate(queryStartDate);
-    setStayLength(queryStayLength);
+    updateSearchState({
+      startDate: queryStartDate,
+      stayLength: queryStayLength,
+    });
     setInitialized(true);
   }, []);
 
@@ -94,8 +93,10 @@ const Availability = ({ properties, className, initialResults }: Props) => {
   useEffect(() => {
     const handleUrlChange = () => {
       const { startDate: newStartDate, stayLength: newStayLength } = parseQueryParams();
-      setStartDate(newStartDate);
-      setStayLength(newStayLength);
+      updateSearchState({
+        startDate: newStartDate,
+        stayLength: newStayLength,
+      });
     };
 
     // Listen for popstate events (browser back/forward)
@@ -110,24 +111,11 @@ const Availability = ({ properties, className, initialResults }: Props) => {
     <Box className={clsx(className)} id="availability">
       <div className="flex flex-col md:flex-row justify-between md:items-center mb-8">
         <h2 className="text-2xl text-blue-900 mb-4 md:mb-0 m-0 font-semibold">Book your stay</h2>
-        <SearchControls
-          startDate={startDate}
-          setStartDate={setStartDate}
-          stayLength={stayLength}
-          setStayLength={setStayLength}
-          isPickerOpen={isPickerOpen}
-          setIsPickerOpen={setIsPickerOpen}
-        />
+        <SearchControls />
       </div>
       {isPickerOpen && (
         <div className=" flex justify-end -mt-6 mb-8">
-          <DayPicker
-            startDate={startDate}
-            setStartDate={setStartDate}
-            isPickerOpen={isPickerOpen}
-            setIsPickerOpen={setIsPickerOpen}
-            setExactDateSelected={setExactDateSelected}
-          />
+          <DayPicker />
         </div>
       )}
       {!hasExactMatch && (
