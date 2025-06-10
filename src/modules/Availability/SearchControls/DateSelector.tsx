@@ -68,7 +68,7 @@ const DateSelector: React.FC<Props> = ({
   const isNextYear = selectedYear > currentYear;
 
   return (
-    <div className="flex items-center border border-gray-300 min-w-[152px] rounded-[99px] overflow-hidden flex-auto w-full">
+    <div className="flex items-center border border-gray-300 min-w-[160px] rounded-[99px] overflow-hidden flex-auto w-full">
       <button
         type="button"
         onClick={() => handleMonthChange('prev')}
