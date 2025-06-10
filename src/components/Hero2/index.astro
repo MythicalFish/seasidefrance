@@ -1,0 +1,69 @@
+---
+import clsx from 'clsx';
+import styles from './styles.module.css';
+import { Picture } from 'astro:assets';
+
+const photoModules = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/images/photos/area/*.{jpg,jpeg,png}'
+);
+const photoEntries = Object.entries(photoModules);
+---
+
+<section class={clsx(styles.hero)}>
+  <div class={styles.bg} id="hero-bg">
+    {
+      photoEntries.map(([filePath, importFn], index) => {
+        return (
+          <div class={clsx(styles.item, index === 0 && 'active')} data-index={index}>
+            <Picture
+              src={importFn()}
+              alt={filePath}
+              width={1768}
+              height={400}
+              class={styles.image}
+            />
+          </div>
+        );
+      })
+    }
+  </div>
+  <div class={styles.content}>
+    <div class="container">
+      <div class="prose mb-4 text-white">
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initHeroCrossfade() {
+    const heroItems = document.querySelectorAll('[data-index]');
+    if (heroItems.length <= 1) return;
+
+    let currentIndex = 0;
+
+    function showNextImage() {
+      const currentImage = heroItems[currentIndex];
+      const nextIndex = (currentIndex + 1) % heroItems.length;
+      const nextImage = heroItems[nextIndex];
+
+      // Add active class to next image first (both will be visible briefly)
+      nextImage.classList.add('active');
+
+      // Remove active class from current image after a short delay
+      // This ensures proper crossfade without white flash
+      setTimeout(() => {
+        currentImage.classList.remove('active');
+      }, 500);
+
+      currentIndex = nextIndex;
+    }
+
+    // Start the rotation
+    setInterval(showNextImage, 4000);
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', initHeroCrossfade);
+</script>

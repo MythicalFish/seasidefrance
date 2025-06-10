@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import WhyVisit1 from '@data/_fixtures/why-visit-1.md';
 import AreaPhotos from './AreaPhotos/index.astro';
 import styles from './styles.module.css';
+import SearchControls from '@components/SearchControls';
 const { showReadMore = false, title } = Astro.props;
 ---
 
@@ -11,6 +12,7 @@ const { showReadMore = false, title } = Astro.props;
     <div class="prose mb-4 text-white">
       {title && <h2 class="mb-4 text-white">{title}</h2>}
       <WhyVisit1 />
+      <SearchControls client:visible />
       {
         showReadMore ? (
           <p>

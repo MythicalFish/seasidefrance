@@ -8,6 +8,7 @@ import Box from '@components/Box/index.astro';
 import WhyVisit2 from '@data/_fixtures/why-visit-2.md';
 import AreaInfo from '@components/AreaInfo/index.astro';
 import PropertyList from '@modules/PropertyList/index.astro';
+import Hero2 from '@components/Hero2/index.astro';
 
 // Generate search results at build time for all properties
 const searchResults = getSearchResults(properties);
@@ -17,7 +18,13 @@ const { showMore = false, page = 'home' } = Astro.props;
 <Layout>
   <SiteHeader page={page} />
   <main>
-    <AreaInfo showReadMore={!showMore} title="Discover Charente-Maritime" />
+    <Hero2>
+      <div class="container">
+        <div class="prose py-40 text-white">
+          <h2>Discover Charente-Maritime</h2>
+        </div>
+      </div>
+    </Hero2>
     {
       showMore && (
         <Box cozy class="mb-8">
@@ -27,7 +34,7 @@ const { showMore = false, page = 'home' } = Astro.props;
         </Box>
       )
     }
-    <div class="container -mt-20">
+    <div class="container">
       <Availability properties={properties} client:visible initialResults={searchResults} />
       <PropertyList title="Other properties" />
     </div>
