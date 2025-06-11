@@ -21,17 +21,16 @@ const searchResults = getSearchResults([property]);
 <Layout>
   <SiteHeader />
   <main>
-    <Hero title={property.name} />
-    <div class="container -mt-20">
-      <Box cozy class="shad">
+    <div class="container">
+      <Box cozy>
+        <div class="flex items-center gap-4 prose mb-4">
+          <h3 class="m-0">{property.name}</h3>
+          <span class="flex items-center font-open gap-1 opacity-70">
+            <UserIcon width={19} height={19} />
+            <span class="text-lg font-semibold">{property.maxPeople}</span>
+          </span>
+        </div>
         <div class="prose mb-4">
-          <div class="flex items-center gap-4">
-            <h3 class="m-0">{property.name}</h3>
-            <span class="flex items-center font-open gap-1 opacity-70">
-              <UserIcon width={19} height={19} />
-              <span class="text-lg font-semibold">{property.maxPeople}</span>
-            </span>
-          </div>
           <p>
             {property.intro}
           </p>

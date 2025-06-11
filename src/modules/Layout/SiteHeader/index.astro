@@ -9,13 +9,15 @@ type Props = {
 const { page }: Props = Astro.props;
 ---
 
-<header class="p-4 md:p-8 border-b border-gray-200">
+<header class="p-4 md:p-8 bg-[#003950]">
   <div class="container flex md:items-center flex-col md:flex-row gap-4 justify-between">
     <div class="">
-      <a class="block" href="/">
-        <img src={logo.src} alt="Seaside France" width={250} />
+      <a class="leading-none opacity-90 block" href="/">
+        <span class="text-xl text-white opacity-90">
+          <span class="opacity-90">seaside</span>
+          <span class="font-semibold">france</span>
+        </span>
       </a>
-      <!-- <div class="text-blue-900 text-2xl">Holiday homes in South West France</div> -->
     </div>
     <div class="hidden md:flex items-center gap-4">
       {
