@@ -83,7 +83,7 @@ const DateSelector: React.FC<Props> = ({
 
       <button
         type="button"
-        className="px-2 py-0 font-default text-slate-700 min-w-[60px] w-full flex-auto text-center whitespace-nowrap hover:bg-gray-50 transition-colors"
+        className="px-2 py-0 text-slate-700 min-w-[60px] w-full flex-auto text-center whitespace-nowrap hover:bg-gray-50 transition-colors"
         onClick={() => setIsPickerOpen(!isPickerOpen)}
       >
         {selectedDay} {MONTHS[selectedMonth]}

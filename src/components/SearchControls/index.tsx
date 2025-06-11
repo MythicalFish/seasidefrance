@@ -1,12 +1,14 @@
 import { useStore } from '@nanostores/react';
+import clsx from 'clsx';
 import DateSelector from './DateSelector';
-import DayPicker from './DayPicker';
 import { ChevronLeftIcon, ChevronRightIcon } from './chevrons';
 import { searchStore, setStartDate, setStayLength, setIsPickerOpen } from '@stores/searchStore';
 
 export type StayLengthOption = 0 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15;
 
 const STAY_OPTIONS: StayLengthOption[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+import styles from './styles.module.css';
 
 const SearchControls: React.FC = () => {
   const { startDate, stayLength, isPickerOpen } = useStore(searchStore);
@@ -30,7 +32,7 @@ const SearchControls: React.FC = () => {
 
   return (
     <>
-      <div className="flex items-center gap-2">
+      <div className={clsx(styles.container, 'flex items-center gap-2')}>
         {/* Stay Length Navigation */}
         <div className="flex items-center border border-gray-300 rounded-[99px] flex-auto w-full">
           <button
@@ -43,7 +45,7 @@ const SearchControls: React.FC = () => {
             <ChevronLeftIcon />
           </button>
 
-          <div className="py-3 font-default text-slate-700 min-w-[60px] w-full flex-auto text-center">
+          <div className="py-3 text-slate-700 min-w-[60px] w-full flex-auto text-center">
             {formatStayLength(stayLength)}
           </div>
 
