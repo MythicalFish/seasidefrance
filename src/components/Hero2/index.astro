@@ -3,9 +3,7 @@ import clsx from 'clsx';
 import styles from './styles.module.css';
 import { Picture } from 'astro:assets';
 
-const photoModules = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/images/photos/area/*.{jpg,jpeg,png}'
-);
+const photoModules = import.meta.glob<{ default: ImageMetadata }>('./photos/*.{jpg,jpeg,png}');
 const photoEntries = Object.entries(photoModules);
 ---
 
