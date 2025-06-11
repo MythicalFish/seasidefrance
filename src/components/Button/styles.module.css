@@ -51,7 +51,7 @@
 /* Variants */
 .primary {
   background-color: #2563eb;
-  color: #ffffff;
+  color: #ffffff !important;
   border-color: #2563eb;
 
   &:hover {
