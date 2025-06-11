@@ -10,12 +10,19 @@ import Availability from '@modules/Availability';
 import getSearchResults from '@lib/getSearchResults';
 import UserIcon from './UserIcon';
 import PropertyList from '@modules/PropertyList/index.astro';
-import Hero from '@components/Hero/index.astro';
+import Button from '@components/Button';
 
 import properties from '@data/properties';
 const { property } = Astro.props;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
 const searchResults = getSearchResults([property]);
+
+// Find the next property in the list
+const currentIndex = properties.findIndex((p) => p.slug === property.slug);
+const nextProperty =
+  currentIndex !== -1 && currentIndex < properties.length - 1
+    ? properties[currentIndex + 1]
+    : properties[0]; // Loop back to first property if at the end
 ---
 
 <Layout>
@@ -23,17 +30,26 @@ const searchResults = getSearchResults([property]);
   <main>
     <div class="container">
       <Box cozy>
-        <div class="flex items-center gap-4 prose mb-4">
-          <h3 class="m-0">{property.name}</h3>
-          <span class="flex items-center font-open gap-1 opacity-70">
-            <UserIcon width={19} height={19} />
-            <span class="text-lg font-semibold">{property.maxPeople}</span>
-          </span>
-        </div>
-        <div class="prose mb-4">
-          <p>
-            {property.intro}
-          </p>
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-4 prose mb-4">
+              <h3 class="m-0">{property.name}</h3>
+              <span class="flex items-center font-open gap-1 opacity-70">
+                <UserIcon width={19} height={19} />
+                <span class="text-lg font-semibold">{property.maxPeople}</span>
+              </span>
+            </div>
+            <div class="prose mb-4">
+              <p>
+                {property.intro}
+              </p>
+            </div>
+          </div>
+          <div class="hidden lg:block">
+            <Button variant="secondary" href={`/${nextProperty.slug}`}>
+              Next property <i class="codicon codicon-arrow-right"></i>
+            </Button>
+          </div>
         </div>
         <PropertyGallery
           propertyId={property.id}
