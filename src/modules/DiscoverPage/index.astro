@@ -9,6 +9,8 @@ import WhyVisit2 from '@data/_fixtures/why-visit-2.md';
 import AreaInfo from '@components/AreaInfo/index.astro';
 import PropertyList from '@modules/PropertyList/index.astro';
 import Hero2 from '@components/Hero2/index.astro';
+import WhyVisit1 from '@data/_fixtures/why-visit-1.md';
+import AreaPhotos from '@components/AreaInfo/AreaPhotos/index.astro';
 
 // Generate search results at build time for all properties
 const searchResults = getSearchResults(properties);
@@ -21,7 +23,9 @@ const { showMore = false, page = 'home' } = Astro.props;
     <Hero2>
       <div class="container">
         <div class="prose py-40 text-white">
-          <h2>Discover Charente-Maritime</h2>
+          <h2 class="mb-4 text-white">Discover Charente-Maritime</h2>
+          <WhyVisit1 />
+          <AreaPhotos />
         </div>
       </div>
     </Hero2>
