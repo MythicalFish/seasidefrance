@@ -9,36 +9,38 @@ type Props = {
 const { page }: Props = Astro.props;
 ---
 
-<header class="p-4 md:p-8 bg-[#003950]">
-  <div class="container flex md:items-center flex-col md:flex-row gap-4 justify-between">
-    <div class="">
-      <a class="leading-none opacity-90 block" href="/">
-        <span class="text-xl text-white opacity-90">
-          <span class="opacity-90">seaside</span>
-          <span class="font-semibold">france</span>
-        </span>
-      </a>
-    </div>
-    <div class="hidden md:flex items-center gap-4">
-      {
-        page !== 'chateau-de-rochebonne' && (
-          <Button variant="plain" href="/chateau-de-rochebonne">
-            Stay in Le Château
-          </Button>
-        )
-      }
-      <Button variant="plain" href="#contact" className="mr-2">Contact us</Button>
-      {
-        ['discover', 'home'].includes(page ?? '') ? (
-          <Button variant="primary" href="#availability">
-            See Availability
-          </Button>
-        ) : (
-          <Button variant="primary" href="/#availability">
-            See Availability
-          </Button>
-        )
-      }
+<header class="bg-[#003950]">
+  <div class="container">
+    <div class="p-4 md:p-8 flex md:items-center flex-col md:flex-row gap-4 justify-between">
+      <div>
+        <a class="leading-none opacity-90 block" href="/">
+          <span class="text-xl text-white opacity-90">
+            <span class="opacity-90">seaside</span>
+            <span class="font-semibold">france</span>
+          </span>
+        </a>
+      </div>
+      <div class="hidden md:flex items-center gap-4">
+        {
+          page !== 'chateau-de-rochebonne' && (
+            <Button variant="plain" href="/chateau-de-rochebonne">
+              Stay in Le Château
+            </Button>
+          )
+        }
+        <Button variant="plain" href="#contact" className="mr-2">Contact us</Button>
+        {
+          ['discover', 'home'].includes(page ?? '') ? (
+            <Button variant="primary" href="#availability">
+              See Availability
+            </Button>
+          ) : (
+            <Button variant="primary" href="/#availability">
+              See Availability
+            </Button>
+          )
+        }
+      </div>
     </div>
   </div>
 </header>
