@@ -1,0 +1,44 @@
+.gallery {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.imageGrid {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  height: 600px;
+}
+
+.mainImageContainer {
+  height: 100%;
+}
+
+.sideImagesContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  @media (min-width: 1024px) {
+    flex-direction: column;
+  }
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.sideImageWrapper {
+  flex: 1;
+  min-height: 0;
+}
+
+.sideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}

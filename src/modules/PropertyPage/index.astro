@@ -2,7 +2,7 @@
 import { marked } from 'marked';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader/index.astro';
-import PropertyGallery from './PropertyGallery/index.astro';
+import PropertyPhotos from './PropertyPhotos/index.astro';
 import Pills from '@components/Pills';
 import Box from '@components/Box/index.astro';
 import AreaInfo from '@components/AreaInfo/index.astro';
@@ -30,13 +30,21 @@ const nextProperty =
   <main>
     <div class="container">
       <Box>
-        <div class="flex items-center justify-between gap-4">
+        <div class="flex flex-col justify-between items-center lg:flex-row gap-4">
           <div>
-            <div class="flex items-center gap-4 prose mb-4">
+            <div class="flex items-center gap-4 prose mb-4 whitespace-nowrap">
+              <a href="/chateau-de-rochebonne" class="text-lg font-semibold">
+                Domaine de Rochebonne
+              </a>
+              <i class="codicon codicon-chevron-right"></i>
               <h3 class="m-0">{property.name}</h3>
               <span class="flex items-center font-open gap-1 opacity-70">
                 <UserIcon width={19} height={19} />
                 <span class="text-lg font-semibold">{property.maxPeople}</span>
+              </span>
+              <span class="flex items-center font-open gap-1 opacity-70">
+                <i class="codicon codicon-location"></i>
+                <a class="text-lg font-semibold" href="#location">St. Just-Luzac</a>
               </span>
             </div>
             <div class="prose mb-4">
@@ -51,7 +59,7 @@ const nextProperty =
             </Button>
           </div>
         </div>
-        <PropertyGallery
+        <PropertyPhotos
           propertyId={property.id}
           mainImageUrl={property.lodgify?.imageUrl}
           imageInfo={property.roomInfo.images}
