@@ -80,7 +80,7 @@ allPhotos = allPhotos.slice(0, 3);
 {
   allPhotos.length > 0 && (
     <div class={styles.gallery}>
-      <div class={clsx(styles.imageGrid, 'flex flex-col lg:flex-row gap-4 lg:h-[600px]')}>
+      <div class={clsx(styles.imageGrid, 'flex flex-col lg:flex-row gap-1 md:gap-4 lg:h-[600px]')}>
         <div class={clsx(styles.mainImageContainer, 'w-full lg:w-2/3')}>
           <button type="button" class="w-full h-full" data-open-gallery="0">
             <Picture
@@ -92,7 +92,7 @@ allPhotos = allPhotos.slice(0, 3);
             />
           </button>
         </div>
-        <div class={clsx(styles.sideImagesContainer, 'w-full lg:w-1/3')}>
+        <div class={clsx(styles.sideImagesContainer, 'w-full lg:w-1/3 gap-1 md:gap-4')}>
           {allPhotos.slice(1).map((photo, index) => (
             <div class={styles.sideImageWrapper}>
               <button type="button" class="w-full h-full" data-open-gallery={index + 1}>
