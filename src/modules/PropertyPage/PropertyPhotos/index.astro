@@ -82,11 +82,7 @@ allPhotos = allPhotos.slice(0, 3);
     <div class={styles.gallery}>
       <div class={clsx(styles.imageGrid, 'flex flex-col lg:flex-row gap-4 lg:h-[600px]')}>
         <div class={clsx(styles.mainImageContainer, 'w-full lg:w-2/3')}>
-          <button
-            type="button"
-            class="w-full h-full"
-            onclick="document.getElementById('gallery-modal').classList.remove('hidden')"
-          >
+          <button type="button" class="w-full h-full" data-open-gallery>
             <Picture
               src={allPhotos[0].image}
               alt={allPhotos[0].description || ''}
@@ -99,11 +95,7 @@ allPhotos = allPhotos.slice(0, 3);
         <div class={clsx(styles.sideImagesContainer, 'w-full lg:w-1/3')}>
           {allPhotos.slice(1).map((photo) => (
             <div class={styles.sideImageWrapper}>
-              <button
-                type="button"
-                class="w-full h-full"
-                onclick="document.getElementById('gallery-modal').classList.remove('hidden')"
-              >
+              <button type="button" class="w-full h-full" data-open-gallery>
                 <Picture
                   src={photo.image}
                   alt={photo.description || ''}
@@ -121,18 +113,24 @@ allPhotos = allPhotos.slice(0, 3);
 }
 
 <div id="gallery-modal" class="hidden">
-  <Modal
-    client:load
-    isOpen={true}
-    onClose={() => {
-      const modal = document.getElementById('gallery-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-      }
-    }}
-  >
+  <Modal client:load isOpen={true}>
     <div class="w-full h-full">
       <PropertyGallery propertyId={propertyId} mainImageUrl={mainImageUrl} imageInfo={imageInfo} />
     </div>
   </Modal>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('gallery-modal');
+    const openButtons = document.querySelectorAll('[data-open-gallery]');
+
+    openButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (modal) {
+          modal.classList.remove('hidden');
+        }
+      });
+    });
+  });
+</script>
