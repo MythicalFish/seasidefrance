@@ -127,6 +127,8 @@ const carouselId = `carousel-${propertyId}`;
   import 'swiper/css/navigation';
   import 'swiper/css/pagination';
 
+  let swiper: Swiper;
+
   // Initialize all carousels on the page
   document.addEventListener('DOMContentLoaded', () => {
     const carousels = document.querySelectorAll('.main-swiper');
@@ -167,7 +169,7 @@ const carouselId = `carousel-${propertyId}`;
           }
         }
 
-        const swiper = new Swiper(carousel as HTMLElement, {
+        swiper = new Swiper(carousel as HTMLElement, {
           modules: [Navigation, Mousewheel, Autoplay, Pagination],
           slidesPerView: 1,
           spaceBetween: 0,
@@ -202,8 +204,6 @@ const carouselId = `carousel-${propertyId}`;
           },
         });
 
-        console.log('🟢🟢🟢 swiper', swiper);
-
         if (thumbnails) {
           thumbnails.forEach((thumbnail, index) => {
             thumbnail.addEventListener('click', () => {
@@ -229,4 +229,11 @@ const carouselId = `carousel-${propertyId}`;
       });
     }, 500);
   });
+
+  document.addEventListener('set-slide', ((event: Event) => {
+    const customEvent = event as CustomEvent<number>;
+    if (swiper && typeof customEvent.detail === 'number') {
+      swiper.slideToLoop(customEvent.detail);
+    }
+  }) as EventListener);
 </script>

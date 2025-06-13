@@ -82,7 +82,7 @@ allPhotos = allPhotos.slice(0, 3);
     <div class={styles.gallery}>
       <div class={clsx(styles.imageGrid, 'flex flex-col lg:flex-row gap-4 lg:h-[600px]')}>
         <div class={clsx(styles.mainImageContainer, 'w-full lg:w-2/3')}>
-          <button type="button" class="w-full h-full" data-open-gallery>
+          <button type="button" class="w-full h-full" data-open-gallery="0">
             <Picture
               src={allPhotos[0].image}
               alt={allPhotos[0].description || ''}
@@ -93,9 +93,9 @@ allPhotos = allPhotos.slice(0, 3);
           </button>
         </div>
         <div class={clsx(styles.sideImagesContainer, 'w-full lg:w-1/3')}>
-          {allPhotos.slice(1).map((photo) => (
+          {allPhotos.slice(1).map((photo, index) => (
             <div class={styles.sideImageWrapper}>
-              <button type="button" class="w-full h-full" data-open-gallery>
+              <button type="button" class="w-full h-full" data-open-gallery={index + 1}>
                 <Picture
                   src={photo.image}
                   alt={photo.description || ''}
@@ -129,6 +129,14 @@ allPhotos = allPhotos.slice(0, 3);
       button.addEventListener('click', () => {
         if (modal) {
           modal.classList.remove('hidden');
+          const index = button.getAttribute('data-open-gallery');
+          if (index !== null) {
+            const event = new CustomEvent('set-slide', {
+              detail: parseInt(index, 10),
+              bubbles: true,
+            });
+            document.dispatchEvent(event);
+          }
         }
       });
     });

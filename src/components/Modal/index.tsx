@@ -10,7 +10,6 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, children, title }) => {
   function handleClose() {
     const modal = document.getElementById('gallery-modal');
-    console.log('handleClose', modal);
     if (modal) {
       modal.classList.add('hidden');
     }
