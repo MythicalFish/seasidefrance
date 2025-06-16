@@ -79,7 +79,7 @@ allPhotos = allPhotos.slice(0, 3);
 
 {
   allPhotos.length > 0 && (
-    <div class={styles.gallery}>
+    <div class={clsx(styles.gallery, 'hidden md:block')}>
       <div class={clsx(styles.imageGrid, 'flex flex-col lg:flex-row gap-1 md:gap-4 lg:h-[600px]')}>
         <div class={clsx(styles.mainImageContainer, 'w-full lg:w-2/3')}>
           <button type="button" class="w-full h-full" data-open-gallery="0">
@@ -112,7 +112,7 @@ allPhotos = allPhotos.slice(0, 3);
   )
 }
 
-<div id="gallery-modal" class="hidden">
+<div id="gallery-modal" class="md:hidden">
   <Modal client:load isOpen={true}>
     <div class="w-full h-full">
       <PropertyGallery propertyId={propertyId} mainImageUrl={mainImageUrl} imageInfo={imageInfo} />

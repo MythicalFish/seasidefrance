@@ -17,4 +17,10 @@
   @media (max-width: 768px) {
     border-radius: 0;
   }
+  &.noPadMobile {
+    @media (max-width: 768px) {
+      border: none;
+      padding: 0;
+    }
+  }
 }

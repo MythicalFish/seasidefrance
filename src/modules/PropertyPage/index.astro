@@ -8,11 +8,11 @@ import Box from '@components/Box/index.astro';
 import AreaInfo from '@components/AreaInfo/index.astro';
 import Availability from '@modules/Availability';
 import getSearchResults from '@lib/getSearchResults';
-import UserIcon from './UserIcon';
 import PropertyList from '@modules/PropertyList/index.astro';
 import Button from '@components/Button';
 import LocationMap from '@components/Map';
 import properties from '@data/properties';
+import Breadcrumbs from './Breadcrumbs.astro';
 const { property } = Astro.props;
 const descriptionHtml = property.description ? marked.parse(property.description) : '';
 const searchResults = getSearchResults([property]);
@@ -29,24 +29,13 @@ const nextProperty =
   <SiteHeader />
   <main>
     <div class="container">
-      <Box>
-        <div class="flex flex-col justify-between items-center lg:flex-row gap-4">
+      <Box noPadMobile>
+        <Breadcrumbs property={property} />
+        <div class="md:hidden px-4 py-10 bg-[#056c8f] text-[rgb(255,255,255,0.8)] text-center">
+          <h3 class="text-4xl font-serif font-normal">{property.name}</h3>
+        </div>
+        <div class="hidden lg:flex flex-col justify-between items-center lg:flex-row gap-4">
           <div>
-            <div class="flex items-center gap-4 prose mb-4 whitespace-nowrap">
-              <a href="/chateau-de-rochebonne" class="text-lg font-semibold">
-                Domaine de Rochebonne
-              </a>
-              <i class="codicon codicon-chevron-right"></i>
-              <h3 class="m-0">{property.name}</h3>
-              <span class="flex items-center font-open gap-1 opacity-70">
-                <UserIcon width={19} height={19} />
-                <span class="text-lg font-semibold">{property.maxPeople}</span>
-              </span>
-              <span class="flex items-center font-open gap-1 opacity-70">
-                <i class="codicon codicon-location"></i>
-                <a class="text-lg font-semibold" href="#location">St. Just-Luzac</a>
-              </span>
-            </div>
             <div class="prose mb-4">
               <p>
                 {property.intro}
@@ -64,6 +53,13 @@ const nextProperty =
           mainImageUrl={property.lodgify?.imageUrl}
           imageInfo={property.roomInfo.images}
         />
+      </Box>
+      <Box>
+        <div class="lg:hidden prose mb-4">
+          <p>
+            {property.intro}
+          </p>
+        </div>
         <div class="mt-4 flex flex-col lg:flex-row gap-4">
           <div>
             <Pills items={property.features} className="mt-4" />

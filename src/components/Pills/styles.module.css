@@ -22,3 +22,11 @@
   font-family: var(--font-open);
   color: var(--color-slate-700);
 }
+@media (max-width: 768px) {
+  .features {
+    & .item {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
+  }
+}

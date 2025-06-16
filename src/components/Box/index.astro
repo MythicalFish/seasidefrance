@@ -1,6 +1,13 @@
 ---
 import clsx from 'clsx';
-const { id, class: className, cozy = false, glassy = false, alt = false } = Astro.props;
+const {
+  id,
+  class: className,
+  cozy = false,
+  glassy = false,
+  alt = false,
+  noPadMobile = false,
+} = Astro.props;
 import styles from './styles.module.css';
 ---
 
@@ -10,6 +17,7 @@ import styles from './styles.module.css';
     [styles.cozy]: cozy,
     [styles.glassy]: glassy,
     [styles.alt]: alt,
+    [styles.noPadMobile]: noPadMobile,
   })}
 >
   <slot />
