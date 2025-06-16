@@ -13,8 +13,9 @@ import Button from '@components/Button';
 import LocationMap from '@components/Map';
 import properties from '@data/properties';
 import Breadcrumbs from './Breadcrumbs.astro';
+import ReadMore from '@components/ReadMore';
 const { property } = Astro.props;
-const descriptionHtml = property.description ? marked.parse(property.description) : '';
+const descriptionHtml = property.description ? marked.parse(property.description).toString() : '';
 const searchResults = getSearchResults([property]);
 
 // Find the next property in the list
@@ -60,8 +61,8 @@ const nextProperty =
       <Box>
         <div class="flex flex-col lg:flex-row gap-4">
           <div>
-            <Pills items={property.features} className="mt-4" />
-            <div class="my-4 prose">{descriptionHtml}</div>
+            <Pills items={property.features} className="mb-4" />
+            <ReadMore content={descriptionHtml} client:load />
           </div>
           <LocationMap client:load />
         </div>

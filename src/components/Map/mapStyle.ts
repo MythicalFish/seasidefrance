@@ -37,7 +37,7 @@ export default [
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#75c96e',
+        color: '#91cb8b',
       },
     ],
   },
@@ -60,11 +60,38 @@ export default [
     ],
   },
   {
+    featureType: 'landscape.natural.landcover',
+    elementType: 'geometry.fill',
+    stylers: [
+      {
+        color: '#91cb8b',
+      },
+    ],
+  },
+  {
+    featureType: 'landscape.natural.landcover',
+    elementType: 'geometry.stroke',
+    stylers: [
+      {
+        visibility: 'off',
+      },
+    ],
+  },
+  {
     featureType: 'landscape.natural.terrain',
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#41ac39',
+        color: '#91cb8b',
+      },
+    ],
+  },
+  {
+    featureType: 'landscape.natural.terrain',
+    elementType: 'geometry.stroke',
+    stylers: [
+      {
+        color: '#91cb8b',
       },
     ],
   },
@@ -98,7 +125,7 @@ export default [
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#32816a',
+        color: '#1b9878',
       },
     ],
   },
@@ -107,7 +134,10 @@ export default [
     elementType: 'geometry.stroke',
     stylers: [
       {
-        color: '#006394',
+        color: '#91cb8b',
+      },
+      {
+        visibility: 'off',
       },
     ],
   },
@@ -141,7 +171,7 @@ export default [
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#006394',
+        color: '#298fc2',
       },
     ],
   },

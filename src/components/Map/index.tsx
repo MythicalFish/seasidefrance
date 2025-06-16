@@ -7,7 +7,7 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Map = () => {
   return (
-    <div style={{ height: '400px', width: '400px', flex: 'none' }}>
+    <div className="w-full h-[200px] lg:h-[400px] lg:w-[400px] flex-none">
       <GoogleMapReact
         options={{
           styles: mapStyle,
