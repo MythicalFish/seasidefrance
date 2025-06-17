@@ -110,7 +110,7 @@ const Availability = ({ properties, className, initialResults, currentProperty }
 
   let title = 'Book your stay';
   if (currentProperty) {
-    title = `Book your stay at ${currentProperty.name}`;
+    title = `Book your stay here`;
   }
 
   return (
@@ -141,9 +141,7 @@ const Availability = ({ properties, className, initialResults, currentProperty }
         <>
           <LayoutSingle results={results} currentProperty={currentProperty} />
           {results.length > 1 && (
-            <h2 className="text-2xl text-[#003950] mb-4 md:mb-0 mt-8 font-semibold">
-              Other availabilities
-            </h2>
+            <h2 className="text-2xl text-[#003950] mb-4 mt-12 font-semibold">Other properties</h2>
           )}
         </>
       )}
