@@ -23,6 +23,7 @@ type Props = {
   properties: PropertyPage[];
   className?: string;
   initialResults?: Result[];
+  currentProperty?: PropertyPage;
 };
 
 const parseQueryParams = () => {
@@ -54,7 +55,7 @@ const parseQueryParams = () => {
   return { startDate, stayLength };
 };
 
-const Availability = ({ properties, className, initialResults }: Props) => {
+const Availability = ({ properties, className, initialResults, currentProperty }: Props) => {
   const isSingleProperty = properties.length === 1;
   const { startDate, stayLength, isPickerOpen, exactDateSelected } = useStore(searchStore);
   const [results, setResults] = useState<Result[]>(initialResults || []);
@@ -107,10 +108,15 @@ const Availability = ({ properties, className, initialResults }: Props) => {
     };
   }, []);
 
+  let title = 'Book your stay';
+  if (currentProperty) {
+    title = `Book your stay at ${currentProperty.name}`;
+  }
+
   return (
     <Box className={clsx(className)} id="availability">
       <div className="flex flex-col md:flex-row justify-between md:items-center mb-8">
-        <h2 className="text-2xl text-[#003950] mb-4 md:mb-0 m-0 font-semibold">Book your stay</h2>
+        <h2 className="text-2xl text-[#003950] mb-4 md:mb-0 m-0 font-semibold">{title}</h2>
         <SearchControls />
       </div>
       {isPickerOpen && (
@@ -131,7 +137,17 @@ const Availability = ({ properties, className, initialResults }: Props) => {
           </p>
         </div>
       )}
-      {isSingleProperty ? <LayoutSingle results={results} /> : <LayoutMultiple results={results} />}
+      {currentProperty && (
+        <>
+          <LayoutSingle results={results} currentProperty={currentProperty} />
+          {results.length > 1 && (
+            <h2 className="text-2xl text-[#003950] mb-4 md:mb-0 mt-8 font-semibold">
+              Other availabilities
+            </h2>
+          )}
+        </>
+      )}
+      <LayoutMultiple results={results} currentProperty={currentProperty} />
     </Box>
   );
 };

@@ -16,7 +16,7 @@ const PeriodRow = ({ period, propertyId }: Props) => (
         <div className="text-sm text-gray-900 font-medium">{formatDate(period.checkInDate)}</div>
         {period.discount > 0 && (
           <div className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full w-fit">
-            {period.promoName} -{period.discount}%
+            -{period.discount}%
           </div>
         )}
       </div>

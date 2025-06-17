@@ -1,19 +1,16 @@
 ---
 import Availability from '@modules/Availability';
-import properties from '@data/properties';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader/index.astro';
 import getSearchResults from '@lib/getSearchResults';
 import Box from '@components/Box/index.astro';
 import WhyVisit2 from '@data/_fixtures/why-visit-2.md';
-import AreaInfo from '@components/AreaInfo/index.astro';
 import PropertyList from '@modules/PropertyList/index.astro';
 import Hero2 from '@components/Hero2/index.astro';
 import WhyVisit1 from '@data/_fixtures/why-visit-1.md';
-import AreaPhotos from '@components/AreaInfo/AreaPhotos/index.astro';
 import Button from '@components/Button';
 
-// Generate search results at build time for all properties
+import properties from '@data/properties';
 const searchResults = getSearchResults(properties);
 const { showMore = false, page = 'home' } = Astro.props;
 ---

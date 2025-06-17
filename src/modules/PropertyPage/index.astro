@@ -11,12 +11,13 @@ import getSearchResults from '@lib/getSearchResults';
 import PropertyList from '@modules/PropertyList/index.astro';
 import Button from '@components/Button';
 import LocationMap from '@components/Map';
-import properties from '@data/properties';
 import Breadcrumbs from './Breadcrumbs.astro';
 import ReadMore from '@components/ReadMore';
+
 const { property } = Astro.props;
+import properties from '@data/properties';
 const descriptionHtml = property.description ? marked.parse(property.description).toString() : '';
-const searchResults = getSearchResults([property]);
+const searchResults = getSearchResults(properties);
 
 // Find the next property in the list
 const currentIndex = properties.findIndex((p) => p.slug === property.slug);
@@ -67,7 +68,12 @@ const nextProperty =
           <LocationMap client:load />
         </div>
       </Box>
-      <Availability client:visible properties={[property]} initialResults={searchResults} />
+      <Availability
+        client:visible
+        currentProperty={property}
+        properties={properties}
+        initialResults={searchResults}
+      />
       <Box class="mt-4">
         <AreaInfo />
       </Box>
