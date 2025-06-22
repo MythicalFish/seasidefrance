@@ -10,7 +10,7 @@ type Props = {
 };
 
 const SiteHeader: React.FC<Props> = ({ page }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <header className={clsx(styles.headerContainer, isOpen && styles.open)}>
       <div className={styles.header}>
