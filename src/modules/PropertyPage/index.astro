@@ -1,7 +1,7 @@
 ---
 import { marked } from 'marked';
 import Layout from '@modules/Layout/index.astro';
-import SiteHeader from '@modules/Layout/SiteHeader/index.astro';
+import SiteHeader from '@modules/Layout/SiteHeader';
 import PropertyPhotos from './PropertyPhotos/index.astro';
 import Pills from '@components/Pills';
 import Box from '@components/Box/index.astro';
@@ -28,7 +28,7 @@ const nextProperty =
 ---
 
 <Layout>
-  <SiteHeader />
+  <SiteHeader client:load />
   <main>
     <div class="container">
       <Box noPadMobile>

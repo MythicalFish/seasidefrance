@@ -1,7 +1,7 @@
 ---
 import Availability from '@modules/Availability';
 import Layout from '@modules/Layout/index.astro';
-import SiteHeader from '@modules/Layout/SiteHeader/index.astro';
+import SiteHeader from '@modules/Layout/SiteHeader';
 import getSearchResults from '@lib/getSearchResults';
 import Box from '@components/Box/index.astro';
 import WhyVisit2 from '@data/_fixtures/why-visit-2.md';
@@ -16,7 +16,7 @@ const { showMore = false, page = 'home' } = Astro.props;
 ---
 
 <Layout>
-  <SiteHeader page={page} />
+  <SiteHeader client:load page={page} />
   <main>
     <Hero2>
       <div class="container">
