@@ -12,6 +12,7 @@ interface BaseButtonProps {
   disabled?: boolean;
   className?: string;
   icon?: React.ReactNode;
+  iconName?: string;
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean;
 }
@@ -41,6 +42,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   className,
   icon,
+  iconName,
   iconPosition = 'left',
   fullWidth = false,
   ...props
@@ -57,9 +59,17 @@ const Button: React.FC<ButtonProps> = ({
     className
   );
 
-  const iconElement = icon && (
+  let iconElement = icon && (
     <span className={clsx(styles.icon, styles[`icon-${iconPosition}`])}>{icon}</span>
   );
+
+  if (iconName) {
+    iconElement = (
+      <i
+        className={clsx(styles.icon, styles[`icon-${iconPosition}`], `codicon codicon-${iconName}`)}
+      />
+    );
+  }
 
   const content = (
     <>

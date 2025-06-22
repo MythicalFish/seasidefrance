@@ -4,20 +4,23 @@ import UserIcon from './UserIcon';
 const { property } = Astro.props;
 ---
 
-<div class="hidden lg:flex items-center gap-4 prose mb-4 whitespace-nowrap">
-  <a href="/chateau-de-rochebonne" class="text-lg font-semibold hidden lg:block">
+<div class="hidden md:flex items-center gap-4 mb-4 whitespace-nowrap">
+  <a
+    href="/chateau-de-rochebonne"
+    class="text-lg font-open font-semibold hidden md:block text-[#056c8f]"
+  >
     Domaine de Rochebonne
   </a>
-  <span class="hidden lg:block">
+  <span class="hidden md:inline leading-none h-[16px] opacity-50">
     <i class="codicon codicon-chevron-right"></i>
   </span>
-  <h3 class="m-0 text-lg font-semibold">{property.name}</h3>
-  <span class="flex items-center font-open gap-1 opacity-70">
+  <h3 class="m-0 text-lg font-open font-semibold">{property.name}</h3>
+  <span class="flex items-center font-open gap-1 opacity-50">
     <UserIcon width={19} height={19} />
     <span class="text-lg font-semibold">{property.maxPeople}</span>
   </span>
-  <span class="flex items-center font-open gap-1 opacity-70">
+  <!-- <span class="flex items-center font-open gap-1">
     <i class="codicon codicon-location"></i>
-    <a class="text-lg font-semibold" href="#location">St. Just-Luzac</a>
-  </span>
+    <a class="text-lg font-semibold text-[#056c8f]" href="#location">St. Just-Luzac</a>
+  </span> -->
 </div>

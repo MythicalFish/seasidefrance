@@ -32,15 +32,9 @@ const nextProperty =
   <main>
     <div class="container">
       <Box noPadMobile>
-        <Breadcrumbs property={property} />
-        <div class="md:hidden px-4 py-10 bg-[#056c8f] text-[rgb(255,255,255,0.8)] text-center">
-          <h3 class="text-4xl font-serif font-normal mb-4">{property.name}</h3>
-          <p>
-            {property.intro}
-          </p>
-        </div>
         <div class="hidden lg:flex flex-col justify-between items-center lg:flex-row gap-4">
           <div>
+            <Breadcrumbs property={property} />
             <div class="prose mb-4">
               <p>
                 {property.intro}
@@ -48,10 +42,22 @@ const nextProperty =
             </div>
           </div>
           <div class="hidden lg:block">
-            <Button variant="secondary" href={`/${nextProperty.slug}`}>
-              Next property <i class="codicon codicon-arrow-right"></i>
+            <Button
+              variant="secondary"
+              href={`/${nextProperty.slug}`}
+              iconName="arrow-right"
+              iconPosition="right"
+            >
+              Next property
             </Button>
           </div>
+        </div>
+
+        <div class="md:hidden px-4 py-10 bg-[#056c8f] text-[rgb(255,255,255,0.8)] text-center">
+          <h3 class="text-4xl font-serif font-normal mb-4">{property.name}</h3>
+          <p>
+            {property.intro}
+          </p>
         </div>
         <PropertyPhotos
           propertyId={property.id}
