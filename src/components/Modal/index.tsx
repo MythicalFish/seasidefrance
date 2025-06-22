@@ -11,7 +11,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, children, title }) => {
   function handleClose() {
     const modal = document.getElementById('gallery-modal');
     if (modal) {
-      modal.classList.add('hidden');
+      modal.classList.add('md:hidden');
     }
   }
   if (!isOpen) return null;

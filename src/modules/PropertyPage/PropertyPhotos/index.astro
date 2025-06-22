@@ -128,7 +128,7 @@ allPhotos = allPhotos.slice(0, 3);
     openButtons.forEach((button) => {
       button.addEventListener('click', () => {
         if (modal) {
-          modal.classList.remove('hidden');
+          modal.classList.remove('md:hidden');
           const index = button.getAttribute('data-open-gallery');
           if (index !== null) {
             const event = new CustomEvent('set-slide', {

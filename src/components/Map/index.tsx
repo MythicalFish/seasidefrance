@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import mapStyle from './mapStyle';
 
@@ -6,6 +7,14 @@ const GOOGLE_MAPS_API_KEY = 'AIzaSyBSr7OBcCo_2TC-sBuOPufN7kb-S1Qw_lM';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Map = () => {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
+
+  if (!loaded) return null;
+
   return (
     <div className="w-full h-[200px] lg:h-[400px] lg:w-[400px] flex-none">
       <GoogleMapReact
