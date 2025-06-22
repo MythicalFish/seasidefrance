@@ -56,7 +56,6 @@ const parseQueryParams = () => {
 };
 
 const Availability = ({ properties, className, initialResults, currentProperty }: Props) => {
-  const isSingleProperty = properties.length === 1;
   const { startDate, stayLength, isPickerOpen, exactDateSelected } = useStore(searchStore);
   const [results, setResults] = useState<Result[]>(initialResults || []);
   const [filterChanged, setFilterChanged] = useState(false);
@@ -114,7 +113,13 @@ const Availability = ({ properties, className, initialResults, currentProperty }
   }
 
   return (
-    <Box className={clsx(className)} id="availability">
+    <Box className={clsx(className)}>
+      <div className="relative">
+        <div
+          id="availability"
+          style={{ top: '-98px', position: 'absolute', visibility: 'hidden', height: '1px' }}
+        />
+      </div>
       <div className="flex flex-col md:flex-row justify-between md:items-center mb-8">
         <h2 className="text-2xl text-[#003950] mb-4 md:mb-0 m-0 font-semibold">{title}</h2>
         <SearchControls />
