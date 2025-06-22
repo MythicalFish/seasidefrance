@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import mapStyle from './mapStyle';
+import Marker from './Marker';
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyBSr7OBcCo_2TC-sBuOPufN7kb-S1Qw_lM';
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Map = () => {
   const [loaded, setLoaded] = useState(false);
@@ -16,7 +15,7 @@ const Map = () => {
   if (!loaded) return null;
 
   return (
-    <div className="w-full h-[200px] lg:h-[400px] lg:w-[400px] flex-none">
+    <div id="location" className="w-full h-[200px] lg:h-[400px] lg:w-[400px] flex-none">
       <GoogleMapReact
         options={{
           styles: mapStyle,
@@ -29,9 +28,10 @@ const Map = () => {
         }}
         defaultZoom={7.5}
       >
-        <AnyReactComponent lat={45.793648} lng={-1.034697} text="X" />
-        <AnyReactComponent lat={46.162413} lng={-1.150898} text="La Rochelle" />
-        <AnyReactComponent lat={45.793648} lng={-1.034697} text="X" />
+        <Marker lat={45.793648} lng={-1.034697} text="Rochebonne" highlight />
+        <Marker lat={46.162413} lng={-1.150898} text="La Rochelle" />
+        <Marker lat={44.839882} lng={-0.574353} text="Bordeaux" />
+        <Marker lat={46.195159} lng={-1.384777} text="Ile de Ré" left />
       </GoogleMapReact>
     </div>
   );

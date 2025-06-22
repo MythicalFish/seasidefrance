@@ -1,0 +1,41 @@
+.markerContainer {
+  position: relative;
+  width: 1px;
+  height: 1px;
+}
+.marker {
+  white-space: nowrap;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: -8px;
+  left: -8px;
+  & > svg {
+    fill: #222222;
+  }
+  & > span {
+    position: absolute;
+    left: 16px;
+    top: 1px;
+    display: block;
+    padding: 2px 4px;
+    background-color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #222222;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  &.left {
+    & > span {
+      left: unset;
+      right: 100%;
+    }
+  }
+  &.highlight {
+    & > svg {
+      fill: #ff0000;
+    }
+  }
+}
