@@ -5,13 +5,44 @@ import '@styles/colors.css';
 import '@vscode/codicons/dist/codicon.css';
 import '@fontsource-variable/montserrat';
 import '@fontsource-variable/open-sans';
+
+export interface Props {
+  title?: string;
+}
+
+const { title = 'Château Stays in France' } = Astro.props;
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Seaside France</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Seaside France - {title}</title>
+    <meta
+      name="description"
+      content="Discover luxury vacation rentals and stay at the beautiful Château de Rochebonne in France. Experience authentic French hospitality with stunning seaside locations."
+    />
+    <meta
+      name="keywords"
+      content="France vacation rentals, château stay, luxury accommodation, seaside France, French holiday homes, vacation properties France"
+    />
+    <meta name="author" content="Seaside France" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content="Discover luxury vacation rentals and stay at the beautiful Château de Rochebonne in France. Experience authentic French hospitality with stunning seaside locations."
+    />
+    <meta property="og:image" content="/thumbnails/280268.jpg" />
+    <meta property="og:url" content="https://seasidefrance.com" />
+    <meta property="og:site_name" content="Seaside France" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="geo.region" content="FR" />
+    <meta name="geo.country" content="France" />
+    <link rel="canonical" href="https://seasidefrance.com" />
     <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon-dark.png" media="(prefers-color-scheme: light)" />
   </head>
