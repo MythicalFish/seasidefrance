@@ -5,7 +5,7 @@ const getBookingPeriodsAny = (availabilities: AvailabilityObj[]): AvailabilityOb
   const result: AvailabilityObj[] = [];
 
   availabilities.forEach((availability) => {
-    if (availability.nights.length <= 7) {
+    if (availability.nights.length <= maxNights) {
       result.push(availability);
       return;
     }
@@ -23,8 +23,6 @@ const getBookingPeriodsAny = (availabilities: AvailabilityObj[]): AvailabilityOb
       const checkOutDateIndex = nightsChunk.length;
       const checkOutDate =
         availability.nights[i + checkOutDateIndex] || nightsChunk[nightsChunk.length - 1];
-
-      console.log('nightsChunk', nightsChunk.length);
 
       result.push({
         nights: nightsChunk,

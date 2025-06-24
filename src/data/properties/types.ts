@@ -72,4 +72,5 @@ export type PropertyPage = {
   availability: AvailabilityPeriod[];
   rates: RatesResponse;
   roomInfo: any;
+  maxPeople: number;
 };

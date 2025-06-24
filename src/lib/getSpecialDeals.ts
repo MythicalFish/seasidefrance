@@ -9,16 +9,20 @@ function getSpecialDeals(properties: PropertyPage[]): Result[] {
   const results = properties.map((property) => {
     const rates = property.rates;
     const availability = property.availability || [];
-    const periods = getBookingPeriods(rates, availability, 0, in1Week, limit);
+    const periods = getBookingPeriods(rates, availability, 0, today, limit);
 
-    // const sortedPeriods = periods.sort((a, b) => b.discount - a.discount);
-    // console.log(sortedPeriods);
-    // const period = sortedPeriods[0];
-    const period = periods[0];
+    let sortedPeriods = periods.filter((period) => period.discount > 0);
+    const period = sortedPeriods[0];
     return { property, periods: [period] };
   });
 
-  return results;
+  return results.sort((a, b) => {
+    const aPeriod = a.periods[0];
+    const bPeriod = b.periods[0];
+    const aFirstAvailableDate = aPeriod.checkInDate;
+    const bFirstAvailableDate = bPeriod.checkInDate;
+    return aFirstAvailableDate.localeCompare(bFirstAvailableDate);
+  });
 }
 
 export default getSpecialDeals;
