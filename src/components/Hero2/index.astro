@@ -5,9 +5,10 @@ import { Picture } from 'astro:assets';
 
 const photoModules = import.meta.glob<{ default: ImageMetadata }>('./photos/*.{jpg,jpeg,png}');
 const photoEntries = Object.entries(photoModules);
+const { className } = Astro.props;
 ---
 
-<section class={clsx(styles.hero)}>
+<section class={clsx(styles.hero, className)}>
   <div class={styles.bg} id="hero-bg">
     {
       photoEntries.map(([filePath, importFn], index) => {

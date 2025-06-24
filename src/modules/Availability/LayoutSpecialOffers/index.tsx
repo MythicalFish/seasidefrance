@@ -11,9 +11,14 @@ const LayoutSpecialOffers = ({ results }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-4 ">
-      {results.slice(0, 1).map((result) => (
-        <Item key={result.property.slug} property={result.property} period={result.periods[0]} />
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+      {results.slice(0, 4).map((result, index) => (
+        <Item
+          key={result.property.slug}
+          property={result.property}
+          period={result.periods[0]}
+          index={index}
+        />
       ))}
     </div>
   );

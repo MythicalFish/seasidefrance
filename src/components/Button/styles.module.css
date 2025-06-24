@@ -50,9 +50,9 @@
 
 /* Variants */
 .primary {
-  background-color: #056c8f;
+  background-color: var(--highlight);
   color: #ffffff !important;
-  border-color: #056c8f;
+  border-color: var(--highlight);
 
   &:hover {
     background-color: #fff;
@@ -67,8 +67,18 @@
   }
 
   &:active {
-    background-color: #1e40af;
+    background-color: var(--highlight);
   }
+}
+
+.pop {
+  box-shadow:
+    -4px -4px 0 0 rgba(0, 0, 0, 0.1),
+    4px 4px 0 0 rgba(0, 0, 0, 0.1),
+    -4px 4px 0 0 rgba(0, 0, 0, 0.1),
+    4px -4px 0 0 rgba(0, 0, 0, 0.1),
+    5px 0 0 0 rgba(0, 0, 0, 0.1),
+    -5px 0 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .plain {

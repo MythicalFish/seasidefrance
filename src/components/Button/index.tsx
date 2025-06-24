@@ -15,6 +15,7 @@ interface BaseButtonProps {
   iconName?: string;
   iconPosition?: 'left' | 'right';
   fullWidth?: boolean;
+  pop?: boolean;
 }
 
 interface ButtonAsButton extends BaseButtonProps {
@@ -45,6 +46,7 @@ const Button: React.FC<ButtonProps> = ({
   iconName,
   iconPosition = 'left',
   fullWidth = false,
+  pop = false,
   ...props
 }) => {
   const baseClasses = clsx(
@@ -55,6 +57,7 @@ const Button: React.FC<ButtonProps> = ({
       [styles.disabled]: disabled,
       [styles.fullWidth]: fullWidth,
       [styles.withIcon]: !!icon,
+      [styles.pop]: pop,
     },
     className
   );

@@ -1,3 +1,9 @@
 :root {
-  --highlight: #1678ff;
+  --highlight: #ff5a5f;
+}
+.bg-highlight {
+  background-color: var(--highlight);
+}
+.border-highlight {
+  border-color: var(--highlight);
 }

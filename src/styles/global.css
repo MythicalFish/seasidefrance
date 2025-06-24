@@ -43,3 +43,10 @@
 .shad {
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.4);
 }
+.bg-waves {
+  background-color: #056c8f;
+  background-image: url('../images/wave-pattern-grey.svg');
+  background-size: auto 220%;
+  background-position: center;
+  background-blend-mode: color-burn;
+}

@@ -34,11 +34,11 @@ const SiteHeader: React.FC<Props> = ({ page }) => {
                 Contact us
               </Button>
               {['discover', 'home'].includes(page ?? '') ? (
-                <Button variant="primary" href="#availability">
+                <Button variant="primary" pop href="#availability">
                   See Availability
                 </Button>
               ) : (
-                <Button variant="primary" href="/#availability">
+                <Button variant="primary" pop href="/#availability">
                   See Availability
                 </Button>
               )}

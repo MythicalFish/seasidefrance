@@ -20,20 +20,27 @@ const { showMore = false, page = 'home' } = Astro.props;
 <Layout>
   <SiteHeader client:load page={page} />
   <main>
-    {page === 'home' && <SpecialOffers />}
-    <Hero2>
-      <div class="container">
-        <div class="prose py-16 px-8 md:py-40 text-white">
-          <h2 class="mb-4 text-white">Discover Charente-Maritime</h2>
-          <WhyVisit1 />
-          <AreaPhotos />
-          <div class="flex gap-4">
-            <Button variant="secondary">Read more</Button>
-            <Button href="#availability">Book your stay</Button>
-          </div>
-        </div>
+    <div class="grid grid-cols-1 xl:grid-cols-2">
+      <div class="relative">
+        <SpecialOffers className="h-full" />
       </div>
-    </Hero2>
+      <div>
+        <Hero2 className="h-full">
+          <div class="container">
+            <div class="prose py-16 px-8 md:py-40 text-white">
+              <h2 class="mb-4 text-white">Discover Charente-Maritime</h2>
+              <WhyVisit1 />
+              <div class="md:hidden">
+                <AreaPhotos />
+              </div>
+              <div class="flex gap-4">
+                <Button variant="secondary">Read more</Button>
+              </div>
+            </div>
+          </div>
+        </Hero2>
+      </div>
+    </div>
     {
       showMore && (
         <Box cozy class="mb-8">
