@@ -15,7 +15,7 @@ const formatCurrencyRounded = (amount: number) => {
 
 const ResultItem = ({ property, period }: Props) => {
   return (
-    <a href={`/${property.slug}`} className="bg-white p-4 rounded-xl">
+    <a href={`/${property.slug}`} className="bg-white px-4 py-3 rounded-xl">
       <div className="flex items-center justify-between gap-2">
         <h3 className="text-lg text-left font-medium">{property.title}</h3>
         <PricingInfo period={period} property={property} />
@@ -27,7 +27,7 @@ const ResultItem = ({ property, period }: Props) => {
 
 const DateInfo = ({ period, property }: { period: AvailablePeriod; property: PropertyPage }) => {
   return (
-    <div className="flex items-center gap-2 mt-3 text-sm opacity-70">
+    <div className="flex items-center gap-2 mt-2 text-sm opacity-70">
       <div className="flex items-center gap-2 text-gray-700">
         <svg
           className="w-4 h-4 text-gray-400"
@@ -74,17 +74,9 @@ const DateInfo = ({ period, property }: { period: AvailablePeriod; property: Pro
 
 const PricingInfo = ({ period, property }: { period: AvailablePeriod; property: PropertyPage }) => {
   return (
-    <div className="flex items-center justify-end gap-3 mb-1">
-      {/* {period.discount > 0 && (
-          <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-semibold">
-            -{period.discount}% OFF
-          </span>
-        )} */}
-      <div className="text-right">
-        <div className="text-2xl font-bold text-gray-900">
-          {formatCurrencyRounded(period.pricePerNight)}
-        </div>
-        {/* <div className="text-sm text-gray-500 -mt-1">per night</div> */}
+    <div className="text-right">
+      <div className="text-xl font-bold text-gray-900">
+        {formatCurrencyRounded(period.pricePerNight)}
       </div>
     </div>
   );

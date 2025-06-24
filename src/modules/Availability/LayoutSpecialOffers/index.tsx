@@ -12,7 +12,7 @@ const LayoutSpecialOffers = ({ results }: Props) => {
 
   return (
     <div className="flex flex-col gap-4 ">
-      {results.slice(0, 3).map((result) => (
+      {results.slice(0, 1).map((result) => (
         <Item key={result.property.slug} property={result.property} period={result.periods[0]} />
       ))}
     </div>
