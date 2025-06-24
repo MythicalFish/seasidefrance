@@ -11,6 +11,7 @@ import getSearchResults, { exactMatchFound } from '@lib/getSearchResults';
 import DayPicker from '@components/SearchControls/DayPicker';
 import type { AvailablePeriod } from '@lib/getBookingPeriods';
 import { searchStore, updateSearchState } from '@stores/searchStore';
+import LayoutSpecialOffers from './LayoutSpecialOffers';
 
 export type Result = {
   property: PropertyPage;
@@ -24,6 +25,7 @@ type Props = {
   className?: string;
   initialResults?: Result[];
   currentProperty?: PropertyPage;
+  special?: boolean;
 };
 
 const parseQueryParams = () => {
@@ -55,7 +57,13 @@ const parseQueryParams = () => {
   return { startDate, stayLength };
 };
 
-const Availability = ({ properties, className, initialResults, currentProperty }: Props) => {
+const Availability = ({
+  properties,
+  className,
+  initialResults,
+  currentProperty,
+  special,
+}: Props) => {
   const { startDate, stayLength, isPickerOpen, exactDateSelected } = useStore(searchStore);
   const [results, setResults] = useState<Result[]>(initialResults || []);
   const [filterChanged, setFilterChanged] = useState(false);
@@ -110,6 +118,10 @@ const Availability = ({ properties, className, initialResults, currentProperty }
   let title = 'Book your stay';
   if (currentProperty) {
     title = `Book your stay here`;
+  }
+
+  if (special) {
+    return <LayoutSpecialOffers results={results} />;
   }
 
   return (

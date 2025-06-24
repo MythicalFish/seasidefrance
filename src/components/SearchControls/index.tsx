@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 const SearchControls: React.FC = () => {
   const { startDate, stayLength, isPickerOpen } = useStore(searchStore);
 
-  const selectedDay = new Date(startDate);
+  const selectedDay = startDate.getDate();
   const selectedYear = startDate.getFullYear();
   const selectedMonth = startDate.getMonth();
 
@@ -61,7 +61,7 @@ const SearchControls: React.FC = () => {
         </div>
         <div className="text-sm font-medium text-gray-700">From</div>
         <DateSelector
-          selectedDay={selectedDay.getDate()}
+          selectedDay={selectedDay}
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}
           startDate={startDate}

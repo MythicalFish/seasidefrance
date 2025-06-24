@@ -16,6 +16,8 @@ const photoEntries = Object.entries(photoModules);
             <Picture
               src={importFn()}
               alt={filePath}
+              widths={[412, 1768]}
+              sizes="(max-width: 768px) 412px, 1768px"
               width={1768}
               height={400}
               class={styles.image}
@@ -27,7 +29,7 @@ const photoEntries = Object.entries(photoModules);
   </div>
   <div class={styles.content}>
     <div class="container">
-      <div class="prose mb-4 text-white">
+      <div class="prose text-white">
         <slot />
       </div>
     </div>

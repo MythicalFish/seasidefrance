@@ -24,6 +24,8 @@ const getBookingPeriodsAny = (availabilities: AvailabilityObj[]): AvailabilityOb
       const checkOutDate =
         availability.nights[i + checkOutDateIndex] || nightsChunk[nightsChunk.length - 1];
 
+      console.log('nightsChunk', nightsChunk.length);
+
       result.push({
         nights: nightsChunk,
         checkInDate,

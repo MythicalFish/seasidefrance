@@ -19,6 +19,7 @@
   }
   &.noPadMobile {
     @media (max-width: 768px) {
+      background-color: transparent;
       border: none;
       padding: 0;
     }

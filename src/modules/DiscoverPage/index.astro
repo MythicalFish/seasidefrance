@@ -9,8 +9,10 @@ import PropertyList from '@modules/PropertyList/index.astro';
 import Hero2 from '@components/Hero2/index.astro';
 import WhyVisit1 from '@data/_fixtures/why-visit-1.md';
 import Button from '@components/Button';
-
+import AreaPhotos from '@components/AreaInfo/AreaPhotos/index.astro';
 import properties from '@data/properties';
+import SpecialOffers from '@components/SpecialOffers/index.astro';
+
 const searchResults = getSearchResults(properties);
 const { showMore = false, page = 'home' } = Astro.props;
 ---
@@ -18,11 +20,13 @@ const { showMore = false, page = 'home' } = Astro.props;
 <Layout>
   <SiteHeader client:load page={page} />
   <main>
+    <SpecialOffers />
     <Hero2>
       <div class="container">
-        <div class="prose py-40 text-white">
+        <div class="prose py-16 px-8 md:py-40 text-white">
           <h2 class="mb-4 text-white">Discover Charente-Maritime</h2>
           <WhyVisit1 />
+          <AreaPhotos />
           <div class="flex gap-4">
             <Button variant="secondary">Read more</Button>
             <Button href="#availability">Book your stay</Button>

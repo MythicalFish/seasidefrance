@@ -1,0 +1,7 @@
+.container {
+  background-color: lime;
+  background-image: url('../../images/wave-pattern-grey.svg');
+  background-size: auto 220%;
+  background-position: center;
+  background-blend-mode: overlay;
+}

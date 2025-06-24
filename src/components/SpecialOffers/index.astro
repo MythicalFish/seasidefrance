@@ -1,0 +1,15 @@
+---
+import Availability from '@modules/Availability';
+import styles from './styles.module.css';
+import clsx from 'clsx';
+
+import properties from '@data/properties';
+import getSpecialDeals from '@lib/getSpecialDeals';
+const searchResults = getSpecialDeals(properties);
+---
+
+<section class={clsx(styles.container, 'py-16 px-8 text-center')}>
+  <h1 class="text-2xl font-bold">Find a vacation rental</h1>
+  <h2 class="text-lg font-bold">Super deals available!</h2>
+  <Availability special properties={properties} initialResults={searchResults} />
+</section>

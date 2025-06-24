@@ -1,6 +1,6 @@
 import type { PropertyPage } from '@data/properties/types';
-import getBookingPeriods from '@lib/getBookingPeriods';
-import type { Result } from '@modules/Availability/Layout';
+import getBookingPeriods, { type AvailablePeriod } from '@lib/getBookingPeriods';
+import type { Result } from '@modules/Availability';
 import { DEFAULT_STAY_LENGTH } from '@lib/getBookingPeriods/constants';
 
 function sortResults(results: Result[]): Result[] {
@@ -34,7 +34,7 @@ function getSearchResults(
 export function exactMatchFound(results: Result[], startDate: Date): boolean {
   const startDateStr = startDate.toISOString().split('T')[0];
   return results.some((result) => {
-    return result.periods.some((period) => {
+    return result.periods.some((period: AvailablePeriod) => {
       return period.checkInDate === startDateStr;
     });
   });

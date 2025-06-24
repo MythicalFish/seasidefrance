@@ -12,7 +12,7 @@ const { showReadMore = false, title } = Astro.props;
     <div class="prose mb-4 text-white">
       {title && <h2 class="mb-4 text-white">{title}</h2>}
       <WhyVisit1 />
-      <SearchControls client:visible />
+      <SearchControls client:only="react" />
       {
         showReadMore ? (
           <p>
