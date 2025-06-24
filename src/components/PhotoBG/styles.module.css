@@ -42,8 +42,4 @@
   .image {
     aspect-ratio: 412 / 542;
   }
-  .bg {
-    position: relative;
-    height: 200px;
-  }
 }

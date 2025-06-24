@@ -34,7 +34,7 @@ const ResultItem = ({ property, period, index }: Props) => {
 
 const DateInfo = ({ period, property }: { period: AvailablePeriod; property: PropertyPage }) => {
   return (
-    <div className="flex items-center gap-2 text-sm opacity-70 font-open">
+    <div className="flex items-center gap-2 text-sm opacity-70 font-open text-gray-900">
       <span className="font-medium">{formatDate(period.checkInDate)}</span>
       <span className={styles.separator} />
       <span className="font-medium">{period.nightLength} nights</span>
