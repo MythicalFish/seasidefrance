@@ -15,7 +15,10 @@ const Map = () => {
   if (!loaded) return null;
 
   return (
-    <div id="location" className="w-full h-[200px] lg:h-[400px] lg:w-[400px] flex-none">
+    <div
+      id="location"
+      className="w-full h-[200px] lg:h-[470px] lg:w-[460px] flex-none rounded-lg overflow-hidden"
+    >
       <GoogleMapReact
         options={{
           styles: mapStyle,

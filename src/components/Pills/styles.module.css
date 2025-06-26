@@ -23,10 +23,29 @@
   color: var(--color-slate-700);
 }
 @media (max-width: 768px) {
+  .container {
+    overflow: hidden;
+  }
   .features {
+    position: relative;
+    left: -6px;
+    gap: 6px;
     & .item {
-      font-size: 12px;
+      font-size: 13px;
       padding: 5px 10px;
+      background: none;
+      border: none;
+      padding: 5px 0;
+      display: inline-flex;
+      align-items: center;
+      &:before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 12px;
+        margin-right: 6px;
+        background-color: var(--color-slate-300);
+      }
     }
   }
 }

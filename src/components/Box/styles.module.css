@@ -1,7 +1,6 @@
 .box {
   background-color: #fff;
   padding: 20px;
-  border-radius: 60px;
   overflow: hidden;
   position: relative;
   border: 1px solid #fff;
@@ -13,9 +12,6 @@
   }
   @media (min-width: 768px) {
     padding: 30px;
-  }
-  @media (max-width: 768px) {
-    border-radius: 0;
   }
   &.noPadMobile {
     @media (max-width: 768px) {
