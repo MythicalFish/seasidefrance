@@ -5,7 +5,7 @@ import { Picture } from 'astro:assets';
 
 const photoModules = import.meta.glob<{ default: ImageMetadata }>('./photos/*.{jpg,jpeg,png}');
 const photoEntries = Object.entries(photoModules);
-const { className } = Astro.props;
+const { className, contentClassName } = Astro.props;
 ---
 
 <section class={clsx(styles.hero, className)}>
@@ -28,7 +28,7 @@ const { className } = Astro.props;
       })
     }
   </div>
-  <div class={styles.content}>
+  <div class={clsx(styles.content, contentClassName)}>
     <slot />
   </div>
 </section>

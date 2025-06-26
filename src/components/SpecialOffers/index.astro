@@ -10,19 +10,19 @@ const searchResults = getSpecialDeals(properties);
 const { className } = Astro.props;
 ---
 
-<section class={clsx(styles.container, className, 'py-12 xl:py-16 px-8 text-center')}>
-  <div class="container">
-    <h2 class="hidden md:block text-lg lg:text-2xl font-medium mb-6 md:mb-8 text-white">
-      Book your stay in sunny south-west France
+<section class={clsx(styles.container, className, 'py-16 px-8 lg:px-16 text-center')}>
+  <div class="prose">
+    <h2 class="hidden md:block text-xl md:text-3xl font-medium mb-6 md:mb-8 text-white">
+      Book your perfect stay in sunny south-west France
     </h2>
     <h2 class="md:hidden text-3xl font-medium mb-4 md:mb-8 text-white">
       Stay in sunny <br />south-west France
     </h2>
-    <div class="py-6 md:py-0">
-      <Availability special properties={properties} initialResults={searchResults} />
-    </div>
-    <div class="mt-4 md:mt-8">
-      <Button href="/#availability">View all deals</Button>
-    </div>
+  </div>
+  <div class="py-6 md:py-0">
+    <Availability special properties={properties} initialResults={searchResults} />
+  </div>
+  <div class="mt-4 md:mt-8">
+    <Button href="/#availability">View all deals</Button>
   </div>
 </section>

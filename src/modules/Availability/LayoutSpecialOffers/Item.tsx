@@ -16,7 +16,8 @@ const formatCurrencyRounded = (amount: number) => {
 };
 
 const ResultItem = ({ property, period, index }: Props) => {
-  let className = 'bg-white px-4 py-3 rounded-xl justify-between gap-2 whitespace-nowrap';
+  let className =
+    'bg-white px-4 py-3 rounded-xl justify-between gap-2 whitespace-nowrap w-full max-w-[400px] lg:mx-auto';
   if (index === 3) {
     className += ' hidden xl:flex';
   } else if (index === 2) {

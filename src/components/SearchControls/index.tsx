@@ -59,7 +59,7 @@ const SearchControls: React.FC = () => {
             <ChevronRightIcon />
           </button>
         </div>
-        <div className="text-sm font-medium text-gray-700">From</div>
+        <div className="text-sm font-medium text-gray-700 hidden md:block">From</div>
         <DateSelector
           selectedDay={selectedDay}
           selectedMonth={selectedMonth}

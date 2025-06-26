@@ -20,21 +20,22 @@ const { showMore = false, page = 'home' } = Astro.props;
 <Layout>
   <SiteHeader client:load page={page} />
   <main>
-    <div class="grid grid-cols-1 xl:grid-cols-2">
-      <PhotoBG className="h-full pt-20 md:pt-0">
-        <div class="side-left flex items-center justify-center">
-          <SpecialOffers />
-        </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <PhotoBG
+        className="h-full"
+        contentClassName="max-w-[640px] w-full mx-auto lg:mr-0 flex items-center justify-center"
+      >
+        <SpecialOffers />
       </PhotoBG>
       <div class="bg-waves">
-        <div class="side-right flex items-center justify-center">
-          <div class="py-16 px-8 md:py-40">
-            <div class="prose text-white">
-              <h2 class="mb-4 text-white">Discover Charente-Maritime</h2>
+        <div class="h-full max-w-[640px] w-full mx-auto lg:ml-0 flex items-center justify-center">
+          <div class="py-16 px-8 md:px-16">
+            <div class="prose text-white text-center">
+              <h2 class="mb-4 text-white text-3xl font-medium">Discover Charente-Maritime</h2>
               <WhyVisit1 />
             </div>
             <AreaPhotos className="my-8" />
-            <div class="flex gap-4">
+            <div class="text-center">
               <Button variant="secondary" href="/#about-the-area"> Read more </Button>
             </div>
           </div>
