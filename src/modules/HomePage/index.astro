@@ -21,13 +21,13 @@ const { showMore = false, page = 'home' } = Astro.props;
   <SiteHeader client:load page={page} />
   <main>
     <div class="grid grid-cols-1 xl:grid-cols-2">
-      <div class="relative">
-        <PhotoBG className="h-full pt-20 md:pt-0">
+      <PhotoBG className="h-full pt-20 md:pt-0">
+        <div class="side-left flex items-center justify-center">
           <SpecialOffers />
-        </PhotoBG>
-      </div>
+        </div>
+      </PhotoBG>
       <div class="bg-waves">
-        <div class="container">
+        <div class="side-right flex items-center justify-center">
           <div class="py-16 px-8 md:py-40">
             <div class="prose text-white">
               <h2 class="mb-4 text-white">Discover Charente-Maritime</h2>

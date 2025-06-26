@@ -20,6 +20,7 @@ const formatCurrencyRounded = (amount: number) => {
 const ResultItem = ({ property, period, resultIndex, single }: Props) => {
   let className = 'border border-gray-200 rounded-xl bg-white transition-all duration-300 mb-6';
   if (!single) className += ' shadow-sm hover:shadow-lg';
+  if (single) className += ' bg-waves';
 
   return (
     <div className={className}>
