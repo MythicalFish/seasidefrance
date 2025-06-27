@@ -9,7 +9,7 @@ import PropertyList from '@modules/PropertyList/index.astro';
 import PhotoBG from '@components/PhotoBG/index.astro';
 import WhyVisit1 from '@data/_fixtures/why-visit-1.md';
 import Button from '@components/Button';
-import AreaPhotos from '@components/AreaInfo/AreaPhotos/index.astro';
+import AreaPhotos from '@components/AreaPhotos/index.astro';
 import properties from '@data/properties';
 import SpecialOffers from '@components/SpecialOffers/index.astro';
 
@@ -54,7 +54,7 @@ const { showMore = false, page = 'home' } = Astro.props;
     <div class="container">
       <div class="pt-4 md:pt-8">
         <Availability properties={properties} client:visible initialResults={searchResults} />
-        <PropertyList title="Other properties" />
+        <!-- <PropertyList title="Other properties" /> -->
       </div>
     </div>
   </main>
