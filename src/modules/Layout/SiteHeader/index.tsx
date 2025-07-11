@@ -30,7 +30,7 @@ const SiteHeader: React.FC<Props> = ({ page }) => {
                   Stay in Le Château
                 </Button>
               )}
-              <Button variant="plain" href="#contact" className="mr-2">
+              <Button variant="plain" href="/contact" className="mr-2">
                 Contact us
               </Button>
               {['discover', 'home'].includes(page ?? '') ? (

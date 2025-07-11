@@ -1,13 +1,19 @@
-const Whatsapp = () => {
+type Props = {
+  width?: number;
+  className?: string;
+};
+
+const Whatsapp = ({ width = 24, className }: Props) => {
   return (
     <svg
-      height="56.693px"
       version="1.1"
       viewBox="0 0 56.693 56.693"
-      width="56.693px"
+      height={width}
+      width={width}
       xmlSpace="preserve"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      className={className}
     >
       <g>
         <path

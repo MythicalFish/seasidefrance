@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 import clsx from 'clsx';
 import Whatsapp from './Whatsapp';
+import info from '@data/info';
 
 type Props = {
   setIsOpen: (isOpen: boolean) => void;
@@ -35,9 +36,15 @@ const MobileNav: React.FC<Props> = ({ setIsOpen }) => {
       <hr />
       <ul className={clsx(styles.menu, styles.secondary)}>
         <li>
-          <a href="tel:+33766384644">
+          <a href={`tel:${info.phone.replace(/\s/g, '')}`}>
             <i className="codicon codicon-call-outgoing"></i>
-            +33 766 384 644
+            {info.phone}
+          </a>
+        </li>
+        <li>
+          <a href={`tel:${info.phone2.replace(/\s/g, '')}`}>
+            <i className="codicon codicon-call-outgoing"></i>
+            {info.phone2}
           </a>
         </li>
         <li>
@@ -47,9 +54,9 @@ const MobileNav: React.FC<Props> = ({ setIsOpen }) => {
           </a>
         </li>
         <li>
-          <a href="mailto:info@seasidefrance.com">
+          <a href={`mailto:${info.email}`}>
             <i className="codicon codicon-mail"></i>
-            info@seasidefrance.com
+            {info.email}
           </a>
         </li>
       </ul>

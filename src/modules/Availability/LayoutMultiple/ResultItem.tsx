@@ -4,6 +4,7 @@ import { formatDate, formatCurrency } from '@lib/date';
 import { getCheckoutUrl } from '@lib/utils';
 import Button from '@components/Button';
 import Pills from '@components/Pills';
+import styles from './styles.module.css';
 
 type Props = {
   property: PropertyPage;
@@ -20,7 +21,7 @@ const formatCurrencyRounded = (amount: number) => {
 const ResultItem = ({ property, period, resultIndex, single }: Props) => {
   let className = 'border border-gray-200 rounded-xl bg-white transition-all duration-300 mb-6';
   if (!single) className += ' shadow-sm hover:shadow-lg';
-  if (single) className += ' bg-waves';
+  if (single) className += ` bg-waves ${styles.cta}`;
 
   return (
     <div className={className}>

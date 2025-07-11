@@ -1,3 +1,5 @@
+# About the area
+
 Charente-Maritime seamlessly combines coastal allure, historical richness, and culinary delights, making it a captivating destination for travelers seeking diverse experiences.
 
 ## 🏖️ Coastal Beauty & Islands
