@@ -4,7 +4,7 @@ import path from 'path';
 const CACHE_DIR = '.cache';
 
 interface CacheOptions {
-  type: 'rates' | 'availability' | 'properties';
+  type: 'rates' | 'availability' | 'properties' | 'restrictions';
   propertyId?: number;
   roomTypeId?: number;
   startDate?: string;

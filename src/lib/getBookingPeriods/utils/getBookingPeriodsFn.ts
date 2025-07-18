@@ -1,13 +1,22 @@
 import type { AvailabilityObj } from './getAvailability';
 import getBookingPeriodsAny from './getBookingPeriodsAny';
 import { DEFAULT_STAY_LENGTH } from '../constants';
+import type { PropertyPage } from '@data/properties/types';
+import getAvailability from './getAvailability';
+import type { MinStayPeriod } from '../../../data/fetchRestrictions/types';
 
-const getBookingPeriods = (
-  availabilities: AvailabilityObj[],
+const getBookingPeriodsFn = (
+  property: PropertyPage,
   stayLength = DEFAULT_STAY_LENGTH,
   limit = 10,
   startDate = new Date()
 ): AvailabilityObj[] => {
+  let minStay = stayLength;
+  const allPeriods = property.availability;
+  const restrictions = property.restrictions;
+
+  const availabilities = getAvailability(allPeriods);
+
   if ([0, 15].includes(stayLength)) {
     return getBookingPeriodsAny(availabilities);
   }
@@ -24,12 +33,25 @@ const getBookingPeriods = (
     const sortedNights = availability.nights.sort();
 
     // For specific night counts (1-14), generate periods with exactly that many consecutive nights
-    for (let startIndex = 0; startIndex <= sortedNights.length - stayLength; startIndex++) {
-      const nightsChunk = sortedNights.slice(startIndex, startIndex + stayLength);
+    for (let startIndex = 0; startIndex < sortedNights.length; startIndex++) {
+      const checkInDate = sortedNights[startIndex];
+      if (checkInDate < startDateStr) continue;
+
+      const restriction = getApplicableRestriction(checkInDate, restrictions || []);
+
+      let effectiveStayLength = stayLength;
+      if (restriction && restriction.minStay > 1) {
+        effectiveStayLength = restriction.minStay;
+      }
+
+      if (startIndex + effectiveStayLength > sortedNights.length) {
+        continue;
+      }
+
+      const nightsChunk = sortedNights.slice(startIndex, startIndex + effectiveStayLength);
 
       // Check if nights are consecutive
       if (areConsecutiveNights(nightsChunk)) {
-        const checkInDate = nightsChunk[0];
         const lastNightDate = new Date(nightsChunk[nightsChunk.length - 1]);
         lastNightDate.setDate(lastNightDate.getDate() + 1);
         const checkOutDate = lastNightDate.toISOString().split('T')[0];
@@ -40,13 +62,30 @@ const getBookingPeriods = (
           checkOutDate,
         });
         count++;
-        // TODO: not working
-        if (limit > 0 && count >= limit) continue;
+        // To avoid creating overlapping periods, advance the start index
+        startIndex += effectiveStayLength - 1;
+
+        if (limit > 0 && count >= limit) break;
       }
     }
   });
 
   return result;
+};
+
+const getApplicableRestriction = (
+  checkInDate: string,
+  restrictions: MinStayPeriod[]
+): MinStayPeriod | null => {
+  if (!restrictions || restrictions.length === 0) {
+    return null;
+  }
+  for (const restriction of restrictions) {
+    if (checkInDate >= restriction.from && checkInDate <= restriction.to) {
+      return restriction;
+    }
+  }
+  return null;
 };
 
 // Helper function to check if nights are consecutive
@@ -67,11 +106,4 @@ const areConsecutiveNights = (nights: string[]): boolean => {
   return true;
 };
 
-export default (
-  availabilities: AvailabilityObj[],
-  stayLength: number,
-  limit: number,
-  startDate: Date
-): AvailabilityObj[] => {
-  return getBookingPeriods(availabilities, stayLength, limit, startDate);
-};
+export default getBookingPeriodsFn;

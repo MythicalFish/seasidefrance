@@ -12,6 +12,7 @@
       "@photos/*": ["src/images/photos/*"],
       "@utils/*": ["src/utils/*"],
       "@data/*": ["src/data/*"],
+      "@fixtures/*": ["src/data/_fixtures/*"],
       "@lib/*": ["src/lib/*"],
       "@styles/*": ["src/styles/*"],
       "@stores/*": ["src/stores/*"]

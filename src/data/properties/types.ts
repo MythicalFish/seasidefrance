@@ -1,5 +1,6 @@
 import type { AvailabilityPeriod } from '../fetchAvailability/types';
 import type { LodgifyRate, RatesResponse } from '../fetchRates/types';
+import type { MinStayPeriod } from '@data/fetchRestrictions/types';
 
 export interface PropertyContact {
   spokenLanguages?: Array<string> | null;
@@ -71,6 +72,7 @@ export type PropertyPage = {
   lodgify: LodgifyProperty;
   availability: AvailabilityPeriod[];
   rates: RatesResponse;
+  restrictions: MinStayPeriod[] | null;
   roomInfo: any;
   maxPeople: number;
 };

@@ -1,9 +1,7 @@
-import type { AvailabilityPeriod } from '@data/fetchAvailability/types';
-import type { RatesResponse } from '@data/fetchRates/types';
+import type { PropertyPage } from '@data/properties/types';
 import getDateInfo from './utils/getDateInfo';
 import getPromoInfo from './utils/getPromotions';
-import getAvailability from './utils/getAvailability';
-import getBookingPeriods from './utils/getBookingPeriods';
+import getBookingPeriodsFn from './utils/getBookingPeriodsFn';
 import isPromoActive from './utils/isPromoActive';
 
 export type AvailablePeriod = {
@@ -19,19 +17,18 @@ export type AvailablePeriod = {
 };
 
 function getBookingPeriodsWithPrices(
-  ratesResponse: RatesResponse,
-  allPeriods: AvailabilityPeriod[],
+  property: PropertyPage,
   stayLength = 0,
   startDate = new Date(),
   limit = 10
 ): AvailablePeriod[] {
+  const ratesResponse = property.rates;
   if (!ratesResponse?.calendarItems?.length) return [];
 
   const promoInfo = getPromoInfo(ratesResponse);
   const dateInfo = getDateInfo(ratesResponse);
-  const availableDates = getAvailability(allPeriods);
-  const bookingPeriods = getBookingPeriods(availableDates, stayLength, limit, startDate);
-  console.log('🟢🟢🟢 availableDates', availableDates);
+  const bookingPeriods = getBookingPeriodsFn(property, stayLength, limit, startDate);
+  // console.log('🟢🟢🟢 availableDates', availableDates);
 
   // Filter booking periods based on startDate
   const startDateStr = startDate.toISOString().split('T')[0];

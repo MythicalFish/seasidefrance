@@ -9,7 +9,7 @@ function getSpecialDeals(properties: PropertyPage[]): Result[] {
   const results = properties.map((property) => {
     const rates = property.rates;
     const availability = property.availability || [];
-    const periods = getBookingPeriods(rates, availability, 0, today, limit);
+    const periods = getBookingPeriods(property, 0, today, limit);
 
     let sortedPeriods = periods.filter((period) => period.discount > 0);
     const period = sortedPeriods[0];

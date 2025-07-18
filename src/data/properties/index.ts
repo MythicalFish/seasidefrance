@@ -1,9 +1,9 @@
-import propertyPages from '../_fixtures/property-pages.json';
-import propertyInfo from '../_fixtures/properties.json';
-import roomInfos from '../_fixtures/roomInfo.json';
+import propertyPages from '@fixtures/property-pages.json';
+import propertyInfo from '@fixtures/properties.json';
+import roomInfos from '@fixtures/roomInfo.json';
 import fetchAvailability from '../fetchAvailability';
 import fetchRates from '../fetchRates';
-
+import fetchRestrictions from '../fetchRestrictions';
 import type { PropertyPage, LodgifyProperty } from './types';
 
 const currentDate = new Date();
@@ -28,11 +28,14 @@ const fullPropertyPages = (await Promise.all(
       oneYearFromNowStr
     );
 
+    const restrictions = await fetchRestrictions(property.id);
+
     return {
       ...property,
       lodgify,
       availability,
       rates,
+      restrictions,
       roomInfo,
     };
   })

@@ -23,9 +23,7 @@ function getSearchResults(
   let limit = 1;
   if (properties.length === 1) limit = 10;
   const results = properties.map((property) => {
-    const rates = property.rates;
-    const availability = property.availability || [];
-    const periods = getBookingPeriods(rates, availability, stayLength, startDate, limit);
+    const periods = getBookingPeriods(property, stayLength, startDate, limit);
     return { property, periods };
   });
   return sortResults(results);
