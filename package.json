@@ -9,7 +9,7 @@
     "fetch-properties": "tsx src/lib/scripts/fetchProperties.ts",
     "fetch-roomInfo": "tsx src/lib/scripts/fetchRoomInfo.ts",
     "fetch-images": "tsx src/lib/scripts/fetchImages.ts",
-    "compress-images": "tsx src/lib/scripts/optimizeImages.ts",
+    "compress-images": "tsx src/lib/scripts/compressImages.ts",
     "generate-pages": "tsx src/lib/scripts/generatePages.ts",
     "generate-about": "tsx src/lib/scripts/generateAbout.ts",
     "download-thumbnails": "tsx src/lib/scripts/downloadThumbnails.ts"

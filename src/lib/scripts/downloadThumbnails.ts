@@ -91,10 +91,10 @@ async function processProperty(property: any): Promise<void> {
   const thumbnailPath = path.join(THUMBNAILS_DIR, `${property.id}.jpg`);
 
   // Skip if thumbnail already exists
-  if (fs.existsSync(thumbnailPath)) {
-    console.log(`⏭️ Thumbnail already exists for property ${property.id}`);
-    return;
-  }
+  // if (fs.existsSync(thumbnailPath)) {
+  //   console.log(`⏭️ Thumbnail already exists for property ${property.id}`);
+  //   return;
+  // }
 
   // Create temporary file path
   const tempPath = path.join(THUMBNAILS_DIR, `temp_${property.id}_${Date.now()}`);

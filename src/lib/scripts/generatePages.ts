@@ -3,9 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
-import type { LodgifyProperty, PropertyPage } from '../data/properties/types';
-import aboutTheArea from '../data/_fixtures/aboutTheArea';
-import properties from '../data/_fixtures/properties.json';
+import type { LodgifyProperty, PropertyPage } from '../../data/properties/types';
+import aboutTheArea from '../../data/_fixtures/aboutTheArea';
+import properties from '../../data/_fixtures/properties.json';
 
 config();
 const apiKey = process.env.OPENAI_API_KEY;
