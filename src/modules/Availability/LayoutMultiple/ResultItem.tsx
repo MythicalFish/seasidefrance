@@ -58,13 +58,6 @@ const ResultItem = ({ property, period, resultIndex, cta }: Props) => {
       </div>
 
       <div className="hidden lg:block p-6">
-        <div className="flex justify-between items-center gap-6">
-          <DateInfo period={period} cta />
-          <div className="flex gap-6">
-            <PricingInfo period={period} property={property} cta />
-            <ActionButtons property={property} period={period} cta />
-          </div>
-        </div>
         <div className="flex gap-6">
           <PropertyImageDesktop property={property} period={period} resultIndex={resultIndex} />
 
