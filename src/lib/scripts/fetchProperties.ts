@@ -1,5 +1,5 @@
-import * as lodgify from '../lib/lodgify-sdk';
-import type { LodgifyProperty } from '../data/properties/types';
+import * as lodgify from '../../lib/lodgify-sdk';
+import type { LodgifyProperty } from '../../data/properties/types';
 import { config } from 'dotenv';
 import path from 'path';
 import fs from 'fs';
@@ -10,7 +10,7 @@ const apiKey = process.env.LODGIFY_PUBLIC_KEY;
 if (!apiKey) throw new Error('LODGIFY_PUBLIC_KEY is not set');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const outputPath = path.join(__dirname, '../data/_fixtures/properties.json');
+const outputPath = path.join(__dirname, '../../data/_fixtures/properties.json');
 const lodgifyConfig = new lodgify.Configuration({ apiKey });
 const lodgifyAPI = new lodgify.PropertiesApi(lodgifyConfig);
 

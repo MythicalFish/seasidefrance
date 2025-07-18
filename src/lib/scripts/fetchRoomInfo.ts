@@ -1,9 +1,9 @@
-import * as lodgify from '../lib/lodgify-sdk';
+import * as lodgify from '../../lib/lodgify-sdk';
 import { config } from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import type { V2PropertiesIdRoomsGet200ResponseInner as RoomInfo } from '../lib/lodgify-sdk';
+import type { V2PropertiesIdRoomsGet200ResponseInner as RoomInfo } from '../../lib/lodgify-sdk';
 
 export type { RoomInfo };
 
@@ -12,8 +12,8 @@ const apiKey = process.env.LODGIFY_PUBLIC_KEY;
 if (!apiKey) throw new Error('LODGIFY_PUBLIC_KEY is not set');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const outputPath = path.join(__dirname, '../data/_fixtures/roomInfo.json');
-const propertiesPath = path.join(__dirname, '../data/_fixtures/properties.json');
+const outputPath = path.join(__dirname, '../../data/_fixtures/roomInfo.json');
+const propertiesPath = path.join(__dirname, '../../data/_fixtures/properties.json');
 const properties = JSON.parse(fs.readFileSync(propertiesPath, 'utf8'));
 const lodgifyConfig = new lodgify.Configuration({ apiKey });
 const lodgifyAPI = new lodgify.PropertiesApi(lodgifyConfig);

@@ -1,5 +1,5 @@
-import propertyPages from '../data/_fixtures/property-pages.json';
-import roomInfos from '../data/_fixtures/roomInfo.json';
+import propertyPages from '@data/_fixtures/property-pages.json';
+import roomInfos from '@data/_fixtures/roomInfo.json';
 import type { RoomInfo } from './fetchRoomInfo';
 import fs from 'fs';
 import path from 'path';

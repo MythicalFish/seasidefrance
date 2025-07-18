@@ -3,9 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { config } from 'dotenv';
-import aboutTheArea from '../data/_fixtures/aboutTheArea';
-import properties from '../data/_fixtures/property-pages.json';
-import attractions from '../data/_fixtures/attractions';
+import aboutTheArea from '@data/_fixtures/aboutTheArea';
+import properties from '@data/_fixtures/property-pages.json';
+import attractions from '@data/_fixtures/attractions';
 const property = properties.find((p) => p.id === 375769);
 
 config();
