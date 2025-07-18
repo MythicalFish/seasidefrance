@@ -10,7 +10,7 @@ type Props = {
   property: PropertyPage;
   period: AvailablePeriod;
   resultIndex: number;
-  single?: boolean;
+  cta?: boolean;
 };
 
 // Helper function to format currency without decimals
@@ -18,59 +18,68 @@ const formatCurrencyRounded = (amount: number) => {
   return formatCurrency(Math.ceil(amount)).replace(/\.00$/, '');
 };
 
-const ResultItem = ({ property, period, resultIndex, single }: Props) => {
+const ResultItem = ({ property, period, resultIndex, cta }: Props) => {
   let className = 'border border-gray-200 rounded-xl bg-white transition-all duration-300 mb-6';
-  if (!single) className += ' shadow-sm hover:shadow-lg';
-  if (single) className += ` bg-waves ${styles.cta}`;
+  if (!cta) className += ' shadow-sm hover:shadow-lg';
+
+  if (cta) {
+    className += ` bg-waves ${styles.cta} p-4 md:p-6 lg:p-8`;
+    return (
+      <div className={className}>
+        <div className="flex justify-between items-center gap-6">
+          <DateInfo period={period} cta />
+          <div className="flex gap-6">
+            <PricingInfo period={period} property={property} cta />
+            <ActionButtons property={property} period={period} cta />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={className}>
-      <div className="block">
-        <div className="block lg:hidden">
-          <PropertyImageMobile property={property} period={period} resultIndex={resultIndex} />
-          <div className="p-4">
-            <a href={`/${property.slug}`} className="block">
-              <PropertyTitle property={property} resultIndex={resultIndex} />
-              <DateInfo period={period} />
-            </a>
-            <div className="flex justify-between items-start mt-4">
-              <div className="flex-1">
-                <PricingInfo period={period} property={property} />
-              </div>
-              <div className="ml-4">
-                <ActionButtons property={property} period={period} />
-              </div>
+      <div className="block lg:hidden">
+        <PropertyImageMobile property={property} period={period} resultIndex={resultIndex} />
+        <div className="p-4">
+          <a href={`/${property.slug}`} className="block">
+            <PropertyTitle property={property} resultIndex={resultIndex} />
+            <DateInfo period={period} />
+          </a>
+          <div className="flex justify-between items-start mt-4">
+            <div className="flex-1">
+              <PricingInfo period={period} property={property} />
+            </div>
+            <div className="ml-4">
+              <ActionButtons property={property} period={period} />
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="hidden lg:block p-6">
-          {single ? (
-            <div className="flex justify-between items-center gap-6">
-              <DateInfo period={period} single />
-              <div className="flex gap-6">
-                <PricingInfo period={period} property={property} single />
-                <ActionButtons property={property} period={period} single />
-              </div>
+      <div className="hidden lg:block p-6">
+        <div className="flex justify-between items-center gap-6">
+          <DateInfo period={period} cta />
+          <div className="flex gap-6">
+            <PricingInfo period={period} property={property} cta />
+            <ActionButtons property={property} period={period} cta />
+          </div>
+        </div>
+        <div className="flex gap-6">
+          <PropertyImageDesktop property={property} period={period} resultIndex={resultIndex} />
+
+          <a href={`/${property.slug}`} className="flex-1">
+            <PropertyTitle property={property} resultIndex={resultIndex} />
+            <Pills items={property.features.slice(0, 8)} small />
+            <DateInfo period={period} />
+          </a>
+
+          <div className="text-right">
+            <PricingInfo period={period} property={property} />
+            <div className="mt-4">
+              <ActionButtons property={property} period={period} />
             </div>
-          ) : (
-            <div className="flex gap-6">
-              <PropertyImageDesktop property={property} period={period} resultIndex={resultIndex} />
-
-              <a href={`/${property.slug}`} className="flex-1">
-                <PropertyTitle property={property} resultIndex={resultIndex} />
-                <Pills items={property.features.slice(0, 8)} small />
-                <DateInfo period={period} />
-              </a>
-
-              <div className="text-right">
-                <PricingInfo period={period} property={property} />
-                <div className="mt-4">
-                  <ActionButtons property={property} period={period} />
-                </div>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
@@ -125,10 +134,10 @@ const PropertyTitle = ({
   </h3>
 );
 
-const DateInfo = ({ period, single }: { period: AvailablePeriod; single?: boolean }) => {
+const DateInfo = ({ period, cta }: { period: AvailablePeriod; cta?: boolean }) => {
   let className = 'flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mt-3';
-  if (single) className += ' text-lg';
-  if (!single) className += ' text-sm';
+  if (cta) className += ' text-lg';
+  if (!cta) className += ' text-sm';
   return (
     <div className={className}>
       <div className="flex items-center gap-2 text-gray-700">
@@ -174,13 +183,13 @@ const DateInfo = ({ period, single }: { period: AvailablePeriod; single?: boolea
 const PricingInfo = ({
   period,
   property,
-  single,
+  cta,
 }: {
   period: AvailablePeriod;
   property: PropertyPage;
-  single?: boolean;
+  cta?: boolean;
 }) => {
-  if (single) {
+  if (cta) {
     return (
       <div className="flex items-center justify-end gap-3">
         {period.discount > 0 && (
@@ -223,14 +232,14 @@ const PricingInfo = ({
 const ActionButtons = ({
   property,
   period,
-  single,
+  cta,
 }: {
   property: PropertyPage;
   period: AvailablePeriod;
-  single?: boolean;
+  cta?: boolean;
 }) => {
   let className = 'flex flex-col gap-2 min-w-[140px]';
-  if (single) className += ' items-center';
+  if (cta) className += ' items-center';
   return (
     <div className={className}>
       <Button
@@ -241,7 +250,7 @@ const ActionButtons = ({
       >
         Book Now
       </Button>
-      {!single ? (
+      {!cta ? (
         <Button variant="secondary" size="sm" href={`/${property.slug}`}>
           More info
         </Button>

@@ -29,7 +29,7 @@ const SingleProperty = ({ results, currentProperty }: Props) => {
 
   const period = periods[0];
 
-  return <ResultItem property={result.property} period={period} resultIndex={0} single />;
+  return <ResultItem property={result.property} period={period} resultIndex={0} cta />;
 };
 
 export default SingleProperty;
