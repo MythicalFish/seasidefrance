@@ -11,29 +11,35 @@
   top: -8px;
   left: -8px;
   & > svg {
-    fill: #222222;
+    fill: #006489;
   }
   & > span {
     position: absolute;
     left: 16px;
     top: 1px;
     display: block;
-    padding: 2px 4px;
-    background-color: #fff;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #222222;
+    padding: 3px 6px;
+    background-color: #006489;
+    border-radius: 99px;
+    font-size: 11px;
+    color: #fff;
     white-space: nowrap;
     line-height: 1;
   }
   &.left {
     & > span {
+      padding: 3px 8px;
       left: unset;
       right: 100%;
     }
   }
   &.highlight {
+    & > span {
+      background-color: #fff;
+      color: var(--color-slate);
+      font-weight: 500;
+      font-size: 12px;
+    }
     & > svg {
       fill: #ff0000;
     }

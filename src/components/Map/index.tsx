@@ -35,6 +35,8 @@ const Map = () => {
         <Marker lat={46.162413} lng={-1.150898} text="La Rochelle" />
         <Marker lat={44.839882} lng={-0.574353} text="Bordeaux" />
         <Marker lat={46.195159} lng={-1.384777} text="Ile de Ré" left />
+        <Marker lat={45.95} lng={-1.29} text="Ile d'Oléron" left />
+        <Marker lat={48.856614} lng={2.352222} text="Paris" left />
       </GoogleMapReact>
     </div>
   );

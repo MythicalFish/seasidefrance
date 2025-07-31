@@ -55,9 +55,9 @@
   border-color: var(--highlight);
 
   &:hover {
-    background-color: #fff;
-    border-color: #fff;
-    color: #056c8f !important;
+    background-color: var(--highlight-hover);
+    border-color: var(--highlight-hover);
+    color: #ffffff !important;
   }
 
   &:focus {

@@ -1,5 +1,6 @@
 :root {
   --highlight: #ff5a5f;
+  --highlight-hover: #ff5a5f;
 }
 .bg-highlight {
   background-color: var(--highlight);
