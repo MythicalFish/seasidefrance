@@ -1,14 +1,14 @@
 import * as lodgify from '../../lib/lodgify-sdk';
 import type { Availability, AvailabilityPeriod } from './types';
 import { getCachedData, setCachedData } from '../../lib/cache';
-
-const apiKey = import.meta.env.LODGIFY_PUBLIC_KEY;
+import { getLodgifyApiKey } from '@lib/env';
 
 const fetchAvailability = async (
   propertyId = 0,
   startDate: string,
   endDate: string
 ): Promise<AvailabilityPeriod[] | null> => {
+  const apiKey = getLodgifyApiKey();
   if (!apiKey) {
     throw new Error('LODGIFY_PUBLIC_KEY is not set');
   }

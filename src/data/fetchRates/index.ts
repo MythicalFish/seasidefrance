@@ -1,8 +1,7 @@
 import * as lodgify from '../../lib/lodgify-sdk';
 import type { RatesResponse } from './types';
 import { getCachedData, setCachedData } from '../../lib/cache';
-
-const apiKey = import.meta.env.LODGIFY_PUBLIC_KEY;
+import { getLodgifyApiKey } from '@lib/env';
 
 const fetchRates = async (
   propertyId = 0,
@@ -10,6 +9,7 @@ const fetchRates = async (
   startDate: string,
   endDate: string
 ): Promise<RatesResponse> => {
+  const apiKey = getLodgifyApiKey();
   if (!apiKey) {
     throw new Error('LODGIFY_PUBLIC_KEY is not set');
   }

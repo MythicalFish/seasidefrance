@@ -1,10 +1,10 @@
 import * as lodgify from '../../lib/lodgify-sdk';
 import type { MinStayPeriod } from './types';
 import { getCachedData, setCachedData } from '../../lib/cache';
-
-const apiKey = process.env.LODGIFY_PUBLIC_KEY;
+import { getLodgifyApiKey } from '@lib/env';
 
 const fetchRestrictions = async (propertyId: number): Promise<MinStayPeriod[]> => {
+  const apiKey = getLodgifyApiKey();
   if (!apiKey) {
     throw new Error('LODGIFY_PUBLIC_KEY is not set');
   }

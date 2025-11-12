@@ -4,9 +4,10 @@ import { config } from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { getLodgifyApiKey } from '../env';
 
 config();
-const apiKey = process.env.LODGIFY_PUBLIC_KEY;
+const apiKey = getLodgifyApiKey();
 if (!apiKey) throw new Error('LODGIFY_PUBLIC_KEY is not set');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

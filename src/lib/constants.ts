@@ -5,7 +5,7 @@ export const airbnbIDs = {
   280263: '19236793', // 4: La Cave
   280253: '18350980', // 6: Le Four a Pain
   280268: '18352982', // 7: La Mangeoire
-  304946: '19312127', // 8: Le Logis
+  // 304946: '19312127', // 8: Le Logis
   280258: '26880618', // Le Studio
   280277: '25127333', // Le Pressoir
   333855: '25127335', // Charming Vacation Home
