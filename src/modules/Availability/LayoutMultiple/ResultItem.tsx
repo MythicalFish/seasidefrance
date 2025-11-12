@@ -157,7 +157,7 @@ const DateInfo = ({ period, cta }: { period: AvailablePeriod; cta?: boolean }) =
           />
         </svg>
         <span className="font-medium">
-          {formatDate(period.checkInDate)} → {formatDate(period.checkOutDate)}
+          {formatDate(period?.checkInDate)} → {formatDate(period.checkOutDate)}
         </span>
       </div>
       <div
@@ -254,7 +254,7 @@ const ActionButtons = ({
       <Button
         variant="primary"
         size="md"
-        href={getCheckoutUrl(property.lodgify.id, period.checkInDate, period.checkOutDate)}
+        href={getCheckoutUrl(property.lodgify.id, period?.checkInDate, period.checkOutDate)}
         className="font-semibold"
       >
         Book Now

@@ -34,7 +34,7 @@ function getBookingPeriodsWithPrices(
   const startDateStr = startDate.toISOString().split('T')[0];
   let filteredPeriods = bookingPeriods.filter((period) => {
     // Check if the period starts on or after the startDate
-    return period.checkInDate >= startDateStr;
+    return period?.checkInDate >= startDateStr;
   });
 
   // If no periods start on or after startDate, try to find periods that include the startDate
@@ -81,7 +81,7 @@ function getBookingPeriodsWithPrices(
       totalPrice,
       minStay,
       nightLength: period.nights.length,
-      checkInDate: period.checkInDate,
+      checkInDate: period?.checkInDate,
       checkOutDate: period.checkOutDate,
       prices,
     };

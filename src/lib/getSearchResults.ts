@@ -8,10 +8,10 @@ function sortResults(results: Result[]): Result[] {
     const aPeriod = a.periods[0];
     const bPeriod = b.periods[0];
 
-    const aFirstAvailableDate = aPeriod.checkInDate;
-    const bFirstAvailableDate = bPeriod.checkInDate;
+    const aFirstAvailableDate = aPeriod?.checkInDate;
+    const bFirstAvailableDate = bPeriod?.checkInDate;
 
-    return aFirstAvailableDate.localeCompare(bFirstAvailableDate);
+    return aFirstAvailableDate?.localeCompare(bFirstAvailableDate);
   });
 }
 
@@ -33,7 +33,7 @@ export function exactMatchFound(results: Result[], startDate: Date): boolean {
   const startDateStr = startDate.toISOString().split('T')[0];
   return results.some((result) => {
     return result.periods.some((period: AvailablePeriod) => {
-      return period.checkInDate === startDateStr;
+      return period?.checkInDate === startDateStr;
     });
   });
 }

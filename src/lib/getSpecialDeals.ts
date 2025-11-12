@@ -19,9 +19,9 @@ function getSpecialDeals(properties: PropertyPage[]): Result[] {
   return results.sort((a, b) => {
     const aPeriod = a.periods[0];
     const bPeriod = b.periods[0];
-    const aFirstAvailableDate = aPeriod.checkInDate;
-    const bFirstAvailableDate = bPeriod.checkInDate;
-    return aFirstAvailableDate.localeCompare(bFirstAvailableDate);
+    const aFirstAvailableDate = aPeriod?.checkInDate;
+    const bFirstAvailableDate = bPeriod?.checkInDate;
+    return aFirstAvailableDate?.localeCompare(bFirstAvailableDate);
   });
 }
 

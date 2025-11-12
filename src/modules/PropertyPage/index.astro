@@ -13,7 +13,6 @@ import Header from './Header/index.astro';
 const { property } = Astro.props;
 import properties from '@data/properties';
 const searchResults = getSearchResults(properties);
-console.log(searchResults);
 
 // Find the next property in the list
 const currentIndex = properties.findIndex((p) => p.slug === property.slug);
