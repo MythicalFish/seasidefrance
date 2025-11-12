@@ -16,6 +16,20 @@ export type AvailablePeriod = {
   pricePerNight: number;
 };
 
+function filterPeriodsWithCheckInDate<T extends { checkInDate?: string }>(
+  periods: T[]
+): (T & { checkInDate: string })[] {
+  const result: (T & { checkInDate: string })[] = [];
+  for (const period of periods) {
+    if (!period?.checkInDate) {
+      console.warn('🟠 [getBookingPeriods] Skipping period without checkInDate', period);
+      continue;
+    }
+    result.push(period as T & { checkInDate: string });
+  }
+  return result;
+}
+
 function getBookingPeriodsWithPrices(
   property: PropertyPage,
   stayLength = 0,
@@ -32,14 +46,15 @@ function getBookingPeriodsWithPrices(
 
   // Filter booking periods based on startDate
   const startDateStr = startDate.toISOString().split('T')[0];
-  let filteredPeriods = bookingPeriods.filter((period) => {
+  const safeBookingPeriods = filterPeriodsWithCheckInDate(bookingPeriods);
+  let filteredPeriods = safeBookingPeriods.filter((period) => {
     // Check if the period starts on or after the startDate
     return period?.checkInDate >= startDateStr;
   });
 
   // If no periods start on or after startDate, try to find periods that include the startDate
   if (filteredPeriods.length === 0) {
-    filteredPeriods = bookingPeriods.filter((period) => {
+    filteredPeriods = safeBookingPeriods.filter((period) => {
       // Check if startDate falls within the period's nights
       return period.nights.includes(startDateStr);
     });
@@ -47,7 +62,7 @@ function getBookingPeriodsWithPrices(
 
   // If still no periods found, return all available periods
   if (filteredPeriods.length === 0) {
-    filteredPeriods = bookingPeriods;
+    filteredPeriods = safeBookingPeriods;
   }
 
   // console.log(
