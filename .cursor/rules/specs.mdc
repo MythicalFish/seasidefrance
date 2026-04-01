@@ -1,0 +1,24 @@
+---
+description: "Conventions for writing and updating spec files"
+globs: "specs/**/*.md"
+---
+
+# Spec Writing Conventions
+
+## Directory Structure
+
+- `specs/product/features/<feature>.md` for user-facing purpose, current state, target state, and acceptance criteria
+- `specs/implementation/<feature>.md` for repository-specific touch points, sequencing, and technical notes
+- `specs/product/backlog/` for future ideas and proposals
+- `specs/product/reference/` for domain explainers and supporting reference material
+- `specs/design/README.md` for visual language, tokens, and UI guidance
+- `specs/architecture/` for cross-cutting conventions and architecture notes
+- `specs/milestones/<milestone>.md` for grouped deliverables and ordered checklists
+
+## When Updating Specs
+
+- Read the existing spec first and preserve accurate context.
+- Keep product specs focused on behavior, goals, and acceptance criteria.
+- Keep implementation specs focused on code touch points, sequencing, and constraints.
+- Keep acceptance criteria concrete and testable.
+- Put cross-cutting rules in `specs/architecture/` instead of repeating them in each feature spec.

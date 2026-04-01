@@ -1,0 +1,15 @@
+---
+description: "CSS module conventions for stylesheet files"
+globs: "src/**/*.css"
+---
+
+# CSS Rules
+
+- Prefer component-scoped `styles.module.css` files for custom component styles.
+- Prefer Tailwind utility classes for layout, spacing, typography, and simple visual treatment when that keeps markup readable.
+- Use CSS modules for component-specific styling that would be awkward, repetitive, or overly dense in utilities.
+- Keep selectors simple, local, and easy to trace back to the component.
+- Use shared CSS variables and existing tokens before introducing new hardcoded values.
+- Use nested PostCSS syntax when it makes modifier and state styles easier to read.
+- Keep global styles in `src/styles/` limited to tokens, typography, shared utility classes, and true global overrides.
+- Keep stylesheets focused; if a component needs substantial unique styling, colocate it with that component.

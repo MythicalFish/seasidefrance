@@ -1,47 +1,67 @@
-# Astro Starter Kit: Minimal
+# Seaside France
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Seaside France is an Astro site for showcasing and booking stays in France. The repo uses Astro for page composition and server-rendered content, with React islands for interactive booking and availability flows.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## Stack
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- Astro
+- React
+- Tailwind CSS
+- CSS modules
+- TypeScript
+- Nanostores
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project Structure
 
 ```text
 /
 ├── public/
+├── specs/
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/
+│   ├── data/
+│   ├── lib/
+│   ├── modules/
+│   ├── pages/
+│   ├── stores/
+│   └── styles/
+├── CLAUDE.md
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Working Conventions
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Keep `src/pages/` thin and hand off to page modules in `src/modules/` when possible.
+- Use `.astro` for layout shells, page composition, and server-side data preparation.
+- Use `.tsx` for interactive UI, browser state, and store-driven behavior.
+- Use path aliases from `tsconfig.json` such as `@components/*`, `@modules/*`, `@lib/*`, `@data/*`, and `@stores/*`.
+- Prefer Tailwind for layout and simple styling, and CSS modules for component-specific styling.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Commands
 
-## 🧞 Commands
+Run commands from the repository root:
 
-All commands are run from the root of the project, from a terminal:
+| Command | Action |
+| :------ | :----- |
+| `npm run dev` | Start the Astro dev server |
+| `npm run build` | Build the production site |
+| `npm run preview` | Preview the production build locally |
+| `npm run fetch-properties` | Fetch property data |
+| `npm run fetch-roomInfo` | Fetch room information |
+| `npm run fetch-images` | Fetch remote images |
+| `npm run compress-images` | Compress downloaded images |
+| `npm run generate-pages` | Generate property pages |
+| `npm run generate-about` | Generate about content |
+| `npm run download-thumbnails` | Download thumbnails |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Documentation
 
-## 👀 Want to learn more?
+- `CLAUDE.md` contains repo-specific working guidance for coding agents.
+- `specs/` contains product, implementation, design, and architecture documentation.
+- `specs/architecture/engineering-conventions.md` is the main cross-cutting implementation guide.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Development Notes
+
+- Astro is configured with the React and Tailwind integrations.
+- The app uses responsive images and constrained Astro image layouts.
+- Shared interactive search state lives in `src/stores/`.

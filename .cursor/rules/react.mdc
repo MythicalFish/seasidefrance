@@ -1,0 +1,32 @@
+---
+description: "React component conventions for TSX files"
+globs: "src/**/*.tsx"
+---
+
+# React Component Rules
+
+## Component Syntax
+
+- Prefer arrow functions with destructured props.
+- Props types should usually be named `Props`.
+- Use `export default ComponentName` at the bottom for component files.
+
+## Structure
+
+- Keep one component per file.
+- When a component has custom styles, place it in its own folder with `index.tsx` and `styles.module.css`.
+- Keep interactive state, effects, browser APIs, and store subscriptions in React components rather than in `.astro` files.
+- Prefer passing data from Astro frontmatter into React islands via props instead of duplicating fetch or lookup logic in the browser.
+- Extract sub-components or helpers before a file becomes hard to scan.
+- Move non-trivial logic into nearby utilities, hooks, or typed helpers instead of leaving it inline in render code.
+
+## Composition
+
+- Keep presentational and behavioral concerns separate where it improves readability.
+- Avoid deep prop drilling when a nearby hook, store, or clearer composition boundary would be simpler.
+- Prefer small render-focused components over one large branching component.
+- Follow existing repo patterns such as feature-level layout components under `src/modules/Availability/` and shared UI under `src/components/`.
+
+## Imports
+
+- Prefer aliases from `tsconfig.json` such as `@components/*`, `@modules/*`, `@lib/*`, `@data/*`, and `@stores/*` when available.

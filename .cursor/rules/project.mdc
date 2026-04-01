@@ -1,0 +1,30 @@
+---
+description: "Project workflow and structure rules"
+alwaysApply: true
+---
+
+# Project Workflow
+
+Use these sources of truth in roughly this order:
+
+1. `README.md` for repository context
+2. `package.json` for commands and tooling
+3. `tsconfig.json` for path aliases and TS settings
+4. `specs/` for product, implementation, design, and architecture guidance
+
+## Working Rules
+
+- For non-trivial work, read the most relevant spec first. If no spec exists and the change affects behavior or architecture, add or update one.
+- Keep files small and focused. Prefer extraction over growing a large component or utility.
+- Preserve Astro and React boundaries: page/layout shells in `.astro`, interactive UI in `.tsx` when possible.
+- Prefer thin pages that hand off to modules or components instead of putting large sections directly in `src/pages/`.
+- Follow existing repo structure before inventing a new one: shared UI in `src/components/`, page-level compositions in `src/modules/`, utilities and data transforms in `src/lib/` or `src/data/`.
+- Prefer path aliases from `tsconfig.json` over long relative imports when an alias exists.
+- Avoid broad unrelated refactors while implementing a focused task.
+- After behavior or workflow changes, update `specs/` so the repo stays documented.
+
+## Debugging
+
+```ts
+console.log("🟢 thing", thing);
+```

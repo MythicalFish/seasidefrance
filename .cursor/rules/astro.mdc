@@ -1,0 +1,29 @@
+---
+description: "Astro conventions for pages, layouts, and .astro modules"
+globs: "src/**/*.astro"
+---
+
+# Astro Rules
+
+## File Role
+
+- Keep `src/pages/` thin. Prefer importing a page-level module or composition rather than building large pages inline.
+- Use `.astro` for page shells, layout composition, static sections, and server-side data preparation.
+- Use `.tsx` islands for interactive UI, browser-only state, event handlers, and subscriptions.
+
+## Frontmatter
+
+- Keep frontmatter focused on imports, props, and straightforward data shaping.
+- Prefer loading or preparing data in frontmatter and passing it down through props.
+- Avoid duplicating client-side logic in Astro when the interactive component already owns that behavior.
+
+## Structure
+
+- Shared page wrappers belong in `src/modules/` or `src/components/`, not directly in `src/pages/`.
+- Reuse the existing `Layout` pattern for document-level concerns such as global styles, metadata, and shared head/body structure.
+- Prefer path aliases from `tsconfig.json` for imports.
+
+## Styling
+
+- Prefer Tailwind utility classes for page composition and simple sections.
+- When a section needs bespoke styling, colocate that styling with the component or module instead of expanding global CSS unnecessarily.
