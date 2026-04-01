@@ -8,9 +8,32 @@ import '@fontsource-variable/open-sans';
 
 export interface Props {
   title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { title = 'Château Stays in France' } = Astro.props;
+const defaultTitle = 'Chateau Stays in France';
+const defaultDescription =
+  'Discover luxury vacation rentals and stay at the beautiful Chateau de Rochebonne in France. Experience authentic French hospitality with stunning seaside locations.';
+const defaultOgImage = '/thumbnails/280268.jpg';
+const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? 'https://seasidefrance.com';
+
+const {
+  title = defaultTitle,
+  description = defaultDescription,
+  canonical,
+  ogImage = defaultOgImage,
+  noIndex = false,
+  structuredData,
+} = Astro.props;
+
+const pageTitle = `Seaside France - ${title}`;
+const canonicalUrl = canonical ?? (Astro.url ? new URL(Astro.url.pathname, siteOrigin).toString() : siteOrigin);
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteOrigin).toString();
+const robots = noIndex ? 'noindex, nofollow' : 'index, follow';
 ---
 
 <html lang="en">
@@ -18,45 +41,65 @@ const { title = 'Château Stays in France' } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Seaside France - {title}</title>
+    <title>{pageTitle}</title>
     <!-- Google Tag Manager -->
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
+      (function (
+        w: Window & { [key: string]: Array<Record<string, unknown>> },
+        d: Document,
+        s: string,
+        l: string,
+        i: string
+      ) {
+        const windowWithDataLayer = w;
+        windowWithDataLayer[l] = windowWithDataLayer[l] || [];
+        windowWithDataLayer[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        const f = d.getElementsByTagName(s)[0] as HTMLScriptElement | undefined;
+        const j = d.createElement(s) as HTMLScriptElement;
+        const dl = l != 'dataLayer' ? '&l=' + l : '';
         j.async = true;
         j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-P66JJ5J8');
+        if (f?.parentNode) {
+          f.parentNode.insertBefore(j, f);
+        }
+      })(
+        window as unknown as Window & { [key: string]: Array<Record<string, unknown>> },
+        document,
+        'script',
+        'dataLayer',
+        'GTM-P66JJ5J8'
+      );
     </script>
     <!-- End Google Tag Manager -->
     <meta
       name="description"
-      content="Discover luxury vacation rentals and stay at the beautiful Château de Rochebonne in France. Experience authentic French hospitality with stunning seaside locations."
-    />
-    <meta
-      name="keywords"
-      content="France vacation rentals, château stay, luxury accommodation, seaside France, French holiday homes, vacation properties France"
+      content={description}
     />
     <meta name="author" content="Seaside France" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
     <meta name="language" content="English" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta
-      property="og:description"
-      content="Discover luxury vacation rentals and stay at the beautiful Château de Rochebonne in France. Experience authentic French hospitality with stunning seaside locations."
-    />
-    <meta property="og:image" content="/thumbnails/280268.jpg" />
-    <meta property="og:url" content="https://seasidefrance.com" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Seaside France" />
     <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="geo.region" content="FR" />
     <meta name="geo.country" content="France" />
-    <link rel="canonical" href="https://seasidefrance.com" />
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
     <link rel="icon" href="/favicon-light.png" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon-dark.png" media="(prefers-color-scheme: light)" />
   </head>

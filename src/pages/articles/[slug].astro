@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '@modules/Layout/index.astro';
+import SiteHeader from '@modules/Layout/SiteHeader';
+import Box from '@components/Box/index.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props as { article: CollectionEntry<'articles'> };
+const { Content } = await render(article);
+
+const canonical = `https://seasidefrance.com/articles/${article.slug}/`;
+const ogImage = article.data.heroImage || '/thumbnails/280268.jpg';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.data.title,
+  description: article.data.description,
+  image: [ogImage],
+  datePublished: article.data.publishDate.toISOString(),
+  dateModified: (article.data.updatedDate || article.data.publishDate).toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: article.data.author,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonical,
+  },
+};
+---
+
+<Layout
+  title={article.data.title}
+  description={article.data.description}
+  canonical={canonical}
+  ogImage={ogImage}
+  structuredData={structuredData}
+>
+  <SiteHeader client:load />
+  <main class="container py-8 md:py-14">
+    <Box class="prose max-w-4xl">
+      <h1>{article.data.title}</h1>
+      <p class="text-sm opacity-70">
+        Published {article.data.publishDate.toLocaleDateString('en-GB')} by {article.data.author}
+      </p>
+      <Content />
+    </Box>
+  </main>
+</Layout>

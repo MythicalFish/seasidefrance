@@ -25,6 +25,9 @@ const SiteHeader: React.FC<Props> = ({ page }) => {
               </a>
             </div>
             <div className="hidden md:flex items-center gap-4">
+              <Button variant="plain" href="/articles">
+                Articles
+              </Button>
               {page !== 'chateau-de-rochebonne' && (
                 <Button variant="plain" href="/chateau-de-rochebonne">
                   Stay in Le Château

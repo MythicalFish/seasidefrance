@@ -15,6 +15,7 @@ import styles from './styles.module.css';
   </div> -->
   <div>
     <Breadcrumbs property={property} />
+    <h1 class="text-3xl font-serif font-normal mb-3">{property.name}</h1>
     <div class="prose mb-4">
       <p>
         {property.intro}
@@ -40,7 +41,7 @@ import styles from './styles.module.css';
   )}
 >
   {property.id !== 333855 && <img src={rbLogoWhite.src} alt="RB Logo" class="w-60 mx-auto mb-4" />}
-  <h3 class="text-4xl font-serif font-normal mb-4">{property.name}</h3>
+  <h1 class="text-4xl font-serif font-normal mb-4">{property.name}</h1>
   <p>
     {property.intro}
   </p>

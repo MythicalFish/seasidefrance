@@ -15,6 +15,7 @@
     "download-thumbnails": "tsx src/lib/scripts/downloadThumbnails.ts"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@fontsource-variable/montserrat": "^5.2.5",
     "@fontsource-variable/open-sans": "^5.2.6",
     "@nanostores/react": "^1.0.0",

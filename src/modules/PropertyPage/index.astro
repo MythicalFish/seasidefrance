@@ -20,9 +20,39 @@ const nextProperty =
   currentIndex !== -1 && currentIndex < properties.length - 1
     ? properties[currentIndex + 1]
     : properties[0]; // Loop back to first property if at the end
+
+const pageTitle = `${property.name} - ${property.title}`;
+const pageDescription = property.intro || property.description;
+const ogImage = property.lodgify?.imageUrl || '/thumbnails/280268.jpg';
+const canonical = `https://seasidefrance.com/${property.slug}`;
+
+const propertyStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'VacationRental',
+  name: property.name,
+  description: property.intro || property.description,
+  image: ogImage ? [ogImage] : undefined,
+  url: canonical,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: property.lodgify?.city || 'St Just-Luzac',
+    addressRegion: property.lodgify?.state || 'Charente-Maritime',
+    addressCountry: property.lodgify?.countryCode || 'FR',
+  },
+  occupancy: {
+    '@type': 'QuantitativeValue',
+    maxValue: property.maxPeople,
+  },
+};
 ---
 
-<Layout title={property.name}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  ogImage={ogImage}
+  structuredData={propertyStructuredData}
+>
   <SiteHeader client:load />
   <main>
     <div class="container">

@@ -27,6 +27,12 @@ const MobileNav: React.FC<Props> = ({ setIsOpen }) => {
           </a>
         </li>
         <li>
+          <a href="/articles" onClick={handleClick}>
+            <i className="codicon codicon-book"></i>
+            Articles
+          </a>
+        </li>
+        <li>
           <a href="/#availability" onClick={handleClick}>
             <i className="codicon codicon-calendar"></i>
             Availability

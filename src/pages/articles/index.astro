@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@modules/Layout/index.astro';
+import SiteHeader from '@modules/Layout/SiteHeader';
+import Box from '@components/Box/index.astro';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Seaside France Travel Articles',
+  description:
+    'Local travel guides and practical planning tips for Charente-Maritime family holidays.',
+  url: 'https://seasidefrance.com/articles',
+};
+---
+
+<Layout
+  title="Charente-Maritime Travel Articles"
+  description="Read practical guides, local tips, and itineraries for planning your Seaside France holiday."
+  canonical="https://seasidefrance.com/articles"
+  structuredData={structuredData}
+>
+  <SiteHeader client:load />
+  <main class="container py-8 md:py-14">
+    <Box class="prose max-w-4xl">
+      <h1>Travel Articles</h1>
+      <p>
+        Browse local guidance for planning your stay in Charente-Maritime, from beach recommendations
+        to family-friendly itineraries.
+      </p>
+      <ul>
+        {
+          articles.map((article) => (
+            <li>
+              <a href={`/articles/${article.slug}/`}>{article.data.title}</a>
+              <p>{article.data.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </Box>
+  </main>
+</Layout>

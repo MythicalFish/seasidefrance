@@ -15,11 +15,29 @@ import SpecialOffers from '@components/SpecialOffers/index.astro';
 
 const searchResults = getSearchResults(properties);
 const { showMore = false, page = 'home' } = Astro.props;
+const isDiscoverPage = page === 'discover';
+const pageTitle = isDiscoverPage ? 'Discover Charente-Maritime Holiday Inspiration' : 'French Holiday Rentals in Charente-Maritime';
+const pageDescription = isDiscoverPage
+  ? 'Explore beaches, villages, and local experiences around Domaine de Rochebonne and Charente-Maritime to plan your next French holiday.'
+  : 'Browse family-friendly gites and chateau stays near the Charente-Maritime coast with direct booking availability at Seaside France.';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: 'Seaside France',
+  url: isDiscoverPage ? 'https://seasidefrance.com/discover' : 'https://seasidefrance.com',
+  description: pageDescription,
+  areaServed: 'Charente-Maritime, France',
+};
 ---
 
-<Layout>
+<Layout title={pageTitle} description={pageDescription} structuredData={structuredData}>
   <SiteHeader client:load page={page} />
   <main>
+    <h1 class="sr-only">
+      {isDiscoverPage
+        ? 'Discover Charente-Maritime and plan your stay'
+        : 'Seaside France holiday rentals and chateau stays'}
+    </h1>
     <div class="grid grid-cols-1 lg:grid-cols-2">
       <PhotoBG
         className="h-full"
