@@ -1,26 +1,19 @@
 ---
+import SiteBreadcrumbs from '@components/Breadcrumbs/index.astro';
 import UserIcon from './UserIcon';
 
 const { property } = Astro.props;
+const items = [
+  { label: 'Home', href: 'https://seasidefrance.com/' },
+  { label: 'Domaine de Rochebonne', href: 'https://seasidefrance.com/chateau-de-rochebonne' },
+  { label: property.name, href: `https://seasidefrance.com/${property.slug}` },
+];
 ---
 
 <div class="hidden md:flex items-center gap-4 mb-4 whitespace-nowrap">
-  <a
-    href="/chateau-de-rochebonne"
-    class="text-lg font-open font-semibold hidden md:block text-[#056c8f]"
-  >
-    Domaine de Rochebonne
-  </a>
-  <span class="hidden md:inline leading-none h-[16px] opacity-50">
-    <i class="codicon codicon-chevron-right"></i>
-  </span>
-  <p class="m-0 text-lg font-open font-semibold">{property.name}</p>
+  <SiteBreadcrumbs items={items} class="whitespace-nowrap" />
   <span class="flex items-center font-open gap-1 opacity-50">
     <UserIcon width={19} height={19} />
     <span class="text-lg font-semibold">{property.maxPeople}</span>
   </span>
-  <!-- <span class="flex items-center font-open gap-1">
-    <i class="codicon codicon-location"></i>
-    <a class="text-lg font-semibold text-[#056c8f]" href="#location">St. Just-Luzac</a>
-  </span> -->
 </div>
