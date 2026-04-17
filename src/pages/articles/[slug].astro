@@ -4,6 +4,8 @@ import type { CollectionEntry } from 'astro:content';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader';
 import Box from '@components/Box/index.astro';
+import Breadcrumbs from '@components/Breadcrumbs/index.astro';
+import { buildBreadcrumbStructuredData } from '@lib/seo';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles', ({ data }) => !data.draft);
@@ -19,7 +21,12 @@ const { Content } = await render(article);
 
 const canonical = `https://seasidefrance.com/articles/${article.slug}/`;
 const ogImage = article.data.heroImage || '/thumbnails/280268.jpg';
-const structuredData = {
+const breadcrumbItems = [
+  { label: 'Home', href: 'https://seasidefrance.com/' },
+  { label: 'Travel Articles', href: 'https://seasidefrance.com/articles' },
+  { label: article.data.title, href: canonical },
+];
+const articleStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: article.data.title,
@@ -36,6 +43,7 @@ const structuredData = {
     '@id': canonical,
   },
 };
+const structuredData = [articleStructuredData, buildBreadcrumbStructuredData(breadcrumbItems)];
 ---
 
 <Layout
@@ -48,6 +56,7 @@ const structuredData = {
   <SiteHeader client:load />
   <main class="container py-8 md:py-14">
     <Box class="prose max-w-4xl">
+      <Breadcrumbs items={breadcrumbItems} class="mb-4 not-prose" />
       <h1>{article.data.title}</h1>
       <p class="text-sm opacity-70">
         Published {article.data.publishDate.toLocaleDateString('en-GB')} by {article.data.author}

@@ -9,6 +9,7 @@ import Availability from '@modules/Availability';
 import getSearchResults from '@lib/getSearchResults';
 import LocationMap from '@components/Map';
 import Header from './Header/index.astro';
+import { buildBreadcrumbStructuredData } from '@lib/seo';
 
 const { property } = Astro.props;
 import properties from '@data/properties';
@@ -25,6 +26,11 @@ const pageTitle = `${property.name} - ${property.title}`;
 const pageDescription = property.intro || property.description;
 const ogImage = property.lodgify?.imageUrl || '/thumbnails/280268.jpg';
 const canonical = `https://seasidefrance.com/${property.slug}`;
+const breadcrumbItems = [
+  { label: 'Home', href: 'https://seasidefrance.com/' },
+  { label: 'Domaine de Rochebonne', href: 'https://seasidefrance.com/chateau-de-rochebonne' },
+  { label: property.name, href: canonical },
+];
 
 const propertyStructuredData = {
   '@context': 'https://schema.org',
@@ -44,6 +50,8 @@ const propertyStructuredData = {
     maxValue: property.maxPeople,
   },
 };
+
+const structuredData = [propertyStructuredData, buildBreadcrumbStructuredData(breadcrumbItems)];
 ---
 
 <Layout
@@ -51,7 +59,7 @@ const propertyStructuredData = {
   description={pageDescription}
   canonical={canonical}
   ogImage={ogImage}
-  structuredData={propertyStructuredData}
+  structuredData={structuredData}
 >
   <SiteHeader client:load />
   <main>
