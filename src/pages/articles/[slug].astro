@@ -51,6 +51,13 @@ const structuredData = [articleStructuredData, buildBreadcrumbStructuredData(bre
   description={article.data.description}
   canonical={canonical}
   ogImage={ogImage}
+  ogType="article"
+  article={{
+    author: article.data.author,
+    publishedTime: article.data.publishDate.toISOString(),
+    modifiedTime: (article.data.updatedDate || article.data.publishDate).toISOString(),
+    tags: article.data.tags,
+  }}
   structuredData={structuredData}
 >
   <SiteHeader client:load />
