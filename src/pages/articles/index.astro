@@ -1,21 +1,42 @@
 ---
 import { getCollection } from 'astro:content';
+import Breadcrumbs from '@components/Breadcrumbs/index.astro';
+import Box from '@components/Box/index.astro';
+import { buildBreadcrumbStructuredData, toAbsoluteUrl } from '@lib/seo';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader';
-import Box from '@components/Box/index.astro';
 
 const articles = (await getCollection('articles', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: 'Seaside France Travel Articles',
-  description:
-    'Local travel guides and practical planning tips for Charente-Maritime family holidays.',
-  url: 'https://seasidefrance.com/articles',
-};
+const breadcrumbItems = [{ label: 'Home', href: '/' }, { label: 'Travel Articles' }];
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Seaside France Travel Articles',
+    description:
+      'Local travel guides and practical planning tips for Charente-Maritime family holidays.',
+    url: toAbsoluteUrl('/articles/'),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: articles.map((article, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: toAbsoluteUrl(`/articles/${article.slug}/`),
+      name: article.data.title,
+      description: article.data.description,
+    })),
+  },
+  buildBreadcrumbStructuredData([
+    { name: 'Home', path: '/' },
+    { name: 'Travel Articles', path: '/articles/' },
+  ]),
+];
 ---
 
 <Layout
@@ -27,10 +48,11 @@ const structuredData = {
   <SiteHeader client:load />
   <main class="container py-8 md:py-14">
     <Box class="prose max-w-4xl">
+      <Breadcrumbs items={breadcrumbItems} />
       <h1>Travel Articles</h1>
       <p>
-        Browse local guidance for planning your stay in Charente-Maritime, from beach recommendations
-        to family-friendly itineraries.
+        Browse local guidance for planning your stay in Charente-Maritime, from beach
+        recommendations to family-friendly itineraries.
       </p>
       <ul>
         {

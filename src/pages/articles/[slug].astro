@@ -1,9 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import Breadcrumbs from '@components/Breadcrumbs/index.astro';
+import Box from '@components/Box/index.astro';
+import { buildBreadcrumbStructuredData, toAbsoluteUrl } from '@lib/seo';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader';
-import Box from '@components/Box/index.astro';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles', ({ data }) => !data.draft);
@@ -17,25 +19,46 @@ export async function getStaticPaths() {
 const { article } = Astro.props as { article: CollectionEntry<'articles'> };
 const { Content } = await render(article);
 
-const canonical = `https://seasidefrance.com/articles/${article.slug}/`;
+const canonicalPath = `/articles/${article.slug}/`;
+const canonical = toAbsoluteUrl(canonicalPath);
 const ogImage = article.data.heroImage || '/thumbnails/280268.jpg';
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: article.data.title,
-  description: article.data.description,
-  image: [ogImage],
-  datePublished: article.data.publishDate.toISOString(),
-  dateModified: (article.data.updatedDate || article.data.publishDate).toISOString(),
-  author: {
-    '@type': 'Organization',
-    name: article.data.author,
+const ogImageUrl = toAbsoluteUrl(ogImage);
+const keywords = article.data.tags.length > 0 ? article.data.tags.join(', ') : undefined;
+const breadcrumbItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Travel Articles', href: '/articles/' },
+  { label: article.data.title },
+];
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.data.title,
+    description: article.data.description,
+    image: [ogImageUrl],
+    datePublished: article.data.publishDate.toISOString(),
+    dateModified: (article.data.updatedDate || article.data.publishDate).toISOString(),
+    author: {
+      '@type': 'Organization',
+      name: article.data.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Seaside France',
+    },
+    keywords,
+    inLanguage: 'en',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonical,
+    },
   },
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': canonical,
-  },
-};
+  buildBreadcrumbStructuredData([
+    { name: 'Home', path: '/' },
+    { name: 'Travel Articles', path: '/articles/' },
+    { name: article.data.title, path: canonicalPath },
+  ]),
+];
 ---
 
 <Layout
@@ -48,6 +71,7 @@ const structuredData = {
   <SiteHeader client:load />
   <main class="container py-8 md:py-14">
     <Box class="prose max-w-4xl">
+      <Breadcrumbs items={breadcrumbItems} />
       <h1>{article.data.title}</h1>
       <p class="text-sm opacity-70">
         Published {article.data.publishDate.toLocaleDateString('en-GB')} by {article.data.author}
