@@ -21,6 +21,7 @@ const { Content } = await render(article);
 
 const canonical = `https://seasidefrance.com/articles/${article.slug}/`;
 const ogImage = article.data.heroImage || '/thumbnails/280268.jpg';
+const faqItems = article.data.faq || [];
 const breadcrumbItems = [
   { label: 'Home', href: 'https://seasidefrance.com/' },
   { label: 'Travel Articles', href: 'https://seasidefrance.com/articles' },
@@ -43,7 +44,26 @@ const articleStructuredData = {
     '@id': canonical,
   },
 };
-const structuredData = [articleStructuredData, buildBreadcrumbStructuredData(breadcrumbItems)];
+const faqStructuredData =
+  faqItems.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      }
+    : null;
+const structuredData = [
+  articleStructuredData,
+  buildBreadcrumbStructuredData(breadcrumbItems),
+  ...(faqStructuredData ? [faqStructuredData] : []),
+];
 ---
 
 <Layout
@@ -69,6 +89,26 @@ const structuredData = [articleStructuredData, buildBreadcrumbStructuredData(bre
         Published {article.data.publishDate.toLocaleDateString('en-GB')} by {article.data.author}
       </p>
       <Content />
+      {
+        faqItems.length > 0 && (
+          <section
+            aria-labelledby="article-faqs"
+            class="mt-10 border-t border-slate-200 pt-8 not-prose"
+          >
+            <h2 id="article-faqs" class="mb-6 text-2xl font-semibold text-slate-900">
+              Frequently asked questions
+            </h2>
+            <div class="space-y-6">
+              {faqItems.map((faq) => (
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                  <h3 class="m-0 text-lg font-semibold text-slate-900">{faq.question}</h3>
+                  <p class="mb-0 mt-3 text-base leading-7 text-slate-700">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
     </Box>
   </main>
 </Layout>
