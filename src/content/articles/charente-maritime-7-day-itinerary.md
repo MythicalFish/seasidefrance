@@ -1,6 +1,6 @@
 ---
-title: "A 7-Day Charente-Maritime Itinerary for Families"
-description: "Plan a one-week family trip in Charente-Maritime with beaches, villages, food stops, and day trips near St Just-Luzac."
+title: 'A 7-Day Charente-Maritime Itinerary for Families'
+description: 'Plan a one-week family trip in Charente-Maritime with beaches, villages, food stops, and day trips near St Just-Luzac.'
 publishDate: 2026-04-01
 updatedDate: 2026-04-01
 draft: false
@@ -8,8 +8,15 @@ tags:
   - itinerary
   - family-holidays
   - nouvelle-aquitaine
-author: "Seaside France"
-heroImage: "/thumbnails/280268.jpg"
+author: 'Seaside France'
+heroImage: '/thumbnails/280268.jpg'
+faq:
+  - question: 'Is a week in Charente-Maritime enough for a family holiday?'
+    answer: 'Yes. Seven days is enough for a balanced trip that mixes beach time, slower local days, and one or two easy day trips without overloading the schedule.'
+  - question: 'Should families plan every day in advance?'
+    answer: 'It usually works better to keep one or two anchor outings and leave space for weather changes, rest, and spontaneous local stops during the week.'
+  - question: 'What makes St Just-Luzac a useful base for this itinerary?'
+    answer: 'It gives families access to beaches, local villages, and practical day-trip options while still making it easy to return for quiet evenings.'
 ---
 
 This simple 7-day itinerary balances beach days, culture, and low-stress family travel around Charente-Maritime.

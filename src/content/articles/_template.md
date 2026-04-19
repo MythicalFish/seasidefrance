@@ -1,14 +1,17 @@
 ---
-title: "Article title with primary keyword"
-description: "Compelling 150-160 character summary for search snippets."
+title: 'Article title with primary keyword'
+description: 'Compelling 150-160 character summary for search snippets.'
 publishDate: 2026-04-01
 updatedDate: 2026-04-01
 draft: true
 tags:
   - charente-maritime
   - family-holidays
-author: "Seaside France"
-heroImage: "/thumbnails/280268.jpg"
+author: 'Seaside France'
+heroImage: '/thumbnails/280268.jpg'
+faq:
+  - question: 'Question travelers often ask'
+    answer: 'Short, practical answer grounded in what guests can realistically expect.'
 ---
 
 ## Intro
@@ -21,4 +24,4 @@ Use clear H2 headings, include practical local details, and add internal links t
 
 ## FAQ
 
-Answer 3-5 common questions with concise, helpful responses.
+Add 3-5 common questions to the `faq` frontmatter array so article pages can render an FAQ section and FAQ schema.

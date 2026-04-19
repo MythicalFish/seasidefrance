@@ -11,6 +11,14 @@ const articles = defineCollection({
     tags: z.array(z.string()).default([]),
     author: z.string().default('Seaside France'),
     heroImage: z.string().optional(),
+    faq: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      )
+      .default([]),
   }),
 });
 
