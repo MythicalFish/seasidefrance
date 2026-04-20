@@ -1,16 +1,68 @@
 ---
 import info from '@data/info';
-import clsx from 'clsx';
 import Whatsapp from '@modules/Layout/SiteHeader/Whatsapp';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader';
 import Box from '@components/Box/index.astro';
+
+const canonical = 'https://seasidefrance.com/contact';
+const pageDescription =
+  'Contact Seaside France for booking help, property questions, and trip planning support in Charente-Maritime.';
+const primaryPhone = info.phone.replace(/[^\d+]/g, '');
+const secondaryPhone = info.phone2.replace(/[^\d+]/g, '');
+
+const organizationStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  '@id': 'https://seasidefrance.com/#organization',
+  name: 'Seaside France',
+  url: 'https://seasidefrance.com',
+  email: info.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Domaine de Rochebonne',
+    addressLocality: 'St Just-Luzac',
+    addressRegion: 'Nouvelle-Aquitaine',
+    postalCode: '17320',
+    addressCountry: 'FR',
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      telephone: primaryPhone,
+      email: info.email,
+      areaServed: 'FR',
+      availableLanguage: ['en', 'fr'],
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      telephone: secondaryPhone,
+      email: info.email,
+      areaServed: 'FR',
+      availableLanguage: ['en', 'fr'],
+    },
+  ],
+};
+
+const contactPageStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Seaside France',
+  url: canonical,
+  description: pageDescription,
+  mainEntity: {
+    '@id': 'https://seasidefrance.com/#organization',
+  },
+};
 ---
 
 <Layout
   title="Contact Seaside France"
-  description="Contact Seaside France for booking help, property questions, and trip planning support in Charente-Maritime."
-  canonical="https://seasidefrance.com/contact"
+  description={pageDescription}
+  canonical={canonical}
+  structuredData={[organizationStructuredData, contactPageStructuredData]}
 >
   <SiteHeader client:load />
   <main>
@@ -18,18 +70,17 @@ import Box from '@components/Box/index.astro';
       <Box class="prose">
         <h1>Contact us</h1>
         <p>
-          We are here to help you with any questions you may have. Please contact us using the
-          details below.
+          We are here to help you with booking questions, property details, and planning your stay
+          in Charente-Maritime.
         </p>
         <ul>
           <li>
-            <i class="codicon
-        codicon-call-outgoing"></i>
-            {info.phone}
+            <i class="codicon codicon-call-outgoing"></i>
+            <a href={`tel:${primaryPhone}`}>{info.phone}</a>
           </li>
           <li>
             <i class="codicon codicon-call-outgoing"></i>
-            {info.phone2}
+            <a href={`tel:${secondaryPhone}`}>{info.phone2}</a>
           </li>
           <li>
             <a
@@ -48,8 +99,12 @@ import Box from '@components/Box/index.astro';
               {info.email}
             </a>
           </li>
+          <li>
+            <i class="codicon codicon-home"></i>
+            <span>{info.address}</span>
+          </li>
         </ul>
       </Box>
     </div>
-  </main></Layout
->
+  </main>
+</Layout>
