@@ -64,6 +64,27 @@ const structuredData = [
   buildBreadcrumbStructuredData(breadcrumbItems),
   ...(faqStructuredData ? [faqStructuredData] : []),
 ];
+
+const articleCtaLinks = [
+  {
+    href: '/discover',
+    title: 'Browse holiday rentals',
+    description:
+      'See family-friendly gites and château stays close to the beaches and villages mentioned in this guide.',
+  },
+  {
+    href: '/contact',
+    title: 'Ask us about your trip',
+    description:
+      'Get practical help choosing the best stay, timing your visit, or planning around local family activities.',
+  },
+  {
+    href: '/articles',
+    title: 'Read more local guides',
+    description:
+      'Explore more Seaside France articles for beaches, itineraries, and practical Charente-Maritime tips.',
+  },
+];
 ---
 
 <Layout
@@ -109,6 +130,36 @@ const structuredData = [
           </section>
         )
       }
+      <aside
+        aria-labelledby="plan-your-stay"
+        class="mt-10 rounded-3xl border border-sky-100 bg-sky-50/70 p-6 not-prose"
+      >
+        <div class="max-w-2xl">
+          <p class="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-sky-800">
+            Plan your stay
+          </p>
+          <h2 id="plan-your-stay" class="m-0 text-2xl font-semibold text-slate-900">
+            Turn this guide into a Charente-Maritime holiday plan
+          </h2>
+          <p class="mb-0 mt-3 text-base leading-7 text-slate-700">
+            Use these next steps to move from inspiration to booking and keep exploring the region.
+          </p>
+        </div>
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          {
+            articleCtaLinks.map((link) => (
+              <a
+                href={link.href}
+                class="flex h-full flex-col rounded-2xl border border-white/80 bg-white p-5 text-slate-900 no-underline shadow-sm transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-slate-950 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700"
+              >
+                <span class="text-lg font-semibold text-slate-900">{link.title}</span>
+                <span class="mt-2 text-sm leading-6 text-slate-700">{link.description}</span>
+                <span class="mt-4 font-semibold text-sky-800">Explore →</span>
+              </a>
+            ))
+          }
+        </div>
+      </aside>
     </Box>
   </main>
 </Layout>
