@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import Availability from '@modules/Availability';
 import Layout from '@modules/Layout/index.astro';
 import SiteHeader from '@modules/Layout/SiteHeader';
@@ -16,10 +17,28 @@ import SpecialOffers from '@components/SpecialOffers/index.astro';
 const searchResults = getSearchResults(properties);
 const { showMore = false, page = 'home' } = Astro.props;
 const isDiscoverPage = page === 'discover';
-const pageTitle = isDiscoverPage ? 'Discover Charente-Maritime Holiday Inspiration' : 'French Holiday Rentals in Charente-Maritime';
+const pageTitle = isDiscoverPage
+  ? 'Discover Charente-Maritime Holiday Inspiration'
+  : 'French Holiday Rentals in Charente-Maritime';
 const pageDescription = isDiscoverPage
   ? 'Explore beaches, villages, and local experiences around Domaine de Rochebonne and Charente-Maritime to plan your next French holiday.'
   : 'Browse family-friendly gites and chateau stays near the Charente-Maritime coast with direct booking availability at Seaside France.';
+const latestArticles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 2)
+  .map((article) => ({
+    href: `/articles/${article.slug}/`,
+    title: article.data.title,
+    description: article.data.description,
+    publishDate: article.data.publishDate,
+    tags: article.data.tags.slice(0, 3),
+  }));
+const articleSectionTitle = isDiscoverPage
+  ? 'Plan your stay with our local guides'
+  : 'Start planning with our Charente-Maritime guides';
+const articleSectionDescription = isDiscoverPage
+  ? 'Use these practical articles to turn local inspiration into an easy family itinerary before you book.'
+  : 'Explore local beaches, itineraries, and practical holiday tips while comparing places to stay.';
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'LodgingBusiness',
@@ -34,9 +53,11 @@ const structuredData = {
   <SiteHeader client:load page={page} />
   <main>
     <h1 class="sr-only">
-      {isDiscoverPage
-        ? 'Discover Charente-Maritime and plan your stay'
-        : 'Seaside France holiday rentals and chateau stays'}
+      {
+        isDiscoverPage
+          ? 'Discover Charente-Maritime and plan your stay'
+          : 'Seaside France holiday rentals and chateau stays'
+      }
     </h1>
     <div class="grid grid-cols-1 lg:grid-cols-2">
       <PhotoBG
@@ -68,8 +89,8 @@ const structuredData = {
     </div>
     <div class="container">
       <Box cozy>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
-          <div class="prose pb-16 col-span-2" id="about-the-area">
+        <div class="grid grid-cols-1 gap-16 lg:grid-cols-3">
+          <div class="prose col-span-2 pb-16" id="about-the-area">
             <WhyVisit2 />
           </div>
           <div class="col-span-1">
@@ -78,5 +99,70 @@ const structuredData = {
         </div>
       </Box>
     </div>
+
+    {
+      latestArticles.length > 0 && (
+        <div class="container">
+          <Box class="!pt-0 md:!pt-4">
+            <section
+              aria-labelledby="latest-articles-heading"
+              class="rounded-[2rem] bg-slate-50 p-6 md:p-10"
+            >
+              <div class="max-w-3xl prose prose-slate">
+                <h2 id="latest-articles-heading" class="mb-3 text-slate-900">
+                  {articleSectionTitle}
+                </h2>
+                <p class="mb-0 text-base leading-7 text-slate-700">{articleSectionDescription}</p>
+              </div>
+
+              <div class="mt-8 grid gap-6 lg:grid-cols-2 not-prose">
+                {latestArticles.map((article) => (
+                  <article class="flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300">
+                    <p class="text-sm text-slate-600">
+                      <time datetime={article.publishDate.toISOString()}>
+                        {article.publishDate.toLocaleDateString('en-GB', {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                        })}
+                      </time>
+                    </p>
+                    <h3 class="mt-3 text-2xl font-semibold text-slate-900">
+                      <a class="no-underline hover:underline" href={article.href}>
+                        {article.title}
+                      </a>
+                    </h3>
+                    <p class="mt-3 text-base leading-7 text-slate-700">{article.description}</p>
+                    {article.tags.length > 0 && (
+                      <ul class="mt-4 flex flex-wrap gap-2" aria-label="Article topics">
+                        {article.tags.map((tag) => (
+                          <li class="rounded-full bg-slate-50 px-3 py-1 text-sm text-slate-700 ring-1 ring-slate-200">
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <div class="mt-6 pt-2">
+                      <a
+                        class="font-semibold text-sky-800 no-underline hover:text-sky-900 hover:underline"
+                        href={article.href}
+                      >
+                        Read article →
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <div class="mt-8 not-prose">
+                <Button variant="secondary" href="/articles">
+                  Browse all travel articles
+                </Button>
+              </div>
+            </section>
+          </Box>
+        </div>
+      )
+    }
   </main>
 </Layout>
